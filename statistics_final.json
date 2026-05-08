@@ -1,0 +1,3168 @@
+{
+  "version": "v82",
+  "generatedAt": "2026-05-08T22:14:00+09:00",
+  "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+  "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+  "notes": "2026本試験の主要19科目について、旺文社教育情報センター「2026年 共通テスト 小問別正答率」の正答率・得点率・平均点を登録。中間集計ではなく大学入試センター資料を基にした小問別データを使用。 2026本試験の地理総合・歴史総合・公共・数学Ⅰは大学入試センターの実施結果の概要に基づく平均点のみ登録。",
+  "entries": [
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "国語",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 116.37,
+      "averageCorrectRate": 60.19,
+      "examinees": 438156,
+      "items": [
+        {
+          "id": "1",
+          "correctRate": 67.17,
+          "scoreRate": 67.17
+        },
+        {
+          "id": "2",
+          "correctRate": 93.54,
+          "scoreRate": 93.54
+        },
+        {
+          "id": "3",
+          "correctRate": 96.66,
+          "scoreRate": 96.66
+        },
+        {
+          "id": "4",
+          "correctRate": 75.5,
+          "scoreRate": 75.5
+        },
+        {
+          "id": "5",
+          "correctRate": 90.23,
+          "scoreRate": 90.23
+        },
+        {
+          "id": "6",
+          "correctRate": 68.7,
+          "scoreRate": 68.7
+        },
+        {
+          "id": "7",
+          "correctRate": 57.67,
+          "scoreRate": 57.67
+        },
+        {
+          "id": "8",
+          "correctRate": 42.4,
+          "scoreRate": 42.4
+        },
+        {
+          "id": "9",
+          "correctRate": 64.8,
+          "scoreRate": 64.8
+        },
+        {
+          "id": "10",
+          "correctRate": 56.1,
+          "scoreRate": 56.1
+        },
+        {
+          "id": "11",
+          "correctRate": 89.59,
+          "scoreRate": 89.59
+        },
+        {
+          "id": "12",
+          "correctRate": 83.96,
+          "scoreRate": 83.96
+        },
+        {
+          "id": "13",
+          "correctRate": 66.82,
+          "scoreRate": 66.82
+        },
+        {
+          "id": "14",
+          "correctRate": 80.41,
+          "scoreRate": 80.41
+        },
+        {
+          "id": "15",
+          "correctRate": 57.41,
+          "scoreRate": 57.41
+        },
+        {
+          "id": "16",
+          "correctRate": 63.97,
+          "scoreRate": 63.97
+        },
+        {
+          "id": "17",
+          "correctRate": 52.77,
+          "scoreRate": 52.77
+        },
+        {
+          "id": "18",
+          "correctRate": 79.5,
+          "scoreRate": 79.5
+        },
+        {
+          "id": "19",
+          "correctRate": 58.03,
+          "scoreRate": 58.03
+        },
+        {
+          "id": "20-21",
+          "correctRate": 29.96,
+          "scoreRate": 54.61,
+          "note": "得点率と正答率が異なる。表示列は正答率。"
+        },
+        {
+          "id": "22",
+          "correctRate": 52.71,
+          "scoreRate": 52.71
+        },
+        {
+          "id": "23",
+          "correctRate": 68.29,
+          "scoreRate": 68.29
+        },
+        {
+          "id": "24",
+          "correctRate": 51.11,
+          "scoreRate": 51.11
+        },
+        {
+          "id": "25",
+          "correctRate": 48.17,
+          "scoreRate": 48.17
+        },
+        {
+          "id": "26",
+          "correctRate": 44.68,
+          "scoreRate": 44.68
+        },
+        {
+          "id": "27",
+          "correctRate": 46.77,
+          "scoreRate": 46.77
+        },
+        {
+          "id": "28",
+          "correctRate": 37.1,
+          "scoreRate": 37.1
+        },
+        {
+          "id": "29",
+          "correctRate": 35.09,
+          "scoreRate": 35.09
+        },
+        {
+          "id": "30",
+          "correctRate": 55.07,
+          "scoreRate": 55.07
+        },
+        {
+          "id": "31",
+          "correctRate": 50.13,
+          "scoreRate": 50.13
+        },
+        {
+          "id": "32",
+          "correctRate": 61.28,
+          "scoreRate": 61.28
+        },
+        {
+          "id": "33",
+          "correctRate": 17.48,
+          "scoreRate": 17.48
+        },
+        {
+          "id": "34",
+          "correctRate": 57.53,
+          "scoreRate": 57.53
+        },
+        {
+          "id": "35",
+          "correctRate": 44.09,
+          "scoreRate": 44.09
+        },
+        {
+          "id": "36",
+          "correctRate": 60.8,
+          "scoreRate": 60.8
+        },
+        {
+          "id": "37",
+          "correctRate": 61.23,
+          "scoreRate": 61.23
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "英語（リーディング）",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 62.81,
+      "averageCorrectRate": 62.6,
+      "examinees": 455114,
+      "items": [
+        {
+          "id": "1",
+          "correctRate": 87.31,
+          "scoreRate": 87.31
+        },
+        {
+          "id": "2",
+          "correctRate": 47.71,
+          "scoreRate": 47.71
+        },
+        {
+          "id": "3",
+          "correctRate": 74.93,
+          "scoreRate": 74.93
+        },
+        {
+          "id": "4",
+          "correctRate": 45.43,
+          "scoreRate": 45.43
+        },
+        {
+          "id": "5",
+          "correctRate": 82.59,
+          "scoreRate": 82.59
+        },
+        {
+          "id": "6",
+          "correctRate": 80.91,
+          "scoreRate": 80.91
+        },
+        {
+          "id": "7",
+          "correctRate": 79.66,
+          "scoreRate": 79.66
+        },
+        {
+          "id": "8",
+          "correctRate": 80.88,
+          "scoreRate": 80.88
+        },
+        {
+          "id": "9-12",
+          "correctRate": 53.07,
+          "scoreRate": 53.07,
+          "note": "複数の解答番号をまとめた採点行。正答率は該当解答番号の統計を統合表示。"
+        },
+        {
+          "id": "13",
+          "correctRate": 50.64,
+          "scoreRate": 50.64
+        },
+        {
+          "id": "14",
+          "correctRate": 86.03,
+          "scoreRate": 86.03
+        },
+        {
+          "id": "15",
+          "correctRate": 78.67,
+          "scoreRate": 78.67
+        },
+        {
+          "id": "16",
+          "correctRate": 82.99,
+          "scoreRate": 82.99
+        },
+        {
+          "id": "17",
+          "correctRate": 71.98,
+          "scoreRate": 71.98
+        },
+        {
+          "id": "18",
+          "correctRate": 61.16,
+          "scoreRate": 61.16
+        },
+        {
+          "id": "19",
+          "correctRate": 71.67,
+          "scoreRate": 71.67
+        },
+        {
+          "id": "20",
+          "correctRate": 51.86,
+          "scoreRate": 51.86
+        },
+        {
+          "id": "21",
+          "correctRate": 70.6,
+          "scoreRate": 70.6
+        },
+        {
+          "id": "22-23",
+          "correctRate": 43.06,
+          "scoreRate": 64.81,
+          "note": "得点率と正答率が異なる。表示列は正答率。"
+        },
+        {
+          "id": "24-25",
+          "correctRate": 27.24,
+          "scoreRate": 27.24
+        },
+        {
+          "id": "26-29",
+          "correctRate": 39.16,
+          "scoreRate": 39.16,
+          "note": "複数の解答番号をまとめた採点行。正答率は該当解答番号の統計を統合表示。"
+        },
+        {
+          "id": "30",
+          "correctRate": 71.15,
+          "scoreRate": 71.15
+        },
+        {
+          "id": "31",
+          "correctRate": 77.63,
+          "scoreRate": 77.63
+        },
+        {
+          "id": "32",
+          "correctRate": 49.16,
+          "scoreRate": 49.16
+        },
+        {
+          "id": "33-34",
+          "correctRate": 42.33,
+          "scoreRate": 42.33
+        },
+        {
+          "id": "35",
+          "correctRate": 54.83,
+          "scoreRate": 54.83
+        },
+        {
+          "id": "36",
+          "correctRate": 48.59,
+          "scoreRate": 48.59
+        },
+        {
+          "id": "37",
+          "correctRate": 48.3,
+          "scoreRate": 48.3
+        },
+        {
+          "id": "38",
+          "correctRate": 74.91,
+          "scoreRate": 74.91
+        },
+        {
+          "id": "39",
+          "correctRate": 60.48,
+          "scoreRate": 60.48
+        },
+        {
+          "id": "40-42",
+          "correctRate": 54.95,
+          "scoreRate": 54.95,
+          "note": "複数の解答番号をまとめた採点行。正答率は該当解答番号の統計を統合表示。"
+        },
+        {
+          "id": "43",
+          "correctRate": 50.47,
+          "scoreRate": 50.47
+        },
+        {
+          "id": "44",
+          "correctRate": 65.61,
+          "scoreRate": 65.61
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "英語（リスニング）",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 54.65,
+      "averageCorrectRate": 56.23,
+      "examinees": 453425,
+      "items": [
+        {
+          "id": "1",
+          "correctRate": 44.34,
+          "scoreRate": 44.34
+        },
+        {
+          "id": "2",
+          "correctRate": 37.59,
+          "scoreRate": 37.59
+        },
+        {
+          "id": "3",
+          "correctRate": 66.54,
+          "scoreRate": 66.54
+        },
+        {
+          "id": "4",
+          "correctRate": 54.9,
+          "scoreRate": 54.9
+        },
+        {
+          "id": "5",
+          "correctRate": 59.82,
+          "scoreRate": 59.82
+        },
+        {
+          "id": "6",
+          "correctRate": 83.86,
+          "scoreRate": 83.86
+        },
+        {
+          "id": "7",
+          "correctRate": 89.26,
+          "scoreRate": 89.26
+        },
+        {
+          "id": "8",
+          "correctRate": 82.66,
+          "scoreRate": 82.66
+        },
+        {
+          "id": "9",
+          "correctRate": 46.78,
+          "scoreRate": 46.78
+        },
+        {
+          "id": "10",
+          "correctRate": 92.69,
+          "scoreRate": 92.69
+        },
+        {
+          "id": "11",
+          "correctRate": 57.63,
+          "scoreRate": 57.63
+        },
+        {
+          "id": "12",
+          "correctRate": 57.95,
+          "scoreRate": 57.95
+        },
+        {
+          "id": "13",
+          "correctRate": 51.72,
+          "scoreRate": 51.72
+        },
+        {
+          "id": "14",
+          "correctRate": 57.51,
+          "scoreRate": 57.51
+        },
+        {
+          "id": "15",
+          "correctRate": 53.78,
+          "scoreRate": 53.78
+        },
+        {
+          "id": "16",
+          "correctRate": 35.88,
+          "scoreRate": 35.88
+        },
+        {
+          "id": "17",
+          "correctRate": 70.46,
+          "scoreRate": 70.46
+        },
+        {
+          "id": "18-21",
+          "correctRate": 22.48,
+          "scoreRate": 22.48,
+          "note": "複数の解答番号をまとめた採点行。正答率は該当解答番号の統計を統合表示。"
+        },
+        {
+          "id": "22",
+          "correctRate": 78.27,
+          "scoreRate": 78.27
+        },
+        {
+          "id": "23",
+          "correctRate": 89.26,
+          "scoreRate": 89.26
+        },
+        {
+          "id": "24",
+          "correctRate": 68.32,
+          "scoreRate": 68.32
+        },
+        {
+          "id": "25",
+          "correctRate": 60.6,
+          "scoreRate": 60.6
+        },
+        {
+          "id": "26",
+          "correctRate": 74.61,
+          "scoreRate": 74.61
+        },
+        {
+          "id": "27",
+          "correctRate": 59.32,
+          "scoreRate": 59.32
+        },
+        {
+          "id": "28-29",
+          "correctRate": 12.71,
+          "scoreRate": 12.71,
+          "note": "複数の解答番号をまとめた採点行。正答率は該当解答番号の統計を統合表示。"
+        },
+        {
+          "id": "30-31",
+          "correctRate": 35.15,
+          "scoreRate": 35.15,
+          "note": "複数の解答番号をまとめた採点行。正答率は該当解答番号の統計を統合表示。"
+        },
+        {
+          "id": "32",
+          "correctRate": 18.73,
+          "scoreRate": 18.73
+        },
+        {
+          "id": "33",
+          "correctRate": 43.74,
+          "scoreRate": 43.74
+        },
+        {
+          "id": "34",
+          "correctRate": 68.06,
+          "scoreRate": 68.06
+        },
+        {
+          "id": "35",
+          "correctRate": 20.87,
+          "scoreRate": 20.87
+        },
+        {
+          "id": "36",
+          "correctRate": 43.58,
+          "scoreRate": 43.58
+        },
+        {
+          "id": "37",
+          "correctRate": 60.32,
+          "scoreRate": 60.32
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "数学Ⅰ，数学A",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 47.2,
+      "averageCorrectRate": 49.83,
+      "examinees": 343000,
+      "items": [
+        {
+          "id": "1-ア",
+          "correctRate": 94.46,
+          "scoreRate": 94.46
+        },
+        {
+          "id": "1-イ",
+          "correctRate": 75.42,
+          "scoreRate": 75.42
+        },
+        {
+          "id": "1-ウエ",
+          "correctRate": 66.82,
+          "scoreRate": 66.82
+        },
+        {
+          "id": "1-オ",
+          "correctRate": 65.75,
+          "scoreRate": 65.75
+        },
+        {
+          "id": "1-カキ",
+          "correctRate": 43.08,
+          "scoreRate": 43.08
+        },
+        {
+          "id": "1-ク",
+          "correctRate": 91.27,
+          "scoreRate": 91.27
+        },
+        {
+          "id": "1-ケ",
+          "correctRate": 91.71,
+          "scoreRate": 91.71
+        },
+        {
+          "id": "1-コサ",
+          "correctRate": 74.77,
+          "scoreRate": 74.77
+        },
+        {
+          "id": "1-シスセソ",
+          "correctRate": 45.81,
+          "scoreRate": 45.81
+        },
+        {
+          "id": "1-タチツテ",
+          "correctRate": 43.78,
+          "scoreRate": 43.78
+        },
+        {
+          "id": "1-トナニヌ",
+          "correctRate": 28.43,
+          "scoreRate": 28.43
+        },
+        {
+          "id": "1-ネノハ",
+          "correctRate": 25.68,
+          "scoreRate": 25.68
+        },
+        {
+          "id": "1-ヒフヘ",
+          "correctRate": 2.68,
+          "scoreRate": 2.68
+        },
+        {
+          "id": "2-アイ",
+          "correctRate": 94.52,
+          "scoreRate": 94.52
+        },
+        {
+          "id": "2-ウエオ",
+          "correctRate": 90.18,
+          "scoreRate": 90.18
+        },
+        {
+          "id": "2-カ",
+          "correctRate": 85.45,
+          "scoreRate": 85.45
+        },
+        {
+          "id": "2-キクケコ",
+          "correctRate": 66.93,
+          "scoreRate": 66.93
+        },
+        {
+          "id": "2-サシ",
+          "correctRate": 53.89,
+          "scoreRate": 53.89
+        },
+        {
+          "id": "2-スセ",
+          "correctRate": 13.87,
+          "scoreRate": 13.87
+        },
+        {
+          "id": "2-ソ",
+          "correctRate": 87.86,
+          "scoreRate": 87.86
+        },
+        {
+          "id": "2-タ",
+          "correctRate": 66.06,
+          "scoreRate": 66.06
+        },
+        {
+          "id": "2-チツ",
+          "correctRate": 22.44,
+          "scoreRate": 22.44
+        },
+        {
+          "id": "2-テ",
+          "correctRate": 59.46,
+          "scoreRate": 59.46
+        },
+        {
+          "id": "2-トナ",
+          "correctRate": 23.27,
+          "scoreRate": 23.27
+        },
+        {
+          "id": "3-ア",
+          "correctRate": 76.23,
+          "scoreRate": 76.23
+        },
+        {
+          "id": "3-イウ",
+          "correctRate": 58.3,
+          "scoreRate": 58.3
+        },
+        {
+          "id": "3-エオカ",
+          "correctRate": 39.52,
+          "scoreRate": 39.52
+        },
+        {
+          "id": "3-キク",
+          "correctRate": 28.21,
+          "scoreRate": 28.21
+        },
+        {
+          "id": "3-ケコ",
+          "correctRate": 22.73,
+          "scoreRate": 22.73
+        },
+        {
+          "id": "3-サシ",
+          "correctRate": 12.3,
+          "scoreRate": 12.3
+        },
+        {
+          "id": "3-スセソ",
+          "correctRate": 6.25,
+          "scoreRate": 6.25
+        },
+        {
+          "id": "4-アイ",
+          "correctRate": 85.17,
+          "scoreRate": 85.17
+        },
+        {
+          "id": "4-ウエオカ",
+          "correctRate": 52.05,
+          "scoreRate": 52.05
+        },
+        {
+          "id": "4-キクケ",
+          "correctRate": 49.59,
+          "scoreRate": 49.59
+        },
+        {
+          "id": "4-コサ",
+          "correctRate": 50.25,
+          "scoreRate": 50.25
+        },
+        {
+          "id": "4-シスセ",
+          "correctRate": 18.04,
+          "scoreRate": 18.04
+        },
+        {
+          "id": "4-ソ",
+          "correctRate": 18.52,
+          "scoreRate": 18.52
+        },
+        {
+          "id": "4-タチ",
+          "correctRate": 9.7,
+          "scoreRate": 9.7
+        },
+        {
+          "id": "4-ツテトナニヌ",
+          "correctRate": 3.07,
+          "scoreRate": 3.07
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "数学Ⅱ，数学B，数学C",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 54.52,
+      "averageCorrectRate": 56.41,
+      "examinees": 317586,
+      "items": [
+        {
+          "id": "第1問 ア・イ・ウ",
+          "correctRate": 89.97,
+          "scoreRate": 89.97
+        },
+        {
+          "id": "第1問 エ・オ・カ・キ",
+          "correctRate": 85.34,
+          "scoreRate": 85.34
+        },
+        {
+          "id": "第1問 ク・ケ",
+          "correctRate": 74.81,
+          "scoreRate": 74.81
+        },
+        {
+          "id": "第1問 コ・サ・シ",
+          "correctRate": 54.75,
+          "scoreRate": 54.75
+        },
+        {
+          "id": "第1問 ス",
+          "correctRate": 43.76,
+          "scoreRate": 43.76
+        },
+        {
+          "id": "第1問 セ",
+          "correctRate": 36.81,
+          "scoreRate": 36.81
+        },
+        {
+          "id": "第1問 ソ",
+          "correctRate": 17.41,
+          "scoreRate": 17.41
+        },
+        {
+          "id": "第2問 ア",
+          "correctRate": 95.28,
+          "scoreRate": 95.28
+        },
+        {
+          "id": "第2問 イ・ウ",
+          "correctRate": 79.72,
+          "scoreRate": 79.72
+        },
+        {
+          "id": "第2問 エ・オ",
+          "correctRate": 59.14,
+          "scoreRate": 59.14
+        },
+        {
+          "id": "第2問 カ・キ",
+          "correctRate": 42.12,
+          "scoreRate": 42.12
+        },
+        {
+          "id": "第2問 ク・ケ",
+          "correctRate": 70.31,
+          "scoreRate": 70.31
+        },
+        {
+          "id": "第2問 コ",
+          "correctRate": 30.17,
+          "scoreRate": 30.17
+        },
+        {
+          "id": "第2問 サ・シ・ス",
+          "correctRate": 30.25,
+          "scoreRate": 30.25
+        },
+        {
+          "id": "第2問 セ",
+          "correctRate": 17.55,
+          "scoreRate": 17.55
+        },
+        {
+          "id": "第3問 ア",
+          "correctRate": 95.44,
+          "scoreRate": 95.44
+        },
+        {
+          "id": "第3問 イ・ウ",
+          "correctRate": 85.74,
+          "scoreRate": 85.74
+        },
+        {
+          "id": "第3問 エ・オ",
+          "correctRate": 86.49,
+          "scoreRate": 86.49
+        },
+        {
+          "id": "第3問 カ",
+          "correctRate": 91.01,
+          "scoreRate": 91.01
+        },
+        {
+          "id": "第3問 キ",
+          "correctRate": 88.44,
+          "scoreRate": 88.44
+        },
+        {
+          "id": "第3問 ク・ケ",
+          "correctRate": 61.48,
+          "scoreRate": 61.48
+        },
+        {
+          "id": "第3問 コ",
+          "correctRate": 42.6,
+          "scoreRate": 42.6
+        },
+        {
+          "id": "第3問 サ・シ・ス・セ・ソ",
+          "correctRate": 32.95,
+          "scoreRate": 32.95
+        },
+        {
+          "id": "第3問 タ・チ・ツ",
+          "correctRate": 43.6,
+          "scoreRate": 43.6
+        },
+        {
+          "id": "第3問 テ・ト",
+          "correctRate": 31.27,
+          "scoreRate": 31.27
+        },
+        {
+          "id": "第3問 ナ",
+          "correctRate": 28.17,
+          "scoreRate": 28.17
+        },
+        {
+          "id": "第4問 ア・イ",
+          "correctRate": 90.88,
+          "scoreRate": 90.88
+        },
+        {
+          "id": "第4問 ウ・エ・オ",
+          "correctRate": 89.32,
+          "scoreRate": 89.32
+        },
+        {
+          "id": "第4問 カ",
+          "correctRate": 85.1,
+          "scoreRate": 85.1
+        },
+        {
+          "id": "第4問 キ・ク・ケ",
+          "correctRate": 61.05,
+          "scoreRate": 61.05
+        },
+        {
+          "id": "第4問 コ・サ",
+          "correctRate": 53.35,
+          "scoreRate": 53.35
+        },
+        {
+          "id": "第4問 シ・ス・セ",
+          "correctRate": 51.15,
+          "scoreRate": 51.15
+        },
+        {
+          "id": "第4問 ソ・タ",
+          "correctRate": 23.47,
+          "scoreRate": 23.47
+        },
+        {
+          "id": "第4問 チ・ツ",
+          "correctRate": 9.13,
+          "scoreRate": 9.13
+        },
+        {
+          "id": "第5問 ア",
+          "correctRate": 81.36,
+          "scoreRate": 81.36
+        },
+        {
+          "id": "第5問 イ",
+          "correctRate": 42.89,
+          "scoreRate": 42.89
+        },
+        {
+          "id": "第5問 ウ・エ",
+          "correctRate": 65.32,
+          "scoreRate": 65.32
+        },
+        {
+          "id": "第5問 オ",
+          "correctRate": 31.96,
+          "scoreRate": 31.96
+        },
+        {
+          "id": "第5問 カ",
+          "correctRate": 57.27,
+          "scoreRate": 57.27
+        },
+        {
+          "id": "第5問 キ",
+          "correctRate": 28.21,
+          "scoreRate": 28.21
+        },
+        {
+          "id": "第5問 ク・ケ",
+          "correctRate": 17.36,
+          "scoreRate": 17.36
+        },
+        {
+          "id": "第5問 コ・サ",
+          "correctRate": 34.01,
+          "scoreRate": 34.01
+        },
+        {
+          "id": "第6問 ア",
+          "correctRate": 71.41,
+          "scoreRate": 71.41
+        },
+        {
+          "id": "第6問 イ",
+          "correctRate": 65.48,
+          "scoreRate": 65.48
+        },
+        {
+          "id": "第6問 ウ",
+          "correctRate": 82.34,
+          "scoreRate": 82.34
+        },
+        {
+          "id": "第6問 エ・オ・カ",
+          "correctRate": 61.47,
+          "scoreRate": 61.47
+        },
+        {
+          "id": "第6問 キ・ク・ケ",
+          "correctRate": 58.78,
+          "scoreRate": 58.78
+        },
+        {
+          "id": "第6問 コ",
+          "correctRate": 55.09,
+          "scoreRate": 55.09
+        },
+        {
+          "id": "第6問 サ",
+          "correctRate": 44.24,
+          "scoreRate": 44.24
+        },
+        {
+          "id": "第6問 シ",
+          "correctRate": 33.85,
+          "scoreRate": 33.85
+        },
+        {
+          "id": "第7問 ア",
+          "correctRate": 88.58,
+          "scoreRate": 88.58
+        },
+        {
+          "id": "第7問 イ・ウ・エ・オ・カ",
+          "correctRate": 64.93,
+          "scoreRate": 64.93
+        },
+        {
+          "id": "第7問 キ・ク",
+          "correctRate": 55.32,
+          "scoreRate": 55.32
+        },
+        {
+          "id": "第7問 ケ",
+          "correctRate": 68.3,
+          "scoreRate": 68.3
+        },
+        {
+          "id": "第7問 コ",
+          "correctRate": 37.39,
+          "scoreRate": 37.39
+        },
+        {
+          "id": "第7問 サ",
+          "correctRate": 57.6,
+          "scoreRate": 57.6
+        },
+        {
+          "id": "第7問 シ",
+          "correctRate": 59.13,
+          "scoreRate": 59.13
+        },
+        {
+          "id": "第7問 ス",
+          "correctRate": 53.41,
+          "scoreRate": 53.41
+        },
+        {
+          "id": "第7問 セ",
+          "correctRate": 34.73,
+          "scoreRate": 34.73
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "情報Ⅰ",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 56.59,
+      "averageCorrectRate": 57.47,
+      "examinees": 305202,
+      "items": [
+        {
+          "id": "1-アイ",
+          "correctRate": 29.39,
+          "scoreRate": 29.39
+        },
+        {
+          "id": "1-ウ",
+          "correctRate": 30.31,
+          "scoreRate": 30.31
+        },
+        {
+          "id": "1-エオ",
+          "correctRate": 65.99,
+          "scoreRate": 65.99
+        },
+        {
+          "id": "1-カキクケ",
+          "correctRate": 28.69,
+          "scoreRate": 28.69
+        },
+        {
+          "id": "1-コ",
+          "correctRate": 50.52,
+          "scoreRate": 50.52
+        },
+        {
+          "id": "1-サ",
+          "correctRate": 74.1,
+          "scoreRate": 74.1
+        },
+        {
+          "id": "1-シ",
+          "correctRate": 49.57,
+          "scoreRate": 49.57
+        },
+        {
+          "id": "1-ス",
+          "correctRate": 32.89,
+          "scoreRate": 32.89
+        },
+        {
+          "id": "1-セ",
+          "correctRate": 10.23,
+          "scoreRate": 10.23
+        },
+        {
+          "id": "1-ソ",
+          "correctRate": 58.86,
+          "scoreRate": 58.86
+        },
+        {
+          "id": "2-アイ",
+          "correctRate": 93.87,
+          "scoreRate": 93.87
+        },
+        {
+          "id": "2-ウエオ",
+          "correctRate": 36.97,
+          "scoreRate": 36.97
+        },
+        {
+          "id": "2-カ",
+          "correctRate": 59.51,
+          "scoreRate": 59.51
+        },
+        {
+          "id": "2-キ",
+          "correctRate": 84.62,
+          "scoreRate": 84.62
+        },
+        {
+          "id": "2-ク",
+          "correctRate": 88.06,
+          "scoreRate": 88.06
+        },
+        {
+          "id": "2-ケ",
+          "correctRate": 62.19,
+          "scoreRate": 62.19
+        },
+        {
+          "id": "2-コ",
+          "correctRate": 79.35,
+          "scoreRate": 79.35
+        },
+        {
+          "id": "2-サ",
+          "correctRate": 85.12,
+          "scoreRate": 85.12
+        },
+        {
+          "id": "2-シ",
+          "correctRate": 30.19,
+          "scoreRate": 30.19
+        },
+        {
+          "id": "2-ス",
+          "correctRate": 57.04,
+          "scoreRate": 57.04
+        },
+        {
+          "id": "2-セソ",
+          "correctRate": 45.1,
+          "scoreRate": 45.1
+        },
+        {
+          "id": "2-タ",
+          "correctRate": 33.26,
+          "scoreRate": 33.26
+        },
+        {
+          "id": "2-チ",
+          "correctRate": 41.88,
+          "scoreRate": 41.88
+        },
+        {
+          "id": "3-アイウ",
+          "correctRate": 86.81,
+          "scoreRate": 86.81
+        },
+        {
+          "id": "3-エ",
+          "correctRate": 83.02,
+          "scoreRate": 83.02
+        },
+        {
+          "id": "3-オ",
+          "correctRate": 81.99,
+          "scoreRate": 81.99
+        },
+        {
+          "id": "3-カキ",
+          "correctRate": 55.3,
+          "scoreRate": 70.38,
+          "note": "得点率と正答率が異なる。表示列は正答率。"
+        },
+        {
+          "id": "3-ク",
+          "correctRate": 64.54,
+          "scoreRate": 64.54
+        },
+        {
+          "id": "3-ケ",
+          "correctRate": 54.54,
+          "scoreRate": 54.54
+        },
+        {
+          "id": "3-コ",
+          "correctRate": 53.03,
+          "scoreRate": 53.03
+        },
+        {
+          "id": "3-サ",
+          "correctRate": 42.36,
+          "scoreRate": 42.36
+        },
+        {
+          "id": "3-シ",
+          "correctRate": 52.48,
+          "scoreRate": 52.48
+        },
+        {
+          "id": "3-ス",
+          "correctRate": 38.68,
+          "scoreRate": 38.68
+        },
+        {
+          "id": "3-セ",
+          "correctRate": 43.34,
+          "scoreRate": 43.34
+        },
+        {
+          "id": "3-ソ",
+          "correctRate": 19.63,
+          "scoreRate": 19.63
+        },
+        {
+          "id": "4-ア",
+          "correctRate": 56.01,
+          "scoreRate": 56.01
+        },
+        {
+          "id": "4-イ",
+          "correctRate": 89.0,
+          "scoreRate": 89.0
+        },
+        {
+          "id": "4-ウ",
+          "correctRate": 88.23,
+          "scoreRate": 88.23
+        },
+        {
+          "id": "4-エオ",
+          "correctRate": 74.91,
+          "scoreRate": 74.91
+        },
+        {
+          "id": "4-カ",
+          "correctRate": 90.8,
+          "scoreRate": 90.8
+        },
+        {
+          "id": "4-キク",
+          "correctRate": 59.62,
+          "scoreRate": 77.32,
+          "note": "得点率と正答率が異なる。表示列は正答率。"
+        },
+        {
+          "id": "4-ケ",
+          "correctRate": 73.61,
+          "scoreRate": 73.61
+        },
+        {
+          "id": "4-コ",
+          "correctRate": 75.9,
+          "scoreRate": 75.9
+        },
+        {
+          "id": "4-サ",
+          "correctRate": 52.99,
+          "scoreRate": 52.99
+        },
+        {
+          "id": "4-シ",
+          "correctRate": 27.43,
+          "scoreRate": 27.43
+        },
+        {
+          "id": "4-ス",
+          "correctRate": 51.46,
+          "scoreRate": 51.46
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "地理総合，地理探究",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 61.87,
+      "averageCorrectRate": 62.02,
+      "examinees": 143237,
+      "items": [
+        {
+          "id": "1",
+          "correctRate": 65.13,
+          "scoreRate": 65.13
+        },
+        {
+          "id": "2",
+          "correctRate": 83.94,
+          "scoreRate": 83.94
+        },
+        {
+          "id": "3",
+          "correctRate": 64.49,
+          "scoreRate": 64.49
+        },
+        {
+          "id": "4",
+          "correctRate": 55.33,
+          "scoreRate": 55.33
+        },
+        {
+          "id": "5",
+          "correctRate": 65.87,
+          "scoreRate": 65.87
+        },
+        {
+          "id": "6",
+          "correctRate": 78.35,
+          "scoreRate": 78.35
+        },
+        {
+          "id": "7",
+          "correctRate": 89.47,
+          "scoreRate": 89.47
+        },
+        {
+          "id": "8",
+          "correctRate": 68.95,
+          "scoreRate": 68.95
+        },
+        {
+          "id": "9",
+          "correctRate": 65.7,
+          "scoreRate": 65.7
+        },
+        {
+          "id": "10",
+          "correctRate": 33.27,
+          "scoreRate": 33.27
+        },
+        {
+          "id": "11",
+          "correctRate": 70.78,
+          "scoreRate": 70.78
+        },
+        {
+          "id": "12",
+          "correctRate": 76.04,
+          "scoreRate": 76.04
+        },
+        {
+          "id": "13",
+          "correctRate": 44.73,
+          "scoreRate": 44.73
+        },
+        {
+          "id": "14",
+          "correctRate": 50.87,
+          "scoreRate": 50.87
+        },
+        {
+          "id": "15",
+          "correctRate": 64.28,
+          "scoreRate": 64.28
+        },
+        {
+          "id": "16",
+          "correctRate": 40.53,
+          "scoreRate": 40.53
+        },
+        {
+          "id": "17",
+          "correctRate": 55.82,
+          "scoreRate": 55.82
+        },
+        {
+          "id": "18",
+          "correctRate": 46.85,
+          "scoreRate": 46.85
+        },
+        {
+          "id": "19",
+          "correctRate": 70.29,
+          "scoreRate": 70.29
+        },
+        {
+          "id": "20",
+          "correctRate": 61.18,
+          "scoreRate": 61.18
+        },
+        {
+          "id": "21",
+          "correctRate": 57.73,
+          "scoreRate": 57.73
+        },
+        {
+          "id": "22",
+          "correctRate": 76.34,
+          "scoreRate": 76.34
+        },
+        {
+          "id": "23",
+          "correctRate": 26.22,
+          "scoreRate": 26.22
+        },
+        {
+          "id": "24",
+          "correctRate": 48.28,
+          "scoreRate": 48.28
+        },
+        {
+          "id": "25",
+          "correctRate": 83.4,
+          "scoreRate": 83.4
+        },
+        {
+          "id": "26",
+          "correctRate": 61.43,
+          "scoreRate": 61.43
+        },
+        {
+          "id": "27",
+          "correctRate": 64.03,
+          "scoreRate": 64.03
+        },
+        {
+          "id": "28",
+          "correctRate": 39.11,
+          "scoreRate": 39.11
+        },
+        {
+          "id": "29",
+          "correctRate": 78.27,
+          "scoreRate": 78.27
+        },
+        {
+          "id": "30",
+          "correctRate": 73.77,
+          "scoreRate": 73.77
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "歴史総合，日本史探究",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 62.29,
+      "averageCorrectRate": 62.15,
+      "examinees": 124431,
+      "items": [
+        {
+          "id": "1",
+          "correctRate": 69.67,
+          "scoreRate": 69.67
+        },
+        {
+          "id": "2",
+          "correctRate": 72.58,
+          "scoreRate": 72.58
+        },
+        {
+          "id": "3",
+          "correctRate": 28.48,
+          "scoreRate": 28.48
+        },
+        {
+          "id": "4",
+          "correctRate": 82.65,
+          "scoreRate": 82.65
+        },
+        {
+          "id": "5",
+          "correctRate": 68.69,
+          "scoreRate": 68.69
+        },
+        {
+          "id": "6",
+          "correctRate": 76.35,
+          "scoreRate": 76.35
+        },
+        {
+          "id": "7",
+          "correctRate": 51.52,
+          "scoreRate": 51.52
+        },
+        {
+          "id": "8",
+          "correctRate": 85.1,
+          "scoreRate": 85.1
+        },
+        {
+          "id": "9",
+          "correctRate": 68.17,
+          "scoreRate": 68.17
+        },
+        {
+          "id": "10",
+          "correctRate": 87.27,
+          "scoreRate": 87.27
+        },
+        {
+          "id": "11",
+          "correctRate": 76.45,
+          "scoreRate": 76.45
+        },
+        {
+          "id": "12",
+          "correctRate": 51.22,
+          "scoreRate": 51.22
+        },
+        {
+          "id": "13",
+          "correctRate": 67.1,
+          "scoreRate": 67.1
+        },
+        {
+          "id": "14",
+          "correctRate": 52.35,
+          "scoreRate": 52.35
+        },
+        {
+          "id": "15",
+          "correctRate": 56.78,
+          "scoreRate": 56.78
+        },
+        {
+          "id": "16",
+          "correctRate": 43.44,
+          "scoreRate": 43.44
+        },
+        {
+          "id": "17",
+          "correctRate": 43.44,
+          "scoreRate": 43.44
+        },
+        {
+          "id": "18",
+          "correctRate": 49.14,
+          "scoreRate": 49.14
+        },
+        {
+          "id": "19",
+          "correctRate": 68.77,
+          "scoreRate": 68.77
+        },
+        {
+          "id": "20",
+          "correctRate": 82.01,
+          "scoreRate": 82.01
+        },
+        {
+          "id": "21",
+          "correctRate": 65.89,
+          "scoreRate": 65.89
+        },
+        {
+          "id": "22",
+          "correctRate": 32.85,
+          "scoreRate": 32.85
+        },
+        {
+          "id": "23",
+          "correctRate": 36.02,
+          "scoreRate": 36.02
+        },
+        {
+          "id": "24",
+          "correctRate": 63.61,
+          "scoreRate": 63.61
+        },
+        {
+          "id": "25",
+          "correctRate": 69.78,
+          "scoreRate": 69.78
+        },
+        {
+          "id": "26",
+          "correctRate": 65.82,
+          "scoreRate": 65.82
+        },
+        {
+          "id": "27",
+          "correctRate": 51.17,
+          "scoreRate": 51.17
+        },
+        {
+          "id": "28",
+          "correctRate": 72.34,
+          "scoreRate": 72.34
+        },
+        {
+          "id": "29",
+          "correctRate": 69.08,
+          "scoreRate": 69.08
+        },
+        {
+          "id": "30",
+          "correctRate": 54.65,
+          "scoreRate": 54.65
+        },
+        {
+          "id": "31",
+          "correctRate": 63.07,
+          "scoreRate": 63.07
+        },
+        {
+          "id": "32",
+          "correctRate": 56.09,
+          "scoreRate": 56.09
+        },
+        {
+          "id": "33",
+          "correctRate": 50.9,
+          "scoreRate": 50.9
+        },
+        {
+          "id": "34",
+          "correctRate": 61.82,
+          "scoreRate": 61.82
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "歴史総合，世界史探究",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 60.88,
+      "averageCorrectRate": 60.89,
+      "examinees": 78710,
+      "items": [
+        {
+          "id": "1",
+          "correctRate": 81.25,
+          "scoreRate": 81.25
+        },
+        {
+          "id": "2",
+          "correctRate": 30.65,
+          "scoreRate": 30.65
+        },
+        {
+          "id": "3",
+          "correctRate": 42.06,
+          "scoreRate": 42.06
+        },
+        {
+          "id": "4",
+          "correctRate": 83.83,
+          "scoreRate": 83.83
+        },
+        {
+          "id": "5",
+          "correctRate": 66.2,
+          "scoreRate": 66.2
+        },
+        {
+          "id": "6",
+          "correctRate": 83.73,
+          "scoreRate": 83.73
+        },
+        {
+          "id": "7",
+          "correctRate": 69.47,
+          "scoreRate": 69.47
+        },
+        {
+          "id": "8",
+          "correctRate": 67.94,
+          "scoreRate": 67.94
+        },
+        {
+          "id": "9",
+          "correctRate": 55.3,
+          "scoreRate": 55.3
+        },
+        {
+          "id": "10",
+          "correctRate": 56.28,
+          "scoreRate": 56.28
+        },
+        {
+          "id": "11",
+          "correctRate": 47.7,
+          "scoreRate": 47.7
+        },
+        {
+          "id": "12",
+          "correctRate": 90.0,
+          "scoreRate": 90.0
+        },
+        {
+          "id": "13",
+          "correctRate": 50.73,
+          "scoreRate": 50.73
+        },
+        {
+          "id": "14",
+          "correctRate": 64.98,
+          "scoreRate": 64.98
+        },
+        {
+          "id": "15",
+          "correctRate": 67.01,
+          "scoreRate": 67.01
+        },
+        {
+          "id": "16",
+          "correctRate": 64.18,
+          "scoreRate": 64.18
+        },
+        {
+          "id": "17",
+          "correctRate": 21.8,
+          "scoreRate": 21.8
+        },
+        {
+          "id": "18",
+          "correctRate": 53.34,
+          "scoreRate": 53.34
+        },
+        {
+          "id": "19",
+          "correctRate": 71.71,
+          "scoreRate": 71.71
+        },
+        {
+          "id": "20",
+          "correctRate": 87.31,
+          "scoreRate": 87.31
+        },
+        {
+          "id": "21",
+          "correctRate": 55.67,
+          "scoreRate": 55.67
+        },
+        {
+          "id": "22",
+          "correctRate": 60.03,
+          "scoreRate": 60.03
+        },
+        {
+          "id": "23",
+          "correctRate": 44.86,
+          "scoreRate": 44.86
+        },
+        {
+          "id": "24",
+          "correctRate": 68.93,
+          "scoreRate": 68.93
+        },
+        {
+          "id": "25",
+          "correctRate": 57.02,
+          "scoreRate": 57.02
+        },
+        {
+          "id": "26",
+          "correctRate": 66.86,
+          "scoreRate": 66.86
+        },
+        {
+          "id": "27",
+          "correctRate": 13.8,
+          "scoreRate": 13.8
+        },
+        {
+          "id": "28",
+          "correctRate": 73.05,
+          "scoreRate": 73.05
+        },
+        {
+          "id": "29",
+          "correctRate": 64.34,
+          "scoreRate": 64.34
+        },
+        {
+          "id": "30",
+          "correctRate": 46.76,
+          "scoreRate": 46.76
+        },
+        {
+          "id": "31",
+          "correctRate": 77.64,
+          "scoreRate": 77.64
+        },
+        {
+          "id": "32",
+          "correctRate": 64.0,
+          "scoreRate": 64.0
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "公共，倫理",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 64.24,
+      "averageCorrectRate": 64.03,
+      "examinees": 30965,
+      "items": [
+        {
+          "id": "1",
+          "correctRate": 73.11,
+          "scoreRate": 73.11
+        },
+        {
+          "id": "2",
+          "correctRate": 36.37,
+          "scoreRate": 36.37
+        },
+        {
+          "id": "3",
+          "correctRate": 95.49,
+          "scoreRate": 95.49
+        },
+        {
+          "id": "4",
+          "correctRate": 65.34,
+          "scoreRate": 65.34
+        },
+        {
+          "id": "5",
+          "correctRate": 57.87,
+          "scoreRate": 57.87
+        },
+        {
+          "id": "6",
+          "correctRate": 94.46,
+          "scoreRate": 94.46
+        },
+        {
+          "id": "7",
+          "correctRate": 43.1,
+          "scoreRate": 43.1
+        },
+        {
+          "id": "8",
+          "correctRate": 91.44,
+          "scoreRate": 91.44
+        },
+        {
+          "id": "9",
+          "correctRate": 65.62,
+          "scoreRate": 65.62
+        },
+        {
+          "id": "10",
+          "correctRate": 51.04,
+          "scoreRate": 51.04
+        },
+        {
+          "id": "11",
+          "correctRate": 82.33,
+          "scoreRate": 82.33
+        },
+        {
+          "id": "12",
+          "correctRate": 45.8,
+          "scoreRate": 45.8
+        },
+        {
+          "id": "13",
+          "correctRate": 88.07,
+          "scoreRate": 88.07
+        },
+        {
+          "id": "14",
+          "correctRate": 39.41,
+          "scoreRate": 39.41
+        },
+        {
+          "id": "15",
+          "correctRate": 61.71,
+          "scoreRate": 61.71
+        },
+        {
+          "id": "16",
+          "correctRate": 64.74,
+          "scoreRate": 64.74
+        },
+        {
+          "id": "17",
+          "correctRate": 70.08,
+          "scoreRate": 70.08
+        },
+        {
+          "id": "18",
+          "correctRate": 72.7,
+          "scoreRate": 72.7
+        },
+        {
+          "id": "19",
+          "correctRate": 33.12,
+          "scoreRate": 33.12
+        },
+        {
+          "id": "20",
+          "correctRate": 58.88,
+          "scoreRate": 58.88
+        },
+        {
+          "id": "21",
+          "correctRate": 72.86,
+          "scoreRate": 72.86
+        },
+        {
+          "id": "22",
+          "correctRate": 88.24,
+          "scoreRate": 88.24
+        },
+        {
+          "id": "23",
+          "correctRate": 67.93,
+          "scoreRate": 67.93
+        },
+        {
+          "id": "24",
+          "correctRate": 21.18,
+          "scoreRate": 21.18
+        },
+        {
+          "id": "25",
+          "correctRate": 46.03,
+          "scoreRate": 46.03
+        },
+        {
+          "id": "26",
+          "correctRate": 72.83,
+          "scoreRate": 72.83
+        },
+        {
+          "id": "27",
+          "correctRate": 88.44,
+          "scoreRate": 88.44
+        },
+        {
+          "id": "28",
+          "correctRate": 69.56,
+          "scoreRate": 69.56
+        },
+        {
+          "id": "29",
+          "correctRate": 50.62,
+          "scoreRate": 50.62
+        },
+        {
+          "id": "30",
+          "correctRate": 54.92,
+          "scoreRate": 54.92
+        },
+        {
+          "id": "31",
+          "correctRate": 53.87,
+          "scoreRate": 53.87
+        },
+        {
+          "id": "32",
+          "correctRate": 71.66,
+          "scoreRate": 71.66
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "公共，政治・経済",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 63.59,
+      "averageCorrectRate": 63.11,
+      "examinees": 143238,
+      "items": [
+        {
+          "id": "1",
+          "correctRate": 66.92,
+          "scoreRate": 66.92
+        },
+        {
+          "id": "2",
+          "correctRate": 60.77,
+          "scoreRate": 60.77
+        },
+        {
+          "id": "3",
+          "correctRate": 94.84,
+          "scoreRate": 94.84
+        },
+        {
+          "id": "4",
+          "correctRate": 71.61,
+          "scoreRate": 71.61
+        },
+        {
+          "id": "5",
+          "correctRate": 40.62,
+          "scoreRate": 40.62
+        },
+        {
+          "id": "6",
+          "correctRate": 94.1,
+          "scoreRate": 94.1
+        },
+        {
+          "id": "7",
+          "correctRate": 61.69,
+          "scoreRate": 61.69
+        },
+        {
+          "id": "8",
+          "correctRate": 88.51,
+          "scoreRate": 88.51
+        },
+        {
+          "id": "9",
+          "correctRate": 77.51,
+          "scoreRate": 77.51
+        },
+        {
+          "id": "10",
+          "correctRate": 77.51,
+          "scoreRate": 77.51
+        },
+        {
+          "id": "11",
+          "correctRate": 62.84,
+          "scoreRate": 62.84
+        },
+        {
+          "id": "12",
+          "correctRate": 67.47,
+          "scoreRate": 67.47
+        },
+        {
+          "id": "13",
+          "correctRate": 72.81,
+          "scoreRate": 72.81
+        },
+        {
+          "id": "14",
+          "correctRate": 63.2,
+          "scoreRate": 63.2
+        },
+        {
+          "id": "15",
+          "correctRate": 61.18,
+          "scoreRate": 61.18
+        },
+        {
+          "id": "16",
+          "correctRate": 69.78,
+          "scoreRate": 69.78
+        },
+        {
+          "id": "17",
+          "correctRate": 54.86,
+          "scoreRate": 54.86
+        },
+        {
+          "id": "18",
+          "correctRate": 49.35,
+          "scoreRate": 49.35
+        },
+        {
+          "id": "19",
+          "correctRate": 65.52,
+          "scoreRate": 65.52
+        },
+        {
+          "id": "20",
+          "correctRate": 65.87,
+          "scoreRate": 65.87
+        },
+        {
+          "id": "21",
+          "correctRate": 74.48,
+          "scoreRate": 74.48
+        },
+        {
+          "id": "22",
+          "correctRate": 74.48,
+          "scoreRate": 74.48
+        },
+        {
+          "id": "23",
+          "correctRate": 30.38,
+          "scoreRate": 30.38
+        },
+        {
+          "id": "24",
+          "correctRate": 59.17,
+          "scoreRate": 59.17
+        },
+        {
+          "id": "25",
+          "correctRate": 56.93,
+          "scoreRate": 56.93
+        },
+        {
+          "id": "26",
+          "correctRate": 74.8,
+          "scoreRate": 74.8
+        },
+        {
+          "id": "27",
+          "correctRate": 59.75,
+          "scoreRate": 59.75
+        },
+        {
+          "id": "28",
+          "correctRate": 39.13,
+          "scoreRate": 39.13
+        },
+        {
+          "id": "29",
+          "correctRate": 60.81,
+          "scoreRate": 60.81
+        },
+        {
+          "id": "30",
+          "correctRate": 25.25,
+          "scoreRate": 25.25
+        },
+        {
+          "id": "31",
+          "correctRate": 54.53,
+          "scoreRate": 54.53
+        },
+        {
+          "id": "32",
+          "correctRate": 92.43,
+          "scoreRate": 92.43
+        },
+        {
+          "id": "33",
+          "correctRate": 62.58,
+          "scoreRate": 62.58
+        },
+        {
+          "id": "34",
+          "correctRate": 39.89,
+          "scoreRate": 39.89
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "物理基礎",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 34.68,
+      "averageCorrectRate": 68.81,
+      "examinees": 18486,
+      "items": [
+        {
+          "id": "101",
+          "correctRate": 57.6,
+          "scoreRate": 57.6
+        },
+        {
+          "id": "102",
+          "correctRate": 43.75,
+          "scoreRate": 43.75
+        },
+        {
+          "id": "103",
+          "correctRate": 78.08,
+          "scoreRate": 78.08
+        },
+        {
+          "id": "104",
+          "correctRate": 83.83,
+          "scoreRate": 83.83
+        },
+        {
+          "id": "105",
+          "correctRate": 90.74,
+          "scoreRate": 90.74
+        },
+        {
+          "id": "106",
+          "correctRate": 70.1,
+          "scoreRate": 70.1
+        },
+        {
+          "id": "107",
+          "correctRate": 74.05,
+          "scoreRate": 74.05
+        },
+        {
+          "id": "108",
+          "correctRate": 80.25,
+          "scoreRate": 80.25
+        },
+        {
+          "id": "109",
+          "correctRate": 77.47,
+          "scoreRate": 77.47
+        },
+        {
+          "id": "110",
+          "correctRate": 56.75,
+          "scoreRate": 56.75
+        },
+        {
+          "id": "111",
+          "correctRate": 59.37,
+          "scoreRate": 59.37
+        },
+        {
+          "id": "112",
+          "correctRate": 69.67,
+          "scoreRate": 69.67
+        },
+        {
+          "id": "113",
+          "correctRate": 61.86,
+          "scoreRate": 61.86
+        },
+        {
+          "id": "114",
+          "correctRate": 59.82,
+          "scoreRate": 59.82
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "化学基礎",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 28.58,
+      "averageCorrectRate": 58.06,
+      "examinees": 89094,
+      "items": [
+        {
+          "id": "101",
+          "correctRate": 82.81,
+          "scoreRate": 82.81
+        },
+        {
+          "id": "102",
+          "correctRate": 74.42,
+          "scoreRate": 74.42
+        },
+        {
+          "id": "103",
+          "correctRate": 54.68,
+          "scoreRate": 54.68
+        },
+        {
+          "id": "104",
+          "correctRate": 75.79,
+          "scoreRate": 75.79
+        },
+        {
+          "id": "105",
+          "correctRate": 60.25,
+          "scoreRate": 60.25
+        },
+        {
+          "id": "106",
+          "correctRate": 67.0,
+          "scoreRate": 67.0
+        },
+        {
+          "id": "107",
+          "correctRate": 49.91,
+          "scoreRate": 49.91
+        },
+        {
+          "id": "108",
+          "correctRate": 84.51,
+          "scoreRate": 84.51
+        },
+        {
+          "id": "109",
+          "correctRate": 66.97,
+          "scoreRate": 66.97
+        },
+        {
+          "id": "110",
+          "correctRate": 31.7,
+          "scoreRate": 31.7
+        },
+        {
+          "id": "111",
+          "correctRate": 67.54,
+          "scoreRate": 67.54
+        },
+        {
+          "id": "112",
+          "correctRate": 78.8,
+          "scoreRate": 78.8
+        },
+        {
+          "id": "113",
+          "correctRate": 16.69,
+          "scoreRate": 16.69
+        },
+        {
+          "id": "114",
+          "correctRate": 36.62,
+          "scoreRate": 36.62
+        },
+        {
+          "id": "115",
+          "correctRate": 46.56,
+          "scoreRate": 46.56
+        },
+        {
+          "id": "116",
+          "correctRate": 34.68,
+          "scoreRate": 34.68
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "生物基礎",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 36.46,
+      "averageCorrectRate": 72.91,
+      "examinees": 114187,
+      "items": [
+        {
+          "id": "101",
+          "correctRate": 37.1,
+          "scoreRate": 37.1
+        },
+        {
+          "id": "102",
+          "correctRate": 64.3,
+          "scoreRate": 64.3
+        },
+        {
+          "id": "103",
+          "correctRate": 78.99,
+          "scoreRate": 78.99
+        },
+        {
+          "id": "104",
+          "correctRate": 73.63,
+          "scoreRate": 73.63
+        },
+        {
+          "id": "105",
+          "correctRate": 42.24,
+          "scoreRate": 42.24
+        },
+        {
+          "id": "106",
+          "correctRate": 77.45,
+          "scoreRate": 77.45
+        },
+        {
+          "id": "107",
+          "correctRate": 66.83,
+          "scoreRate": 66.83
+        },
+        {
+          "id": "108",
+          "correctRate": 84.42,
+          "scoreRate": 84.42
+        },
+        {
+          "id": "109",
+          "correctRate": 76.37,
+          "scoreRate": 76.37
+        },
+        {
+          "id": "110",
+          "correctRate": 71.67,
+          "scoreRate": 71.67
+        },
+        {
+          "id": "111",
+          "correctRate": 89.9,
+          "scoreRate": 89.9
+        },
+        {
+          "id": "112",
+          "correctRate": 82.95,
+          "scoreRate": 82.95
+        },
+        {
+          "id": "113",
+          "correctRate": 87.11,
+          "scoreRate": 87.11
+        },
+        {
+          "id": "114",
+          "correctRate": 78.45,
+          "scoreRate": 78.45
+        },
+        {
+          "id": "115",
+          "correctRate": 87.85,
+          "scoreRate": 87.85
+        },
+        {
+          "id": "116",
+          "correctRate": 67.29,
+          "scoreRate": 67.29
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "地学基礎",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 28.17,
+      "averageCorrectRate": 57.89,
+      "examinees": 48438,
+      "items": [
+        {
+          "id": "101",
+          "correctRate": 79.54,
+          "scoreRate": 79.54
+        },
+        {
+          "id": "102",
+          "correctRate": 60.09,
+          "scoreRate": 60.09
+        },
+        {
+          "id": "103",
+          "correctRate": 65.99,
+          "scoreRate": 65.99
+        },
+        {
+          "id": "104",
+          "correctRate": 24.78,
+          "scoreRate": 24.78
+        },
+        {
+          "id": "105",
+          "correctRate": 36.32,
+          "scoreRate": 36.32
+        },
+        {
+          "id": "106",
+          "correctRate": 59.4,
+          "scoreRate": 59.4
+        },
+        {
+          "id": "107",
+          "correctRate": 73.33,
+          "scoreRate": 73.33
+        },
+        {
+          "id": "108",
+          "correctRate": 77.17,
+          "scoreRate": 77.17
+        },
+        {
+          "id": "109",
+          "correctRate": 23.51,
+          "scoreRate": 23.51
+        },
+        {
+          "id": "110",
+          "correctRate": 38.49,
+          "scoreRate": 38.49
+        },
+        {
+          "id": "111",
+          "correctRate": 83.03,
+          "scoreRate": 83.03
+        },
+        {
+          "id": "112",
+          "correctRate": 49.49,
+          "scoreRate": 49.49
+        },
+        {
+          "id": "113",
+          "correctRate": 85.02,
+          "scoreRate": 85.02
+        },
+        {
+          "id": "114",
+          "correctRate": 77.33,
+          "scoreRate": 77.33
+        },
+        {
+          "id": "115",
+          "correctRate": 34.89,
+          "scoreRate": 34.89
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "物理",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 45.55,
+      "averageCorrectRate": 46.42,
+      "examinees": 145203,
+      "items": [
+        {
+          "id": "1",
+          "correctRate": 59.87,
+          "scoreRate": 59.87
+        },
+        {
+          "id": "2",
+          "correctRate": 69.57,
+          "scoreRate": 69.57
+        },
+        {
+          "id": "3",
+          "correctRate": 42.09,
+          "scoreRate": 42.09
+        },
+        {
+          "id": "4",
+          "correctRate": 53.43,
+          "scoreRate": 53.43
+        },
+        {
+          "id": "5",
+          "correctRate": 57.35,
+          "scoreRate": 57.35
+        },
+        {
+          "id": "6",
+          "correctRate": 12.5,
+          "scoreRate": 12.5
+        },
+        {
+          "id": "7",
+          "correctRate": 71.77,
+          "scoreRate": 71.77
+        },
+        {
+          "id": "8",
+          "correctRate": 66.01,
+          "scoreRate": 66.01
+        },
+        {
+          "id": "9",
+          "correctRate": 60.24,
+          "scoreRate": 60.24
+        },
+        {
+          "id": "10",
+          "correctRate": 40.9,
+          "scoreRate": 40.9
+        },
+        {
+          "id": "11",
+          "correctRate": 29.99,
+          "scoreRate": 29.99
+        },
+        {
+          "id": "12",
+          "correctRate": 49.69,
+          "scoreRate": 49.69
+        },
+        {
+          "id": "13",
+          "correctRate": 74.97,
+          "scoreRate": 74.97
+        },
+        {
+          "id": "14",
+          "correctRate": 53.5,
+          "scoreRate": 53.5
+        },
+        {
+          "id": "15",
+          "correctRate": 35.11,
+          "scoreRate": 35.11
+        },
+        {
+          "id": "16",
+          "correctRate": 35.75,
+          "scoreRate": 35.75
+        },
+        {
+          "id": "17",
+          "correctRate": 58.54,
+          "scoreRate": 58.54
+        },
+        {
+          "id": "18",
+          "correctRate": 18.87,
+          "scoreRate": 18.87
+        },
+        {
+          "id": "19",
+          "correctRate": 29.47,
+          "scoreRate": 29.47
+        },
+        {
+          "id": "20",
+          "correctRate": 30.09,
+          "scoreRate": 30.09
+        },
+        {
+          "id": "21",
+          "correctRate": 53.9,
+          "scoreRate": 53.9
+        },
+        {
+          "id": "22",
+          "correctRate": 17.63,
+          "scoreRate": 17.63
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "化学",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 56.86,
+      "averageCorrectRate": 57.81,
+      "examinees": 181584,
+      "items": [
+        {
+          "id": "1",
+          "correctRate": 80.68,
+          "scoreRate": 80.68
+        },
+        {
+          "id": "2",
+          "correctRate": 58.04,
+          "scoreRate": 58.04
+        },
+        {
+          "id": "3",
+          "correctRate": 76.85,
+          "scoreRate": 76.85
+        },
+        {
+          "id": "4",
+          "correctRate": 52.68,
+          "scoreRate": 52.68
+        },
+        {
+          "id": "5",
+          "correctRate": 56.44,
+          "scoreRate": 56.44
+        },
+        {
+          "id": "6",
+          "correctRate": 56.19,
+          "scoreRate": 56.19
+        },
+        {
+          "id": "7",
+          "correctRate": 79.42,
+          "scoreRate": 79.42
+        },
+        {
+          "id": "8",
+          "correctRate": 58.06,
+          "scoreRate": 58.06
+        },
+        {
+          "id": "9",
+          "correctRate": 45.07,
+          "scoreRate": 45.07
+        },
+        {
+          "id": "10",
+          "correctRate": 32.94,
+          "scoreRate": 32.94
+        },
+        {
+          "id": "11",
+          "correctRate": 76.8,
+          "scoreRate": 76.8
+        },
+        {
+          "id": "12",
+          "correctRate": 37.33,
+          "scoreRate": 37.33
+        },
+        {
+          "id": "13",
+          "correctRate": 52.64,
+          "scoreRate": 52.64
+        },
+        {
+          "id": "14",
+          "correctRate": 79.86,
+          "scoreRate": 79.86
+        },
+        {
+          "id": "15",
+          "correctRate": 69.24,
+          "scoreRate": 69.24
+        },
+        {
+          "id": "16",
+          "correctRate": 61.24,
+          "scoreRate": 61.24
+        },
+        {
+          "id": "17",
+          "correctRate": 56.44,
+          "scoreRate": 56.44
+        },
+        {
+          "id": "18",
+          "correctRate": 33.35,
+          "scoreRate": 33.35
+        },
+        {
+          "id": "19",
+          "correctRate": 49.97,
+          "scoreRate": 49.97
+        },
+        {
+          "id": "20",
+          "correctRate": 69.69,
+          "scoreRate": 69.69
+        },
+        {
+          "id": "21",
+          "correctRate": 50.48,
+          "scoreRate": 50.48
+        },
+        {
+          "id": "22",
+          "correctRate": 47.88,
+          "scoreRate": 47.88
+        },
+        {
+          "id": "23",
+          "correctRate": 58.32,
+          "scoreRate": 58.32
+        },
+        {
+          "id": "24",
+          "correctRate": 58.39,
+          "scoreRate": 58.39
+        },
+        {
+          "id": "25",
+          "correctRate": 68.08,
+          "scoreRate": 68.08
+        },
+        {
+          "id": "26",
+          "correctRate": 70.52,
+          "scoreRate": 70.52
+        },
+        {
+          "id": "27",
+          "correctRate": 67.26,
+          "scoreRate": 67.26
+        },
+        {
+          "id": "28",
+          "correctRate": 50.34,
+          "scoreRate": 50.34
+        },
+        {
+          "id": "29",
+          "correctRate": 37.79,
+          "scoreRate": 37.79
+        },
+        {
+          "id": "30",
+          "correctRate": 73.11,
+          "scoreRate": 73.11
+        },
+        {
+          "id": "31",
+          "correctRate": 57.0,
+          "scoreRate": 57.0
+        },
+        {
+          "id": "32",
+          "correctRate": 55.39,
+          "scoreRate": 55.39
+        },
+        {
+          "id": "33",
+          "correctRate": 30.12,
+          "scoreRate": 30.12
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "生物",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 55.01,
+      "averageCorrectRate": 54.24,
+      "examinees": 56314,
+      "items": [
+        {
+          "id": "1",
+          "correctRate": 42.12,
+          "scoreRate": 42.12
+        },
+        {
+          "id": "2",
+          "correctRate": 73.22,
+          "scoreRate": 73.22
+        },
+        {
+          "id": "3",
+          "correctRate": 49.91,
+          "scoreRate": 49.91
+        },
+        {
+          "id": "4",
+          "correctRate": 45.95,
+          "scoreRate": 45.95
+        },
+        {
+          "id": "5",
+          "correctRate": 31.86,
+          "scoreRate": 31.86
+        },
+        {
+          "id": "6",
+          "correctRate": 60.9,
+          "scoreRate": 60.9
+        },
+        {
+          "id": "7-8",
+          "correctRate": 65.99,
+          "scoreRate": 79.48,
+          "note": "得点率と正答率が異なる。表示列は正答率。"
+        },
+        {
+          "id": "9",
+          "correctRate": 46.21,
+          "scoreRate": 46.21
+        },
+        {
+          "id": "10",
+          "correctRate": 49.11,
+          "scoreRate": 49.11
+        },
+        {
+          "id": "11",
+          "correctRate": 15.2,
+          "scoreRate": 15.2
+        },
+        {
+          "id": "12",
+          "correctRate": 38.82,
+          "scoreRate": 38.82
+        },
+        {
+          "id": "13",
+          "correctRate": 25.17,
+          "scoreRate": 25.17
+        },
+        {
+          "id": "14",
+          "correctRate": 34.21,
+          "scoreRate": 34.21
+        },
+        {
+          "id": "15",
+          "correctRate": 77.68,
+          "scoreRate": 77.68
+        },
+        {
+          "id": "16",
+          "correctRate": 51.37,
+          "scoreRate": 51.37
+        },
+        {
+          "id": "17",
+          "correctRate": 48.83,
+          "scoreRate": 48.83
+        },
+        {
+          "id": "18",
+          "correctRate": 68.28,
+          "scoreRate": 68.28
+        },
+        {
+          "id": "19",
+          "correctRate": 79.13,
+          "scoreRate": 79.13
+        },
+        {
+          "id": "20",
+          "correctRate": 40.92,
+          "scoreRate": 40.92
+        },
+        {
+          "id": "21",
+          "correctRate": 76.24,
+          "scoreRate": 76.24
+        },
+        {
+          "id": "22",
+          "correctRate": 89.91,
+          "scoreRate": 89.91
+        },
+        {
+          "id": "23",
+          "correctRate": 48.71,
+          "scoreRate": 54.25,
+          "note": "得点率と正答率が異なる。表示列は正答率。"
+        },
+        {
+          "id": "24",
+          "correctRate": 70.28,
+          "scoreRate": 70.28
+        },
+        {
+          "id": "25",
+          "correctRate": 71.78,
+          "scoreRate": 71.78
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "地学",
+      "source": "旺文社 教育情報センター 2026年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
+      "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2026/0317_1.pdf",
+      "averageScore": 44.29,
+      "averageCorrectRate": 44.47,
+      "examinees": 2701,
+      "items": [
+        {
+          "id": "1",
+          "correctRate": 43.95,
+          "scoreRate": 43.95
+        },
+        {
+          "id": "2",
+          "correctRate": 28.17,
+          "scoreRate": 28.17
+        },
+        {
+          "id": "3",
+          "correctRate": 31.43,
+          "scoreRate": 31.43
+        },
+        {
+          "id": "4",
+          "correctRate": 68.12,
+          "scoreRate": 68.12
+        },
+        {
+          "id": "5",
+          "correctRate": 54.39,
+          "scoreRate": 54.39
+        },
+        {
+          "id": "6",
+          "correctRate": 62.05,
+          "scoreRate": 62.05
+        },
+        {
+          "id": "7",
+          "correctRate": 77.86,
+          "scoreRate": 77.86
+        },
+        {
+          "id": "8",
+          "correctRate": 42.76,
+          "scoreRate": 42.76
+        },
+        {
+          "id": "9",
+          "correctRate": 14.81,
+          "scoreRate": 14.81
+        },
+        {
+          "id": "10",
+          "correctRate": 18.81,
+          "scoreRate": 18.81
+        },
+        {
+          "id": "11",
+          "correctRate": 51.87,
+          "scoreRate": 51.87
+        },
+        {
+          "id": "12",
+          "correctRate": 35.91,
+          "scoreRate": 35.91
+        },
+        {
+          "id": "13",
+          "correctRate": 51.83,
+          "scoreRate": 51.83
+        },
+        {
+          "id": "14",
+          "correctRate": 36.95,
+          "scoreRate": 36.95
+        },
+        {
+          "id": "15",
+          "correctRate": 33.1,
+          "scoreRate": 33.1
+        },
+        {
+          "id": "16",
+          "correctRate": 33.99,
+          "scoreRate": 33.99
+        },
+        {
+          "id": "17",
+          "correctRate": 49.43,
+          "scoreRate": 49.43
+        },
+        {
+          "id": "18",
+          "correctRate": 33.28,
+          "scoreRate": 33.28
+        },
+        {
+          "id": "19",
+          "correctRate": 67.53,
+          "scoreRate": 67.53
+        },
+        {
+          "id": "20",
+          "correctRate": 22.14,
+          "scoreRate": 22.14
+        },
+        {
+          "id": "21",
+          "correctRate": 54.39,
+          "scoreRate": 54.39
+        },
+        {
+          "id": "22",
+          "correctRate": 62.2,
+          "scoreRate": 62.2
+        },
+        {
+          "id": "23",
+          "correctRate": 31.36,
+          "scoreRate": 31.36
+        },
+        {
+          "id": "24",
+          "correctRate": 47.91,
+          "scoreRate": 47.91
+        },
+        {
+          "id": "25",
+          "correctRate": 62.75,
+          "scoreRate": 62.75
+        },
+        {
+          "id": "26",
+          "correctRate": 32.58,
+          "scoreRate": 32.58
+        },
+        {
+          "id": "27",
+          "correctRate": 38.13,
+          "scoreRate": 38.13
+        },
+        {
+          "id": "28",
+          "correctRate": 57.31,
+          "scoreRate": 57.31
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "地理総合",
+      "source": "大学入試センター 令和8年度大学入学共通テスト 実施結果の概要",
+      "sourceUrl": "https://www.dnc.ac.jp/news/albums/abm.php?d=514&f=abm00006109.pdf&n=%EF%BC%88%E5%A0%B1%E9%81%93%E7%99%BA%E8%A1%A8%E8%B3%87%E6%96%99%EF%BC%89%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E5%AD%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88_%E5%AE%9F%E6%96%BD%E7%B5%90%E6%9E%9C%E3%81%AE%E6%A6%82%E8%A6%81.pdf",
+      "averageScore": 24.27,
+      "examinees": 6355,
+      "items": [],
+      "notes": "平均点のみ登録。小問別正答率は未登録。"
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "歴史総合",
+      "source": "大学入試センター 令和8年度大学入学共通テスト 実施結果の概要",
+      "sourceUrl": "https://www.dnc.ac.jp/news/albums/abm.php?d=514&f=abm00006109.pdf&n=%EF%BC%88%E5%A0%B1%E9%81%93%E7%99%BA%E8%A1%A8%E8%B3%87%E6%96%99%EF%BC%89%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E5%AD%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88_%E5%AE%9F%E6%96%BD%E7%B5%90%E6%9E%9C%E3%81%AE%E6%A6%82%E8%A6%81.pdf",
+      "averageScore": 24.98,
+      "examinees": 4477,
+      "items": [],
+      "notes": "平均点のみ登録。小問別正答率は未登録。"
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "公共",
+      "source": "大学入試センター 令和8年度大学入学共通テスト 実施結果の概要",
+      "sourceUrl": "https://www.dnc.ac.jp/news/albums/abm.php?d=514&f=abm00006109.pdf&n=%EF%BC%88%E5%A0%B1%E9%81%93%E7%99%BA%E8%A1%A8%E8%B3%87%E6%96%99%EF%BC%89%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E5%AD%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88_%E5%AE%9F%E6%96%BD%E7%B5%90%E6%9E%9C%E3%81%AE%E6%A6%82%E8%A6%81.pdf",
+      "averageScore": 29.27,
+      "examinees": 5342,
+      "items": [],
+      "notes": "平均点のみ登録。小問別正答率は未登録。"
+    },
+    {
+      "year": "2026",
+      "exam": "main",
+      "subject": "数学Ⅰ",
+      "source": "大学入試センター 令和8年度大学入学共通テスト 実施結果の概要",
+      "sourceUrl": "https://www.dnc.ac.jp/news/albums/abm.php?d=514&f=abm00006109.pdf&n=%EF%BC%88%E5%A0%B1%E9%81%93%E7%99%BA%E8%A1%A8%E8%B3%87%E6%96%99%EF%BC%89%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E5%AD%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88_%E5%AE%9F%E6%96%BD%E7%B5%90%E6%9E%9C%E3%81%AE%E6%A6%82%E8%A6%81.pdf",
+      "averageScore": 28.53,
+      "examinees": 3280,
+      "items": [],
+      "notes": "平均点のみ登録。小問別正答率は未登録。"
+    }
+  ]
+}
