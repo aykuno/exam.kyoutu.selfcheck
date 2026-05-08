@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-08T22:52+09:00",
-  "updatedAt": "2026/5/8 22:52",
-  "version": "v85",
+  "generatedAt": "2026-05-09T00:19:00+09:00",
+  "updatedAt": "2026/5/9 00:19",
+  "version": "v90",
   "password": "なし",
-  "includedCount": 611,
-  "count": 611,
+  "includedCount": 659,
+  "count": 659,
   "included": [
     {
       "year": "2026",
@@ -4380,9 +4380,7 @@
       "maxScore": 100,
       "questions": 30,
       "source": "大学入試センター 令和8年度 大学入学共通テスト 追・再試験 正解",
-      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
     },
     {
       "year": "2026",
@@ -4435,9 +4433,7 @@
       "maxScore": 50,
       "questions": 16,
       "source": "大学入試センター 令和8年度 大学入学共通テスト 追・再試験 正解",
-      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
     },
     {
       "year": "2026",
@@ -4446,9 +4442,7 @@
       "maxScore": 50,
       "questions": 16,
       "source": "大学入試センター 令和8年度 大学入学共通テスト 追・再試験 正解",
-      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
     },
     {
       "year": "2026",
@@ -4457,9 +4451,7 @@
       "maxScore": 50,
       "questions": 16,
       "source": "大学入試センター 令和8年度 大学入学共通テスト 追・再試験 正解",
-      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
     },
     {
       "year": "2026",
@@ -4578,9 +4570,7 @@
       "maxScore": 100,
       "questions": 27,
       "source": "大学入試センター 令和8年度 大学入学共通テスト 追・再試験 正解",
-      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
     },
     {
       "year": "2026",
@@ -6393,9 +6383,7 @@
       "maxScore": 100,
       "questions": 29,
       "source": "共通テスト過去問集（千進アカデミー）2022年追試 正解表画像",
-      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%9C%B0%E5%AD%A6%E3%80%912022%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%9C%B0%E5%AD%A6%E3%80%912022%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94"
     },
     {
       "year": "2022",
@@ -6426,9 +6414,7 @@
       "maxScore": 100,
       "questions": 32,
       "source": "共通テスト過去問集（千進アカデミー）2022年追試 英語リスニング各設問ページ",
-      "sourceUrl": "https://kyotsutest.jp/?page_id=2673",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://kyotsutest.jp/?page_id=2673"
     },
     {
       "year": "2021",
@@ -6525,9 +6511,7 @@
       "maxScore": 100,
       "questions": 30,
       "source": "共通テスト過去問集 2021年追試 現代社会 問題+解答",
-      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%8F%BE%E4%BB%A3%E7%A4%BE%E4%BC%9A%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%8F%BE%E4%BB%A3%E7%A4%BE%E4%BC%9A%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94"
     },
     {
       "year": "2021",
@@ -6591,9 +6575,7 @@
       "maxScore": 100,
       "questions": 30,
       "source": "共通テスト過去問集 2021年追試 地学 問題+解答",
-      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%9C%B0%E5%AD%A6%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%9C%B0%E5%AD%A6%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94"
     },
     {
       "year": "2021",
@@ -6646,9 +6628,7 @@
       "maxScore": 50,
       "questions": 16,
       "source": "共通テスト過去問集 2020年追試 生物基礎 問題+解答",
-      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E%E3%80%912020%E5%B9%B4-%E8%BF%BD%E8%A9%A6-%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E%E3%80%912020%E5%B9%B4-%E8%BF%BD%E8%A9%A6-%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94"
     },
     {
       "year": 2020,
@@ -6657,9 +6637,7 @@
       "maxScore": 100,
       "questions": 34,
       "source": "共通テスト過去問集 2020年追試 生物 問題+解答",
-      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%94%9F%E7%89%A9%E3%80%912020%E5%B9%B4-%E8%BF%BD%E8%A9%A6-%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%94%9F%E7%89%A9%E3%80%912020%E5%B9%B4-%E8%BF%BD%E8%A9%A6-%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94"
     },
     {
       "year": 2020,
@@ -6679,9 +6657,7 @@
       "maxScore": 100,
       "questions": 34,
       "source": "共通テスト過去問集 2020年追試 地学 問題+解答",
-      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%9C%B0%E5%AD%A6%E3%80%912020%E5%B9%B4-%E8%BF%BD%E8%A9%A6-%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%9C%B0%E5%AD%A6%E3%80%912020%E5%B9%B4-%E8%BF%BD%E8%A9%A6-%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94"
     },
     {
       "year": 2020,
@@ -6712,9 +6688,7 @@
       "maxScore": 100,
       "questions": 36,
       "source": "共通テスト過去問集 2020年追試 現代社会 問題+解答",
-      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%8F%BE%E4%BB%A3%E7%A4%BE%E4%BC%9A%E3%80%912020%E5%B9%B4-%E8%BF%BD%E8%A9%A6-%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%8F%BE%E4%BB%A3%E7%A4%BE%E4%BC%9A%E3%80%912020%E5%B9%B4-%E8%BF%BD%E8%A9%A6-%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94"
     },
     {
       "year": 2020,
@@ -6723,275 +6697,689 @@
       "maxScore": 100,
       "questions": 34,
       "source": "共通テスト過去問集 2020年追試 政治・経済 問題+解答",
-      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88%E3%80%912020%E5%B9%B4-%E8%BF%BD%E8%A9%A6-%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
-      "explanationSource": null,
-      "explanationSourceUrl": null
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88%E3%80%912020%E5%B9%B4-%E8%BF%BD%E8%A9%A6-%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "世界史A",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2005年度大学入試センター試験 世界史A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005WhisA_Ans.pdf"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "倫理",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2005年度大学入試センター試験 倫理 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005Eth_Ans.pdf"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "現代社会",
+      "maxScore": 100,
+      "questions": 39,
+      "source": "日本の学校 2005年度大学入試センター試験 現代社会 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005Soc_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "倫理",
+      "maxScore": 100,
+      "questions": 37,
+      "source": "日本の学校 2006年度大学入試センター試験 倫理 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Eth_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "世界史A",
+      "maxScore": 100,
+      "questions": 33,
+      "source": "日本の学校 2007年度大学入試センター試験 世界史A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007WhisA_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "世界史B",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2007年度大学入試センター試験 世界史B 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007WhisB_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "政治・経済",
+      "maxScore": 100,
+      "questions": 38,
+      "source": "日本の学校 2007年度大学入試センター試験 政治・経済 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007Gov_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "英語（筆記）",
+      "maxScore": 200,
+      "questions": 48,
+      "source": "日本の学校 2007年度大学入試センター試験 英語（筆記） 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007Eng_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "日本史A",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2007年度大学入試センター試験 日本史A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007JhisA_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "日本史B",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2007年度大学入試センター試験 日本史B 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007JhisB_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "地理A",
+      "maxScore": 100,
+      "questions": 35,
+      "source": "日本の学校 2007年度大学入試センター試験 地理A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007GeogA_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "地理B",
+      "maxScore": 100,
+      "questions": 35,
+      "source": "日本の学校 2007年度大学入試センター試験 地理B 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007GeogB_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "現代社会",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2007年度大学入試センター試験 現代社会 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007Soc_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "倫理",
+      "maxScore": 100,
+      "questions": 37,
+      "source": "日本の学校 2007年度大学入試センター試験 倫理 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007Eth_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "理科総合A",
+      "maxScore": 100,
+      "questions": 25,
+      "source": "日本の学校 2007年度大学入試センター試験 理科総合A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007RikaSogoA_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "理科総合B",
+      "maxScore": 100,
+      "questions": 27,
+      "source": "日本の学校 2007年度大学入試センター試験 理科総合B 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007RikaSogoB_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "物理I",
+      "maxScore": 100,
+      "questions": 24,
+      "source": "日本の学校 2007年度大学入試センター試験 物理I 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007Phy1_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "生物I",
+      "maxScore": 100,
+      "questions": 29,
+      "source": "日本の学校 2007年度大学入試センター試験 生物I 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007Bio1_Ans.pdf"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "地学I",
+      "maxScore": 100,
+      "questions": 30,
+      "source": "日本の学校 2007年度大学入試センター試験 地学I 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007Geol1_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "世界史A",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2006年度大学入試センター試験 世界史A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006WhisA_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "世界史B",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2006年度大学入試センター試験 世界史B 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006WhisB_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "日本史A",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2006年度大学入試センター試験 日本史A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006JhisA_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "日本史B",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2006年度大学入試センター試験 日本史B 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006JhisB_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "地理A",
+      "maxScore": 100,
+      "questions": 35,
+      "source": "日本の学校 2006年度大学入試センター試験 地理A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006GeogA_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "地理B",
+      "maxScore": 100,
+      "questions": 35,
+      "source": "日本の学校 2006年度大学入試センター試験 地理B 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006GeogB_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "現代社会",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2006年度大学入試センター試験 現代社会 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Soc_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "政治・経済",
+      "maxScore": 100,
+      "questions": 38,
+      "source": "日本の学校 2006年度大学入試センター試験 政治・経済 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Gov_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "理科総合A",
+      "maxScore": 100,
+      "questions": 26,
+      "source": "日本の学校 2006年度大学入試センター試験 理科総合A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006RikaSogoA_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "理科総合B",
+      "maxScore": 100,
+      "questions": 27,
+      "source": "日本の学校 2006年度大学入試センター試験 理科総合B 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006RikaSogoB_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "総合理科",
+      "maxScore": 100,
+      "questions": 25,
+      "source": "日本の学校 2006年度大学入試センター試験 総合理科 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006TotalScience._Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "物理I",
+      "maxScore": 100,
+      "questions": 23,
+      "source": "日本の学校 2006年度大学入試センター試験 物理I 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Phy1_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "化学I",
+      "maxScore": 100,
+      "questions": 28,
+      "source": "日本の学校 2006年度大学入試センター試験 化学I 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Chem1_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "生物I",
+      "maxScore": 100,
+      "questions": 26,
+      "source": "日本の学校 2006年度大学入試センター試験 生物I 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Bio1_Ans.pdf"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "地学I",
+      "maxScore": 100,
+      "questions": 30,
+      "source": "日本の学校 2006年度大学入試センター試験 地学I 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Geol1_Ans.pdf"
+    },
+    {
+      "year": "2008",
+      "exam": "center-main",
+      "subject": "英語（リーディング）",
+      "maxScore": 200,
+      "questions": 48,
+      "source": "日本の学校 2008年度大学入試センター試験 英語（筆記） 解答（リーディング相当の別名登録）",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2008Eng_Ans.pdf",
+      "explanationSource": "東進 2008年センター試験 解答速報・解説",
+      "explanationSourceUrl": "https://www.toshin.com/center/2008/"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "英語（筆記）",
+      "maxScore": 200,
+      "questions": 44,
+      "source": "日本の学校 2005年度大学入試センター試験 英語（筆記） 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005Eng_Ans.pdf"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "世界史B",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2005年度大学入試センター試験 世界史B 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005WhisB_Ans.pdf"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "日本史A",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2005年度大学入試センター試験 日本史A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005JhisA_Ans.pdf"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "日本史B",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2005年度大学入試センター試験 日本史B 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005JhisB_Ans.pdf"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "地理A",
+      "maxScore": 100,
+      "questions": 35,
+      "source": "日本の学校 2005年度大学入試センター試験 地理A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005GeogA_Ans.pdf"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "地理B",
+      "maxScore": 100,
+      "questions": 35,
+      "source": "日本の学校 2005年度大学入試センター試験 地理B 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005GeogB_Ans.pdf"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "政治・経済",
+      "maxScore": 100,
+      "questions": 38,
+      "source": "日本の学校 2005年度大学入試センター試験 政治・経済 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005Gov_Ans.pdf"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "総合理科",
+      "maxScore": 100,
+      "questions": 25,
+      "source": "日本の学校 2005年度大学入試センター試験 総合理科 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005TotalScience_Ans.pdf"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "物理IA",
+      "maxScore": 100,
+      "questions": 54,
+      "source": "日本の学校 2005年度大学入試センター試験 物理IA 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005PhyA_Ans.pdf"
+    },
+    {
+      "year": "2004",
+      "exam": "center-main",
+      "subject": "英語（筆記）",
+      "maxScore": 200,
+      "questions": 44,
+      "source": "日本の学校 2004年度大学入試センター試験 英語（筆記） 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004Eng_Ans.pdf"
+    },
+    {
+      "year": "2004",
+      "exam": "center-main",
+      "subject": "世界史A",
+      "maxScore": 100,
+      "questions": 40,
+      "source": "日本の学校 2004年度大学入試センター試験 世界史A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004WhisA_Ans.pdf"
+    },
+    {
+      "year": "2004",
+      "exam": "center-main",
+      "subject": "世界史B",
+      "maxScore": 100,
+      "questions": 41,
+      "source": "日本の学校 2004年度大学入試センター試験 世界史B 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004WhisB_Ans.pdf"
+    },
+    {
+      "year": "2004",
+      "exam": "center-main",
+      "subject": "日本史A",
+      "maxScore": 100,
+      "questions": 36,
+      "source": "日本の学校 2004年度大学入試センター試験 日本史A 解答",
+      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004JhisA_Ans.pdf"
     }
   ],
   "latestAdditions": [
     {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "国語",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "歴史総合，日本史探究",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "歴史総合，世界史探究",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "公共，倫理",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "公共，政治・経済",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "物理基礎",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "化学基礎",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "生物基礎",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "地学基礎",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "物理",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "化学",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "生物",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2026",
-      "exam": "retake",
+      "year": "2008",
+      "exam": "center-main",
       "subject": "英語（リーディング）",
-      "kind": "explanationSourceUrl"
+      "kind": "answerKey"
     },
     {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "情報Ⅰ",
-      "kind": "explanationSourceUrl"
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "英語（筆記）",
+      "kind": "answerKey"
     },
     {
-      "year": "2022",
-      "exam": "retake",
-      "subject": "英語（リーディング）",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2022",
-      "exam": "retake",
+      "year": "2005",
+      "exam": "center-main",
       "subject": "世界史B",
-      "kind": "explanationSourceUrl"
+      "kind": "answerKey"
     },
     {
-      "year": "2022",
-      "exam": "retake",
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "日本史A",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "日本史B",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "地理A",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
       "subject": "地理B",
-      "kind": "explanationSourceUrl"
+      "kind": "answerKey"
     },
     {
-      "year": "2022",
-      "exam": "retake",
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "政治・経済",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "総合理科",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2005",
+      "exam": "center-main",
+      "subject": "物理IA",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2004",
+      "exam": "center-main",
+      "subject": "英語（筆記）",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2004",
+      "exam": "center-main",
+      "subject": "世界史A",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2004",
+      "exam": "center-main",
+      "subject": "世界史B",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2004",
+      "exam": "center-main",
+      "subject": "日本史A",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "地理A",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "地理B",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
       "subject": "現代社会",
-      "kind": "explanationSourceUrl"
+      "kind": "answerKey"
     },
     {
-      "year": "2022",
-      "exam": "retake",
-      "subject": "倫理",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2022",
-      "exam": "retake",
+      "year": "2006",
+      "exam": "center-main",
       "subject": "政治・経済",
-      "kind": "explanationSourceUrl"
+      "kind": "answerKey"
     },
     {
-      "year": "2022",
-      "exam": "retake",
-      "subject": "倫理，政治・経済",
-      "kind": "explanationSourceUrl"
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "理科総合A",
+      "kind": "answerKey"
     },
     {
-      "year": "2022",
-      "exam": "retake",
-      "subject": "物理基礎",
-      "kind": "explanationSourceUrl"
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "理科総合B",
+      "kind": "answerKey"
     },
     {
-      "year": "2022",
-      "exam": "retake",
-      "subject": "生物基礎",
-      "kind": "explanationSourceUrl"
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "総合理科",
+      "kind": "answerKey"
     },
     {
-      "year": "2022",
-      "exam": "retake",
-      "subject": "地学基礎",
-      "kind": "explanationSourceUrl"
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "物理I",
+      "kind": "answerKey"
     },
     {
-      "year": "2022",
-      "exam": "retake",
-      "subject": "化学",
-      "kind": "explanationSourceUrl"
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "化学I",
+      "kind": "answerKey"
     },
     {
-      "year": "2022",
-      "exam": "retake",
-      "subject": "生物",
-      "kind": "explanationSourceUrl"
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "生物I",
+      "kind": "answerKey"
     },
     {
-      "year": "2021",
-      "exam": "retake",
-      "subject": "英語（リーディング）",
-      "kind": "explanationSourceUrl"
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "地学I",
+      "kind": "answerKey"
     },
     {
-      "year": "2021",
-      "exam": "retake",
-      "subject": "物理基礎",
-      "kind": "explanationSourceUrl"
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "世界史A",
+      "kind": "answerKey"
     },
     {
-      "year": "2021",
-      "exam": "retake",
-      "subject": "化学基礎",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2021",
-      "exam": "retake",
-      "subject": "日本史B",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2021",
-      "exam": "retake",
+      "year": "2006",
+      "exam": "center-main",
       "subject": "世界史B",
-      "kind": "explanationSourceUrl"
+      "kind": "answerKey"
     },
     {
-      "year": "2021",
-      "exam": "retake",
-      "subject": "倫理",
-      "kind": "explanationSourceUrl"
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "日本史A",
+      "kind": "answerKey"
     },
     {
-      "year": "2021",
-      "exam": "retake",
-      "subject": "倫理，政治・経済",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2021",
-      "exam": "retake",
-      "subject": "地学基礎",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2021",
-      "exam": "retake",
-      "subject": "政治・経済",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2020",
-      "exam": "retake",
-      "subject": "物理",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2020",
-      "exam": "retake",
-      "subject": "化学基礎",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2020",
-      "exam": "retake",
-      "subject": "地学基礎",
-      "kind": "explanationSourceUrl"
-    },
-    {
-      "year": "2020",
-      "exam": "retake",
+      "year": "2006",
+      "exam": "center-main",
       "subject": "日本史B",
-      "kind": "explanationSourceUrl"
+      "kind": "answerKey"
     },
     {
-      "year": "2020",
-      "exam": "retake",
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "英語（筆記）",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "日本史A",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "日本史B",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "地理A",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
       "subject": "地理B",
-      "kind": "explanationSourceUrl"
+      "kind": "answerKey"
     },
     {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "数学Ⅰ，数学A",
-      "kind": "explanationSourceUrl"
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "現代社会",
+      "kind": "answerKey"
     },
     {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "数学Ⅰ",
-      "kind": "explanationSourceUrl"
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "倫理",
+      "kind": "answerKey"
     },
     {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "数学Ⅱ，数学B，数学C",
-      "kind": "explanationSourceUrl"
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "理科総合A",
+      "kind": "answerKey"
     },
     {
-      "year": "2026",
-      "exam": "retake",
-      "subject": "英語（リスニング）",
-      "kind": "explanationSourceUrl"
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "理科総合B",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "物理I",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "生物I",
+      "kind": "answerKey"
+    },
+    {
+      "year": "2007",
+      "exam": "center-main",
+      "subject": "地学I",
+      "kind": "answerKey"
     }
   ]
 }

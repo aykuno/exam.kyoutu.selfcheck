@@ -1,6 +1,6 @@
 {
-  "version": "v85",
-  "generatedAt": "2026-05-08T22:52+09:00",
+  "version": "v90",
+  "generatedAt": "2026-05-09T00:19:00+09:00",
   "source": "大学入試センター 受験者数・平均点の推移（本試験）／旺文社 教育情報センター 小問別正答率",
   "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/",
   "notes": "2008〜2026本試験の受験者平均点を大学入試センターの「受験者数・平均点の推移（本試験）」から追加。出典の平均点は100点満点換算のため、サイト表示では各科目の満点に合わせて換算している。2024〜2026本試験の一部科目は旺文社教育情報センターの小問別正答率資料を基に受験者正答率も登録。受験者正答率は完全正答者の割合であり、得点率ではない。",
@@ -15008,6 +15008,20 @@
       "averageScoreScale": "app-max-score",
       "averageSource": "大学入試センター 共通テスト 受験者数・平均点の推移（本試験）",
       "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/R3_.html"
+    },
+    {
+      "year": "2008",
+      "exam": "center-main",
+      "subject": "英語（リーディング）",
+      "source": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageScore": 125.26,
+      "averageScore100": 62.63,
+      "averageScoreScale": "app-max-score",
+      "items": [],
+      "note": "センター試験当時の正式科目名は「英語（筆記）」。v90で別名登録。"
     }
   ]
 }
