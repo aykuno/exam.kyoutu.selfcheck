@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-09T11:17:00+09:00",
-  "updatedAt": "2026-05-09T11:17:00+09:00",
-  "version": "v98",
+  "generatedAt": "2026-05-09T11:43:00+09:00",
+  "updatedAt": "2026-05-09T11:43:00+09:00",
+  "version": "v100",
   "password": "なし",
-  "includedCount": 753,
-  "count": 753,
+  "includedCount": 703,
+  "count": 703,
   "included": [
     {
       "year": "2026",
@@ -1314,7 +1314,7 @@
     {
       "year": "2020",
       "exam": "center-main",
-      "subject": "英語（筆記）",
+      "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "中日進学ナビ 2020年度大学入試センター試験 英語（筆記）解答PDF",
       "sourceUrl": "https://edu.chunichi.co.jp/site_home/center/pdf/2020English_a.pdf",
@@ -1539,7 +1539,7 @@
     {
       "year": "2019",
       "exam": "center-main",
-      "subject": "英語（筆記）",
+      "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "中日進学ナビ 2019年度大学入試センター試験 英語（筆記）解答PDF",
       "sourceUrl": "https://edu.chunichi.co.jp/site_home/center/pdf/2019English_a.pdf",
@@ -1764,7 +1764,7 @@
     {
       "year": 2018,
       "exam": "center-main",
-      "subject": "英語（筆記）",
+      "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "インターエデュ 2018年度センター試験 英語（筆記）解答速報PDF",
       "sourceUrl": "https://www.inter-edu.com/files/center/2018/english-a.pdf",
@@ -1980,7 +1980,7 @@
     {
       "year": 2017,
       "exam": "center-main",
-      "subject": "英語（筆記）",
+      "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "日本の学校 2017年度センター試験 英語（筆記）自己採点表",
       "sourceUrl": "https://school.js88.com/scl_dai/center_data/self_mark?subject_list_id=433&year=2017",
@@ -2205,7 +2205,7 @@
     {
       "year": 2016,
       "exam": "center-main",
-      "subject": "英語（筆記）",
+      "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "日本の学校 2016年度センター試験 自己採点 英語（筆記）",
       "sourceUrl": "https://school.js88.com/scl_dai/center_data/self_mark?subject_list_id=409&year=2016",
@@ -2430,7 +2430,7 @@
     {
       "year": 2015,
       "exam": "center-main",
-      "subject": "英語（筆記）",
+      "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "日本の学校 2015年度センター試験 自己採点 英語（筆記）",
       "sourceUrl": "https://school.js88.com/scl_dai/center_data/self_mark?subject_list_id=376&year=2015",
@@ -2655,7 +2655,7 @@
     {
       "year": 2014,
       "exam": "center-main",
-      "subject": "英語（筆記）",
+      "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "中日進学ナビ 2014年度センター試験 正解・配点 英語（筆記）",
       "sourceUrl": "https://edu.chunichi.co.jp/pages/center2014",
@@ -2817,7 +2817,7 @@
     {
       "year": 2013,
       "exam": "center-main",
-      "subject": "英語（筆記）",
+      "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "中日進学ナビ 2013年度センター試験 正解・配点 英語（筆記）",
       "sourceUrl": "https://edu.chunichi.co.jp/site_home/center/pdf/2013English_a.pdf",
@@ -3069,7 +3069,7 @@
     {
       "year": 2012,
       "exam": "center-main",
-      "subject": "英語（筆記）",
+      "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "日本の学校 2012年度センター試験 英語（筆記） 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2012eigo_Ans.pdf",
@@ -3258,7 +3258,7 @@
     {
       "year": 2011,
       "exam": "center-main",
-      "subject": "英語（筆記）",
+      "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "日本の学校 2011年度センター試験 英語（筆記） 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2011eigo_Ans.pdf",
@@ -3420,7 +3420,7 @@
     {
       "year": 2010,
       "exam": "center-main",
-      "subject": "英語（筆記）",
+      "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "日本の学校 2010年度センター試験 英語（筆記） 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2010Eng_Ans.pdf",
@@ -4365,7 +4365,7 @@
     {
       "year": "2009",
       "exam": "center-main",
-      "subject": "英語（筆記）",
+      "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "日本の学校 2009年度大学入試センター試験 英語（筆記） 解答",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2009Eng_Ans.pdf",
@@ -4505,15 +4505,6 @@
       "source": "日本の学校 2009年度大学入試センター試験 地学I 解答",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2009Geol1_Ans.pdf",
       "questions": 30
-    },
-    {
-      "year": "2008",
-      "exam": "center-main",
-      "subject": "英語（筆記）",
-      "maxScore": 200,
-      "source": "日本の学校 2008年度大学入試センター試験 英語（筆記） 解答",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2008Eng_Ans.pdf",
-      "questions": 48
     },
     {
       "year": "2008",
@@ -4658,15 +4649,6 @@
       "source": "日本の学校 2008年度大学入試センター試験 数学I 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2008Math1_Ans.pdf",
       "questions": 30
-    },
-    {
-      "year": "2008",
-      "exam": "center-main",
-      "subject": "数学I・Ａ",
-      "maxScore": 100,
-      "source": "日本の学校 2008年度大学入試センター試験 数学I・Ａ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2008Math1A_Ans.pdf",
-      "questions": 35
     },
     {
       "year": "2008",
@@ -5571,15 +5553,6 @@
     {
       "year": "2007",
       "exam": "center-main",
-      "subject": "英語（筆記）",
-      "maxScore": 200,
-      "source": "日本の学校 2007年度大学入試センター試験 英語（筆記） 解答",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007Eng_Ans.pdf",
-      "questions": 48
-    },
-    {
-      "year": "2007",
-      "exam": "center-main",
       "subject": "日本史A",
       "maxScore": 100,
       "source": "日本の学校 2007年度大学入試センター試験 日本史A 解答",
@@ -5823,15 +5796,6 @@
     {
       "year": "2005",
       "exam": "center-main",
-      "subject": "英語（筆記）",
-      "maxScore": 200,
-      "source": "日本の学校 2005年度大学入試センター試験 英語（筆記） 解答",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005Eng_Ans.pdf",
-      "questions": 44
-    },
-    {
-      "year": "2005",
-      "exam": "center-main",
       "subject": "世界史B",
       "maxScore": 100,
       "source": "日本の学校 2005年度大学入試センター試験 世界史B 解答",
@@ -5900,15 +5864,6 @@
       "source": "日本の学校 2005年度大学入試センター試験 物理IA 解答",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005PhyA_Ans.pdf",
       "questions": 54
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "英語（筆記）",
-      "maxScore": 200,
-      "source": "日本の学校 2004年度大学入試センター試験 英語（筆記） 解答",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004Eng_Ans.pdf",
-      "questions": 44
     },
     {
       "year": "2004",
@@ -6064,15 +6019,6 @@
       "questions": 33
     },
     {
-      "year": "2007",
-      "exam": "center-main",
-      "subject": "数学I・Ａ",
-      "maxScore": 100,
-      "source": "日本の学校 2007年度大学入試センター試験 数学I・Ａ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007Math1A_Ans.pdf",
-      "questions": 32
-    },
-    {
       "year": "2006",
       "exam": "center-main",
       "subject": "数学I",
@@ -6080,15 +6026,6 @@
       "source": "日本の学校 2006年度大学入試センター試験 数学I 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Math1_Ans.pdf",
       "questions": 35
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
-      "subject": "数学I・Ａ",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 数学I・Ａ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Math1A_Ans.pdf",
-      "questions": 27
     },
     {
       "year": "2004",
@@ -6118,15 +6055,6 @@
       "questions": 43
     },
     {
-      "year": "2007",
-      "exam": "center-main",
-      "subject": "数学II・Ｂ",
-      "maxScore": 100,
-      "source": "日本の学校 2007年度大学入試センター試験 数学II・Ｂ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2007Math2B_Ans.pdf",
-      "questions": 60
-    },
-    {
       "year": "2006",
       "exam": "center-main",
       "subject": "数学II",
@@ -6134,24 +6062,6 @@
       "source": "日本の学校 2006年度大学入試センター試験 数学II 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Math2_Ans.pdf",
       "questions": 49
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
-      "subject": "数学II・Ｂ",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 数学II・Ｂ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Math2B_Ans.pdf",
-      "questions": 70
-    },
-    {
-      "year": "2005",
-      "exam": "center-main",
-      "subject": "数学I・Ａ",
-      "maxScore": 100,
-      "source": "日本の学校 2005年度大学入試センター試験 数学I・Ａ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005Math1A_Ans.pdf",
-      "questions": 44
     },
     {
       "year": "2005",
@@ -6163,24 +6073,6 @@
       "questions": 55
     },
     {
-      "year": "2005",
-      "exam": "center-main",
-      "subject": "数学II・Ｂ",
-      "maxScore": 100,
-      "source": "日本の学校 2005年度大学入試センター試験 数学II・Ｂ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2005Math2B_Ans.pdf",
-      "questions": 66
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "数学I・Ａ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 数学I・Ａ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004Math1a_Ans.pdf",
-      "questions": 44
-    },
-    {
       "year": "2004",
       "exam": "center-main",
       "subject": "数学II",
@@ -6188,15 +6080,6 @@
       "source": "日本の学校 2004年度大学入試センター試験 数学II 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004Math2_Ans.pdf",
       "questions": 42
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "数学II・Ｂ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 数学II・Ｂ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004Math2b_Ans.pdf",
-      "questions": 63
     },
     {
       "year": "2006",
@@ -6327,15 +6210,6 @@
     {
       "year": "2006",
       "exam": "center-main",
-      "subject": "英語（筆記）",
-      "maxScore": 200,
-      "source": "日本の学校 2006年度大学入試センター試験 英語（筆記）解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Eng_Ans.pdf",
-      "questions": 45
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
       "subject": "英語（リーディング）",
       "maxScore": 200,
       "source": "日本の学校 2006年度大学入試センター試験 英語（筆記）解答PDF",
@@ -6354,61 +6228,7 @@
     {
       "year": "2006",
       "exam": "center-main",
-      "subject": "物理IＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 物理IA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Phy1A_Ans.pdf",
-      "questions": 51
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
-      "subject": "物理ⅠA",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 物理IA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Phy1A_Ans.pdf",
-      "questions": 51
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
-      "subject": "物理ⅠＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 物理IA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Phy1A_Ans.pdf",
-      "questions": 51
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
       "subject": "化学IA",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 化学IA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Chem1A_Ans.pdf",
-      "questions": 35
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
-      "subject": "化学IＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 化学IA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Chem1A_Ans.pdf",
-      "questions": 35
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
-      "subject": "化学ⅠA",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 化学IA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Chem1A_Ans.pdf",
-      "questions": 35
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
-      "subject": "化学ⅠＡ",
       "maxScore": 100,
       "source": "日本の学校 2006年度大学入試センター試験 化学IA 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Chem1A_Ans.pdf",
@@ -6426,61 +6246,7 @@
     {
       "year": "2006",
       "exam": "center-main",
-      "subject": "生物IＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 生物IA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Bio1A_Ans.pdf",
-      "questions": 49
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
-      "subject": "生物ⅠA",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 生物IA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Bio1A_Ans.pdf",
-      "questions": 49
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
-      "subject": "生物ⅠＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 生物IA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Bio1A_Ans.pdf",
-      "questions": 49
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
       "subject": "地学IA",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 地学IA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Geol1A_Ans.pdf",
-      "questions": 45
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
-      "subject": "地学IＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 地学IA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Geol1A_Ans.pdf",
-      "questions": 45
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
-      "subject": "地学ⅠA",
-      "maxScore": 100,
-      "source": "日本の学校 2006年度大学入試センター試験 地学IA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Geol1A_Ans.pdf",
-      "questions": 45
-    },
-    {
-      "year": "2006",
-      "exam": "center-main",
-      "subject": "地学ⅠＡ",
       "maxScore": 100,
       "source": "日本の学校 2006年度大学入試センター試験 地学IA 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2006Geol1A_Ans.pdf",
@@ -6498,47 +6264,11 @@
     {
       "year": "2004",
       "exam": "center-main",
-      "subject": "物理IＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 物理IＡ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyA_Ans.pdf",
-      "questions": 46
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
       "subject": "物理IA",
       "maxScore": 100,
       "source": "日本の学校 2004年度大学入試センター試験 物理IA 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyA_Ans.pdf",
       "questions": 46
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "物理ⅠA",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 物理ⅠA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyA_Ans.pdf",
-      "questions": 46
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "物理ⅠＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 物理ⅠＡ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyA_Ans.pdf",
-      "questions": 46
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "物理IＢ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 物理IＢ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyB_Ans.pdf",
-      "questions": 24
     },
     {
       "year": "2004",
@@ -6552,65 +6282,11 @@
     {
       "year": "2004",
       "exam": "center-main",
-      "subject": "物理ⅠB",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 物理ⅠB 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyB_Ans.pdf",
-      "questions": 24
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "物理ⅠＢ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 物理ⅠＢ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyB_Ans.pdf",
-      "questions": 24
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学IＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 化学IＡ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemA_Ans.pdf",
-      "questions": 38
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
       "subject": "化学IA",
       "maxScore": 100,
       "source": "日本の学校 2004年度大学入試センター試験 化学IA 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemA_Ans.pdf",
       "questions": 38
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学ⅠA",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 化学ⅠA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemA_Ans.pdf",
-      "questions": 38
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学ⅠＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 化学ⅠＡ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemA_Ans.pdf",
-      "questions": 38
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学IＢ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 化学IＢ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemB_Ans.pdf",
-      "questions": 30
     },
     {
       "year": "2004",
@@ -6624,65 +6300,11 @@
     {
       "year": "2004",
       "exam": "center-main",
-      "subject": "化学ⅠB",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 化学ⅠB 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学ⅠＢ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 化学ⅠＢ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物IＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 生物IＡ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioA_Ans.pdf",
-      "questions": 47
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
       "subject": "生物IA",
       "maxScore": 100,
       "source": "日本の学校 2004年度大学入試センター試験 生物IA 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioA_Ans.pdf",
       "questions": 47
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物ⅠA",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 生物ⅠA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioA_Ans.pdf",
-      "questions": 47
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物ⅠＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 生物ⅠＡ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioA_Ans.pdf",
-      "questions": 47
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物IＢ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 生物IＢ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioB_Ans.pdf",
-      "questions": 30
     },
     {
       "year": "2004",
@@ -6696,33 +6318,6 @@
     {
       "year": "2004",
       "exam": "center-main",
-      "subject": "生物ⅠB",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 生物ⅠB 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物ⅠＢ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 生物ⅠＢ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学IＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 地学IＡ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolA_Ans.pdf",
-      "questions": 45
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
       "subject": "地学IA",
       "maxScore": 100,
       "source": "日本の学校 2004年度大学入試センター試験 地学IA 解答PDF",
@@ -6732,289 +6327,21 @@
     {
       "year": "2004",
       "exam": "center-main",
-      "subject": "地学ⅠA",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 地学ⅠA 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolA_Ans.pdf",
-      "questions": 45
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学ⅠＡ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 地学ⅠＡ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolA_Ans.pdf",
-      "questions": 45
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学IＢ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 地学IＢ 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
       "subject": "地学IB",
       "maxScore": 100,
       "source": "日本の学校 2004年度大学入試センター試験 地学IB 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学ⅠB",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 地学ⅠB 解答PDF",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学ⅠＢ",
-      "maxScore": 100,
-      "source": "日本の学校 2004年度大学入試センター試験 地学ⅠＢ 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolB_Ans.pdf",
       "questions": 30
     }
   ],
   "latestAdditions": [
     {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "総合理科",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004TotalScience_Ans.pdf",
-      "questions": 25
+      "type": "cleanup",
+      "description": "英語（筆記）を英語（リーディング）へ統一"
     },
     {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "物理IＡ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyA_Ans.pdf",
-      "questions": 46
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "物理IA",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyA_Ans.pdf",
-      "questions": 46
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "物理ⅠA",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyA_Ans.pdf",
-      "questions": 46
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "物理ⅠＡ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyA_Ans.pdf",
-      "questions": 46
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "物理IＢ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyB_Ans.pdf",
-      "questions": 24
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "物理IB",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyB_Ans.pdf",
-      "questions": 24
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "物理ⅠB",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyB_Ans.pdf",
-      "questions": 24
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "物理ⅠＢ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004PhyB_Ans.pdf",
-      "questions": 24
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学IＡ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemA_Ans.pdf",
-      "questions": 38
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学IA",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemA_Ans.pdf",
-      "questions": 38
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学ⅠA",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemA_Ans.pdf",
-      "questions": 38
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学ⅠＡ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemA_Ans.pdf",
-      "questions": 38
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学IＢ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学IB",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学ⅠB",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "化学ⅠＢ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004ChemB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物IＡ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioA_Ans.pdf",
-      "questions": 47
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物IA",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioA_Ans.pdf",
-      "questions": 47
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物ⅠA",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioA_Ans.pdf",
-      "questions": 47
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物ⅠＡ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioA_Ans.pdf",
-      "questions": 47
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物IＢ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物IB",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物ⅠB",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "生物ⅠＢ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004BioB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学IＡ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolA_Ans.pdf",
-      "questions": 45
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学IA",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolA_Ans.pdf",
-      "questions": 45
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学ⅠA",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolA_Ans.pdf",
-      "questions": 45
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学ⅠＡ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolA_Ans.pdf",
-      "questions": 45
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学IＢ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学IB",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学ⅠB",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolB_Ans.pdf",
-      "questions": 30
-    },
-    {
-      "year": "2004",
-      "exam": "center-main",
-      "subject": "地学ⅠＢ",
-      "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolB_Ans.pdf",
-      "questions": 30
+      "type": "statistics",
+      "description": "2004〜2007本試験の受験者平均点を追加"
     }
   ]
 }
