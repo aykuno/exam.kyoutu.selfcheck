@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-05-09T11:43:00+09:00",
-  "updatedAt": "2026-05-09T11:43:00+09:00",
-  "version": "v100",
+  "generatedAt": "2026-05-10T17:48:00+09:00",
+  "updatedAt": "2026-05-10T17:48:00+09:00",
+  "version": "v109",
   "password": "なし",
-  "includedCount": 703,
-  "count": 703,
+  "includedCount": 753,
+  "count": 753,
   "included": [
     {
       "year": "2026",
@@ -6332,16 +6332,512 @@
       "source": "日本の学校 2004年度大学入試センター試験 地学IB 解答PDF",
       "sourceUrl": "https://school.js88.com/sd_article/dai/dai_center_data/pdf/2004GeolB_Ans.pdf",
       "questions": 30
+    },
+    {
+      "year": "2003",
+      "exam": "center-main",
+      "subject": "数学I・A",
+      "maxScore": 100,
+      "source": "kyotsutest 2003年度センター試験 数学I・A 本試験解答PDF",
+      "sourceUrl": "https://pub-43d2006e555442dca4a107e7bc0d01bb.r2.dev/2003_%E6%95%B0%E5%AD%A6IA_%E6%9C%AC%E8%A9%A6%E9%A8%93%E8%A7%A3%E7%AD%94.pdf",
+      "questions": 49
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "英語（リーディング）",
+      "maxScore": 200,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 英語（筆記） 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=1&year=2001",
+      "questions": 46
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "世界史A",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 世界史A 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=2&year=2001",
+      "questions": 40
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "世界史B",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 世界史B 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=3&year=2001",
+      "questions": 41
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "日本史A",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 日本史A 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=4&year=2001",
+      "questions": 36
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "日本史B",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 日本史B 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=5&year=2001",
+      "questions": 36
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "地理A",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 地理A 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=6&year=2001",
+      "questions": 35
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "地理B",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 地理B 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=7&year=2001",
+      "questions": 35
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "現代社会",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 現代社会 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=22&year=2001",
+      "questions": 35
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "倫理",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 倫理 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=23&year=2001",
+      "questions": 38
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "政治・経済",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 政治・経済 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=24&year=2001",
+      "questions": 38
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "数学I",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 数学I 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=8&year=2001",
+      "questions": 24
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "数学I・A",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 数学I・A 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=9&year=2001",
+      "questions": 44
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "物理IA",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 物理IA 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=12&year=2001",
+      "questions": 46
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "物理IB",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 物理IB 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=13&year=2001",
+      "questions": 25
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "生物IA",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 生物IA 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=14&year=2001",
+      "questions": 49
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "生物IB",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 生物IB 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=15&year=2001",
+      "questions": 30
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "化学IA",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 化学IA 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=16&year=2001",
+      "questions": 39
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "化学IB",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 化学IB 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=17&year=2001",
+      "questions": 29
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "地学IA",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 地学IA 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=18&year=2001",
+      "questions": 45
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "地学IB",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 地学IB 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=19&year=2001",
+      "questions": 30
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "数学II",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 数学II 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=10&year=2001",
+      "questions": 39
+    },
+    {
+      "year": "2001",
+      "exam": "center-main",
+      "subject": "数学II・B",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2001年度大学入試センター試験 数学II・B 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=11&year=2001",
+      "questions": 61
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "英語（リーディング）",
+      "maxScore": 200,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 英語（リーディング） 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=53&year=2002",
+      "questions": 44
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "世界史A",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 世界史A 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=54&year=2002",
+      "questions": 41
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "世界史B",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 世界史B 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=55&year=2002",
+      "questions": 41
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "日本史A",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 日本史A 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=56&year=2002",
+      "questions": 36
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "地理A",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 地理A 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=58&year=2002",
+      "questions": 33
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "地理B",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 地理B 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=59&year=2002",
+      "questions": 33
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "総合理科",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 総合理科 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=66&year=2002",
+      "questions": 25
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "物理IB",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 物理IB 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=68&year=2002",
+      "questions": 25
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "生物IA",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 生物IA 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=69&year=2002",
+      "questions": 47
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "日本史B",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 日本史B 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=57&year=2002",
+      "questions": 36
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "数学I・A",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 数学I・A 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=61&year=2002",
+      "questions": 51
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "生物IB",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 生物IB 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=70&year=2002",
+      "questions": 24
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "化学IA",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 化学IA 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=71&year=2002",
+      "questions": 37
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "化学IB",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 化学IB 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=72&year=2002",
+      "questions": 31
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "地学IB",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 地学IB 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=74&year=2002",
+      "questions": 30
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "現代社会",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 現代社会 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=75&year=2002",
+      "questions": 40
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "倫理",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 倫理 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=76&year=2002",
+      "questions": 37
+    },
+    {
+      "year": "2002",
+      "exam": "center-main",
+      "subject": "政治・経済",
+      "maxScore": 100,
+      "source": "ユーザー提供画像 / 日本の学校 2002年度大学入試センター試験 政治・経済 解答",
+      "sourceUrl": "https://school.js88.com/scl_dai/center_data/question?subject_list_id=77&year=2002",
+      "questions": 38
+    },
+    {
+      "year": "2003",
+      "exam": "center-main",
+      "subject": "英語（リーディング）",
+      "maxScore": 200,
+      "source": "kyotsutest 2003年度センター試験 英語（リーディング） 本試験解答PDF",
+      "sourceUrl": "https://pub-43d2006e555442dca4a107e7bc0d01bb.r2.dev/2003_%E8%8B%B1%E8%AA%9ER_%E6%9C%AC%E8%A9%A6%E9%A8%93%E8%A7%A3%E7%AD%94.pdf",
+      "questions": 44
+    },
+    {
+      "year": "2003",
+      "exam": "center-main",
+      "subject": "国語",
+      "maxScore": 200,
+      "source": "kyotsutest 2003年度センター試験 国語 本試験解答PDF",
+      "sourceUrl": "https://pub-43d2006e555442dca4a107e7bc0d01bb.r2.dev/2003_%E5%9B%BD%E8%AA%9EIII_%E6%9C%AC%E8%A9%A6%E9%A8%93%E8%A7%A3%E7%AD%94.pdf",
+      "questions": 35
+    },
+    {
+      "year": "2003",
+      "exam": "center-main",
+      "subject": "数学II・B",
+      "maxScore": 100,
+      "source": "kyotsutest 2003年度センター試験 数学II・B 本試験解答PDF",
+      "sourceUrl": "https://pub-43d2006e555442dca4a107e7bc0d01bb.r2.dev/2003_%E6%95%B0%E5%AD%A6IIB_%E6%9C%AC%E8%A9%A6%E9%A8%93%E8%A7%A3%E7%AD%94.pdf",
+      "questions": 67
+    },
+    {
+      "year": "2003",
+      "exam": "center-main",
+      "subject": "物理IB",
+      "maxScore": 100,
+      "source": "kyotsutest 2003年度センター試験 物理IB 本試験解答PDF",
+      "sourceUrl": "https://pub-43d2006e555442dca4a107e7bc0d01bb.r2.dev/2003_%E7%89%A9%E7%90%86IB_%E6%9C%AC%E8%A9%A6%E9%A8%93%E8%A7%A3%E7%AD%94.pdf",
+      "questions": 26
+    },
+    {
+      "year": "2003",
+      "exam": "center-main",
+      "subject": "化学IB",
+      "maxScore": 100,
+      "source": "kyotsutest 2003年度センター試験 化学IB 本試験解答PDF",
+      "sourceUrl": "https://pub-43d2006e555442dca4a107e7bc0d01bb.r2.dev/2003_%E5%8C%96%E5%AD%A6IB_%E6%9C%AC%E8%A9%A6%E9%A8%93%E8%A7%A3%E7%AD%94.pdf",
+      "questions": 30
+    },
+    {
+      "year": "2003",
+      "exam": "center-main",
+      "subject": "生物IB",
+      "maxScore": 100,
+      "source": "kyotsutest 2003年度センター試験 生物IB 本試験解答PDF",
+      "sourceUrl": "https://pub-43d2006e555442dca4a107e7bc0d01bb.r2.dev/2003_%E7%94%9F%E7%89%A9IB_%E6%9C%AC%E8%A9%A6%E9%A8%93%E8%A7%A3%E7%AD%94.pdf",
+      "questions": 33
+    },
+    {
+      "year": "2003",
+      "exam": "center-main",
+      "subject": "地学IB",
+      "maxScore": 100,
+      "source": "kyotsutest 2003年度センター試験 地学IB 本試験解答PDF",
+      "sourceUrl": "https://pub-43d2006e555442dca4a107e7bc0d01bb.r2.dev/2003_%E5%9C%B0%E5%AD%A6IB_%E6%9C%AC%E8%A9%A6%E9%A8%93%E8%A7%A3%E7%AD%94.pdf",
+      "questions": 29
+    },
+    {
+      "year": "2003",
+      "exam": "center-main",
+      "subject": "物理IA",
+      "maxScore": 100,
+      "source": "kyotsutest 2003年度センター試験 物理IA 本試験解答PDF",
+      "sourceUrl": "https://pub-43d2006e555442dca4a107e7bc0d01bb.r2.dev/2003_%E7%89%A9%E7%90%86IA_%E6%9C%AC%E8%A9%A6%E9%A8%93%E8%A7%A3%E7%AD%94.pdf",
+      "questions": 55
+    },
+    {
+      "year": "2003",
+      "exam": "center-main",
+      "subject": "化学IA",
+      "maxScore": 100,
+      "source": "kyotsutest 2003年度センター試験 化学IA 本試験解答PDF",
+      "sourceUrl": "https://pub-43d2006e555442dca4a107e7bc0d01bb.r2.dev/2003_%E5%8C%96%E5%AD%A6IA_%E6%9C%AC%E8%A9%A6%E9%A8%93%E8%A7%A3%E7%AD%94.pdf",
+      "questions": 38
     }
   ],
   "latestAdditions": [
     {
-      "type": "cleanup",
-      "description": "英語（筆記）を英語（リーディング）へ統一"
+      "year": 2003,
+      "exam": "center-main",
+      "subject": "英語（リーディング）",
+      "type": "answerKey"
     },
     {
-      "type": "statistics",
-      "description": "2004〜2007本試験の受験者平均点を追加"
+      "year": 2003,
+      "exam": "center-main",
+      "subject": "国語",
+      "type": "answerKey"
+    },
+    {
+      "year": 2003,
+      "exam": "center-main",
+      "subject": "数学II・B",
+      "type": "answerKey"
+    },
+    {
+      "year": 2003,
+      "exam": "center-main",
+      "subject": "物理IB",
+      "type": "answerKey"
+    },
+    {
+      "year": 2003,
+      "exam": "center-main",
+      "subject": "化学IB",
+      "type": "answerKey"
+    },
+    {
+      "year": 2003,
+      "exam": "center-main",
+      "subject": "生物IB",
+      "type": "answerKey"
+    },
+    {
+      "year": 2003,
+      "exam": "center-main",
+      "subject": "地学IB",
+      "type": "answerKey"
+    },
+    {
+      "year": 2003,
+      "exam": "center-main",
+      "subject": "物理IA",
+      "type": "answerKey"
+    },
+    {
+      "year": 2003,
+      "exam": "center-main",
+      "subject": "化学IA",
+      "type": "answerKey"
     }
   ]
 }
