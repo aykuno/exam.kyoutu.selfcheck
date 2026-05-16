@@ -1,7 +1,7 @@
 {
-  "version": "v120",
+  "version": "v122",
   "passwordHint": "なし",
-  "generatedAt": "2026-05-16T20:50:00+09:00",
+  "generatedAt": "2026-05-16T21:30:00+09:00",
   "keys": [
     {
       "year": "2001",
@@ -225861,7 +225861,3301 @@
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
       }
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 英語R",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『英語R』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003164.pdf",
+      "maxScore": 30,
+      "notes": "令和7年度試験に向けた試作問題。問題文は掲載せず、正解・配点のみ登録。",
+      "questions": [
+        {
+          "id": "第A問 1",
+          "points": 3,
+          "group": "第A問",
+          "problemNumber": "第A問",
+          "answer": "2"
+        },
+        {
+          "id": "第A問 2",
+          "points": 3,
+          "group": "第A問",
+          "problemNumber": "第A問",
+          "answer": "2"
+        },
+        {
+          "id": "第A問 3-4",
+          "points": 3,
+          "group": "第A問",
+          "problemNumber": "第A問",
+          "answers": [
+            "2",
+            "5"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第A問 5",
+          "points": 3,
+          "group": "第A問",
+          "problemNumber": "第A問",
+          "answer": "4"
+        },
+        {
+          "id": "第A問 6",
+          "points": 3,
+          "group": "第A問",
+          "problemNumber": "第A問",
+          "answer": "2"
+        },
+        {
+          "id": "第A問 7",
+          "points": 3,
+          "group": "第A問",
+          "problemNumber": "第A問",
+          "answer": "2"
+        },
+        {
+          "id": "第B問 1",
+          "points": 3,
+          "group": "第B問",
+          "problemNumber": "第B問",
+          "answer": "1"
+        },
+        {
+          "id": "第B問 2",
+          "points": 3,
+          "group": "第B問",
+          "problemNumber": "第B問",
+          "answer": "2"
+        },
+        {
+          "id": "第B問 3",
+          "points": 3,
+          "group": "第B問",
+          "problemNumber": "第B問",
+          "answer": "3"
+        },
+        {
+          "id": "第B問 4",
+          "points": 3,
+          "group": "第B問",
+          "problemNumber": "第B問",
+          "answer": "1"
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 英語L",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『英語L』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003167.pdf",
+      "maxScore": 15,
+      "notes": "公開正解表に掲載された第C問を登録。",
+      "questions": [
+        {
+          "id": "27",
+          "points": 3,
+          "group": "第C問",
+          "problemNumber": "第C問",
+          "answer": "2"
+        },
+        {
+          "id": "28-29",
+          "points": 2,
+          "group": "第C問",
+          "problemNumber": "第C問",
+          "answers": [
+            "1",
+            "2"
+          ],
+          "note": "全部正解の場合のみ得点"
+        },
+        {
+          "id": "30-31",
+          "points": 2,
+          "group": "第C問",
+          "problemNumber": "第C問",
+          "answers": [
+            "5",
+            "4"
+          ],
+          "note": "全部正解の場合のみ得点"
+        },
+        {
+          "id": "32",
+          "points": 4,
+          "group": "第C問",
+          "problemNumber": "第C問",
+          "answer": "3"
+        },
+        {
+          "id": "33",
+          "points": 4,
+          "group": "第C問",
+          "problemNumber": "第C問",
+          "answer": "1"
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 国語",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『国語』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003158.pdf",
+      "maxScore": 40,
+      "notes": "令和7年度試験に向けた試作問題。問題文は掲載せず、正解・配点のみ登録。",
+      "questions": [
+        {
+          "id": "第A問 1",
+          "points": 4,
+          "group": "第A問",
+          "problemNumber": "第A問",
+          "answer": "3"
+        },
+        {
+          "id": "第A問 2",
+          "points": 3,
+          "group": "第A問",
+          "problemNumber": "第A問",
+          "answer": "3"
+        },
+        {
+          "id": "第A問 3",
+          "points": 3,
+          "group": "第A問",
+          "problemNumber": "第A問",
+          "answer": "3"
+        },
+        {
+          "id": "第A問 4",
+          "points": 4,
+          "group": "第A問",
+          "problemNumber": "第A問",
+          "answer": "3"
+        },
+        {
+          "id": "第A問 5",
+          "points": 5,
+          "group": "第A問",
+          "problemNumber": "第A問",
+          "answer": "2"
+        },
+        {
+          "id": "第B問 1",
+          "points": 4,
+          "group": "第B問",
+          "problemNumber": "第B問",
+          "answer": "2"
+        },
+        {
+          "id": "第B問 2",
+          "points": 3,
+          "group": "第B問",
+          "problemNumber": "第B問",
+          "answer": "3"
+        },
+        {
+          "id": "第B問 3",
+          "points": 3,
+          "group": "第B問",
+          "problemNumber": "第B問",
+          "answers": [
+            "4",
+            "5"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第B問 4",
+          "points": 4,
+          "group": "第B問",
+          "problemNumber": "第B問",
+          "answer": "3"
+        },
+        {
+          "id": "第B問 5",
+          "points": 5,
+          "group": "第B問",
+          "problemNumber": "第B問",
+          "answer": "2"
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 地理総合，地理探究",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『地理総合，地理探究』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003159.pdf",
+      "maxScore": 100,
+      "notes": "令和7年度試験に向けた試作問題。問題文は掲載せず、正解・配点のみ登録。",
+      "questions": [
+        {
+          "id": "1",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "6"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "6",
+          "points": 4,
+          "answer": "4"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "9",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "10",
+          "points": 4,
+          "answer": "5"
+        },
+        {
+          "id": "11",
+          "points": 4,
+          "answer": "4"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "6"
+        },
+        {
+          "id": "15",
+          "points": 4,
+          "answer": "3"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "18",
+          "points": 4,
+          "answer": "3"
+        },
+        {
+          "id": "19",
+          "points": 4,
+          "answer": "2"
+        },
+        {
+          "id": "20",
+          "points": 4,
+          "answer": "1"
+        },
+        {
+          "id": "21",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "22",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "23",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "24",
+          "points": 4,
+          "answer": "1"
+        },
+        {
+          "id": "25",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "26",
+          "points": 4,
+          "answer": "4"
+        },
+        {
+          "id": "27",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "28",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "29",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "30",
+          "points": 4,
+          "answer": "3"
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 歴史総合，日本史探究",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『歴史総合，日本史探究』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003160.pdf",
+      "maxScore": 100,
+      "notes": "令和7年度試験に向けた試作問題。問題文は掲載せず、正解・配点のみ登録。",
+      "questions": [
+        {
+          "id": "1",
+          "points": 3,
+          "answer": "6"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "5",
+          "points": 2,
+          "answer": "2"
+        },
+        {
+          "id": "6",
+          "points": 2,
+          "answer": "3"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "9",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "10",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "18",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "19",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "20",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "21",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "22",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "23",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "24",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "25",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "26",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "27",
+          "points": 3,
+          "answer": "5"
+        },
+        {
+          "id": "28",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "29",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "30",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "31",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "32",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "33",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "34",
+          "points": 3,
+          "answer": "6"
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 歴史総合，世界史探究",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『歴史総合，世界史探究』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003161.pdf",
+      "maxScore": 100,
+      "notes": "令和7年度試験に向けた試作問題。問題文は掲載せず、正解・配点のみ登録。",
+      "questions": [
+        {
+          "id": "1",
+          "points": 3,
+          "answer": "5"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "4",
+          "points": 2,
+          "correctOptions": [
+            [
+              "2"
+            ],
+            [
+              "6"
+            ]
+          ],
+          "note": "解答番号5の正解が分岐"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "conditionalCorrect": [
+            {
+              "ifId": "4",
+              "ifEquals": [
+                "2"
+              ],
+              "answers": [
+                "5"
+              ]
+            },
+            {
+              "ifId": "4",
+              "ifEquals": [
+                "6"
+              ],
+              "answers": [
+                "1"
+              ]
+            }
+          ],
+          "note": "4で2なら5、4で6なら1"
+        },
+        {
+          "id": "6",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "9",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "10",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "5"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "13",
+          "points": 4,
+          "answer": "2"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "5"
+        },
+        {
+          "id": "18",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "19",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "20",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "21",
+          "points": 4,
+          "answer": "3"
+        },
+        {
+          "id": "22",
+          "points": 3,
+          "answer": "6"
+        },
+        {
+          "id": "23",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "24",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "25",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "26",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "27",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "28",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "29",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "30",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "31",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "32",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "33",
+          "points": 4,
+          "answer": "3"
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 公共，倫理",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『公共，倫理』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003162.pdf",
+      "maxScore": 100,
+      "notes": "令和7年度試験に向けた試作問題。問題文は掲載せず、正解・配点のみ登録。",
+      "questions": [
+        {
+          "id": "1",
+          "points": 4,
+          "answer": "4"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "5"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "6",
+          "points": 3,
+          "answer": "6"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "9",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "10",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "17",
+          "points": 4,
+          "answer": "4"
+        },
+        {
+          "id": "18",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "19",
+          "points": 3,
+          "answer": "6"
+        },
+        {
+          "id": "20",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "21",
+          "points": 3,
+          "answer": "8"
+        },
+        {
+          "id": "22",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "23",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "24",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "25",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "26",
+          "points": 3,
+          "answer": "7"
+        },
+        {
+          "id": "27",
+          "points": 5,
+          "correctOptions": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ],
+          "note": "解答番号28の正解が分岐"
+        },
+        {
+          "id": "28",
+          "points": 5,
+          "conditionalCorrect": [
+            {
+              "ifId": "27",
+              "ifEquals": [
+                "1"
+              ],
+              "answers": [
+                "3"
+              ]
+            },
+            {
+              "ifId": "27",
+              "ifEquals": [
+                "2"
+              ],
+              "answers": [
+                "4"
+              ]
+            },
+            {
+              "ifId": "27",
+              "ifEquals": [
+                "3"
+              ],
+              "answers": [
+                "6"
+              ]
+            }
+          ],
+          "note": "27で1なら3、2なら4、3なら6"
+        },
+        {
+          "id": "29",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "30",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "31",
+          "points": 3,
+          "answer": "5"
+        },
+        {
+          "id": "32",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "33",
+          "points": 4,
+          "answer": "3"
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 公共，政治・経済",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『公共，政治・経済』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003196.pdf",
+      "maxScore": 100,
+      "notes": "令和7年度試験に向けた試作問題。問題文は掲載せず、正解・配点のみ登録。",
+      "questions": [
+        {
+          "id": "1",
+          "points": 4,
+          "answer": "4"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "5"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "6",
+          "points": 3,
+          "answer": "6"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "9",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "10",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "18",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "19",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "20",
+          "points": 3,
+          "answer": "1"
+        },
+        {
+          "id": "21",
+          "points": 3,
+          "answer": "4"
+        },
+        {
+          "id": "22",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "23",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "24",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "25",
+          "points": 3,
+          "answer": "5"
+        },
+        {
+          "id": "26",
+          "points": 4,
+          "answer": "5"
+        },
+        {
+          "id": "27",
+          "points": 3,
+          "answer": "6"
+        },
+        {
+          "id": "28",
+          "points": 3,
+          "answer": "3"
+        },
+        {
+          "id": "29-30",
+          "points": 4,
+          "answers": [
+            "1",
+            "2"
+          ],
+          "note": "両方正解の場合のみ得点"
+        },
+        {
+          "id": "31",
+          "points": 3,
+          "answer": "2"
+        },
+        {
+          "id": "32",
+          "points": 4,
+          "answer": "8"
+        },
+        {
+          "id": "33",
+          "points": 6,
+          "correctOptions": [
+            [
+              "1"
+            ],
+            [
+              "2"
+            ],
+            [
+              "3"
+            ]
+          ],
+          "note": "解答番号34の正解が分岐"
+        },
+        {
+          "id": "34",
+          "points": 6,
+          "conditionalCorrect": [
+            {
+              "ifId": "33",
+              "ifEquals": [
+                "1"
+              ],
+              "answers": [
+                "3"
+              ]
+            },
+            {
+              "ifId": "33",
+              "ifEquals": [
+                "2"
+              ],
+              "answers": [
+                "1"
+              ]
+            },
+            {
+              "ifId": "33",
+              "ifEquals": [
+                "3"
+              ],
+              "answers": [
+                "2"
+              ]
+            }
+          ],
+          "note": "33で1なら3、2なら1、3なら2"
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 地理総合，歴史総合，公共",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『地理総合，歴史総合，公共』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003157.pdf",
+      "maxScore": 100,
+      "notes": "令和7年度試験に向けた試作問題。問題文は掲載せず、正解・配点のみ登録。",
+      "questions": [
+        {
+          "id": "地理総合 1",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "4"
+        },
+        {
+          "id": "地理総合 2",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "3"
+        },
+        {
+          "id": "地理総合 3",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "6"
+        },
+        {
+          "id": "地理総合 4",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "3"
+        },
+        {
+          "id": "地理総合 5",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "1"
+        },
+        {
+          "id": "地理総合 6",
+          "points": 4,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "4"
+        },
+        {
+          "id": "地理総合 7",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "3"
+        },
+        {
+          "id": "地理総合 8",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "2"
+        },
+        {
+          "id": "地理総合 9",
+          "points": 4,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "1"
+        },
+        {
+          "id": "地理総合 10",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "4"
+        },
+        {
+          "id": "地理総合 11",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "3"
+        },
+        {
+          "id": "地理総合 12",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "4"
+        },
+        {
+          "id": "地理総合 13",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "1"
+        },
+        {
+          "id": "地理総合 14",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "5"
+        },
+        {
+          "id": "地理総合 15",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "4"
+        },
+        {
+          "id": "地理総合 16",
+          "points": 3,
+          "group": "地理総合",
+          "problemNumber": "地理総合",
+          "answer": "1"
+        },
+        {
+          "id": "公共 1",
+          "points": 4,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "4"
+        },
+        {
+          "id": "公共 2",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "5"
+        },
+        {
+          "id": "公共 3",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "1"
+        },
+        {
+          "id": "公共 4",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "2"
+        },
+        {
+          "id": "公共 5",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "3"
+        },
+        {
+          "id": "公共 6",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "7"
+        },
+        {
+          "id": "公共 7",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "1"
+        },
+        {
+          "id": "公共 8",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "7"
+        },
+        {
+          "id": "公共 9",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "2"
+        },
+        {
+          "id": "公共 10",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "1"
+        },
+        {
+          "id": "公共 11",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "3"
+        },
+        {
+          "id": "公共 12",
+          "points": 4,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "8"
+        },
+        {
+          "id": "公共 13",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "2"
+        },
+        {
+          "id": "公共 14",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "6"
+        },
+        {
+          "id": "公共 15",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "3"
+        },
+        {
+          "id": "公共 16",
+          "points": 3,
+          "group": "公共",
+          "problemNumber": "公共",
+          "answer": "4"
+        },
+        {
+          "id": "歴史総合 1",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "6"
+        },
+        {
+          "id": "歴史総合 2",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "4"
+        },
+        {
+          "id": "歴史総合 3",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "2"
+        },
+        {
+          "id": "歴史総合 4",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "4"
+        },
+        {
+          "id": "歴史総合 5",
+          "points": 2,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "2"
+        },
+        {
+          "id": "歴史総合 6",
+          "points": 2,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "3"
+        },
+        {
+          "id": "歴史総合 7",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "1"
+        },
+        {
+          "id": "歴史総合 8",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "4"
+        },
+        {
+          "id": "歴史総合 9",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "2"
+        },
+        {
+          "id": "歴史総合 10",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "5"
+        },
+        {
+          "id": "歴史総合 11",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "2"
+        },
+        {
+          "id": "歴史総合 12",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "3"
+        },
+        {
+          "id": "歴史総合 13",
+          "points": 2,
+          "correctOptions": [
+            [
+              "2"
+            ],
+            [
+              "6"
+            ]
+          ],
+          "group": "歴史総合",
+          "problemNumber": "歴史総合"
+        },
+        {
+          "id": "歴史総合 14",
+          "points": 3,
+          "conditionalCorrect": [
+            {
+              "ifId": "歴史総合 13",
+              "ifEquals": [
+                "2"
+              ],
+              "answers": [
+                "5"
+              ]
+            },
+            {
+              "ifId": "歴史総合 13",
+              "ifEquals": [
+                "6"
+              ],
+              "answers": [
+                "1"
+              ]
+            }
+          ],
+          "group": "歴史総合",
+          "problemNumber": "歴史総合"
+        },
+        {
+          "id": "歴史総合 15",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "4"
+        },
+        {
+          "id": "歴史総合 16",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "3"
+        },
+        {
+          "id": "歴史総合 17",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "1"
+        },
+        {
+          "id": "歴史総合 18",
+          "points": 3,
+          "group": "歴史総合",
+          "problemNumber": "歴史総合",
+          "answer": "2"
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 情報Ⅰ",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『情報Ⅰ』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003169.pdf",
+      "maxScore": 100,
+      "notes": "令和7年度試験に向けた試作問題。問題文は掲載せず、正解・配点のみ登録。",
+      "questions": [
+        {
+          "id": "ア-イ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "1",
+            "4"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "エ",
+          "points": 3,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "オ",
+          "points": 3,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "0"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "ケ",
+          "points": 1,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "0"
+        },
+        {
+          "id": "コ-サ",
+          "points": 3,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "3",
+            "4"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "ア",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "イ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "2"
+        },
+        {
+          "id": "ウ-エ",
+          "points": 4,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answers": [
+            "1",
+            "4"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "オ",
+          "points": 5,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "2"
+        },
+        {
+          "id": "カ",
+          "points": 5,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "0"
+        },
+        {
+          "id": "キ",
+          "points": 5,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "ク",
+          "points": 5,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "1"
+        },
+        {
+          "id": "ケ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "8"
+        },
+        {
+          "id": "コ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "4"
+        },
+        {
+          "id": "サ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "1"
+        },
+        {
+          "id": "シ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "ス",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "1"
+        },
+        {
+          "id": "セ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "0"
+        },
+        {
+          "id": "ア",
+          "points": 1,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "6"
+        },
+        {
+          "id": "イ",
+          "points": 1,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "0"
+        },
+        {
+          "id": "ウ-エ",
+          "points": 3,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answers": [
+            "2",
+            "1"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "オ",
+          "points": 1,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "2"
+        },
+        {
+          "id": "カ",
+          "points": 1,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "3"
+        },
+        {
+          "id": "キ",
+          "points": 1,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "1"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "1"
+        },
+        {
+          "id": "ケ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "0"
+        },
+        {
+          "id": "コ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "1"
+        },
+        {
+          "id": "サ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "3"
+        },
+        {
+          "id": "シ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "0"
+        },
+        {
+          "id": "ス-セ",
+          "points": 3,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answers": [
+            "0",
+            "2"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "ソ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "0"
+        },
+        {
+          "id": "タ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "1"
+        },
+        {
+          "id": "ア",
+          "points": 4,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "1"
+        },
+        {
+          "id": "イ",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "ウ",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "0"
+        },
+        {
+          "id": "エ",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "オ",
+          "points": 3,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "カ",
+          "points": 3,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "1"
+        },
+        {
+          "id": "キ",
+          "points": 3,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "1"
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 情報Ⅰ（参考問題）",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『情報Ⅰ（参考問題）』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003170.pdf",
+      "maxScore": 25,
+      "notes": "第4問のみの参考問題。",
+      "questions": [
+        {
+          "id": "ア",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "イ",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "1"
+        },
+        {
+          "id": "ウ",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "エ",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "4"
+        },
+        {
+          "id": "オ",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "1"
+        },
+        {
+          "id": "カ",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "0"
+        },
+        {
+          "id": "キ",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 旧情報（仮）",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『旧情報（仮）』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003165.pdf",
+      "maxScore": 100,
+      "notes": "旧情報（仮）。一部選択問題を含む。",
+      "questions": [
+        {
+          "id": "ア-イ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "1",
+            "4"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "エ",
+          "points": 3,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "オ",
+          "points": 3,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "5"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "0"
+        },
+        {
+          "id": "ケ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "5"
+        },
+        {
+          "id": "コ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "サ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "4"
+        },
+        {
+          "id": "シ",
+          "points": 3,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "ス",
+          "points": 3,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "セ-ソ",
+          "points": 4,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "1",
+            "4"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "タ",
+          "points": 5,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "チ",
+          "points": 5,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "0"
+        },
+        {
+          "id": "ツ",
+          "points": 5,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "テ",
+          "points": 5,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "ア-イ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "1",
+            "4"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "エ",
+          "points": 3,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "オ",
+          "points": 3,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "0"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "ケ",
+          "points": 1,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "0"
+        },
+        {
+          "id": "コ-サ",
+          "points": 3,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "3",
+            "4"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "ア",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "イ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "2"
+        },
+        {
+          "id": "ウ-エ",
+          "points": 4,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answers": [
+            "1",
+            "4"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "オ",
+          "points": 5,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "2"
+        },
+        {
+          "id": "カ",
+          "points": 5,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "0"
+        },
+        {
+          "id": "キ",
+          "points": 5,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "ク",
+          "points": 5,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "1"
+        },
+        {
+          "id": "ケ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "8"
+        },
+        {
+          "id": "コ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "4"
+        },
+        {
+          "id": "サ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "1"
+        },
+        {
+          "id": "シ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "ス",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "1"
+        },
+        {
+          "id": "セ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "0"
+        },
+        {
+          "id": "ア",
+          "points": 1,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "6"
+        },
+        {
+          "id": "イ",
+          "points": 1,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "0"
+        },
+        {
+          "id": "ウ-エ",
+          "points": 3,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answers": [
+            "2",
+            "1"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "オ",
+          "points": 1,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "2"
+        },
+        {
+          "id": "カ",
+          "points": 1,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "3"
+        },
+        {
+          "id": "キ",
+          "points": 1,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "1"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "1"
+        },
+        {
+          "id": "ケ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "0"
+        },
+        {
+          "id": "コ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "1"
+        },
+        {
+          "id": "サ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "3"
+        },
+        {
+          "id": "シ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "0"
+        },
+        {
+          "id": "ス-セ",
+          "points": 3,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answers": [
+            "0",
+            "2"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "ソ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "0"
+        },
+        {
+          "id": "タ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "1"
+        },
+        {
+          "id": "ア",
+          "points": 4,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "1"
+        },
+        {
+          "id": "イ",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "ウ",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "0"
+        },
+        {
+          "id": "エ",
+          "points": 5,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "オ",
+          "points": 3,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "カ",
+          "points": 3,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "1"
+        },
+        {
+          "id": "キ",
+          "points": 3,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "1"
+        }
+      ],
+      "selectionRules": [
+        {
+          "groups": [
+            "第2問",
+            "第3問"
+          ],
+          "choose": 1
+        },
+        {
+          "groups": [
+            "第5問",
+            "第6問"
+          ],
+          "choose": 1
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 数学ⅠA",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『数学ⅠA』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003166.pdf",
+      "maxScore": 100,
+      "notes": "分数・小数等は解答欄に入る数字・記号列として登録。",
+      "questions": [
+        {
+          "id": "第1問 ア",
+          "points": 3,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "第1問 イウ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "2",
+            "5"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第1問 エオカ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "-",
+            "5",
+            "6",
+            "5"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第1問 キ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "4"
+        },
+        {
+          "id": "第1問 クケコ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "5",
+            "6",
+            "5"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第1問 サ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "第1問 シ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "6"
+        },
+        {
+          "id": "第1問 ス",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "第1問 セソ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "4",
+            "5"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第1問 タチ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "1",
+            "2"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第1問 ツテ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "1",
+            "2"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第1問 ト",
+          "points": 1,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "第1問 ナ",
+          "points": 1,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "0"
+        },
+        {
+          "id": "第1問 ニ",
+          "points": 1,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "第1問 ヌ",
+          "points": 3,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "第1問 ネ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "第1問 ノ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "第1問 ハ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "0"
+        },
+        {
+          "id": "第1問 ヒ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "第2問 ア",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "2"
+        },
+        {
+          "id": "第2問 イウエオ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answers": [
+            "-",
+            "2",
+            "4",
+            "4"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第2問 カキク",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answers": [
+            "2",
+            "0",
+            "0"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第2問 ケコサ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answers": [
+            "2",
+            "2",
+            "0"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第2問 シスセ",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answers": [
+            "4",
+            "4",
+            "0"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第2問 ソ",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "第2問 タチ",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answers": [
+            "1",
+            "2"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第2問 ツ",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "第2問 テ",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "2"
+        },
+        {
+          "id": "第2問 トナ",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answers": [
+            "0",
+            "1"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第2問 ニ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "6"
+        },
+        {
+          "id": "第2問 ヌネノハ",
+          "points": 4,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answers": [
+            "5",
+            "8",
+            "1",
+            "1"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第3問 アイ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answers": [
+            "3",
+            "2"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第3問 ウエオ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answers": [
+            "3",
+            "5"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第3問 カキ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answers": [
+            "2",
+            "5"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第3問 ク",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "5"
+        },
+        {
+          "id": "第3問 ケ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "1"
+        },
+        {
+          "id": "第3問 コサ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answers": [
+            "5",
+            "4"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第3問 シ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "1"
+        },
+        {
+          "id": "第3問 ス",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "5"
+        },
+        {
+          "id": "第3問 セソ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answers": [
+            "5",
+            "2"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第3問 タ",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "1"
+        },
+        {
+          "id": "第4問 アイ",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answers": [
+            "3",
+            "8"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第4問 ウエ",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answers": [
+            "4",
+            "9"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第4問 オカ",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answers": [
+            "3",
+            "2"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第4問 キ",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "1"
+        },
+        {
+          "id": "第4問 クケコサ",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answers": [
+            "2",
+            "7",
+            "5",
+            "9"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第4問 シ",
+          "points": 3,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "3"
+        },
+        {
+          "id": "第4問 スセ",
+          "points": 4,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answers": [
+            "2",
+            "3"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第4問 ソタチツテ",
+          "points": 3,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answers": [
+            "7",
+            "5",
+            "5",
+            "9",
+            "1"
+          ],
+          "unordered": true
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "exam": "other",
+      "subject": "試作問題 数学ⅡBC",
+      "source": "大学入試センター 令和7年度試験 試作問題 正解表『数学ⅡBC』",
+      "sourceUrl": "https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003168.pdf",
+      "maxScore": 100,
+      "notes": "第1問〜第3問は必答、第4問〜第7問から3問選択。式型の一部は解答欄に入る数字・記号列として登録。",
+      "questions": [
+        {
+          "id": "第1問 ア",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "第1問 イ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "第1問 ウエ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "6",
+            "2"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第1問 オカ",
+          "points": 1,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "2",
+            "1"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第1問 キ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "9"
+        },
+        {
+          "id": "第1問 ク",
+          "points": 1,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "第1問 ケ",
+          "points": 1,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "第1問 コサ",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "1",
+            "9"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第1問 シス",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answers": [
+            "2",
+            "1"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第2問 ア",
+          "points": 1,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "1"
+        },
+        {
+          "id": "第2問 イ",
+          "points": 1,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "0"
+        },
+        {
+          "id": "第2問 ウ",
+          "points": 1,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "0"
+        },
+        {
+          "id": "第2問 エ",
+          "points": 1,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "1"
+        },
+        {
+          "id": "第2問 キ",
+          "points": 1,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "0"
+        },
+        {
+          "id": "第2問 ク",
+          "points": 1,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "第2問 ケ",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "1"
+        },
+        {
+          "id": "第2問 コ",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "2"
+        },
+        {
+          "id": "第2問 サ",
+          "points": 3,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "1"
+        },
+        {
+          "id": "第4問 ア",
+          "points": 1,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "3"
+        },
+        {
+          "id": "第4問 イ",
+          "points": 1,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "3"
+        },
+        {
+          "id": "第4問 ウ",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "第4問 エ",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "6"
+        },
+        {
+          "id": "第4問 オ",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "6"
+        },
+        {
+          "id": "第4問 カ",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "6"
+        },
+        {
+          "id": "第4問 キ",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "6"
+        },
+        {
+          "id": "第4問 ク",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "3"
+        },
+        {
+          "id": "第4問 サ",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "第4問 シ",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "第4問 ス",
+          "points": 1,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "第4問 セ",
+          "points": 1,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "0"
+        },
+        {
+          "id": "第5問 ア",
+          "points": 1,
+          "group": "第5問",
+          "problemNumber": "第5問",
+          "answer": "0"
+        },
+        {
+          "id": "第5問 イ",
+          "points": 1,
+          "group": "第5問",
+          "problemNumber": "第5問",
+          "answer": "7"
+        },
+        {
+          "id": "第5問 ウ",
+          "points": 1,
+          "group": "第5問",
+          "problemNumber": "第5問",
+          "answer": "4"
+        },
+        {
+          "id": "第5問 エ",
+          "points": 1,
+          "group": "第5問",
+          "problemNumber": "第5問",
+          "answer": "5"
+        },
+        {
+          "id": "第5問 オカキクケコ",
+          "points": 3,
+          "group": "第5問",
+          "problemNumber": "第5問",
+          "answers": [
+            "1",
+            "9",
+            "3",
+            "2",
+            "0",
+            "7"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第5問 サシ",
+          "points": 3,
+          "group": "第5問",
+          "problemNumber": "第5問",
+          "answers": [
+            "2",
+            "6"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第5問 ス",
+          "points": 1,
+          "group": "第5問",
+          "problemNumber": "第5問",
+          "answer": "7"
+        },
+        {
+          "id": "第5問 セ",
+          "points": 2,
+          "group": "第5問",
+          "problemNumber": "第5問",
+          "answer": "1"
+        },
+        {
+          "id": "第5問 ソタ",
+          "points": 3,
+          "group": "第5問",
+          "problemNumber": "第5問",
+          "answers": [
+            "1",
+            "0"
+          ],
+          "unordered": true
+        },
+        {
+          "id": "第7問 ア",
+          "points": 4,
+          "group": "第7問",
+          "problemNumber": "第7問",
+          "answer": "2"
+        },
+        {
+          "id": "第7問 イ",
+          "points": 1,
+          "group": "第7問",
+          "problemNumber": "第7問",
+          "answer": "1"
+        },
+        {
+          "id": "第7問 ウ",
+          "points": 2,
+          "group": "第7問",
+          "problemNumber": "第7問",
+          "answer": "1"
+        },
+        {
+          "id": "第7問 エ",
+          "points": 3,
+          "group": "第7問",
+          "problemNumber": "第7問",
+          "answer": "3"
+        },
+        {
+          "id": "第7問 オ",
+          "points": 3,
+          "group": "第7問",
+          "problemNumber": "第7問",
+          "answer": "6"
+        },
+        {
+          "id": "第7問 カ",
+          "points": 3,
+          "group": "第7問",
+          "problemNumber": "第7問",
+          "answer": "6"
+        }
+      ],
+      "selectionRules": [
+        {
+          "groups": [
+            "第4問",
+            "第5問",
+            "第6問",
+            "第7問"
+          ],
+          "choose": 3
+        }
+      ]
     }
   ],
-  "notes": "v100: 英語（筆記）を英語（リーディング）へ統一。表記ゆれ水増しは削除済み。2004〜2007本試験の受験者平均点を追加。"
+  "notes": "v122: 令和7年度試験の試作問題を追加。テンキー固定はv121のfixed方式を継続。"
 }
