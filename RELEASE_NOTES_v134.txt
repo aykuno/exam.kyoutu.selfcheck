@@ -1,0 +1,6 @@
+v134
+- kyotsutest.vercel.app/test/{年度}_{科目}_追試験問題.pdf の問題ページ内にある「解答を閲覧」導線、および問題ページ/PDF内に埋め込まれた解答表を対象にする方針へ変更。
+- retake_problem_answer_page_candidates_v134.json を追加。未登録追試候補 481 件。
+- tools/kyotsutest_embedded_answer_importer.py を追加。R2直リンクだけでなく、問題ページ内リンク・解答画像・解答PDFを発見するための作業スクリプト。
+- 正解番号・配点を確認できていない科目の大量登録は行わない。登録件数は 828 件のまま。
+- v127以降のテンキー固定制御、問題/解答リンク表示は維持。
