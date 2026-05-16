@@ -1,7 +1,7 @@
 {
-  "version": "v122",
+  "version": "v127",
   "passwordHint": "なし",
-  "generatedAt": "2026-05-16T21:30:00+09:00",
+  "generatedAt": "2026-05-16T23:55:00+09:00",
   "keys": [
     {
       "year": "2001",
@@ -75862,7 +75862,9 @@
         "status": "problemNumber-complete",
         "method": "正解PDFの大問・設問番号・配点欄を確認",
         "updatedIn": "v117"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2012_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2013,
@@ -83054,7 +83056,9 @@
         "status": "problemNumber-complete",
         "method": "正解PDFの大問・設問番号・配点欄を確認",
         "updatedIn": "v117"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2013_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2014,
@@ -90408,7 +90412,9 @@
         "status": "problemNumber-complete",
         "method": "正解PDFの大問・設問番号・配点欄を確認",
         "updatedIn": "v117"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2014_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2015,
@@ -97629,7 +97635,9 @@
         "status": "problemNumber-complete",
         "method": "正解PDFの大問・設問番号・配点欄を確認",
         "updatedIn": "v117"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2015_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2016,
@@ -104960,7 +104968,9 @@
         "status": "problemNumber-complete",
         "method": "正解PDFの大問・設問番号・配点欄を確認",
         "updatedIn": "v117"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2016_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2017,
@@ -112397,7 +112407,9 @@
         "status": "problemNumber-complete",
         "method": "正解PDFの大問・設問番号・配点欄を確認",
         "updatedIn": "v117"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2017_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2018",
@@ -119733,7 +119745,9 @@
         "status": "problemNumber-complete",
         "method": "正解PDFの大問・設問番号・配点欄を確認",
         "updatedIn": "v117"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2018_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2019",
@@ -127238,7 +127252,9 @@
         "status": "problemNumber-complete",
         "method": "正解PDFの大問・設問番号・配点欄を確認",
         "updatedIn": "v117"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2019_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -134541,7 +134557,9 @@
         "status": "verified",
         "method": "answer-table-image-problem-number-groups",
         "updatedIn": "v115"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E4%B8%96%E7%95%8C%E5%8F%B2B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -134816,7 +134834,9 @@
         "status": "verified",
         "method": "answer-table-image-problem-number-groups",
         "updatedIn": "v115"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E5%80%AB%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -135091,7 +135111,9 @@
         "status": "verified",
         "method": "answer-table-image-problem-number-groups",
         "updatedIn": "v115"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E5%80%AB%E7%90%86%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -135350,7 +135372,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "note 2020化学 追試験 大学入試センター試験 解説",
-      "explanationSourceUrl": "https://note.com/38mol/n/n9e15f17f7044"
+      "explanationSourceUrl": "https://note.com/38mol/n/n9e15f17f7044",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E5%8C%96%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -135467,7 +135491,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "YouTube センター化学基礎2020追試験解説プレイリスト",
-      "explanationSourceUrl": "https://www.youtube.com/playlist?list=PLIDrY2nJVIv7jT8LDsec27ItakY3FB2N1"
+      "explanationSourceUrl": "https://www.youtube.com/playlist?list=PLIDrY2nJVIv7jT8LDsec27ItakY3FB2N1",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -135724,7 +135750,9 @@
         "status": "verified",
         "method": "answer-table-image-problem-number-groups",
         "updatedIn": "v115"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E5%9B%BD%E8%AA%9E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -135989,7 +136017,9 @@
         "method": "explicit-major-question-in-answer-id",
         "source": "既存解答IDに含まれる第N問表記",
         "updatedAt": "2026-05-07T22:17:50+09:00"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E5%9C%B0%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -136113,7 +136143,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "無学 2020年センター試験追試 地学基礎 全問解説",
-      "explanationSourceUrl": "https://www.mugaku.net/detail.php?id=22238"
+      "explanationSourceUrl": "https://www.mugaku.net/detail.php?id=22238",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -136376,7 +136408,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "たつじん地理 2020年地理B追試験解説プレイリスト",
-      "explanationSourceUrl": "https://www.youtube.com/playlist?list=PLUghhx20IdXDQJyjNH2g5vMXkQ0p8M5UF"
+      "explanationSourceUrl": "https://www.youtube.com/playlist?list=PLUghhx20IdXDQJyjNH2g5vMXkQ0p8M5UF",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E5%9C%B0%E7%90%86B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -136630,7 +136664,9 @@
         "status": "problemNumber-complete",
         "method": "同一科目・同一解答番号列の確認済み問題番号パターン（2020 center-main 政治・経済）",
         "updatedIn": "v74"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -137127,7 +137163,9 @@
         "status": "problemNumber-complete",
         "method": "正解表画像の問題番号列・配点欄を確認",
         "updatedIn": "v116"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E6%95%B0%E5%AD%A6IA_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -137397,7 +137435,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "YouTube 2020年度共通テスト追試日本史解説前半（部分）",
-      "explanationSourceUrl": "https://www.youtube.com/watch?v=i9zKCV-2WqQ"
+      "explanationSourceUrl": "https://www.youtube.com/watch?v=i9zKCV-2WqQ",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E6%97%A5%E6%9C%AC%E5%8F%B2B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -137630,7 +137670,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "YouTube センター物理2020追試解説プレイリスト",
-      "explanationSourceUrl": "https://www.youtube.com/playlist?list=PLgihjZ72kuKSuYTTQez_ih5ol_dm12neU"
+      "explanationSourceUrl": "https://www.youtube.com/playlist?list=PLgihjZ72kuKSuYTTQez_ih5ol_dm12neU",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E7%89%A9%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -137751,7 +137793,9 @@
         "status": "verified",
         "method": "answer-table-image-problem-number-groups",
         "updatedIn": "v115"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -138019,7 +138063,9 @@
         "status": "problemNumber-complete",
         "method": "同一科目・同一解答番号列の確認済み問題番号パターン（2020 center-main 現代社会）",
         "updatedIn": "v74"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E7%8F%BE%E4%BB%A3%E7%A4%BE%E4%BC%9A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -138312,7 +138358,9 @@
         "method": "explicit-major-question-in-answer-id",
         "source": "既存解答IDに含まれる第N問表記",
         "updatedAt": "2026-05-07T22:17:50+09:00"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E7%94%9F%E7%89%A9_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -138453,7 +138501,9 @@
         "method": "explicit-major-question-in-answer-id",
         "source": "既存解答IDに含まれる第N問表記",
         "updatedAt": "2026-05-07T22:17:50+09:00"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -138646,7 +138696,9 @@
         "status": "problemNumber-complete",
         "method": "解答解説ページの設問番号を確認",
         "updatedIn": "v117"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2020,
@@ -139016,7 +139068,9 @@
         "status": "problemNumber-complete",
         "method": "正解表画像の問題番号列・配点欄を確認",
         "updatedIn": "v116"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2020_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2021,
@@ -146169,17 +146223,19 @@
         "status": "problemNumber-complete",
         "method": "提示ページの科目・日程に合わせて大問単位で設定",
         "updatedIn": "v112"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E4%B8%96%E7%95%8C%E5%8F%B2A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "世界史B",
-      "source": "共通テスト過去問集 2021年追試 世界史B 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E4%B8%96%E7%95%8C%E5%8F%B2b%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 100,
       "system": "common",
-      "notes": "正解表画像で確認。",
+      "notes": "正解表画像で確認。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -146420,17 +146476,19 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 歴史総合・世界史探究 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88%E3%83%BB%E4%B8%96%E7%95%8C%E5%8F%B2%E6%8E%A2%E6%B1%82-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88%E3%83%BB%E4%B8%96%E7%95%8C%E5%8F%B2%E6%8E%A2%E6%B1%82-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E4%B8%96%E7%95%8C%E5%8F%B2B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "倫理",
-      "source": "共通テスト過去問集 2021年追試 倫理 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%80%AB%E7%90%86%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 100,
       "system": "common",
-      "notes": "正解表画像で確認。",
+      "notes": "正解表画像で確認。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -146671,17 +146729,19 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 公共・倫理 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%85%AC%E5%85%B1%E3%83%BB%E5%80%AB%E7%90%86-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%85%AC%E5%85%B1%E3%83%BB%E5%80%AB%E7%90%86-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E5%80%AB%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "倫理，政治・経済",
-      "source": "共通テスト過去問集 2021年追試 倫理，政治・経済 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%80%AB%E7%90%86%E3%83%BB%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88%E3%80%912021%E5%B9%B4%E8%BF%BD%E8%A9%A6%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 100,
       "system": "common",
-      "notes": "正解表画像で確認。",
+      "notes": "正解表画像で確認。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -146915,17 +146975,19 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 公共・倫理/公共・政治経済 過去問全小問解説（講座一覧）",
-      "explanationSourceUrl": "https://brg.plus/courses/"
+      "explanationSourceUrl": "https://brg.plus/courses/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E5%80%AB%E7%90%86%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "化学",
-      "source": "共通テスト過去問集 2021年追試 化学 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%8C%96%E5%AD%A6%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 100,
       "system": "common",
-      "notes": "正解表画像で確認。＊は全部正解の場合のみ加点。",
+      "notes": "正解表画像で確認。＊は全部正解の場合のみ加点。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -147147,17 +147209,19 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "note おのれー 2021第二日程 化学 解説",
-      "explanationSourceUrl": "https://note.com/rapparapa18/n/ncc065238bdcb"
+      "explanationSourceUrl": "https://note.com/rapparapa18/n/ncc065238bdcb",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E5%8C%96%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "化学基礎",
-      "source": "共通テスト過去問集 2021年追試 化学基礎 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 50,
       "system": "common",
-      "notes": "正解表画像で確認。＊は全部正解の場合のみ加点。",
+      "notes": "正解表画像で確認。＊は全部正解の場合のみ加点。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -147278,17 +147342,19 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 化学基礎 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "国語",
-      "source": "共通テスト過去問集 2021年追試 国語 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%9B%BD%E8%AA%9E%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 200,
       "system": "common",
-      "notes": "正解表画像で確認。ハイフンでつながれた正解は順序不問・各点。",
+      "notes": "正解表画像で確認。ハイフンでつながれた正解は順序不問・各点。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -147553,14 +147619,16 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "ことほぎ 2021年度共通テスト国語追試 解説",
-      "explanationSourceUrl": "https://kotohogi.page/kokugo_kyoute_2021_tsui_1/"
+      "explanationSourceUrl": "https://kotohogi.page/kokugo_kyoute_2021_tsui_1/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E5%9B%BD%E8%AA%9E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "地学",
       "maxScore": 100,
-      "source": "共通テスト過去問集 2021年追試 地学 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%9C%B0%E5%AD%A6%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "questions": [
         {
@@ -147774,20 +147842,22 @@
           "problemNumber": "第5問"
         }
       ],
-      "notes": "正解表画像で確認。",
+      "notes": "正解表画像で確認。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "groupVerification": {
         "status": "verified",
         "method": "explicit-major-question-in-answer-id",
         "source": "既存解答IDに含まれる第N問表記",
         "updatedAt": "2026-05-07T22:17:50+09:00"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E5%9C%B0%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "地学基礎",
       "maxScore": 50,
-      "source": "共通テスト過去問集 2021年追試 地学基礎 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "questions": [
         {
@@ -147896,7 +147966,7 @@
           "problemNumber": "第3問"
         }
       ],
-      "notes": "正解表画像で確認。",
+      "notes": "正解表画像で確認。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "groupVerification": {
         "status": "verified",
         "method": "explicit-major-question-in-answer-id",
@@ -147904,7 +147974,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 地学基礎 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
@@ -148130,16 +148202,18 @@
         "status": "problemNumber-complete",
         "method": "提示ページの科目・日程に合わせて大問単位で設定",
         "updatedIn": "v112"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E5%9C%B0%E7%90%86A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "地理B",
-      "source": "kyotsutest 2021年度 地理B 追試験 問題・解答PDF（ユーザー指定ページ）",
-      "sourceUrl": "https://kyotsutest.vercel.app/test/2021_%E5%9C%B0%E7%90%86B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E5%9C%B0%E7%90%86b%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 100,
-      "notes": "ユーザー指定により、提示ページを問題・解答・配点ソースとして採用して登録。年度・科目名は提示ページ表題に合わせて確認。",
+      "notes": "ユーザー指定により、提示ページを問題・解答・配点ソースとして採用して登録。年度・科目名は提示ページ表題に合わせて確認。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -148356,14 +148430,16 @@
         "status": "problemNumber-complete",
         "method": "提示ページの科目・日程に合わせて大問単位で設定",
         "updatedIn": "v112"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E5%9C%B0%E7%90%86B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "政治・経済",
       "maxScore": 100,
-      "source": "共通テスト過去問集 2021年追試 政治経済 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "questions": [
         {
@@ -148620,7 +148696,7 @@
           "problemNumber": "第4問"
         }
       ],
-      "notes": "正解表画像で確認。解答番号8は解答番号7に応じた条件付き加点として登録。",
+      "notes": "正解表画像で確認。解答番号8は解答番号7に応じた条件付き加点として登録。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "groupVerification": {
         "status": "verified",
         "method": "explicit-major-question-in-answer-id",
@@ -148628,7 +148704,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 公共・政治経済 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%85%AC%E5%85%B1%E3%83%BB%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%85%AC%E5%85%B1%E3%83%BB%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
@@ -149048,16 +149126,18 @@
         "status": "problemNumber-complete",
         "method": "提示ページの科目・日程に合わせて大問単位で設定",
         "updatedIn": "v112"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E6%95%B0%E5%AD%A6I_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "数学Ⅰ・数学A",
-      "source": "kyotsutest 2021年度 数学I・数学A 追試験 正解表画像",
-      "sourceUrl": "https://www.kyotsutest.net/wp-content/uploads/2023/04/dasdsdsaa.jpg",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E6%95%B0%E5%AD%A6%E2%85%A0a%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 100,
-      "notes": "ユーザー提示URLで2021年度・数学I・数学A・追試験を確認。正解表画像で解答・配点を登録。第1問・第2問は必答、第3問〜第5問から2問選択。",
+      "notes": "ユーザー提示URLで2021年度・数学I・数学A・追試験を確認。正解表画像で解答・配点を登録。第1問・第2問は必答、第3問〜第5問から2問選択。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "第1問 アイ，ウエ",
@@ -149581,7 +149661,9 @@
           "choose": 2,
           "note": "第1問・第2問は必答。第3問〜第5問から2問選択。必要数を超えて入力している場合は得点の高い2問を採点対象にします。"
         }
-      ]
+      ],
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E6%95%B0%E5%AD%A6IA_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
@@ -150100,16 +150182,18 @@
         "status": "problemNumber-complete",
         "method": "正解PDFの左端問題番号・設問列を確認",
         "updatedIn": "v111"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E6%95%B0%E5%AD%A6II_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "数学Ⅱ・数学B",
-      "source": "kyotsutest 2021年度 数学II・数学B 追試験 正解表画像",
-      "sourceUrl": "https://www.kyotsutest.net/wp-content/uploads/2023/04/ddeeeee.jpg",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E6%95%B0%E5%AD%A6%E2%85%B1b%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 100,
-      "notes": "ユーザー提示URLで2021年度・数学II・数学B・追試験を確認。正解表画像で解答・配点を登録。第1問・第2問は必答、第3問〜第5問から2問選択。第2問コは条件付き加点を設定。",
+      "notes": "ユーザー提示URLで2021年度・数学II・数学B・追試験を確認。正解表画像で解答・配点を登録。第1問・第2問は必答、第3問〜第5問から2問選択。第2問コは条件付き加点を設定。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "第1問 ア",
@@ -150755,7 +150839,9 @@
           "choose": 2,
           "note": "第1問・第2問は必答。第3問〜第5問から2問選択。必要数を超えて入力している場合は得点の高い2問を採点対象にします。"
         }
-      ]
+      ],
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E6%95%B0%E5%AD%A6IIB_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
@@ -150995,17 +151081,19 @@
         "status": "problemNumber-complete",
         "method": "提示ページの科目・日程に合わせて大問単位で設定",
         "updatedIn": "v112"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E6%97%A5%E6%9C%AC%E5%8F%B2A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "日本史B",
-      "source": "共通テスト過去問集 2021年追試 日本史B 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E6%97%A5%E6%9C%AC%E5%8F%B2b%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 100,
       "system": "common",
-      "notes": "正解表画像で確認。",
+      "notes": "正解表画像で確認。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -151239,14 +151327,16 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 歴史総合・日本史探究 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88%E3%83%BB%E6%97%A5%E6%9C%AC%E5%8F%B2%E6%8E%A2%E6%B1%82-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88%E3%83%BB%E6%97%A5%E6%9C%AC%E5%8F%B2%E6%8E%A2%E6%B1%82-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E6%97%A5%E6%9C%AC%E5%8F%B2B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "物理",
       "maxScore": 100,
-      "source": "共通テスト過去問集 2021年追試 物理 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%89%A9%E7%90%86%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "questions": [
         {
@@ -151547,7 +151637,7 @@
           "problemNumber": "第4問"
         }
       ],
-      "notes": "正解表画像で確認。＊印は部分点・条件付き加点として登録。",
+      "notes": "正解表画像で確認。＊印は部分点・条件付き加点として登録。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "groupVerification": {
         "status": "verified",
         "method": "explicit-major-question-in-answer-id",
@@ -151555,17 +151645,19 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "大学入学共通テスト・物理・2021年度第2日程 解説",
-      "explanationSourceUrl": "https://physics.educationalconsulting.jp/?page_id=2775"
+      "explanationSourceUrl": "https://physics.educationalconsulting.jp/?page_id=2775",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E7%89%A9%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "物理基礎",
-      "source": "共通テスト過去問集 2021年追試 物理基礎 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 50,
       "system": "common",
-      "notes": "正解表画像で確認。",
+      "notes": "正解表画像で確認。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -151680,17 +151772,19 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 物理基礎 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "現代社会",
-      "source": "共通テスト過去問集 2021年追試 現代社会 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%8F%BE%E4%BB%A3%E7%A4%BE%E4%BC%9A%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 100,
       "system": "common",
-      "notes": "正解表画像で確認。",
+      "notes": "正解表画像で確認。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -151908,14 +152002,16 @@
         "method": "explicit-major-question-in-answer-id",
         "source": "既存解答IDに含まれる第N問表記",
         "updatedAt": "2026-05-07T22:17:50+09:00"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E7%8F%BE%E4%BB%A3%E7%A4%BE%E4%BC%9A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "生物",
       "maxScore": 100,
-      "source": "共通テスト過去問集 2021年追試 生物 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%94%9F%E7%89%A9%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "questions": [
         {
@@ -152119,7 +152215,7 @@
           "problemNumber": "第6問"
         }
       ],
-      "notes": "正解表画像で確認。＊印は部分点として登録。",
+      "notes": "正解表画像で確認。＊印は部分点として登録。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "groupVerification": {
         "status": "verified",
         "method": "explicit-major-question-in-answer-id",
@@ -152127,17 +152223,19 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "note なまもの 2021年度共通テスト第二日程 生物 所感と解説",
-      "explanationSourceUrl": "https://note.com/openyourtextbook/n/nbeed77d875c3"
+      "explanationSourceUrl": "https://note.com/openyourtextbook/n/nbeed77d875c3",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E7%94%9F%E7%89%A9_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "生物基礎",
-      "source": "共通テスト過去問集 2021年追試 生物基礎 問題+解答",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 50,
       "system": "common",
-      "notes": "正解表画像で確認。ハイフンでつながれた正解は順序不問・各点。",
+      "notes": "正解表画像で確認。ハイフンでつながれた正解は順序不問・各点。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -152271,16 +152369,18 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "2021年度大学入試共通テスト追試 生物基礎・生物 所感",
-      "explanationSourceUrl": "https://i-my-mine.hatenablog.com/entry/2021/02/01/2021%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E7%AC%AC%E4%BA%8C%E6%97%A5%E7%A8%8B_%E7%94%9F%E7%89%A9_%E6%89%80%E6%84%9F"
+      "explanationSourceUrl": "https://i-my-mine.hatenablog.com/entry/2021/02/01/2021%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E7%AC%AC%E4%BA%8C%E6%97%A5%E7%A8%8B_%E7%94%9F%E7%89%A9_%E6%89%80%E6%84%9F",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "英語（リスニング）",
-      "source": "猫英語 2021第2日程 英語リスニング 正解表PDF",
-      "sourceUrl": "https://nekoeigo.net/common/2021listening_a2.pdf",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E8%8B%B1%E8%AA%9E%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 100,
-      "notes": "ユーザー提示URLで2021年度・英語リスニング・追試験を確認。正解表PDFで解答・配点を登録。＊は全部正解の場合のみ加点。",
+      "notes": "ユーザー提示URLで2021年度・英語リスニング・追試験を確認。正解表PDFで解答・配点を登録。＊は全部正解の場合のみ加点。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -152527,16 +152627,18 @@
         "updatedIn": "v110"
       },
       "explanationSource": "猫英語 2021第2日程 英語リスニング解説",
-      "explanationSourceUrl": "https://nekoeigo.net/tag/2021-2"
+      "explanationSourceUrl": "https://nekoeigo.net/tag/2021-2",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2021",
       "exam": "retake",
       "subject": "英語（リーディング）",
-      "source": "共通テスト過去問集（千進アカデミー）2021年追試 英語リーディング正解表画像",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
       "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E8%8B%B1%E8%AA%9E%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
       "maxScore": 100,
-      "notes": "＊印は全部正解の場合のみ加点。ハイフンでつながれた正解は順序不問として登録。",
+      "notes": "＊印は全部正解の場合のみ加点。ハイフンでつながれた正解は順序不問として登録。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
       "questions": [
         {
           "id": "1",
@@ -152840,7 +152942,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "猫英語 2021第2日程 英語リーディング解説",
-      "explanationSourceUrl": "https://nekoeigo.net/tag/2021-2"
+      "explanationSourceUrl": "https://nekoeigo.net/tag/2021-2",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -159937,7 +160041,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "世界史教室 2022共通テスト追試 世界史B解説",
-      "explanationSourceUrl": "https://bunbunshinrosaijki.hatenablog.com/entry/2022/02/01/193213"
+      "explanationSourceUrl": "https://bunbunshinrosaijki.hatenablog.com/entry/2022/02/01/193213",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E4%B8%96%E7%95%8C%E5%8F%B2B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -160187,7 +160293,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "bridge+ 共通テスト 公共・倫理 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%85%AC%E5%85%B1%E3%83%BB%E5%80%AB%E7%90%86-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%85%AC%E5%85%B1%E3%83%BB%E5%80%AB%E7%90%86-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E5%80%AB%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -160443,7 +160551,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 公共・倫理/公共・政治経済 過去問全小問解説（講座一覧）",
-      "explanationSourceUrl": "https://brg.plus/courses/"
+      "explanationSourceUrl": "https://brg.plus/courses/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E5%80%AB%E7%90%86%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -160687,7 +160797,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 化学 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%8C%96%E5%AD%A6-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5%E8%A9%A6%E5%AF%BE/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%8C%96%E5%AD%A6-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5%E8%A9%A6%E5%AF%BE/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E5%8C%96%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -160835,7 +160947,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "一石のテスト集 2022年度共通テスト追・再試験 化学基礎 解説",
-      "explanationSourceUrl": "https://ippeki87.m39.coreserver.jp/exercise/kyotsu_test/test.php?test=chemistry_basic&testtime=2022_2"
+      "explanationSourceUrl": "https://ippeki87.m39.coreserver.jp/exercise/kyotsu_test/test.php?test=chemistry_basic&testtime=2022_2",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -161106,7 +161220,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "ことほぎ 2022年度共通テスト国語追試 解説",
-      "explanationSourceUrl": "https://kotohogi.page/kokugo_kyoute_2022_tsui_1/"
+      "explanationSourceUrl": "https://kotohogi.page/kokugo_kyoute_2022_tsui_1/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E5%9B%BD%E8%AA%9E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -161346,7 +161462,9 @@
         "method": "explicit-major-question-in-answer-id",
         "source": "既存解答IDに含まれる第N問表記",
         "updatedAt": "2026-05-07T22:17:50+09:00"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E5%9C%B0%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -161471,7 +161589,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 地学基礎 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -161700,7 +161820,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "たつじん地理 2022共通テスト追試 地理B解説プレイリスト",
-      "explanationSourceUrl": "https://www.youtube.com/playlist?list=PLmrVKouFINQS5PGDX-L1JpXlMZF8FAJbp"
+      "explanationSourceUrl": "https://www.youtube.com/playlist?list=PLmrVKouFINQS5PGDX-L1JpXlMZF8FAJbp",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E5%9C%B0%E7%90%86B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -161942,7 +162064,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 公共・政治経済 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%85%AC%E5%85%B1%E3%83%BB%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%85%AC%E5%85%B1%E3%83%BB%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -162499,7 +162623,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2022年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2022tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2022tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E6%95%B0%E5%AD%A6IA_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -163105,7 +163231,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2022年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2022tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2022tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E6%95%B0%E5%AD%A6IIB_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -163348,7 +163476,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "久下哲也 2022年度共通テスト日本史B追試験 解説PDF",
-      "explanationSourceUrl": "https://kugetetsuya.g1.xrea.com/kyote/2022Btsuishikaisetsu.pdf"
+      "explanationSourceUrl": "https://kugetetsuya.g1.xrea.com/kyote/2022Btsuishikaisetsu.pdf",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E6%97%A5%E6%9C%AC%E5%8F%B2B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -163515,7 +163645,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "Physicmath 2022年 共通テスト追試 物理 解答・解説",
-      "explanationSourceUrl": "https://physicmath.net/7599/"
+      "explanationSourceUrl": "https://physicmath.net/7599/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E7%89%A9%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -163730,7 +163862,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "bridge+ 共通テスト 物理基礎 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -163959,7 +164093,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "ミニいけ先生 2022共通テスト追試 現代社会解説動画",
-      "explanationSourceUrl": "https://nicochannel.jp/miniikesensei/video/smEjn9VD8SxihmZNY6XCT29k"
+      "explanationSourceUrl": "https://nicochannel.jp/miniikesensei/video/smEjn9VD8SxihmZNY6XCT29k",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E7%8F%BE%E4%BB%A3%E7%A4%BE%E4%BC%9A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -164187,7 +164323,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "あいまいまいん 2022共通テスト2次日程 生物 所感",
-      "explanationSourceUrl": "https://i-my-mine.hatenablog.com/entry/2022/02/02/2022%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%EF%BC%92%E6%AC%A1%E6%97%A5%E7%A8%8B_%E7%94%9F%E7%89%A9_%E6%89%80%E6%84%9F"
+      "explanationSourceUrl": "https://i-my-mine.hatenablog.com/entry/2022/02/02/2022%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%EF%BC%92%E6%AC%A1%E6%97%A5%E7%A8%8B_%E7%94%9F%E7%89%A9_%E6%89%80%E6%84%9F",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E7%94%9F%E7%89%A9_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -164332,7 +164470,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "あいまいまいん 2022共通テスト2次日程 生物基礎 所感",
-      "explanationSourceUrl": "https://i-my-mine.hatenablog.com/entry/2022/02/02/2022%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%EF%BC%92%E6%AC%A1%E6%97%A5%E7%A8%8B_%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E_%E6%89%80%E6%84%9F"
+      "explanationSourceUrl": "https://i-my-mine.hatenablog.com/entry/2022/02/02/2022%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%EF%BC%92%E6%AC%A1%E6%97%A5%E7%A8%8B_%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E_%E6%89%80%E6%84%9F",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -164586,7 +164726,9 @@
         "status": "problemNumber-complete",
         "method": "同一科目・同一解答番号列の確認済み問題番号パターン（2024 main 英語（リスニング））",
         "updatedIn": "v74"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2022",
@@ -164905,7 +165047,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "猫英語 2022追試 英語リーディング解説",
-      "explanationSourceUrl": "https://nekoeigo.net/tag/t2022"
+      "explanationSourceUrl": "https://nekoeigo.net/tag/t2022",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -171890,7 +172034,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E4%B8%96%E7%95%8C%E5%8F%B2A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -172139,7 +172285,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E4%B8%96%E7%95%8C%E5%8F%B2B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -172388,7 +172536,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E5%80%AB%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -172630,7 +172780,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E5%80%AB%E7%90%86%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -172851,7 +173003,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E5%8C%96%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -172978,7 +173132,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -173269,7 +173425,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E5%9B%BD%E8%AA%9E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -173483,7 +173641,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E5%9C%B0%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -173612,7 +173772,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -173840,7 +174002,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E5%9C%B0%E7%90%86A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -174068,7 +174232,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E5%9C%B0%E7%90%86B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -174296,7 +174462,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -174717,7 +174885,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2023年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2023tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2023tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E6%95%B0%E5%AD%A6I_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -175234,7 +175404,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2023年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2023tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2023tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E6%95%B0%E5%AD%A6IA_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -175695,7 +175867,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2023年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2023tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2023tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E6%95%B0%E5%AD%A6II_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -176320,7 +176494,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2023年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2023tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2023tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E6%95%B0%E5%AD%A6IIB_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -176562,7 +176738,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E6%97%A5%E6%9C%AC%E5%8F%B2A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -176804,7 +176982,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E6%97%A5%E6%9C%AC%E5%8F%B2B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -177030,7 +177210,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E7%89%A9%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -177153,7 +177335,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -177381,7 +177565,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E7%8F%BE%E4%BB%A3%E7%A4%BE%E4%BC%9A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -177639,7 +177825,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E7%94%9F%E7%89%A9_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -177788,7 +177976,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -178042,7 +178232,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2023",
@@ -178366,7 +178558,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2023年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=2660"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=2660",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -185237,7 +185431,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E4%B8%96%E7%95%8C%E5%8F%B2A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -185486,7 +185682,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E4%B8%96%E7%95%8C%E5%8F%B2B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -185735,7 +185933,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E5%80%AB%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -185977,7 +186177,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E5%80%AB%E7%90%86%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -186191,7 +186393,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E5%8C%96%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -186334,7 +186538,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -186618,7 +186824,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E5%9B%BD%E8%AA%9E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -186825,7 +187033,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E5%9C%B0%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -186948,7 +187158,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -187176,7 +187388,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E5%9C%B0%E7%90%86A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -187404,7 +187618,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E5%9C%B0%E7%90%86B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -187632,7 +187848,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -188051,7 +188269,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2024年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2024tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2024tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E6%95%B0%E5%AD%A6I_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -188520,7 +188740,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2024年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2024tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2024tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E6%95%B0%E5%AD%A6IA_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -188944,7 +189166,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2024年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2024tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2024tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E6%95%B0%E5%AD%A6II_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -189433,7 +189657,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2024年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2024tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2024tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E6%95%B0%E5%AD%A6IIB_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -189675,7 +189901,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E6%97%A5%E6%9C%AC%E5%8F%B2A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -189917,7 +190145,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E6%97%A5%E6%9C%AC%E5%8F%B2B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -190089,7 +190319,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E7%89%A9%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -190223,7 +190455,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -190458,7 +190692,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E7%8F%BE%E4%BB%A3%E7%A4%BE%E4%BC%9A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -190656,7 +190892,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E7%94%9F%E7%89%A9_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -190798,7 +191036,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -191054,7 +191294,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2024",
@@ -191377,7 +191619,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2024年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=1466"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=1466",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2024_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -201958,7 +202202,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E5%85%AC%E5%85%B1_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -202214,7 +202460,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E5%85%AC%E5%85%B1%E5%80%AB%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -202456,7 +202704,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E5%85%AC%E5%85%B1%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -202695,7 +202945,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E5%8C%96%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -202837,7 +203089,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -203120,7 +203374,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E5%9B%BD%E8%AA%9E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -203327,7 +203583,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E5%9C%B0%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -203450,7 +203708,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -203580,7 +203840,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E5%9C%B0%E7%90%86%E7%B7%8F%E5%90%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -203808,7 +204070,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E5%9C%B0%E7%90%86%E7%B7%8F%E5%90%88%E5%9C%B0%E7%90%86%E6%8E%A2%E7%A9%B6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -204145,7 +204409,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%83%85%E5%A0%B1%E2%85%A0_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -204520,7 +204786,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2025年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2025tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2025tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%95%B0%E5%AD%A6I_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -204888,7 +205156,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2025年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2025tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2025tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%95%B0%E5%AD%A6IA_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -205427,7 +205697,9 @@
         "updatedAt": "2026-05-07T22:17:50+09:00"
       },
       "explanationSource": "おおぞらラボ 2025年共通テスト追試 数学 解説",
-      "explanationSourceUrl": "https://www.ozl.jp/dnk/2025tui/index.html"
+      "explanationSourceUrl": "https://www.ozl.jp/dnk/2025tui/index.html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%95%B0%E5%AD%A6IIBC_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -205654,7 +205926,9 @@
         "method": "official-answer-pdf-problem-number-groups",
         "source": "大学入試センター 令和7年度 追・再試験の正解",
         "updatedIn": "v113"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E4%B8%96%E7%95%8C%E5%8F%B2A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -205902,7 +206176,9 @@
         "method": "official-answer-pdf-problem-number-groups",
         "source": "大学入試センター 令和7年度 追・再試験の正解",
         "updatedIn": "v113"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E4%B8%96%E7%95%8C%E5%8F%B2B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -206150,7 +206426,9 @@
         "method": "official-answer-pdf-problem-number-groups",
         "source": "大学入試センター 令和7年度 追・再試験の正解",
         "updatedIn": "v113"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E5%80%AB%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -206391,7 +206669,9 @@
         "method": "official-answer-pdf-problem-number-groups",
         "source": "大学入試センター 令和7年度 追・再試験の正解",
         "updatedIn": "v113"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E5%80%AB%E7%90%86%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -206618,7 +206898,9 @@
         "method": "official-answer-pdf-problem-number-groups",
         "source": "大学入試センター 令和7年度 追・再試験の正解",
         "updatedIn": "v113"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E5%9C%B0%E7%90%86A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -206845,7 +207127,9 @@
         "method": "official-answer-pdf-problem-number-groups",
         "source": "大学入試センター 令和7年度 追・再試験の正解",
         "updatedIn": "v113"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E5%9C%B0%E7%90%86B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -207321,7 +207605,9 @@
         "method": "official-answer-pdf-selection-groups",
         "source": "大学入試センター 令和7年度 追・再試験の正解",
         "updatedIn": "v113"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E6%83%85%E5%A0%B1_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -207548,7 +207834,9 @@
         "method": "official-answer-pdf-problem-number-groups",
         "source": "大学入試センター 令和7年度 追・再試験の正解",
         "updatedIn": "v113"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -207964,7 +208252,9 @@
         "method": "official-answer-pdf-table",
         "source": "https://www.dnc.ac.jp/kyotsu/kakomondai/r7/r7_tuisaisiken_seikai.html",
         "updatedIn": "v114"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E6%95%B0%E5%AD%A6I_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -208436,7 +208726,9 @@
         "method": "official-answer-pdf-table",
         "source": "https://www.dnc.ac.jp/kyotsu/kakomondai/r7/r7_tuisaisiken_seikai.html",
         "updatedIn": "v114"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E6%95%B0%E5%AD%A6IA_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -208911,7 +209203,9 @@
         "method": "official-answer-pdf-table",
         "source": "https://www.dnc.ac.jp/kyotsu/kakomondai/r7/r7_tuisaisiken_seikai.html",
         "updatedIn": "v114"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E6%95%B0%E5%AD%A6II_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -209493,7 +209787,9 @@
         "method": "official-answer-pdf-table",
         "source": "https://www.dnc.ac.jp/kyotsu/kakomondai/r7/r7_tuisaisiken_seikai.html",
         "updatedIn": "v114"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E6%95%B0%E5%AD%A6IIB_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -209734,7 +210030,9 @@
         "method": "official-answer-pdf-problem-number-groups",
         "source": "大学入試センター 令和7年度 追・再試験の正解",
         "updatedIn": "v113"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E6%97%A5%E6%9C%AC%E5%8F%B2A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -209975,7 +210273,9 @@
         "method": "official-answer-pdf-problem-number-groups",
         "source": "大学入試センター 令和7年度 追・再試験の正解",
         "updatedIn": "v113"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E6%97%A5%E6%9C%AC%E5%8F%B2B_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -210216,7 +210516,9 @@
         "method": "official-answer-pdf-problem-number-groups",
         "source": "大学入試センター 令和7年度 追・再試験の正解",
         "updatedIn": "v113"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%97%A7%E7%8F%BE%E4%BB%A3%E7%A4%BE%E4%BC%9A_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -210346,7 +210648,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -210588,7 +210892,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88%E4%B8%96%E7%95%8C%E5%8F%B2%E6%8E%A2%E7%A9%B6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -210837,7 +211143,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88%E6%97%A5%E6%9C%AC%E5%8F%B2%E6%8E%A2%E7%A9%B6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -211016,7 +211324,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E7%89%A9%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -211139,7 +211449,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -211347,7 +211659,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E7%94%9F%E7%89%A9_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -211483,7 +211797,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -211739,7 +212055,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -212027,7 +212345,9 @@
         "updatedIn": "v74"
       },
       "explanationSource": "大学受験の森 2025年度大学入学共通テスト追試験 解答・解説",
-      "explanationSourceUrl": "https://juken-library.com/?page_id=3768"
+      "explanationSourceUrl": "https://juken-library.com/?page_id=3768",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2025_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -218129,7 +218449,9 @@
         "method": "大学入試センター公式「令和8年度 追・再試験の正解」ページへ出典リンクを統一",
         "updatedIn": "v119",
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E5%85%AC%E5%85%B1_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -218372,7 +218694,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "bridge+ 共通テスト 公共・倫理 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%85%AC%E5%85%B1%E3%83%BB%E5%80%AB%E7%90%86-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%85%AC%E5%85%B1%E3%83%BB%E5%80%AB%E7%90%86-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E5%85%AC%E5%85%B1%E5%80%AB%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -218615,7 +218939,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "bridge+ 共通テスト 公共・政治経済 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%85%AC%E5%85%B1%E3%83%BB%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%85%AC%E5%85%B1%E3%83%BB%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E5%85%AC%E5%85%B1%E6%94%BF%E6%B2%BB%E7%B5%8C%E6%B8%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -218858,7 +219184,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "bridge+ 共通テスト 化学 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%8C%96%E5%AD%A6-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5%E8%A9%A6%E5%AF%BE/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%8C%96%E5%AD%A6-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5%E8%A9%A6%E5%AF%BE/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E5%8C%96%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -218989,7 +219317,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "bridge+ 共通テスト 化学基礎 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E5%8C%96%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -219286,7 +219616,9 @@
         "updatedIn": "v119"
       },
       "explanationSource": "敬天塾 2026共通テスト追試 国語第4問古文 現代語訳（部分）",
-      "explanationSourceUrl": "https://exam-strategy.jp/archives/413336"
+      "explanationSourceUrl": "https://exam-strategy.jp/archives/413336",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E5%9B%BD%E8%AA%9E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -219492,7 +219824,9 @@
         "method": "大学入試センター公式「令和8年度 追・再試験の正解」ページへ出典リンクを統一",
         "updatedIn": "v119",
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E5%9C%B0%E5%AD%A6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -219616,7 +219950,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "bridge+ 共通テスト 地学基礎 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E5%9C%B0%E5%AD%A6%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -219745,7 +220081,9 @@
         "method": "大学入試センター公式「令和8年度 追・再試験の正解」ページへ出典リンクを統一",
         "updatedIn": "v119",
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E5%9C%B0%E7%90%86%E7%B7%8F%E5%90%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -219972,7 +220310,9 @@
         "method": "大学入試センター公式「令和8年度 追・再試験の正解」ページへ出典リンクを統一",
         "updatedIn": "v119",
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E5%9C%B0%E7%90%86%E7%B7%8F%E5%90%88%E5%9C%B0%E7%90%86%E6%8E%A2%E7%A9%B6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -220354,7 +220694,9 @@
         "updatedIn": "v119"
       },
       "explanationSource": "YouTube 大学入学共通テスト 情報Ⅰ 2026追試験解説プレイリスト",
-      "explanationSourceUrl": "https://www.youtube.com/playlist?list=PLcZN34N1CPdnUbN_kzf8oNO9Mq1nlOOcZ"
+      "explanationSourceUrl": "https://www.youtube.com/playlist?list=PLcZN34N1CPdnUbN_kzf8oNO9Mq1nlOOcZ",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E6%83%85%E5%A0%B1%E2%85%A0_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -220790,7 +221132,9 @@
         "updatedIn": "v119"
       },
       "explanationSource": "MathAbyss 2026共通テスト数学Ⅰ・A 速報分析（追試験含む）",
-      "explanationSourceUrl": "https://mathabyss.com/kyotutest2026_math1/"
+      "explanationSourceUrl": "https://mathabyss.com/kyotutest2026_math1/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E6%95%B0%E5%AD%A6I_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -221181,7 +221525,9 @@
         "updatedIn": "v119"
       },
       "explanationSource": "MathAbyss 2026共通テスト数学Ⅰ・A 速報分析（追試験含む）",
-      "explanationSourceUrl": "https://mathabyss.com/kyotutest2026_math1/"
+      "explanationSourceUrl": "https://mathabyss.com/kyotutest2026_math1/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E6%95%B0%E5%AD%A6IA_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -221764,7 +222110,9 @@
         "updatedIn": "v119"
       },
       "explanationSource": "MathAbyss 2026共通テスト数学Ⅱ・B・C 速報分析（追試験含む）",
-      "explanationSourceUrl": "https://mathabyss.com/kyotutest2026_math2/"
+      "explanationSourceUrl": "https://mathabyss.com/kyotutest2026_math2/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E6%95%B0%E5%AD%A6IIBC_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -221893,7 +222241,9 @@
         "method": "大学入試センター公式「令和8年度 追・再試験の正解」ページへ出典リンクを統一",
         "updatedIn": "v119",
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -222136,7 +222486,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "bridge+ 共通テスト 歴史総合・世界史探究 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88%E3%83%BB%E4%B8%96%E7%95%8C%E5%8F%B2%E6%8E%A2%E6%B1%82-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88%E3%83%BB%E4%B8%96%E7%95%8C%E5%8F%B2%E6%8E%A2%E6%B1%82-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88%E4%B8%96%E7%95%8C%E5%8F%B2%E6%8E%A2%E7%A9%B6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -222386,7 +222738,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "bridge+ 共通テスト 歴史総合・日本史探究 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88%E3%83%BB%E6%97%A5%E6%9C%AC%E5%8F%B2%E6%8E%A2%E6%B1%82-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88%E3%83%BB%E6%97%A5%E6%9C%AC%E5%8F%B2%E6%8E%A2%E6%B1%82-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E6%AD%B4%E5%8F%B2%E7%B7%8F%E5%90%88%E6%97%A5%E6%9C%AC%E5%8F%B2%E6%8E%A2%E7%A9%B6_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -222559,7 +222913,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "bridge+ 共通テスト 物理 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E7%89%A9%E7%90%86-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5%E8%A9%A6%E5%AF%BE/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E7%89%A9%E7%90%86-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5%E8%A9%A6%E5%AF%BE/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E7%89%A9%E7%90%86_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -222683,7 +223039,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "bridge+ 共通テスト 物理基礎 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E7%89%A9%E7%90%86%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -222875,7 +223233,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "あいまいまいん 2026共通テスト追試 生物 所感",
-      "explanationSourceUrl": "https://i-my-mine.hatenablog.com/entry/2026/03/25/2026%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E8%BF%BD%E8%A9%A6_%E7%94%9F%E7%89%A9_%E6%89%80%E6%84%9F"
+      "explanationSourceUrl": "https://i-my-mine.hatenablog.com/entry/2026/03/25/2026%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E8%BF%BD%E8%A9%A6_%E7%94%9F%E7%89%A9_%E6%89%80%E6%84%9F",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E7%94%9F%E7%89%A9_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -223022,7 +223382,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "あいまいまいん 2026共通テスト追試 生物基礎 所感",
-      "explanationSourceUrl": "https://i-my-mine.hatenablog.com/entry/2026/03/24/2026%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E8%BF%BD%E8%A9%A6_%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E_%E6%89%80%E6%84%9F"
+      "explanationSourceUrl": "https://i-my-mine.hatenablog.com/entry/2026/03/24/2026%E5%B9%B4%E5%BA%A6%E5%A4%A7%E5%AD%A6%E5%85%A5%E8%A9%A6%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E8%BF%BD%E8%A9%A6_%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E_%E6%89%80%E6%84%9F",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E7%94%9F%E7%89%A9%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -223279,7 +223641,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "猫英語 2026共通テスト英語リスニング解説",
-      "explanationSourceUrl": "https://nekoeigo.net/center/kakomon-html"
+      "explanationSourceUrl": "https://nekoeigo.net/center/kakomon-html",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2026",
@@ -223568,7 +223932,9 @@
         "sourceUrl": "https://www.dnc.ac.jp/kyotsu/shiken_jouhou/r8/r8_tuisaisiken_seikai.html"
       },
       "explanationSource": "bridge+ 共通テスト 英語リーディング 過去問全小問解説",
-      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E8%8B%B1%E8%AA%9Er-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5%E8%A9%A6%E5%AF%BE/"
+      "explanationSourceUrl": "https://brg.plus/courses/%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88-%E8%8B%B1%E8%AA%9Er-%E9%81%8E%E5%8E%BB%E5%95%8F%E5%85%A8%E5%B0%8F%E5%95%8F%E8%A7%A3%E8%AA%AC%EF%BC%882027%E5%B9%B4%E5%BA%A6%E5%85%A5%E8%A9%A6%E5%AF%BE/",
+      "problemUrl": "https://kyotsutest.vercel.app/test/2026_%E8%8B%B1%E8%AA%9ER_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2006,
@@ -223759,7 +224125,9 @@
         "status": "problemNumber-complete",
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2006_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2007,
@@ -223950,7 +224318,9 @@
         "status": "problemNumber-complete",
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2007_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2008,
@@ -224141,7 +224511,9 @@
         "status": "problemNumber-complete",
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2008_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2009,
@@ -224332,7 +224704,9 @@
         "status": "problemNumber-complete",
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2009_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2010,
@@ -224523,7 +224897,9 @@
         "status": "problemNumber-complete",
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2010_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2011,
@@ -224714,7 +225090,9 @@
         "status": "problemNumber-complete",
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2011_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2012,
@@ -224905,7 +225283,9 @@
         "status": "problemNumber-complete",
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2012_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2013,
@@ -225096,7 +225476,9 @@
         "status": "problemNumber-complete",
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2013_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2015,
@@ -225287,7 +225669,9 @@
         "status": "problemNumber-complete",
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2015_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2016,
@@ -225478,7 +225862,9 @@
         "status": "problemNumber-complete",
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2016_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2017,
@@ -225669,7 +226055,9 @@
         "status": "problemNumber-complete",
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2017_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": 2018,
@@ -225860,7 +226248,9 @@
         "status": "problemNumber-complete",
         "method": "掲載ページの第1問〜第4問の設問番号・解答欄を確認",
         "updatedIn": "v118"
-      }
+      },
+      "problemUrl": "https://kyotsutest.vercel.app/test/2018_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     },
     {
       "year": "2025",
@@ -229155,7 +229545,1891 @@
           "choose": 3
         }
       ]
+    },
+    {
+      "year": "2022",
+      "exam": "retake",
+      "subject": "情報関係基礎",
+      "source": "共通テスト過去問集 2022年追試 情報関係基礎 解答画像 / 大学入試センター 令和4年度 追・再試験の正解掲載科目",
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E6%83%85%E5%A0%B1%E3%80%912022%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
+      "maxScore": 100,
+      "notes": "2022年度追試。解答画像から正解・配点を転記。第1問・第2問は必答、第3問・第4問のうち1問選択。部分点欄は可能な範囲で個別欄化。",
+      "questions": [
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "0"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "4"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "3"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "6"
+        },
+        {
+          "id": "オ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "4"
+        },
+        {
+          "id": "カ-キ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answers": [
+            "1",
+            "5"
+          ],
+          "note": "各1点。サイト上は一括欄として扱う。"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "3"
+        },
+        {
+          "id": "ケ",
+          "points": 2,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "1"
+        },
+        {
+          "id": "コ",
+          "points": 2,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "4"
+        },
+        {
+          "id": "サ",
+          "points": 1,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "6"
+        },
+        {
+          "id": "シ",
+          "points": 1,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "2"
+        },
+        {
+          "id": "ス",
+          "points": 1,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "4"
+        },
+        {
+          "id": "セ",
+          "points": 1,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "1"
+        },
+        {
+          "id": "ソ",
+          "points": 1,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "0"
+        },
+        {
+          "id": "タ",
+          "points": 1,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "8"
+        },
+        {
+          "id": "チ",
+          "points": 2,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "5"
+        },
+        {
+          "id": "ツ",
+          "points": 2,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "7"
+        },
+        {
+          "id": "テ",
+          "points": 2,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "0"
+        },
+        {
+          "id": "ト",
+          "points": 1,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "1"
+        },
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "1"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "5"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "1"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "4"
+        },
+        {
+          "id": "オ",
+          "points": 3,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "1"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "1"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "6"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "5"
+        },
+        {
+          "id": "ケ",
+          "points": 3,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "1"
+        },
+        {
+          "id": "コ",
+          "points": 3,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "3"
+        },
+        {
+          "id": "サ",
+          "points": 1,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "1"
+        },
+        {
+          "id": "シ",
+          "points": 1,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "3"
+        },
+        {
+          "id": "ス",
+          "points": 2,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "4"
+        },
+        {
+          "id": "セ",
+          "points": 3,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "2"
+        },
+        {
+          "id": "ソ",
+          "points": 1,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "3"
+        },
+        {
+          "id": "タ",
+          "points": 1,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "4"
+        },
+        {
+          "id": "チ",
+          "points": 2,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "0"
+        },
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "3"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "3"
+        },
+        {
+          "id": "ウ",
+          "points": 3,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "2"
+        },
+        {
+          "id": "エ",
+          "points": 3,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "3"
+        },
+        {
+          "id": "オ",
+          "points": 5,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "6"
+        },
+        {
+          "id": "カ",
+          "points": 5,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "4"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "2"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "1"
+        },
+        {
+          "id": "ケ",
+          "points": 3,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "6"
+        },
+        {
+          "id": "コ",
+          "points": 3,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "2"
+        },
+        {
+          "id": "サ",
+          "points": 3,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "3"
+        },
+        {
+          "id": "シ",
+          "points": 3,
+          "group": "第3問-3",
+          "problemNumber": "第3問-3",
+          "answer": "4"
+        },
+        {
+          "id": "ス",
+          "points": 1,
+          "group": "第3問-3",
+          "problemNumber": "第3問-3",
+          "answer": "1"
+        },
+        {
+          "id": "セ",
+          "points": 1,
+          "group": "第3問-3",
+          "problemNumber": "第3問-3",
+          "answer": "0"
+        },
+        {
+          "id": "ソ",
+          "points": 1,
+          "group": "第3問-3",
+          "problemNumber": "第3問-3",
+          "answer": "0"
+        },
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "2"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "3"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "5"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "3"
+        },
+        {
+          "id": "オ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "4"
+        },
+        {
+          "id": "カ",
+          "points": 1,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "1"
+        },
+        {
+          "id": "キ",
+          "points": 1,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "2"
+        },
+        {
+          "id": "ク",
+          "points": 3,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "0"
+        },
+        {
+          "id": "ケ",
+          "points": 2,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "1"
+        },
+        {
+          "id": "コ",
+          "points": 3,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "0"
+        },
+        {
+          "id": "サ-シ",
+          "points": 3,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answers": [
+            "4",
+            "5"
+          ],
+          "note": "全部正解の場合のみ得点。"
+        },
+        {
+          "id": "ス",
+          "points": 3,
+          "group": "第4問-3",
+          "problemNumber": "第4問-3",
+          "answer": "0"
+        },
+        {
+          "id": "セ",
+          "points": 2,
+          "group": "第4問-3",
+          "problemNumber": "第4問-3",
+          "answer": "8"
+        },
+        {
+          "id": "ソ",
+          "points": 3,
+          "group": "第4問-3",
+          "problemNumber": "第4問-3",
+          "answer": "2"
+        },
+        {
+          "id": "タ",
+          "points": 3,
+          "group": "第4問-3",
+          "problemNumber": "第4問-3",
+          "answer": "6"
+        },
+        {
+          "id": "チ",
+          "points": 1,
+          "group": "第4問-3",
+          "problemNumber": "第4問-3",
+          "answer": "2"
+        }
+      ],
+      "selectionRules": [
+        {
+          "groups": [
+            "第3問-1",
+            "第3問-2",
+            "第3問-3",
+            "第4問-1",
+            "第4問-2",
+            "第4問-3"
+          ],
+          "choose": 1
+        }
+      ],
+      "problemUrl": "https://kyotsutest.vercel.app/test/2022_%E6%83%85%E5%A0%B1%E9%96%A2%E4%BF%82%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
+    },
+    {
+      "year": "2014",
+      "exam": "retake",
+      "subject": "英語（リスニング）",
+      "source": "mm参考書 センター試験 英語リスニング2014追試（音声・問題・正解・和訳）",
+      "sourceUrl": "https://www.mmsankosho.com/centerlistening2014tuisi/",
+      "maxScore": 50,
+      "notes": "旧センター試験の英語リスニング追試を登録。mm参考書掲載の各問「正解」から解答番号を転記。各問2点。",
+      "groupVerification": {
+        "status": "verified",
+        "method": "web-page-answer-transcription",
+        "source": "mm参考書 2014追試リスニング正解ページ",
+        "sourceUrl": "https://www.mmsankosho.com/centerlistening2014tuisi/",
+        "updatedAt": "2026-05-16T22:35:00+09:00"
+      },
+      "questions": [
+        {
+          "id": "1",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "2",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "3",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "4"
+        },
+        {
+          "id": "4",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "4"
+        },
+        {
+          "id": "5",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "6",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "7",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "8",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "9",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "10",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "2"
+        },
+        {
+          "id": "11",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "12",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "1"
+        },
+        {
+          "id": "13",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "2"
+        },
+        {
+          "id": "14",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "3"
+        },
+        {
+          "id": "15",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "2"
+        },
+        {
+          "id": "16",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "2"
+        },
+        {
+          "id": "17",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "4"
+        },
+        {
+          "id": "18",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "5"
+        },
+        {
+          "id": "19",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "2"
+        },
+        {
+          "id": "20",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "3"
+        },
+        {
+          "id": "21",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "4"
+        },
+        {
+          "id": "22",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "3"
+        },
+        {
+          "id": "23",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "3"
+        },
+        {
+          "id": "24",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "25",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        }
+      ],
+      "problemUrl": "https://kyotsutest.vercel.app/test/2014_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
+    },
+    {
+      "year": "2019",
+      "exam": "retake",
+      "subject": "英語（リスニング）",
+      "source": "mm参考書 センター試験 英語リスニング2019追試（音声・問題・正解・和訳）",
+      "sourceUrl": "https://www.mmsankosho.com/centerlistening2019tuisi/",
+      "maxScore": 50,
+      "notes": "旧センター試験の英語リスニング追試を登録。mm参考書掲載の各問「正解」から解答番号を転記。各問2点。",
+      "groupVerification": {
+        "status": "verified",
+        "method": "web-page-answer-transcription",
+        "source": "mm参考書 2019追試リスニング正解ページ",
+        "sourceUrl": "https://www.mmsankosho.com/centerlistening2019tuisi/",
+        "updatedAt": "2026-05-16T22:35:00+09:00"
+      },
+      "questions": [
+        {
+          "id": "1",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "1"
+        },
+        {
+          "id": "2",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "3",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "4",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "3"
+        },
+        {
+          "id": "5",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "2"
+        },
+        {
+          "id": "6",
+          "points": 2,
+          "group": "第1問",
+          "problemNumber": "第1問",
+          "answer": "4"
+        },
+        {
+          "id": "7",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "8",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "4"
+        },
+        {
+          "id": "9",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "3"
+        },
+        {
+          "id": "10",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "4"
+        },
+        {
+          "id": "11",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "2"
+        },
+        {
+          "id": "12",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "4"
+        },
+        {
+          "id": "13",
+          "points": 2,
+          "group": "第2問",
+          "problemNumber": "第2問",
+          "answer": "2"
+        },
+        {
+          "id": "14",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "1"
+        },
+        {
+          "id": "15",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "2"
+        },
+        {
+          "id": "16",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "4"
+        },
+        {
+          "id": "17",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "2"
+        },
+        {
+          "id": "18",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "3"
+        },
+        {
+          "id": "19",
+          "points": 2,
+          "group": "第3問",
+          "problemNumber": "第3問",
+          "answer": "3"
+        },
+        {
+          "id": "20",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "21",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "22",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "23",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "2"
+        },
+        {
+          "id": "24",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "1"
+        },
+        {
+          "id": "25",
+          "points": 2,
+          "group": "第4問",
+          "problemNumber": "第4問",
+          "answer": "4"
+        }
+      ],
+      "problemUrl": "https://kyotsutest.vercel.app/test/2019_%E8%8B%B1%E8%AA%9EL_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
+    },
+    {
+      "year": "2021",
+      "exam": "retake",
+      "subject": "情報関係基礎",
+      "source": "kyotsutest.net 共通テスト2021年追試 問題+解答ページ",
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E6%83%85%E5%A0%B1%E9%96%A2%E4%BF%82%E5%9F%BA%E7%A4%8E%E3%80%912021%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
+      "maxScore": 100,
+      "notes": "2021年度追試。解答画像から正解・配点を転記。第1問・第2問は必答、第3問・第4問のうち1問選択。部分点欄は可能な範囲で個別欄化。 / v126: 出典URLを問題+解答ページへ統一。問題PDFは problemUrl に保持。",
+      "groupVerification": {
+        "status": "verified",
+        "method": "answer-image-transcription",
+        "source": "kyotsutest.net 解答画像",
+        "sourceUrl": "https://www.kyotsutest.net/wp-content/uploads/2023/04/1ddfa30ab7426a686fc50a3d79edc880.jpg",
+        "updatedAt": "2026-05-16T22:35:00+09:00"
+      },
+      "questions": [
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "7"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "0"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "1"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "1"
+        },
+        {
+          "id": "オ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "5"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "1"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "2"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "1"
+        },
+        {
+          "id": "ケ-コ",
+          "points": 4,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answers": [
+            "2",
+            "3"
+          ],
+          "note": "各2点。"
+        },
+        {
+          "id": "サ",
+          "points": 1,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "7"
+        },
+        {
+          "id": "シ",
+          "points": 1,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "3"
+        },
+        {
+          "id": "ス",
+          "points": 2,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "3"
+        },
+        {
+          "id": "セ",
+          "points": 2,
+          "group": "第1問-3",
+          "problemNumber": "第1問-3",
+          "answer": "3"
+        },
+        {
+          "id": "ソ",
+          "points": 2,
+          "group": "第1問-3",
+          "problemNumber": "第1問-3",
+          "answer": "7"
+        },
+        {
+          "id": "ターチ",
+          "points": 2,
+          "group": "第1問-3",
+          "problemNumber": "第1問-3",
+          "answers": [
+            "1",
+            "3"
+          ],
+          "note": "各1点。"
+        },
+        {
+          "id": "ツ",
+          "points": 2,
+          "group": "第1問-3",
+          "problemNumber": "第1問-3",
+          "answer": "2"
+        },
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "5"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "0"
+        },
+        {
+          "id": "ウ-エ",
+          "points": 3,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answers": [
+            "1",
+            "3"
+          ],
+          "note": "各配点内訳は原表の一括欄。"
+        },
+        {
+          "id": "オ",
+          "points": 3,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "0"
+        },
+        {
+          "id": "カ",
+          "points": 3,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "1"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "6"
+        },
+        {
+          "id": "ク",
+          "points": 3,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "5"
+        },
+        {
+          "id": "ス",
+          "points": 3,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "0"
+        },
+        {
+          "id": "ソ",
+          "points": 2,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "3"
+        },
+        {
+          "id": "タ",
+          "points": 3,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "8"
+        },
+        {
+          "id": "ツ-テ",
+          "points": 3,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answers": [
+            "3",
+            "6"
+          ],
+          "note": "原表は一括3点。"
+        },
+        {
+          "id": "ナ",
+          "points": 3,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "9"
+        },
+        {
+          "id": "ヌ",
+          "points": 2,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "1"
+        },
+        {
+          "id": "ネ",
+          "points": 2,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "1"
+        },
+        {
+          "id": "ノーハ",
+          "points": 4,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answers": [
+            "2",
+            "4"
+          ],
+          "note": "各2点。"
+        },
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "3"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "2"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "1"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "0"
+        },
+        {
+          "id": "オ",
+          "points": 3,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "1"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "2"
+        },
+        {
+          "id": "キ",
+          "points": 3,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "4"
+        },
+        {
+          "id": "ク",
+          "points": 4,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "7"
+        },
+        {
+          "id": "ケ",
+          "points": 2,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "4"
+        },
+        {
+          "id": "コ",
+          "points": 3,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "5"
+        },
+        {
+          "id": "サ",
+          "points": 2,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "1"
+        },
+        {
+          "id": "シ",
+          "points": 2,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "1"
+        },
+        {
+          "id": "ス",
+          "points": 2,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "0"
+        },
+        {
+          "id": "セ",
+          "points": 3,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "1"
+        },
+        {
+          "id": "ソータ",
+          "points": 4,
+          "group": "第3問-3",
+          "problemNumber": "第3問-3",
+          "answers": [
+            "0",
+            "2"
+          ],
+          "note": "各2点。"
+        },
+        {
+          "id": "チ",
+          "points": 3,
+          "group": "第3問-3",
+          "problemNumber": "第3問-3",
+          "answer": "5"
+        },
+        {
+          "id": "ツ",
+          "points": 3,
+          "group": "第3問-3",
+          "problemNumber": "第3問-3",
+          "answer": "2"
+        },
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "1"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "3"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "1"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "1"
+        },
+        {
+          "id": "オ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "4"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "3"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "3"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "2"
+        },
+        {
+          "id": "コ",
+          "points": 2,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "9"
+        },
+        {
+          "id": "シ",
+          "points": 3,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "6"
+        },
+        {
+          "id": "スーセ",
+          "points": 3,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answers": [
+            "0",
+            "4"
+          ],
+          "note": "原表は一括3点。"
+        },
+        {
+          "id": "タ",
+          "points": 2,
+          "group": "第4問-3",
+          "problemNumber": "第4問-3",
+          "answer": "8"
+        },
+        {
+          "id": "ツ",
+          "points": 3,
+          "group": "第4問-3",
+          "problemNumber": "第4問-3",
+          "answer": "8"
+        },
+        {
+          "id": "ト",
+          "points": 3,
+          "group": "第4問-3",
+          "problemNumber": "第4問-3",
+          "answer": "4"
+        },
+        {
+          "id": "ニ",
+          "points": 3,
+          "group": "第4問-3",
+          "problemNumber": "第4問-3",
+          "answer": "1"
+        }
+      ],
+      "problemUrl": "https://kyotsutest.vercel.app/test/2021_%E6%83%85%E5%A0%B1%E9%96%A2%E4%BF%82%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
+    },
+    {
+      "year": "2023",
+      "exam": "retake",
+      "subject": "情報関係基礎",
+      "source": "共通テスト過去問集 2023年追試 情報関係基礎 解答画像 / 大学入試センター 令和5年度 追・再試験の正解掲載科目",
+      "sourceUrl": "https://www.kyotsutest.net/?recipe=%E5%85%B1%E9%80%9A%E3%83%86%E3%82%B9%E3%83%88%E3%80%90%E6%83%85%E5%A0%B1%E3%80%912023%E5%B9%B4-%E8%BF%BD%E8%A9%A6%E3%80%80%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94",
+      "maxScore": 100,
+      "notes": "2023年度追試。解答画像から正解・配点を転記。第1問・第2問は必答、第3問・第4問のうち1問選択。部分点欄は可能な範囲で個別欄化。",
+      "groupVerification": {
+        "status": "verified",
+        "method": "answer-image-transcription",
+        "source": "kyotsutest.net 解答画像",
+        "sourceUrl": "https://www.kyotsutest.net/wp-content/uploads/2023/04/8747837f610b2d4ebaf2b576a4491192.jpg",
+        "updatedAt": "2026-05-16T22:35:00+09:00"
+      },
+      "questions": [
+        {
+          "id": "ア",
+          "points": 1,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "0"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "2"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "3"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "5"
+        },
+        {
+          "id": "オ",
+          "points": 2,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "2"
+        },
+        {
+          "id": "カ",
+          "points": 3,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "1"
+        },
+        {
+          "id": "キ",
+          "points": 1,
+          "group": "第1問-1",
+          "problemNumber": "第1問-1",
+          "answer": "0"
+        },
+        {
+          "id": "ク",
+          "points": 1,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "2"
+        },
+        {
+          "id": "ケ",
+          "points": 1,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "0"
+        },
+        {
+          "id": "コ",
+          "points": 1,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "3"
+        },
+        {
+          "id": "サ",
+          "points": 2,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "3"
+        },
+        {
+          "id": "シ",
+          "points": 3,
+          "group": "第1問-2",
+          "problemNumber": "第1問-2",
+          "answer": "4"
+        },
+        {
+          "id": "ス",
+          "points": 2,
+          "group": "第1問-3",
+          "problemNumber": "第1問-3",
+          "answer": "2"
+        },
+        {
+          "id": "セ",
+          "points": 2,
+          "group": "第1問-3",
+          "problemNumber": "第1問-3",
+          "answer": "1"
+        },
+        {
+          "id": "ソ",
+          "points": 2,
+          "group": "第1問-3",
+          "problemNumber": "第1問-3",
+          "answer": "7"
+        },
+        {
+          "id": "タ",
+          "points": 3,
+          "group": "第1問-3",
+          "problemNumber": "第1問-3",
+          "answer": "0"
+        },
+        {
+          "id": "チ",
+          "points": 3,
+          "group": "第1問-3",
+          "problemNumber": "第1問-3",
+          "answer": "3"
+        },
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "4"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "3"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "0"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "3"
+        },
+        {
+          "id": "オ",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "0"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "第2問-1",
+          "problemNumber": "第2問-1",
+          "answer": "3"
+        },
+        {
+          "id": "キーウ",
+          "points": 3,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answers": [
+            "0",
+            "7"
+          ],
+          "note": "原表は一括3点。"
+        },
+        {
+          "id": "ケ",
+          "points": 2,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "3"
+        },
+        {
+          "id": "コ",
+          "points": 3,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answer": "3"
+        },
+        {
+          "id": "サーシ",
+          "points": 3,
+          "group": "第2問-2",
+          "problemNumber": "第2問-2",
+          "answers": [
+            "1",
+            "3"
+          ],
+          "note": "原表は一括3点。"
+        },
+        {
+          "id": "ス",
+          "points": 3,
+          "group": "第2問-3",
+          "problemNumber": "第2問-3",
+          "answer": "2"
+        },
+        {
+          "id": "セ",
+          "points": 3,
+          "group": "第2問-3",
+          "problemNumber": "第2問-3",
+          "answer": "0"
+        },
+        {
+          "id": "ソーターチ",
+          "points": 3,
+          "group": "第2問-3",
+          "problemNumber": "第2問-3",
+          "answers": [
+            "0",
+            "1",
+            "6"
+          ],
+          "note": "原表は一括3点。"
+        },
+        {
+          "id": "ツ",
+          "points": 1,
+          "group": "第2問-3",
+          "problemNumber": "第2問-3",
+          "answer": "0"
+        },
+        {
+          "id": "テ",
+          "points": 2,
+          "group": "第2問-3",
+          "problemNumber": "第2問-3",
+          "answer": "6"
+        },
+        {
+          "id": "ト",
+          "points": 2,
+          "group": "第2問-3",
+          "problemNumber": "第2問-3",
+          "answer": "1"
+        },
+        {
+          "id": "ア",
+          "points": 1,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "3"
+        },
+        {
+          "id": "イ",
+          "points": 1,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "5"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "1"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "2"
+        },
+        {
+          "id": "オ",
+          "points": 2,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "4"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "4"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "第3問-1",
+          "problemNumber": "第3問-1",
+          "answer": "5"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "3"
+        },
+        {
+          "id": "ケ",
+          "points": 2,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "9"
+        },
+        {
+          "id": "コ",
+          "points": 2,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "9"
+        },
+        {
+          "id": "サ",
+          "points": 2,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "2"
+        },
+        {
+          "id": "シ",
+          "points": 1,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "4"
+        },
+        {
+          "id": "ス",
+          "points": 1,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "2"
+        },
+        {
+          "id": "セ",
+          "points": 2,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "2"
+        },
+        {
+          "id": "ソ",
+          "points": 3,
+          "group": "第3問-2",
+          "problemNumber": "第3問-2",
+          "answer": "2"
+        },
+        {
+          "id": "タ",
+          "points": 2,
+          "group": "第3問-3",
+          "problemNumber": "第3問-3",
+          "answer": "1"
+        },
+        {
+          "id": "チ",
+          "points": 2,
+          "group": "第3問-3",
+          "problemNumber": "第3問-3",
+          "answer": "6"
+        },
+        {
+          "id": "ツ",
+          "points": 2,
+          "group": "第3問-3",
+          "problemNumber": "第3問-3",
+          "answer": "7"
+        },
+        {
+          "id": "テ",
+          "points": 1,
+          "group": "第3問-3",
+          "problemNumber": "第3問-3",
+          "answer": "0"
+        },
+        {
+          "id": "ト",
+          "points": 1,
+          "group": "第3問-3",
+          "problemNumber": "第3問-3",
+          "answer": "6"
+        },
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "2"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "3"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "0"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "0"
+        },
+        {
+          "id": "オ",
+          "points": 3,
+          "group": "第4問-1",
+          "problemNumber": "第4問-1",
+          "answer": "2"
+        },
+        {
+          "id": "キ",
+          "points": 3,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "1"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "1"
+        },
+        {
+          "id": "ケ",
+          "points": 2,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "5"
+        },
+        {
+          "id": "サ",
+          "points": 3,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "3"
+        },
+        {
+          "id": "シ",
+          "points": 2,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "7"
+        },
+        {
+          "id": "ス",
+          "points": 3,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "3"
+        },
+        {
+          "id": "セ",
+          "points": 3,
+          "group": "第4問-2",
+          "problemNumber": "第4問-2",
+          "answer": "2"
+        },
+        {
+          "id": "ソ",
+          "points": 3,
+          "group": "第4問-3",
+          "problemNumber": "第4問-3",
+          "answer": "4"
+        },
+        {
+          "id": "チ",
+          "points": 3,
+          "group": "第4問-3",
+          "problemNumber": "第4問-3",
+          "answer": "0"
+        }
+      ],
+      "problemUrl": "https://kyotsutest.vercel.app/test/2023_%E6%83%85%E5%A0%B1%E9%96%A2%E4%BF%82%E5%9F%BA%E7%A4%8E_%E8%BF%BD%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf",
+      "problemSource": "kyotsutest.vercel.app 推定URL（年度_科目_追試験問題.pdf）"
     }
   ],
-  "notes": "v122: 令和7年度試験の試作問題を追加。テンキー固定はv121のfixed方式を継続。"
+  "notes": "検証済み正解・配点データ。v125では追試験の問題PDF直接URLを kyotsutest.vercel.app/test/{年度}_{科目}_追試験問題.pdf 規則で一括付与。"
 }
