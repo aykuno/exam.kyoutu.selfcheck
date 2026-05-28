@@ -22,7 +22,7 @@
   const MOCK_FILE = 'answer_keys_mock_benesse_2026_05_verified_v2.json';
   const MOCK_EXAM_ID = 'mock-benesse-2026-05';
   const MOCK_EXAM_LABEL = '模擬試験-2026年5月実施ベネッセ共通テスト模試';
-  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/28 17:45';
+  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/28 17:55';
 
   function fail(message){
     document.body.innerHTML = '<pre style="white-space:pre-wrap;margin:20px;padding:16px;border-radius:12px;background:#0b1020;color:#e5e7eb">' + message + '</pre>';
@@ -30,7 +30,7 @@
 
   function patchIndex(html){
     html = html.replace(/最終更新日時：[^<]+/, UPDATE_TIME_TEXT);
-    html = html.replace('<b>バージョン：v137</b>', '<b>バージョン：v142</b>');
+    html = html.replace('<b>バージョン：v137</b>', '<b>バージョン：v143</b>');
 
     html = html.replace(
       "const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）'};",
@@ -43,12 +43,26 @@
     html = html.replace(oldInit, newInit);
 
     const oldQid = "function rowNote(k,r){return [r.q.note||'',statNote(k,r.q)].filter(Boolean).join(' / ')}function qid(q){return norm(q.id)}";
-    const newQid = "function rowNote(k,r){return [r.q.note||'',statNote(k,r.q)].filter(Boolean).join(' / ')}function qid(q){try{const k=selected&&selected();if(k&&Array.isArray(k.questions)){const id=norm(q.id);const dup=k.questions.filter(x=>norm(x.id)===id).length>1;if(dup)return norm((q.problemNumber||q.group||'')+'||'+q.id);}}catch(e){}return norm(q.id)}";
+    const newQid = "let __qidSig='',__qidCounts=null;function __getQidCounts(k){const sig=k?keySig(k):'';if(sig!==__qidSig){__qidSig=sig;__qidCounts=new Map();if(k&&Array.isArray(k.questions)){for(const x of k.questions){const id=norm(x.id);__qidCounts.set(id,(__qidCounts.get(id)||0)+1);}}}return __qidCounts||new Map()}function rowNote(k,r){return [r.q.note||'',statNote(k,r.q)].filter(Boolean).join(' / ')}function qid(q){const id=norm(q.id);try{const k=selected&&selected();if(k&&(__getQidCounts(k).get(id)||0)>1)return norm((q.problemNumber||q.group||'')+'||'+q.id);}catch(e){}return id}";
     if (html.includes(oldQid)) {
       html = html.replace(oldQid, newQid);
     } else {
       throw new Error('index.html の qid 関数を見つけられませんでした。');
     }
+
+    // v143 performance patch: avoid repeated deep cloning and full DOM rebuilds while entering answers.
+    const oldLoadSave = "function keySig(k){return [String(k.year),k.exam,k.subject].join('||')}function load(){return BASE_KEYS.map(k=>JSON.parse(JSON.stringify(k)));}function save(keys){/* 正解データのユーザー追加機能はv80で画面から削除。互換用に関数だけ残す。 */}";
+    const newLoadSave = "function keySig(k){return [String(k.year),k.exam,k.subject].join('||')}function load(){return BASE_KEYS}function save(keys){/* 正解データのユーザー追加機能はv80で画面から削除。互換用に関数だけ残す。 */}";
+    if (html.includes(oldLoadSave)) html = html.replace(oldLoadSave, newLoadSave);
+
+    const oldRenderKeypad = "function renderKeypad(){const k=selected();if(!k)return;const q=k.questions[currentIndex]||k.questions[0];$('currentId').textContent=q?displayId(q):'-';$('currentAnswer').textContent=q?answerString(q):'';$('keyButtons').innerHTML=tokenSet(k).map(t=>`<button data-t=\"${esc(t)}\">${t==='-'?'－':esc(t)}</button>`).join('');document.querySelectorAll('#keyButtons button').forEach(b=>b.onclick=()=>press(b.dataset.t));}";
+    const newRenderKeypad = "function renderKeypad(){const k=selected();if(!k)return;const q=k.questions[currentIndex]||k.questions[0];$('currentId').textContent=q?displayId(q):'-';$('currentAnswer').textContent=q?answerString(q):'';const kb=$('keyButtons'),tokens=tokenSet(k).join('|');if(kb.dataset.tokens!==tokens){kb.dataset.tokens=tokens;kb.innerHTML=tokenSet(k).map(t=>`<button data-t=\"${esc(t)}\">${t==='-'?'－':esc(t)}</button>`).join('');if(!kb.dataset.bound){kb.addEventListener('click',e=>{const b=e.target.closest('button[data-t]');if(b)press(b.dataset.t)});kb.dataset.bound='1';}}}";
+    if (html.includes(oldRenderKeypad)) html = html.replace(oldRenderKeypad, newRenderKeypad);
+
+    const oldRenderCards = "function renderCards(){const k=selected();if(!k)return;$('answerCards').innerHTML=k.questions.map((q,i)=>{const val=answerString(q);return `<div class=\"answerCard ${i===currentIndex?'active':''} ${val?'done':''}\" data-i=\"${i}\"><div class=\"id\" title=\"${esc(displayId(q))}\">${esc(displayId(q))}</div><div class=\"ans\">${esc(val||'')}</div><div class=\"pt\">${qpts(q)}点 / ${expectedLen(q)}桁</div></div>`}).join('');document.querySelectorAll('.answerCard').forEach(c=>c.onclick=()=>{currentIndex=Number(c.dataset.i);renderKeypad();renderCards();});}";
+    const newRenderCards = "function renderCards(){const k=selected();if(!k)return;const box=$('answerCards'),sig=keySig(k)+'||'+k.questions.length;if(box.dataset.sig!==sig){box.dataset.sig=sig;box.innerHTML=k.questions.map((q,i)=>`<div class=\"answerCard\" data-i=\"${i}\"><div class=\"id\" title=\"${esc(displayId(q))}\">${esc(displayId(q))}</div><div class=\"ans\"></div><div class=\"pt\">${qpts(q)}点 / ${expectedLen(q)}桁</div></div>`).join('');if(!box.dataset.bound){box.addEventListener('click',e=>{const c=e.target.closest('.answerCard');if(!c)return;currentIndex=Number(c.dataset.i);renderKeypad();renderCards();});box.dataset.bound='1';}}const cards=box.children;for(let i=0;i<k.questions.length;i++){const q=k.questions[i],val=answerString(q),c=cards[i];if(!c)continue;const cls='answerCard '+(i===currentIndex?'active ':'')+(val?'done':'');if(c.className!==cls)c.className=cls;const ans=c.querySelector('.ans');if(ans&&ans.textContent!==(val||''))ans.textContent=val||'';}}";
+    if (html.includes(oldRenderCards)) html = html.replace(oldRenderCards, newRenderCards);
+
 
 
 
