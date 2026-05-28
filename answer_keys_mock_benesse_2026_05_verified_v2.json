@@ -1,0 +1,4554 @@
+{
+  "keys": [
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "地理総合,地理探究",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "questions": [
+        {
+          "id": "1",
+          "points": 4,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "6",
+          "points": 3,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "5",
+          "group": "Q2"
+        },
+        {
+          "id": "9",
+          "points": 4,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "10",
+          "points": 4,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "15",
+          "points": 4,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "18",
+          "points": 3,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "19",
+          "points": 4,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "20",
+          "points": 4,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "21",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "22",
+          "points": 3,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "23",
+          "points": 4,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "24",
+          "points": 4,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "25",
+          "points": 3,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "26",
+          "points": 3,
+          "answer": "4",
+          "group": "Q6"
+        },
+        {
+          "id": "27",
+          "points": 4,
+          "answer": "5",
+          "group": "Q6"
+        },
+        {
+          "id": "28",
+          "points": 3,
+          "answer": "1",
+          "group": "Q6"
+        },
+        {
+          "id": "29",
+          "points": 3,
+          "answer": "3",
+          "group": "Q6"
+        },
+        {
+          "id": "30",
+          "points": 4,
+          "answer": "1",
+          "group": "Q6"
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "歴史総合,日本史探究",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "questions": [
+        {
+          "id": "1",
+          "points": 3,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "6",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "8",
+          "points": 4,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "9",
+          "points": 3,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "10",
+          "points": 3,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "18",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "19",
+          "points": 3,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "20",
+          "points": 3,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "21",
+          "points": 3,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "22",
+          "points": 3,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "23",
+          "points": 3,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "24",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "25",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "26",
+          "points": 3,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "27",
+          "points": 3,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "28",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "29",
+          "points": 3,
+          "answer": "2",
+          "group": "Q6"
+        },
+        {
+          "id": "30",
+          "points": 3,
+          "answer": "1",
+          "group": "Q6"
+        },
+        {
+          "id": "31",
+          "points": 3,
+          "answer": "1",
+          "group": "Q6"
+        },
+        {
+          "id": "32",
+          "points": 3,
+          "answer": "4",
+          "group": "Q6"
+        },
+        {
+          "id": "33",
+          "points": 3,
+          "answer": "3",
+          "group": "Q6"
+        },
+        {
+          "id": "34",
+          "points": 3,
+          "answer": "1",
+          "group": "Q7"
+        },
+        {
+          "id": "35",
+          "points": 3,
+          "answer": "2",
+          "group": "Q7"
+        },
+        {
+          "id": "36",
+          "points": 3,
+          "answer": "2",
+          "group": "Q7"
+        },
+        {
+          "id": "37",
+          "points": 3,
+          "answer": "1",
+          "group": "Q7"
+        },
+        {
+          "id": "38",
+          "points": 3,
+          "answer": "4",
+          "group": "Q7"
+        }
+      ],
+      "notes": "第1問〜第5問は必答。第6問・第7問から1問選択。",
+      "selectionRules": [
+        {
+          "groups": [
+            "Q6",
+            "Q7"
+          ],
+          "choose": 1
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "歴史総合,世界史探究",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "questions": [
+        {
+          "id": "1",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "6",
+          "points": 3,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "5",
+          "group": "Q1"
+        },
+        {
+          "id": "8",
+          "points": 4,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "9",
+          "points": 3,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "10",
+          "points": 3,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "18",
+          "points": 3,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "19",
+          "points": 3,
+          "answer": "5",
+          "group": "Q3"
+        },
+        {
+          "id": "20",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "21",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "22",
+          "points": 3,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "23",
+          "points": 3,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "24",
+          "points": 3,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "25",
+          "points": 3,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "26",
+          "points": 3,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "27",
+          "points": 3,
+          "answer": "6",
+          "group": "Q4"
+        },
+        {
+          "id": "28",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "29",
+          "points": 3,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "30",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "31",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "32",
+          "points": 3,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "33",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "公共,政治・経済",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "questions": [
+        {
+          "id": "1",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "6",
+          "points": 3,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "7",
+          "points": 4,
+          "answer": "6",
+          "group": "Q2"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "9",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "10",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "5",
+          "group": "Q3"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "16",
+          "points": 4,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "18",
+          "points": 3,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "19",
+          "points": 3,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "20",
+          "points": 3,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "21",
+          "points": 4,
+          "answer": "8",
+          "group": "Q4"
+        },
+        {
+          "id": "22",
+          "points": 3,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "23",
+          "points": 3,
+          "answer": "6",
+          "group": "Q4"
+        },
+        {
+          "id": "24",
+          "points": 3,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "25",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "26",
+          "points": 3,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "27",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "28",
+          "points": 3,
+          "answer": "6",
+          "group": "Q5"
+        },
+        {
+          "id": "29",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "30",
+          "points": 4,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "31",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "32",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "33",
+          "points": 3,
+          "answer": "7",
+          "group": "Q6"
+        },
+        {
+          "id": "34",
+          "points": 3,
+          "answer": "2",
+          "group": "Q6"
+        },
+        {
+          "id": "35",
+          "points": 3,
+          "answer": "1",
+          "group": "Q6"
+        },
+        {
+          "id": "36",
+          "points": 3,
+          "answer": "1",
+          "group": "Q6"
+        },
+        {
+          "id": "37",
+          "points": 4,
+          "answer": "3",
+          "group": "Q6"
+        },
+        {
+          "id": "38",
+          "points": 3,
+          "answer": "4",
+          "group": "Q6"
+        },
+        {
+          "id": "39",
+          "points": 3,
+          "answer": "3",
+          "group": "Q6"
+        },
+        {
+          "id": "40",
+          "points": 3,
+          "answer": "2",
+          "group": "Q6"
+        }
+      ],
+      "notes": "第1問〜第4問は必答。第5問・第6問から1問選択。",
+      "selectionRules": [
+        {
+          "groups": [
+            "Q5",
+            "Q6"
+          ],
+          "choose": 1
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "公共,倫理",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "questions": [
+        {
+          "id": "1",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "6",
+          "points": 3,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "7",
+          "points": 4,
+          "answer": "6",
+          "group": "Q2"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "9",
+          "points": 3,
+          "answer": "5",
+          "group": "Q3"
+        },
+        {
+          "id": "10",
+          "points": 3,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "6",
+          "group": "Q3"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "8",
+          "group": "Q3"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "16",
+          "points": 4,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "18",
+          "points": 3,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "19",
+          "points": 3,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "20",
+          "points": 3,
+          "answer": "5",
+          "group": "Q4"
+        },
+        {
+          "id": "21",
+          "points": 3,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "22",
+          "points": 4,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "23",
+          "points": 3,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "24",
+          "points": 3,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "25",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "26",
+          "points": 4,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "27",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "28",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "29",
+          "points": 3,
+          "answer": "6",
+          "group": "Q5"
+        },
+        {
+          "id": "30",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "31",
+          "points": 3,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "32",
+          "points": 3,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "33",
+          "points": 3,
+          "answer": "4",
+          "group": "Q6"
+        },
+        {
+          "id": "34",
+          "points": 3,
+          "answer": "2",
+          "group": "Q6"
+        },
+        {
+          "id": "35",
+          "points": 3,
+          "answer": "1",
+          "group": "Q6"
+        },
+        {
+          "id": "36",
+          "points": 3,
+          "answer": "4",
+          "group": "Q6"
+        },
+        {
+          "id": "37",
+          "points": 3,
+          "answer": "3",
+          "group": "Q6"
+        },
+        {
+          "id": "38",
+          "points": 4,
+          "answer": "4",
+          "group": "Q6"
+        },
+        {
+          "id": "39",
+          "points": 3,
+          "answer": "3",
+          "group": "Q6"
+        },
+        {
+          "id": "40",
+          "points": 3,
+          "answer": "1",
+          "group": "Q6"
+        }
+      ],
+      "notes": "第1問〜第4問は必答。第5問・第6問から1問選択。",
+      "selectionRules": [
+        {
+          "groups": [
+            "Q5",
+            "Q6"
+          ],
+          "choose": 1
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "地理総合/歴史総合/公共",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "questions": [
+        {
+          "id": "地理総合-1",
+          "points": 4,
+          "answer": "2",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-2",
+          "points": 3,
+          "answer": "2",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-3",
+          "points": 3,
+          "answer": "3",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-4",
+          "points": 3,
+          "answer": "4",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-5",
+          "points": 3,
+          "answer": "2",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-6",
+          "points": 3,
+          "answer": "3",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-7",
+          "points": 3,
+          "answer": "3",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-8",
+          "points": 3,
+          "answer": "5",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-9",
+          "points": 3,
+          "answer": "4",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-10",
+          "points": 3,
+          "answer": "3",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-11",
+          "points": 3,
+          "answer": "1",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-12",
+          "points": 3,
+          "answer": "2",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-13",
+          "points": 3,
+          "answer": "3",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-14",
+          "points": 3,
+          "answer": "2",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-15",
+          "points": 3,
+          "answer": "2",
+          "group": "地理総合"
+        },
+        {
+          "id": "地理総合-16",
+          "points": 4,
+          "answer": "2",
+          "group": "地理総合"
+        },
+        {
+          "id": "歴史総合-1",
+          "points": 3,
+          "answer": "4",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-2",
+          "points": 3,
+          "answer": "2",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-3",
+          "points": 3,
+          "answer": "3",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-4",
+          "points": 3,
+          "answer": "2",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-5",
+          "points": 3,
+          "answer": "4",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-6",
+          "points": 3,
+          "answer": "2",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-7",
+          "points": 3,
+          "answer": "1",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-8",
+          "points": 4,
+          "answer": "3",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-9",
+          "points": 3,
+          "answer": "2",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-10",
+          "points": 3,
+          "answer": "1",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-11",
+          "points": 3,
+          "answer": "1",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-12",
+          "points": 3,
+          "answer": "4",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-13",
+          "points": 3,
+          "answer": "2",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-14",
+          "points": 3,
+          "answer": "3",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-15",
+          "points": 3,
+          "answer": "5",
+          "group": "歴史総合"
+        },
+        {
+          "id": "歴史総合-16",
+          "points": 4,
+          "answer": "4",
+          "group": "歴史総合"
+        },
+        {
+          "id": "公共-1",
+          "points": 3,
+          "answer": "2",
+          "group": "公共"
+        },
+        {
+          "id": "公共-2",
+          "points": 3,
+          "answer": "4",
+          "group": "公共"
+        },
+        {
+          "id": "公共-3",
+          "points": 3,
+          "answer": "3",
+          "group": "公共"
+        },
+        {
+          "id": "公共-4",
+          "points": 3,
+          "answer": "2",
+          "group": "公共"
+        },
+        {
+          "id": "公共-5",
+          "points": 3,
+          "answer": "4",
+          "group": "公共"
+        },
+        {
+          "id": "公共-6",
+          "points": 3,
+          "answer": "6",
+          "group": "公共"
+        },
+        {
+          "id": "公共-7",
+          "points": 3,
+          "answer": "7",
+          "group": "公共"
+        },
+        {
+          "id": "公共-8",
+          "points": 3,
+          "answer": "4",
+          "group": "公共"
+        },
+        {
+          "id": "公共-9",
+          "points": 3,
+          "answer": "3",
+          "group": "公共"
+        },
+        {
+          "id": "公共-10",
+          "points": 3,
+          "answer": "5",
+          "group": "公共"
+        },
+        {
+          "id": "公共-11",
+          "points": 3,
+          "answer": "1",
+          "group": "公共"
+        },
+        {
+          "id": "公共-12",
+          "points": 4,
+          "answer": "2",
+          "group": "公共"
+        },
+        {
+          "id": "公共-13",
+          "points": 3,
+          "answer": "3",
+          "group": "公共"
+        },
+        {
+          "id": "公共-14",
+          "points": 3,
+          "answer": "2",
+          "group": "公共"
+        },
+        {
+          "id": "公共-15",
+          "points": 4,
+          "answer": "6",
+          "group": "公共"
+        },
+        {
+          "id": "公共-16",
+          "points": 3,
+          "answer": "1",
+          "group": "公共"
+        }
+      ],
+      "notes": "地理総合・歴史総合・公共から2分野選択。各50点。",
+      "selectionRules": [
+        {
+          "groups": [
+            "地理総合",
+            "歴史総合",
+            "公共"
+          ],
+          "choose": 2
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "国語",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 200,
+      "questions": [
+        {
+          "id": "1",
+          "points": 2,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 2,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 2,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 2,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "5",
+          "points": 2,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "6",
+          "points": 7,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "7",
+          "points": 6,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "8",
+          "points": 6,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "9",
+          "points": 6,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "10",
+          "points": 5,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "11",
+          "points": 5,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "12",
+          "points": 4,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "13",
+          "points": 4,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "14",
+          "points": 7,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "15",
+          "points": 7,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "16",
+          "points": 8,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "17",
+          "points": 8,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "18",
+          "points": 7,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "19",
+          "points": 4,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "20",
+          "points": 4,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "21",
+          "points": 4,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "22",
+          "points": 4,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "23",
+          "points": 4,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "24",
+          "points": 5,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "25",
+          "points": 5,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "26",
+          "points": 5,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "27",
+          "points": 7,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "28",
+          "points": 7,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "29",
+          "points": 8,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "30",
+          "points": 8,
+          "answer": "5",
+          "group": "Q4"
+        },
+        {
+          "id": "31",
+          "points": 3,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "32",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "33",
+          "points": 6,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "34",
+          "points": 6,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "35",
+          "points": 6,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "36",
+          "points": 7,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "37",
+          "points": 7,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "38",
+          "points": 7,
+          "answer": "3",
+          "group": "Q5"
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "英語R",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "questions": [
+        {
+          "id": "1",
+          "points": 2,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 2,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 2,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "6",
+          "points": 3,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "8-11",
+          "points": 3,
+          "answers": [
+            "1",
+            "2",
+            "3",
+            "5"
+          ],
+          "group": "Q3"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "18",
+          "points": 3,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "19",
+          "points": 2,
+          "answer": "5",
+          "group": "Q5"
+        },
+        {
+          "id": "20",
+          "points": 2,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "21",
+          "points": 3,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "22",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "23",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "24-27",
+          "points": 3,
+          "answers": [
+            "5",
+            "3",
+            "1",
+            "4"
+          ],
+          "group": "Q6"
+        },
+        {
+          "id": "28",
+          "points": 3,
+          "answer": "4",
+          "group": "Q6"
+        },
+        {
+          "id": "29",
+          "points": 3,
+          "answer": "1",
+          "group": "Q6"
+        },
+        {
+          "id": "30-31",
+          "points": 3,
+          "answers": [
+            "3",
+            "5"
+          ],
+          "group": "Q6",
+          "unordered": true,
+          "note": "※の正解は順序不問"
+        },
+        {
+          "id": "32",
+          "points": 3,
+          "answer": "4",
+          "group": "Q7"
+        },
+        {
+          "id": "33-34",
+          "points": 4,
+          "answers": [
+            "4",
+            "5"
+          ],
+          "group": "Q7",
+          "unordered": true,
+          "note": "★の正解は順序不問"
+        },
+        {
+          "id": "35",
+          "points": 3,
+          "answer": "5",
+          "group": "Q7"
+        },
+        {
+          "id": "36",
+          "points": 3,
+          "answer": "3",
+          "group": "Q7"
+        },
+        {
+          "id": "37",
+          "points": 3,
+          "answer": "2",
+          "group": "Q7"
+        },
+        {
+          "id": "38",
+          "points": 3,
+          "answer": "1",
+          "group": "Q8"
+        },
+        {
+          "id": "39",
+          "points": 3,
+          "answer": "2",
+          "group": "Q8"
+        },
+        {
+          "id": "40-42",
+          "points": 4,
+          "correctOptions": [
+            [
+              "1",
+              "3",
+              "4"
+            ],
+            [
+              "3",
+              "1",
+              "4"
+            ]
+          ],
+          "group": "Q8",
+          "note": "◎の正解は順序不問"
+        },
+        {
+          "id": "43",
+          "points": 3,
+          "answer": "1",
+          "group": "Q8"
+        },
+        {
+          "id": "44",
+          "points": 4,
+          "answer": "3",
+          "group": "Q8"
+        }
+      ],
+      "notes": "※・★・◎の正解はそれぞれ順序を問わない。画像で配点が結合表示されている箇所は範囲IDで登録。"
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "英語L",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "questions": [
+        {
+          "id": "1",
+          "points": 4,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 4,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 4,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 4,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "6",
+          "points": 3,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "9",
+          "points": 4,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "10",
+          "points": 4,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "11",
+          "points": 4,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "18-21",
+          "points": 4,
+          "answers": [
+            "2",
+            "5",
+            "1",
+            "4"
+          ],
+          "group": "Q4"
+        },
+        {
+          "id": "22",
+          "points": 1,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "23",
+          "points": 1,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "24",
+          "points": 1,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "25",
+          "points": 1,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "26",
+          "points": 4,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "27",
+          "points": 3,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "28-29",
+          "points": 2,
+          "answers": [
+            "4",
+            "6"
+          ],
+          "group": "Q5"
+        },
+        {
+          "id": "30-31",
+          "points": 2,
+          "answers": [
+            "2",
+            "1"
+          ],
+          "group": "Q5"
+        },
+        {
+          "id": "32",
+          "points": 4,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "33",
+          "points": 5,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "34",
+          "points": 3,
+          "answer": "2",
+          "group": "Q6"
+        },
+        {
+          "id": "35",
+          "points": 3,
+          "answer": "3",
+          "group": "Q6"
+        },
+        {
+          "id": "36",
+          "points": 4,
+          "answer": "3",
+          "group": "Q6"
+        },
+        {
+          "id": "37",
+          "points": 4,
+          "answer": "4",
+          "group": "Q6"
+        }
+      ],
+      "notes": "画像で配点が結合表示されている箇所は範囲IDで登録。"
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "数学IA",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "notes": "数学①。解答用紙写真から確認できた正解・配点のみ登録。複数記号の行は解答用紙の採点行単位でまとめた。",
+      "questions": [
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "Q1",
+          "answer": "7"
+        },
+        {
+          "id": "イ,ウ",
+          "points": 2,
+          "group": "Q1",
+          "answers": [
+            "4",
+            "7"
+          ]
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "Q1",
+          "answer": "2"
+        },
+        {
+          "id": "オ,カ",
+          "points": 2,
+          "group": "Q1",
+          "answers": [
+            "1",
+            "8"
+          ]
+        },
+        {
+          "id": "キ,ク,ケ",
+          "points": 2,
+          "group": "Q1",
+          "answers": [
+            "8",
+            "4",
+            "3"
+          ]
+        },
+        {
+          "id": "コ,サ",
+          "points": 2,
+          "group": "Q1",
+          "answers": [
+            "7",
+            "4"
+          ]
+        },
+        {
+          "id": "シ,ス,セ,ソ",
+          "points": 2,
+          "group": "Q1",
+          "answers": [
+            "1",
+            "5",
+            "7",
+            "4"
+          ]
+        },
+        {
+          "id": "タ",
+          "points": 3,
+          "group": "Q1",
+          "answer": "4"
+        },
+        {
+          "id": "チ,ツ,テ",
+          "points": 3,
+          "group": "Q1",
+          "answers": [
+            "8",
+            "7",
+            "7"
+          ]
+        },
+        {
+          "id": "ト,ナ",
+          "points": 3,
+          "group": "Q1",
+          "answers": [
+            "5",
+            "3"
+          ]
+        },
+        {
+          "id": "ニ",
+          "points": 2,
+          "group": "Q1",
+          "answer": "0"
+        },
+        {
+          "id": "ヌ",
+          "points": 3,
+          "group": "Q1",
+          "answer": "2"
+        },
+        {
+          "id": "ネ,ノ,ハ",
+          "points": 2,
+          "group": "Q1",
+          "answers": [
+            "5",
+            "3",
+            "2"
+          ]
+        },
+        {
+          "id": "ア,イ",
+          "points": 2,
+          "group": "Q2",
+          "answers": [
+            "0",
+            "3"
+          ]
+        },
+        {
+          "id": "ウ,エ,オ",
+          "points": 2,
+          "group": "Q2",
+          "answers": [
+            "1",
+            "8",
+            "0"
+          ]
+        },
+        {
+          "id": "カ,キ,ク",
+          "points": 2,
+          "group": "Q2",
+          "answers": [
+            "1",
+            "0",
+            "0"
+          ]
+        },
+        {
+          "id": "ケ,コ,サ",
+          "points": 3,
+          "group": "Q2",
+          "answers": [
+            "1",
+            "6",
+            "0"
+          ]
+        },
+        {
+          "id": "シ,ス",
+          "points": 2,
+          "group": "Q2",
+          "answers": [
+            "8",
+            "0"
+          ]
+        },
+        {
+          "id": "セ,ソ,タ",
+          "points": 2,
+          "group": "Q2",
+          "answers": [
+            "1",
+            "8",
+            "0"
+          ]
+        },
+        {
+          "id": "チ,ツ",
+          "points": 2,
+          "group": "Q2",
+          "answers": [
+            "1",
+            "8"
+          ]
+        },
+        {
+          "id": "テ",
+          "points": 2,
+          "group": "Q2",
+          "answer": "3"
+        },
+        {
+          "id": "ト",
+          "points": 2,
+          "group": "Q2",
+          "answer": "4"
+        },
+        {
+          "id": "ナ",
+          "points": 2,
+          "group": "Q2",
+          "answer": "0"
+        },
+        {
+          "id": "ニ,ヌ",
+          "points": 4,
+          "group": "Q2",
+          "answers": [
+            "3",
+            "4"
+          ],
+          "unordered": true,
+          "partialAnyCorrect": 2,
+          "note": "解答の順序は問わない。各2点。"
+        },
+        {
+          "id": "ネ",
+          "points": 2,
+          "group": "Q2",
+          "answer": "2"
+        },
+        {
+          "id": "ノ,ハ",
+          "points": 1,
+          "group": "Q2",
+          "answers": [
+            "6",
+            "5"
+          ]
+        },
+        {
+          "id": "ヒ,フ",
+          "points": 2,
+          "group": "Q2",
+          "answers": [
+            "1",
+            "1"
+          ]
+        },
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "Q3",
+          "answer": "1"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "2"
+        },
+        {
+          "id": "ウ,エ,オ",
+          "points": 2,
+          "group": "Q3",
+          "answers": [
+            "1",
+            "0",
+            "3"
+          ]
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "1"
+        },
+        {
+          "id": "キ,ク",
+          "points": 2,
+          "group": "Q3",
+          "answers": [
+            "2",
+            "5"
+          ]
+        },
+        {
+          "id": "ケ,コ",
+          "points": 2,
+          "group": "Q3",
+          "answers": [
+            "5",
+            "3"
+          ]
+        },
+        {
+          "id": "サ,シ,ス",
+          "points": 2,
+          "group": "Q3",
+          "answers": [
+            "5",
+            "5",
+            "4"
+          ]
+        },
+        {
+          "id": "セ,ソ",
+          "points": 3,
+          "group": "Q3",
+          "answers": [
+            "1",
+            "3"
+          ]
+        },
+        {
+          "id": "タ,チ,ツ,テ",
+          "points": 3,
+          "group": "Q3",
+          "answers": [
+            "1",
+            "9",
+            "1",
+            "6"
+          ]
+        },
+        {
+          "id": "ア,イ",
+          "points": 2,
+          "group": "Q4",
+          "answers": [
+            "1",
+            "8"
+          ]
+        },
+        {
+          "id": "ウ,エ",
+          "points": 2,
+          "group": "Q4",
+          "answers": [
+            "1",
+            "7"
+          ]
+        },
+        {
+          "id": "オ",
+          "points": 2,
+          "group": "Q4",
+          "answer": "5"
+        },
+        {
+          "id": "カ",
+          "points": 1,
+          "group": "Q4",
+          "answer": "6"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "Q4",
+          "answer": "8"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "Q4",
+          "answer": "3"
+        },
+        {
+          "id": "ケ,コ",
+          "points": 1,
+          "group": "Q4",
+          "answers": [
+            "2",
+            "7"
+          ]
+        },
+        {
+          "id": "サ,シ",
+          "points": 2,
+          "group": "Q4",
+          "answers": [
+            "2",
+            "4"
+          ]
+        },
+        {
+          "id": "ス,セ,ソ",
+          "points": 1,
+          "group": "Q4",
+          "answers": [
+            "1",
+            "9",
+            "2"
+          ]
+        },
+        {
+          "id": "タ,チ,ツ,テ",
+          "points": 2,
+          "group": "Q4",
+          "answers": [
+            "1",
+            "2",
+            "3",
+            "5"
+          ]
+        },
+        {
+          "id": "ト,ナ,ニ",
+          "points": 1,
+          "group": "Q4",
+          "answers": [
+            "8",
+            "3",
+            "5"
+          ]
+        },
+        {
+          "id": "ヌ,ネ,ノ,ハ,ヒ",
+          "points": 2,
+          "group": "Q4",
+          "answers": [
+            "1",
+            "2",
+            "8",
+            "3",
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "数学IIBC",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "notes": "数学②。第1問～第3問は必答。第4問～第7問から3問選択。解答用紙写真から確認できた正解・配点のみ登録。複数記号の行は解答用紙の採点行単位でまとめた。",
+      "selectionRules": [
+        {
+          "groups": [
+            "Q4",
+            "Q5",
+            "Q6",
+            "Q7"
+          ],
+          "choose": 3
+        }
+      ],
+      "questions": [
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "Q1",
+          "answer": "2"
+        },
+        {
+          "id": "イ",
+          "points": 1,
+          "group": "Q1",
+          "answer": "3"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "Q1",
+          "answer": "2"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "Q1",
+          "answer": "0"
+        },
+        {
+          "id": "オ",
+          "points": 2,
+          "group": "Q1",
+          "answer": "2"
+        },
+        {
+          "id": "カ,キ,ク",
+          "points": 2,
+          "group": "Q1",
+          "answers": [
+            "-",
+            "1",
+            "2"
+          ]
+        },
+        {
+          "id": "ケ,コ",
+          "points": 1,
+          "group": "Q1",
+          "answers": [
+            "3",
+            "4"
+          ]
+        },
+        {
+          "id": "サ",
+          "points": 1,
+          "group": "Q1",
+          "answer": "0"
+        },
+        {
+          "id": "シ,ス,セ",
+          "points": 2,
+          "group": "Q1",
+          "answers": [
+            "6",
+            "2",
+            "4"
+          ]
+        },
+        {
+          "id": "ア,イ",
+          "points": 2,
+          "group": "Q2",
+          "answers": [
+            "1",
+            "2"
+          ]
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "Q2",
+          "answer": "1"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "Q2",
+          "answer": "1"
+        },
+        {
+          "id": "オ",
+          "points": 2,
+          "group": "Q2",
+          "answer": "1"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "Q2",
+          "answer": "9"
+        },
+        {
+          "id": "キ",
+          "points": 1,
+          "group": "Q2",
+          "answer": "7"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "Q2",
+          "answer": "3"
+        },
+        {
+          "id": "ケ",
+          "points": 2,
+          "group": "Q2",
+          "answer": "5"
+        },
+        {
+          "id": "ア,イ",
+          "points": 2,
+          "group": "Q3",
+          "answers": [
+            "1",
+            "3"
+          ]
+        },
+        {
+          "id": "ウ,エ",
+          "points": 2,
+          "group": "Q3",
+          "answers": [
+            "4",
+            "3"
+          ]
+        },
+        {
+          "id": "オ,カ",
+          "points": 2,
+          "group": "Q3",
+          "answers": [
+            "4",
+            "3"
+          ]
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "1"
+        },
+        {
+          "id": "ク",
+          "points": 2,
+          "group": "Q3",
+          "answer": "3"
+        },
+        {
+          "id": "ケ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "3"
+        },
+        {
+          "id": "コ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "0"
+        },
+        {
+          "id": "サ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "0"
+        },
+        {
+          "id": "シ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "0"
+        },
+        {
+          "id": "ス",
+          "points": 2,
+          "group": "Q3",
+          "answer": "5"
+        },
+        {
+          "id": "セ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "2"
+        },
+        {
+          "id": "ア",
+          "points": 1,
+          "group": "Q4",
+          "answer": "4"
+        },
+        {
+          "id": "イ",
+          "points": 1,
+          "group": "Q4",
+          "answer": "6"
+        },
+        {
+          "id": "ウ,エ",
+          "points": 1,
+          "group": "Q4",
+          "answers": [
+            "6",
+            "4"
+          ]
+        },
+        {
+          "id": "オ,カ",
+          "points": 1,
+          "group": "Q4",
+          "answers": [
+            "9",
+            "6"
+          ]
+        },
+        {
+          "id": "キ,ク",
+          "points": 2,
+          "group": "Q4",
+          "answers": [
+            "3",
+            "2"
+          ]
+        },
+        {
+          "id": "ケ,コ,サ,シ",
+          "points": 2,
+          "group": "Q4",
+          "answers": [
+            "2",
+            "5",
+            "1",
+            "0"
+          ]
+        },
+        {
+          "id": "ス,セ,ソ",
+          "points": 2,
+          "group": "Q4",
+          "answers": [
+            "3",
+            "5",
+            "4"
+          ]
+        },
+        {
+          "id": "タ,チ",
+          "points": 2,
+          "group": "Q4",
+          "answers": [
+            "1",
+            "0"
+          ]
+        },
+        {
+          "id": "ツ,テ",
+          "points": 1,
+          "group": "Q4",
+          "answers": [
+            "1",
+            "0"
+          ]
+        },
+        {
+          "id": "ト,ナ,ニ,ヌ",
+          "points": 1,
+          "group": "Q4",
+          "answers": [
+            "1",
+            "5",
+            "1",
+            "5"
+          ]
+        },
+        {
+          "id": "ネ",
+          "points": 2,
+          "group": "Q4",
+          "answer": "1"
+        },
+        {
+          "id": "ア",
+          "points": 1,
+          "group": "Q5",
+          "answer": "3"
+        },
+        {
+          "id": "イ",
+          "points": 1,
+          "group": "Q5",
+          "answer": "4"
+        },
+        {
+          "id": "ウ",
+          "points": 1,
+          "group": "Q5",
+          "answer": "0"
+        },
+        {
+          "id": "エ",
+          "points": 1,
+          "group": "Q5",
+          "answer": "1"
+        },
+        {
+          "id": "オ",
+          "points": 2,
+          "group": "Q5",
+          "answer": "2"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "Q5",
+          "answer": "1"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "Q5",
+          "answer": "2"
+        },
+        {
+          "id": "ク",
+          "points": 1,
+          "group": "Q5",
+          "answer": "4"
+        },
+        {
+          "id": "ケ",
+          "points": 1,
+          "group": "Q5",
+          "answer": "0"
+        },
+        {
+          "id": "コ",
+          "points": 1,
+          "group": "Q5",
+          "answer": "1"
+        },
+        {
+          "id": "サ",
+          "points": 1,
+          "group": "Q5",
+          "answer": "0"
+        },
+        {
+          "id": "シ",
+          "points": 1,
+          "group": "Q5",
+          "answer": "2"
+        },
+        {
+          "id": "ス",
+          "points": 1,
+          "group": "Q5",
+          "answer": "3"
+        },
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "Q6",
+          "answer": "2"
+        },
+        {
+          "id": "イ",
+          "points": 1,
+          "group": "Q6",
+          "answer": "0"
+        },
+        {
+          "id": "ウ",
+          "points": 1,
+          "group": "Q6",
+          "answer": "3"
+        },
+        {
+          "id": "エ",
+          "points": 1,
+          "group": "Q6",
+          "answer": "3"
+        },
+        {
+          "id": "オ",
+          "points": 1,
+          "group": "Q6",
+          "answer": "0"
+        },
+        {
+          "id": "カ,キ",
+          "points": 2,
+          "group": "Q6",
+          "answers": [
+            "3",
+            "2"
+          ]
+        },
+        {
+          "id": "ク,ケ",
+          "points": 2,
+          "group": "Q6",
+          "answers": [
+            "3",
+            "4"
+          ]
+        },
+        {
+          "id": "コ,サ",
+          "points": 2,
+          "group": "Q6",
+          "answers": [
+            "3",
+            "2"
+          ]
+        },
+        {
+          "id": "シ,ス",
+          "points": 2,
+          "group": "Q6",
+          "answers": [
+            "2",
+            "2"
+          ]
+        },
+        {
+          "id": "セ,ソ,タ",
+          "points": 1,
+          "group": "Q6",
+          "answers": [
+            "3",
+            "3",
+            "2"
+          ]
+        },
+        {
+          "id": "チ,ツ,テ",
+          "points": 1,
+          "group": "Q6",
+          "answers": [
+            "2",
+            "6",
+            "9"
+          ]
+        },
+        {
+          "id": "ア,イ,ウ",
+          "points": 1,
+          "group": "Q7",
+          "answers": [
+            "6",
+            "1",
+            "2"
+          ]
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "Q7",
+          "answer": "1"
+        },
+        {
+          "id": "オ",
+          "points": 1,
+          "group": "Q7",
+          "answer": "4"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "Q7",
+          "answer": "1"
+        },
+        {
+          "id": "キ,ク",
+          "points": 2,
+          "group": "Q7",
+          "answers": [
+            "2",
+            "4"
+          ]
+        },
+        {
+          "id": "ケ,コ",
+          "points": 2,
+          "group": "Q7",
+          "answers": [
+            "1",
+            "2"
+          ]
+        },
+        {
+          "id": "サ",
+          "points": 2,
+          "group": "Q7",
+          "answer": "4"
+        },
+        {
+          "id": "シ",
+          "points": 2,
+          "group": "Q7",
+          "answer": "8"
+        },
+        {
+          "id": "ス",
+          "points": 2,
+          "group": "Q7",
+          "answer": "6"
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "情報I",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "notes": "情報I。解答用紙写真から確認できた正解・配点のみ登録。*付きの行は全部正解の場合のみ得点として、採点行単位でまとめた。",
+      "questions": [
+        {
+          "id": "ア",
+          "points": 1,
+          "group": "Q1",
+          "answer": "0"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "Q1",
+          "answer": "5"
+        },
+        {
+          "id": "ウ,エ",
+          "points": 2,
+          "group": "Q1",
+          "answers": [
+            "1",
+            "2"
+          ],
+          "unordered": true,
+          "note": "順不同。全部正解の場合のみ得点。"
+        },
+        {
+          "id": "オ",
+          "points": 1,
+          "group": "Q1",
+          "answer": "3"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "Q1",
+          "answer": "1"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "Q1",
+          "answer": "2"
+        },
+        {
+          "id": "ク",
+          "points": 1,
+          "group": "Q1",
+          "answer": "3"
+        },
+        {
+          "id": "ケ",
+          "points": 2,
+          "group": "Q1",
+          "answer": "2"
+        },
+        {
+          "id": "コ",
+          "points": 2,
+          "group": "Q1",
+          "answer": "3"
+        },
+        {
+          "id": "サ",
+          "points": 2,
+          "group": "Q1",
+          "answer": "1"
+        },
+        {
+          "id": "シ",
+          "points": 1,
+          "group": "Q1",
+          "answer": "4"
+        },
+        {
+          "id": "ス",
+          "points": 2,
+          "group": "Q1",
+          "answer": "3"
+        },
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "Q2",
+          "answer": "2"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "Q2",
+          "answer": "7"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "Q2",
+          "answer": "2"
+        },
+        {
+          "id": "エ",
+          "points": 3,
+          "group": "Q2",
+          "answer": "5"
+        },
+        {
+          "id": "オ",
+          "points": 3,
+          "group": "Q2",
+          "answer": "2"
+        },
+        {
+          "id": "カ",
+          "points": 3,
+          "group": "Q2",
+          "answer": "4"
+        },
+        {
+          "id": "キ,ク,ケ",
+          "points": 1,
+          "group": "Q2",
+          "answers": [
+            "5",
+            "4",
+            "0"
+          ],
+          "note": "全部正解の場合のみ得点。"
+        },
+        {
+          "id": "コ,サ",
+          "points": 1,
+          "group": "Q2",
+          "answers": [
+            "3",
+            "0"
+          ],
+          "note": "全部正解の場合のみ得点。"
+        },
+        {
+          "id": "シ,ス,セ",
+          "points": 1,
+          "group": "Q2",
+          "answers": [
+            "6",
+            "3",
+            "0"
+          ],
+          "note": "全部正解の場合のみ得点。"
+        },
+        {
+          "id": "ソ,タ",
+          "points": 3,
+          "group": "Q2",
+          "answers": [
+            "4",
+            "5"
+          ],
+          "unordered": true,
+          "note": "順不同。全部正解の場合のみ得点。"
+        },
+        {
+          "id": "チ",
+          "points": 3,
+          "group": "Q2",
+          "answer": "4"
+        },
+        {
+          "id": "ツ",
+          "points": 3,
+          "group": "Q2",
+          "answer": "2"
+        },
+        {
+          "id": "テ",
+          "points": 3,
+          "group": "Q2",
+          "answer": "3"
+        },
+        {
+          "id": "ア",
+          "points": 2,
+          "group": "Q3",
+          "answer": "0"
+        },
+        {
+          "id": "イ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "2"
+        },
+        {
+          "id": "ウ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "1"
+        },
+        {
+          "id": "エ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "3"
+        },
+        {
+          "id": "オ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "3"
+        },
+        {
+          "id": "カ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "1"
+        },
+        {
+          "id": "キ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "0"
+        },
+        {
+          "id": "ク,ケ",
+          "points": 1,
+          "group": "Q3",
+          "answers": [
+            "1",
+            "6"
+          ],
+          "note": "全部正解の場合のみ得点。"
+        },
+        {
+          "id": "コ",
+          "points": 2,
+          "group": "Q3",
+          "answer": "2"
+        },
+        {
+          "id": "サ",
+          "points": 3,
+          "group": "Q3",
+          "answer": "1"
+        },
+        {
+          "id": "シ",
+          "points": 3,
+          "group": "Q3",
+          "answer": "1"
+        },
+        {
+          "id": "ス",
+          "points": 2,
+          "group": "Q3",
+          "answer": "9"
+        },
+        {
+          "id": "ア",
+          "points": 3,
+          "group": "Q4",
+          "answer": "0"
+        },
+        {
+          "id": "イ,ウ",
+          "points": 3,
+          "group": "Q4",
+          "answers": [
+            "1",
+            "2"
+          ],
+          "unordered": true,
+          "note": "順不同。全部正解の場合のみ得点。"
+        },
+        {
+          "id": "エ",
+          "points": 3,
+          "group": "Q4",
+          "answer": "3"
+        },
+        {
+          "id": "オ",
+          "points": 3,
+          "group": "Q4",
+          "answer": "1"
+        },
+        {
+          "id": "カ",
+          "points": 3,
+          "group": "Q4",
+          "answer": "3"
+        },
+        {
+          "id": "キ",
+          "points": 3,
+          "group": "Q4",
+          "answer": "0"
+        },
+        {
+          "id": "ク,ケ",
+          "points": 3,
+          "group": "Q4",
+          "answers": [
+            "2",
+            "4"
+          ],
+          "unordered": true,
+          "note": "順不同。全部正解の場合のみ得点。"
+        },
+        {
+          "id": "コ,サ",
+          "points": 4,
+          "group": "Q4",
+          "answers": [
+            "1",
+            "3"
+          ],
+          "unordered": true,
+          "note": "順不同。全部正解の場合のみ得点。"
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "物理基礎",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 50,
+      "questions": [
+        {
+          "id": "1",
+          "points": 4,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 4,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 4,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "4-6",
+          "points": 4,
+          "answers": [
+            "1",
+            "3",
+            "3"
+          ],
+          "group": "Q1"
+        },
+        {
+          "id": "7",
+          "points": 5,
+          "answer": "5",
+          "group": "Q2"
+        },
+        {
+          "id": "8",
+          "points": 4,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "9",
+          "points": 5,
+          "answer": "6",
+          "group": "Q2"
+        },
+        {
+          "id": "10",
+          "points": 4,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "11",
+          "points": 4,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "12",
+          "points": 4,
+          "answer": "6",
+          "group": "Q3"
+        },
+        {
+          "id": "13",
+          "points": 4,
+          "answer": "6",
+          "group": "Q3"
+        },
+        {
+          "id": "14",
+          "points": 4,
+          "answer": "4",
+          "group": "Q3"
+        }
+      ],
+      "notes": "画像で配点が結合表示されている箇所は範囲IDで登録。"
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "化学基礎",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 50,
+      "questions": [
+        {
+          "id": "1",
+          "points": 3,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "6",
+          "points": 3,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "9",
+          "points": 3,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "10",
+          "points": 3,
+          "answer": "7",
+          "group": "Q1"
+        },
+        {
+          "id": "11",
+          "points": 4,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "12",
+          "points": 4,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "13",
+          "points": 4,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "14",
+          "points": 4,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "15",
+          "points": 4,
+          "answer": "3",
+          "group": "Q2"
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "生物基礎",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 50,
+      "questions": [
+        {
+          "id": "1",
+          "points": 3,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 2,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "5",
+          "points": 3,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "6",
+          "points": 3,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "5",
+          "group": "Q2"
+        },
+        {
+          "id": "9-10",
+          "points": 4,
+          "answers": [
+            "3",
+            "5"
+          ],
+          "group": "Q2",
+          "unordered": true,
+          "note": "※の正解は順序不問"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "12-13",
+          "points": 4,
+          "answers": [
+            "2",
+            "7"
+          ],
+          "group": "Q2",
+          "unordered": true,
+          "note": "★の正解は順序不問"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "18",
+          "points": 2,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "19",
+          "points": 2,
+          "answer": "5",
+          "group": "Q3"
+        }
+      ],
+      "notes": "※・★の正解はそれぞれ順序を問わない。"
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "地学基礎",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 50,
+      "questions": [
+        {
+          "id": "1",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "4-5",
+          "points": 4,
+          "answers": [
+            "4",
+            "3"
+          ],
+          "group": "Q1"
+        },
+        {
+          "id": "6",
+          "points": 4,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "9",
+          "points": 4,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "10",
+          "points": 3,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "12",
+          "points": 4,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "16",
+          "points": 4,
+          "answer": "1",
+          "group": "Q4"
+        }
+      ],
+      "notes": "第1問の配点結合箇所は範囲IDで登録。"
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "物理",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "questions": [
+        {
+          "id": "1",
+          "points": 5,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 5,
+          "answer": "6",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 5,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 5,
+          "answer": "6",
+          "group": "Q1"
+        },
+        {
+          "id": "5",
+          "points": 5,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "6",
+          "points": 4,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "7",
+          "points": 4,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "8",
+          "points": 4,
+          "answer": "6",
+          "group": "Q2"
+        },
+        {
+          "id": "9",
+          "points": 4,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "10",
+          "points": 4,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "11",
+          "points": 5,
+          "answer": "6",
+          "group": "Q2"
+        },
+        {
+          "id": "12",
+          "points": 4,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "13",
+          "points": 4,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "14",
+          "points": 4,
+          "answer": "7",
+          "group": "Q3"
+        },
+        {
+          "id": "15",
+          "points": 4,
+          "answer": "6",
+          "group": "Q3"
+        },
+        {
+          "id": "16",
+          "points": 4,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "18",
+          "points": 3,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "19",
+          "points": 4,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "20-21",
+          "points": 4,
+          "answers": [
+            "2",
+            "3"
+          ],
+          "group": "Q4"
+        },
+        {
+          "id": "22-23",
+          "points": 4,
+          "answers": [
+            "8",
+            "3"
+          ],
+          "group": "Q4"
+        },
+        {
+          "id": "24-25",
+          "points": 4,
+          "answers": [
+            "1",
+            "4"
+          ],
+          "group": "Q4"
+        },
+        {
+          "id": "26",
+          "points": 4,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "27",
+          "points": 4,
+          "answer": "2",
+          "group": "Q4"
+        }
+      ],
+      "notes": "第4問は画像で配点が結合表示されている箇所を範囲IDで登録。"
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "化学",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "questions": [
+        {
+          "id": "1",
+          "points": 3,
+          "answer": "5",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 3,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 4,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 3,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "5-6",
+          "points": 4,
+          "answers": [
+            "3",
+            "4"
+          ],
+          "group": "Q1",
+          "unordered": true,
+          "note": "※の正解は順序不問"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "8",
+          "points": 3,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "9",
+          "points": 3,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "10",
+          "points": 3,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "12",
+          "points": 4,
+          "answer": "5",
+          "group": "Q2"
+        },
+        {
+          "id": "13",
+          "points": 4,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "14",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "15",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "5",
+          "group": "Q3"
+        },
+        {
+          "id": "17",
+          "points": 4,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "18",
+          "points": 3,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "19",
+          "points": 4,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "20",
+          "points": 3,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "21",
+          "points": 3,
+          "answer": "5",
+          "group": "Q4"
+        },
+        {
+          "id": "22",
+          "points": 3,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "23",
+          "points": 4,
+          "answer": "3",
+          "group": "Q4"
+        },
+        {
+          "id": "24",
+          "points": 3,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "25",
+          "points": 4,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "26",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "27",
+          "points": 4,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "28",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "29",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "30",
+          "points": 4,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "31",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        }
+      ],
+      "notes": "※の正解は順序を問わない。"
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "生物",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "questions": [
+        {
+          "id": "1",
+          "points": 4,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 4,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 4,
+          "answer": "3",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 5,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "5",
+          "points": 4,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "6",
+          "points": 4,
+          "answer": "5",
+          "group": "Q2"
+        },
+        {
+          "id": "7",
+          "points": 4,
+          "answer": "7",
+          "group": "Q2"
+        },
+        {
+          "id": "8",
+          "points": 4,
+          "answer": "2",
+          "group": "Q2"
+        },
+        {
+          "id": "9",
+          "points": 4,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "10",
+          "points": 4,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "11",
+          "points": 4,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "12",
+          "points": 4,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "13",
+          "points": 4,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "14",
+          "points": 5,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "15",
+          "points": 4,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "16",
+          "points": 4,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "17",
+          "points": 4,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "18",
+          "points": 5,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "19",
+          "points": 4,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "20",
+          "points": 3,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "21",
+          "points": 3,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "22",
+          "points": 4,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "23",
+          "points": 3,
+          "answer": "2",
+          "group": "Q5"
+        },
+        {
+          "id": "24",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "25",
+          "points": 5,
+          "answer": "4",
+          "group": "Q5"
+        }
+      ]
+    },
+    {
+      "year": 2026,
+      "exam": "mock-benesse-2026-05",
+      "subject": "地学",
+      "source": "2026年5月実施ベネッセ共通テスト模試 解答用紙写真（ユーザー提供）",
+      "maxScore": 100,
+      "questions": [
+        {
+          "id": "1",
+          "points": 4,
+          "answer": "4",
+          "group": "Q1"
+        },
+        {
+          "id": "2",
+          "points": 4,
+          "answer": "1",
+          "group": "Q1"
+        },
+        {
+          "id": "3",
+          "points": 4,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "4",
+          "points": 4,
+          "answer": "2",
+          "group": "Q1"
+        },
+        {
+          "id": "5",
+          "points": 4,
+          "answer": "6",
+          "group": "Q2"
+        },
+        {
+          "id": "6",
+          "points": 4,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "7",
+          "points": 3,
+          "answer": "4",
+          "group": "Q2"
+        },
+        {
+          "id": "8",
+          "points": 4,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "9",
+          "points": 3,
+          "answer": "1",
+          "group": "Q2"
+        },
+        {
+          "id": "10",
+          "points": 3,
+          "answer": "3",
+          "group": "Q2"
+        },
+        {
+          "id": "11",
+          "points": 3,
+          "answer": "6",
+          "group": "Q2"
+        },
+        {
+          "id": "12",
+          "points": 3,
+          "answer": "1",
+          "group": "Q3"
+        },
+        {
+          "id": "13",
+          "points": 3,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "14",
+          "points": 4,
+          "answer": "2",
+          "group": "Q3"
+        },
+        {
+          "id": "15",
+          "points": 4,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "16",
+          "points": 3,
+          "answer": "3",
+          "group": "Q3"
+        },
+        {
+          "id": "17",
+          "points": 3,
+          "answer": "4",
+          "group": "Q3"
+        },
+        {
+          "id": "18",
+          "points": 4,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "19",
+          "points": 4,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "20",
+          "points": 3,
+          "answer": "4",
+          "group": "Q4"
+        },
+        {
+          "id": "21",
+          "points": 3,
+          "answer": "6",
+          "group": "Q4"
+        },
+        {
+          "id": "22",
+          "points": 3,
+          "answer": "1",
+          "group": "Q4"
+        },
+        {
+          "id": "23",
+          "points": 3,
+          "answer": "2",
+          "group": "Q4"
+        },
+        {
+          "id": "24",
+          "points": 3,
+          "answer": "3",
+          "group": "Q5"
+        },
+        {
+          "id": "25",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        },
+        {
+          "id": "26",
+          "points": 3,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "27",
+          "points": 4,
+          "answer": "1",
+          "group": "Q5"
+        },
+        {
+          "id": "28",
+          "points": 4,
+          "answer": "5",
+          "group": "Q5"
+        },
+        {
+          "id": "29",
+          "points": 3,
+          "answer": "4",
+          "group": "Q5"
+        }
+      ]
+    }
+  ]
+}
