@@ -22,7 +22,7 @@
   const MOCK_FILE = 'answer_keys_mock_benesse_2026_05_verified_v2.json';
   const MOCK_EXAM_ID = 'mock-benesse-2026-05';
   const MOCK_EXAM_LABEL = '模擬試験-2026年5月実施ベネッセ共通テスト模試';
-  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/28 17:30';
+  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/28 17:20';
 
   function fail(message){
     document.body.innerHTML = '<pre style="white-space:pre-wrap;margin:20px;padding:16px;border-radius:12px;background:#0b1020;color:#e5e7eb">' + message + '</pre>';
@@ -31,20 +31,6 @@
   function patchIndex(html){
     html = html.replace(/最終更新日時：[^<]+/, UPDATE_TIME_TEXT);
     html = html.replace('<b>バージョン：v137</b>', '<b>バージョン：v140</b>');
-
-
-    const subjectTitleCss = ".resultSubjectTitle{font-size:22px;font-weight:800;margin:4px 0 12px;color:#1d2433;line-height:1.35}\n@media(max-width:700px){.resultSubjectTitle{font-size:20px;margin-top:2px}}\n";
-    if (!html.includes('.resultSubjectTitle')) {
-      html = html.replace('</style>', subjectTitleCss + '</style>');
-    }
-
-    const oldResultStart = "$('result').innerHTML=`<div class=\"metrics\">";
-    const newResultStart = "$('result').innerHTML=`<div class=\"resultSubjectTitle\">${esc(k.subject||'')}</div><div class=\"metrics\">";
-    if (html.includes(oldResultStart)) {
-      html = html.replace(oldResultStart, newResultStart);
-    } else if (!html.includes('resultSubjectTitle')) {
-      throw new Error('index.html の採点結果表示部分を見つけられませんでした。');
-    }
 
     html = html.replace(
       "const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）'};",
