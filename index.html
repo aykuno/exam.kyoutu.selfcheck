@@ -22,7 +22,7 @@
   const MOCK_FILE = 'answer_keys_mock_benesse_2026_05_verified_v2.json';
   const MOCK_EXAM_ID = 'mock-benesse-2026-05';
   const MOCK_EXAM_LABEL = '模擬試験-2026年5月実施ベネッセ共通テスト模試';
-  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/28 18:05';
+  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/28 18:25';
 
   function fail(message){
     document.body.innerHTML = '<pre style="white-space:pre-wrap;margin:20px;padding:16px;border-radius:12px;background:#0b1020;color:#e5e7eb">' + message + '</pre>';
@@ -30,7 +30,7 @@
 
   function patchIndex(html){
     html = html.replace(/最終更新日時：[^<]+/, UPDATE_TIME_TEXT);
-    html = html.replace('<b>バージョン：v137</b>', '<b>バージョン：v144</b>');
+    html = html.replace('<b>バージョン：v137</b>', '<b>バージョン：v145</b>');
 
     html = html.replace(
       "const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）'};",
@@ -42,18 +42,16 @@
     if (!html.includes(oldInit)) throw new Error('index.html の init 関数を見つけられませんでした。');
     html = html.replace(oldInit, newInit);
 
-    const oldQid = "function rowNote(k,r){return [r.q.note||'',statNote(k,r.q)].filter(Boolean).join(' / ')}function qid(q){return norm(q.id)}";
-    const newQid = "let __qidSig='',__qidCounts=null;function __getQidCounts(k){const sig=k?keySig(k):'';if(sig!==__qidSig){__qidSig=sig;__qidCounts=new Map();if(k&&Array.isArray(k.questions)){for(const x of k.questions){const id=norm(x.id);__qidCounts.set(id,(__qidCounts.get(id)||0)+1);}}}return __qidCounts||new Map()}function rowNote(k,r){return [r.q.note||'',statNote(k,r.q)].filter(Boolean).join(' / ')}function qid(q){const id=norm(q.id);try{const k=selected&&selected();if(k&&(__getQidCounts(k).get(id)||0)>1)return norm((q.problemNumber||q.group||'')+'||'+q.id);}catch(e){}return id}";
-    if (html.includes(oldQid)) {
-      html = html.replace(oldQid, newQid);
-    } else {
-      throw new Error('index.html の qid 関数を見つけられませんでした。');
-    }
-
-    // v143 performance patch: avoid repeated deep cloning and full DOM rebuilds while entering answers.
     const oldLoadSave = "function keySig(k){return [String(k.year),k.exam,k.subject].join('||')}function load(){return BASE_KEYS.map(k=>JSON.parse(JSON.stringify(k)));}function save(keys){/* 正解データのユーザー追加機能はv80で画面から削除。互換用に関数だけ残す。 */}";
     const newLoadSave = "function keySig(k){return [String(k.year),k.exam,k.subject].join('||')}function load(){return BASE_KEYS}function save(keys){/* 正解データのユーザー追加機能はv80で画面から削除。互換用に関数だけ残す。 */}";
     if (html.includes(oldLoadSave)) html = html.replace(oldLoadSave, newLoadSave);
+
+    const oldQid = "function rowNote(k,r){return [r.q.note||'',statNote(k,r.q)].filter(Boolean).join(' / ')}function qid(q){return norm(q.id)}";
+    const newQid = "function cleanNote(s){return String(s||'').replace(/(?:^|[\\/／]\\s*)v\\d+修正[:：][^。]*(?:。|$)/g,'').replace(/(?:^|[\\/／]\\s*)v\\d+[^。]*(?:修正|確認|再確認)[^。]*(?:。|$)/g,'').replace(/^[\\s\\/／]+|[\\s\\/／]+$/g,'').trim()}let __qidSig='',__qidCounts=null;function __getQidCounts(k){const sig=k?keySig(k):'';if(sig!==__qidSig){__qidSig=sig;__qidCounts=new Map();if(k&&Array.isArray(k.questions)){for(const x of k.questions){const id=norm(x.id);__qidCounts.set(id,(__qidCounts.get(id)||0)+1);}}}return __qidCounts||new Map()}function rowNote(k,r){return [cleanNote(r.q.note||''),cleanNote(statNote(k,r.q))].filter(Boolean).join(' / ')}function qid(q){const id=norm(q.id);try{const k=selected&&selected();if(k&&(__getQidCounts(k).get(id)||0)>1)return norm((q.problemNumber||q.group||'')+'||'+q.id);}catch(e){}return id}";
+    if (html.includes(oldQid)) html = html.replace(oldQid, newQid);
+    else throw new Error('index.html の qid 関数を見つけられませんでした。');
+
+    html = html.replace("${k.notes?'<div class=\"noteBlock\">注記：'+esc(k.notes)+'</div>':''}", "${cleanNote(k.notes)?'<div class=\"noteBlock\">注記：'+esc(cleanNote(k.notes))+'</div>':''}");
 
     const oldRenderKeypad = "function renderKeypad(){const k=selected();if(!k)return;const q=k.questions[currentIndex]||k.questions[0];$('currentId').textContent=q?displayId(q):'-';$('currentAnswer').textContent=q?answerString(q):'';$('keyButtons').innerHTML=tokenSet(k).map(t=>`<button data-t=\"${esc(t)}\">${t==='-'?'－':esc(t)}</button>`).join('');document.querySelectorAll('#keyButtons button').forEach(b=>b.onclick=()=>press(b.dataset.t));}";
     const newRenderKeypad = "function renderKeypad(){const k=selected();if(!k)return;const q=k.questions[currentIndex]||k.questions[0];$('currentId').textContent=q?displayId(q):'-';$('currentAnswer').textContent=q?answerString(q):'';const kb=$('keyButtons'),tokens=tokenSet(k).join('|');if(kb.dataset.tokens!==tokens){kb.dataset.tokens=tokens;kb.innerHTML=tokenSet(k).map(t=>`<button data-t=\"${esc(t)}\">${t==='-'?'－':esc(t)}</button>`).join('');if(!kb.dataset.bound){kb.addEventListener('click',e=>{const b=e.target.closest('button[data-t]');if(b)press(b.dataset.t)});kb.dataset.bound='1';}}}";
@@ -63,40 +61,21 @@
     const newRenderCards = "function renderCards(){const k=selected();if(!k)return;const box=$('answerCards'),sig=keySig(k)+'||'+k.questions.length;if(box.dataset.sig!==sig){box.dataset.sig=sig;box.innerHTML=k.questions.map((q,i)=>`<div class=\"answerCard\" data-i=\"${i}\"><div class=\"id\" title=\"${esc(displayId(q))}\">${esc(displayId(q))}</div><div class=\"ans\"></div><div class=\"pt\">${qpts(q)}点 / ${expectedLen(q)}桁</div></div>`).join('');if(!box.dataset.bound){box.addEventListener('click',e=>{const c=e.target.closest('.answerCard');if(!c)return;currentIndex=Number(c.dataset.i);renderKeypad();renderCards();});box.dataset.bound='1';}}const cards=box.children;for(let i=0;i<k.questions.length;i++){const q=k.questions[i],val=answerString(q),c=cards[i];if(!c)continue;const cls='answerCard '+(i===currentIndex?'active ':'')+(val?'done':'');if(c.className!==cls)c.className=cls;const ans=c.querySelector('.ans');if(ans&&ans.textContent!==(val||''))ans.textContent=val||'';}}";
     if (html.includes(oldRenderCards)) html = html.replace(oldRenderCards, newRenderCards);
 
+    const oldSaveStatus = '<div id="saveStatus" class="saveStatus"></div>';
+    const newSaveStatus = '<div class="privacyNote">※解答を保存しても、サイト管理者がそれを閲覧することは出来ません。保存内容はこの端末のブラウザ内に保存されます。</div><div id="saveStatus" class="saveStatus"></div>';
+    if (html.includes(oldSaveStatus)) html = html.replace(oldSaveStatus, newSaveStatus);
 
-
-
-    const v144Css = ".display{width:154px;min-width:154px;max-width:154px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 0 154px}.resultSummaryCard{display:grid;grid-template-columns:minmax(180px,1fr) 2fr;gap:14px;align-items:stretch;margin:14px 0 12px;padding:14px;border:1px solid #dfe7fb;background:#fbfcff;border-radius:16px}.resultSummarySubject{font-size:24px;font-weight:900;line-height:1.25}.resultSummaryMeta{font-size:13px;font-weight:800;color:#5b6475;margin-top:4px}.resultSummaryStats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.resultSummaryStat{background:#fff;border:1px solid #e1e7f5;border-radius:12px;padding:9px 10px}.resultSummaryStat span{display:block;color:#647086;font-size:12px;font-weight:800}.resultSummaryStat b{display:block;margin-top:2px;font-size:20px;line-height:1.2}.missedPanel{margin:12px 0;border:1px solid #f0c7c1;background:#fff7f6;border-radius:16px;padding:12px}.missedPanel h3{margin:0 0 8px;color:#8c1d18}.missedList{display:flex;flex-wrap:wrap;gap:8px}.missedItem{background:#fff;border:1px solid #f0d0cb;border-radius:12px;padding:7px 9px;font-size:13px}.missedItem b{font-weight:900}.missedItem .judgeNg{color:#b3261e;font-weight:900}.missedItem .judgePartial{color:#8a5b00;font-weight:900}.missedOk{margin:12px 0;border:1px solid #cfe8d4;background:#f3faf5;border-radius:14px;padding:10px;font-weight:800;color:#137333}@media(max-width:760px){.display{width:132px;min-width:132px;max-width:132px;flex-basis:132px}.resultSummaryCard{grid-template-columns:1fr;gap:10px}.resultSummaryStats{grid-template-columns:1fr 1fr}.resultSummarySubject{font-size:22px}.resultSummaryStat b{font-size:18px}}";
-    if (!html.includes('.resultSummaryCard')) {
-      html = html.replace('</style>', v144Css + '</style>');
-    }
+    const v145Css = ".display{width:154px;min-width:154px;max-width:154px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:0 0 154px}.privacyNote{margin-top:8px;font-size:12px;color:#647086;font-weight:700}.resultSummaryCard{display:grid;grid-template-columns:minmax(210px,1fr) 2.25fr;gap:14px;align-items:stretch;margin:14px 0 12px;padding:16px;border:1px solid #dfe7fb;background:#fbfcff;border-radius:16px}.resultSummarySubject{font-size:27px;font-weight:900;line-height:1.25}.resultSummaryMeta{font-size:14px;font-weight:800;color:#5b6475;margin-top:5px}.resultSummaryStats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.resultSummaryStat{background:#fff;border:1px solid #e1e7f5;border-radius:12px;padding:11px 12px}.resultSummaryStat span{display:block;color:#647086;font-size:12px;font-weight:800}.resultSummaryStat b{display:block;margin-top:3px;font-size:24px;line-height:1.2}.missedPanel{margin:16px 0 0;border:1px solid #f0c7c1;background:#fff7f6;border-radius:16px;padding:12px}.missedPanel h3{margin:0 0 8px;color:#8c1d18}.missedList{display:flex;flex-wrap:wrap;gap:8px}.missedItem{background:#fff;border:1px solid #f0d0cb;border-radius:12px;padding:7px 9px;font-size:13px}.missedItem b{font-weight:900}.missedItem .judgeNg{color:#b3261e;font-weight:900}.missedItem .judgePartial{color:#8a5b00;font-weight:900}.missedOk{margin:16px 0 0;border:1px solid #cfe8d4;background:#f3faf5;border-radius:14px;padding:10px;font-weight:800;color:#137333}@media(max-width:760px){.display{width:132px;min-width:132px;max-width:132px;flex-basis:132px}.resultSummaryCard{grid-template-columns:1fr;gap:10px}.resultSummaryStats{grid-template-columns:1fr 1fr}.resultSummarySubject{font-size:24px}.resultSummaryStat b{font-size:22px}}";
+    if (!html.includes('.resultSummaryCard')) html = html.replace('</style>', v145Css + '</style>');
 
     const helperAnchor = "function tokenSet(k){";
-    const v144Helpers = "function __round1(n){return Math.round(Number(n||0)*10)/10}function __avgText(k){const s=statsFor(k);return s&&s.averageScore!=null?Number(s.averageScore).toFixed(2):'—'}function resultSummary(k,disp,mx,rate,missing){const meta=esc((k.year?String(k.year)+'年 ':'')+(examLabel[k.exam]||k.exam||''));return `<div class=\"resultSummaryCard\"><div><div class=\"resultSummarySubject\">${esc(k.subject||'')}</div><div class=\"resultSummaryMeta\">${meta}</div></div><div class=\"resultSummaryStats\"><div class=\"resultSummaryStat\"><span>点数</span><b>${__round1(disp)} / ${esc(mx)}</b></div><div class=\"resultSummaryStat\"><span>受験者平均点</span><b>${esc(__avgText(k))}</b></div><div class=\"resultSummaryStat\"><span>得点率</span><b>${__round1(rate)}%</b></div><div class=\"resultSummaryStat\"><span>未入力</span><b>${esc(missing)}</b></div></div></div>`}function missedPanel(rows,k){const bad=rows.filter(r=>r.included&&r.got.length&&r.earn<r.pts);const missing=rows.filter(r=>r.included&&!r.got.length);if(!bad.length&&!missing.length)return '<div class=\"missedOk\">間違い・未入力なし</div>';const items=bad.concat(missing).map(r=>{const judge=!r.got.length?'未入力':(r.earn>0?'△':'×');const cls=!r.got.length?'judgeNg':(r.earn>0?'judgePartial':'judgeNg');return `<div class=\"missedItem\"><b>${esc(displayId(r.q))}</b> <span class=\"${cls}\">${judge}</span><br>自分：${esc(r.got.join('')||'未入力')} / 正解：${esc(expText(r.q))}<br>得点：${r.earn} / ${r.pts}</div>`}).join('');return `<div class=\"missedPanel\"><h3>間違えた問題・未入力</h3><div class=\"missedList\">${items}</div></div>`}";
-    if (html.includes(helperAnchor) && !html.includes('function resultSummary(k,disp,mx')) {
-      html = html.replace(helperAnchor, v144Helpers + helperAnchor);
-    }
+    const helpers = "function __round1(n){return Math.round(Number(n||0)*10)/10}function __avgText(k){const s=statsFor(k);return s&&s.averageScore!=null?Number(s.averageScore).toFixed(2):'—'}function resultSummary(k,disp,mx,rate,missing){const meta=esc((k.year?String(k.year)+'年 ':'')+(examLabel[k.exam]||k.exam||''));return `<div class=\"resultSummaryCard\"><div><div class=\"resultSummarySubject\">${esc(k.subject||'')}</div><div class=\"resultSummaryMeta\">${meta}</div></div><div class=\"resultSummaryStats\"><div class=\"resultSummaryStat\"><span>点数</span><b>${__round1(disp)} / ${esc(mx)}</b></div><div class=\"resultSummaryStat\"><span>受験者平均点</span><b>${esc(__avgText(k))}</b></div><div class=\"resultSummaryStat\"><span>得点率</span><b>${__round1(rate)}%</b></div><div class=\"resultSummaryStat\"><span>未入力</span><b>${esc(missing)}</b></div></div></div>`}function missedPanel(rows,k){const bad=rows.filter(r=>r.included&&r.got.length&&r.earn<r.pts);const missing=rows.filter(r=>r.included&&!r.got.length);if(!bad.length&&!missing.length)return '<div class=\"missedOk\">間違い・未入力なし</div>';const items=bad.concat(missing).map(r=>{const judge=!r.got.length?'未入力':(r.earn>0?'△':'×');const cls=!r.got.length?'judgeNg':(r.earn>0?'judgePartial':'judgeNg');return `<div class=\"missedItem\"><b>${esc(displayId(r.q))}</b> <span class=\"${cls}\">${judge}</span><br>自分：${esc(r.got.join('')||'未入力')} / 正解：${esc(expText(r.q))}<br>得点：${r.earn} / ${r.pts}</div>`}).join('');return `<div class=\"missedPanel\"><h3>間違えた問題・未入力</h3><div class=\"missedList\">${items}</div></div>`}";
+    if (html.includes(helperAnchor) && !html.includes('function resultSummary(k,disp,mx')) html = html.replace(helperAnchor, helpers + helperAnchor);
 
-    const subjectHeadingCss = ".resultSubjectTitle{font-size:22px;font-weight:800;margin:4px 0 12px;color:#1d2433;line-height:1.35}.resultSubjectMeta{font-size:13px;font-weight:700;color:#5b6475;margin-top:2px}@media(max-width:700px){.resultSubjectTitle{font-size:20px;margin-top:2px}}";
-    if (!html.includes('.resultSubjectTitle')) {
-      html = html.replace('</style>', subjectHeadingCss + '</style>');
-    }
-
-    const oldResultHead = "$('result').innerHTML=`<div class=\"metrics\">";
-    const newResultHead = "$('result').innerHTML=`${resultSummary(k,disp,mx,possible?score/possible*100:0,missing)}<div class=\"metrics\">";
-    if (html.includes(oldResultHead)) {
-      html = html.replace(oldResultHead, newResultHead);
-    } else if (!html.includes('resultSummary(k,disp,mx')) {
-      throw new Error('index.html の採点結果表示部分を見つけられませんでした。');
-    }
-
-    const oldMissAnchor = "${sectionPanel(rows)}<div class=\"tableScrollNotice\"><b>表は右にスクロールできます</b></div>";
-    const newMissAnchor = "${sectionPanel(rows)}${missedPanel(rows,k)}<div class=\"tableScrollNotice\"><b>表は右にスクロールできます</b></div>";
-    if (html.includes(oldMissAnchor)) {
-      html = html.replace(oldMissAnchor, newMissAnchor);
-    } else if (!html.includes('missedPanel(rows,k)')) {
-      throw new Error('index.html のミス問題要約挿入位置を見つけられませんでした。');
-    }
+    const gradeRegex = /function grade\(\)\{[\s\S]*?\}\s*function parseAnsCell/;
+    const newGrade = "function grade(){if(window.disableKeypadSticky)window.disableKeypadSticky();const k=selected();let rows=k.questions.map((q,i)=>{const got=user[qid(q)]||[],earn=match(got,q),pts=qpts(q);return{q,i,got,earn,pts,included:true}});let score=0,possible=0,okc=0,missing=0;let optionalGroups=new Set();if(Array.isArray(k.selectionRules)){for(const rule of k.selectionRules){(rule.groups||[]).forEach(g=>optionalGroups.add(g))}for(const r of rows){if(!optionalGroups.has(r.q.group)){possible+=r.pts;score+=r.earn;if(r.earn===r.pts)okc++;if(!r.got.length)missing++;}}for(const rule of k.selectionRules){const stats=(rule.groups||[]).map(g=>{const rs=rows.filter(r=>r.q.group===g);return{g,rs,max:rs.reduce((a,r)=>a+r.pts,0),earn:rs.reduce((a,r)=>a+r.earn,0),has:rs.some(r=>r.got.length)}});stats.sort((a,b)=>(b.has-a.has)||(b.earn-a.earn));const chosen=stats.slice(0,Number(rule.choose||1));const chosenSet=new Set(chosen.map(x=>x.g));for(const st of stats){for(const r of st.rs){r.included=chosenSet.has(st.g)}}for(const st of chosen){possible+=st.max;score+=st.earn;for(const r of st.rs){if(r.earn===r.pts)okc++;if(!r.got.length)missing++;}}}}else{for(const r of rows){possible+=r.pts;score+=r.earn;if(r.earn===r.pts)okc++;if(!r.got.length)missing++;}}const mx=k.maxScore??possible,disp=possible?score*mx/possible:score,rate=possible?score/possible*100:0;$('result').innerHTML=`${resultSummary(k,disp,mx,rate,missing)}${sectionPanel(rows)}<div class=\"tableScrollNotice\"><b>表は右にスクロールできます</b></div><div class=\"resultTableWrap\"><table class=\"resultTable\"><thead><tr><th>番号</th><th>自分</th><th>正解</th><th>得点</th><th>判定</th><th>受験者正答率</th><th>注記</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(displayId(r.q))}</td><td>${esc(r.got.join('')||'未入力')}</td><td>${esc(expText(r.q))}</td><td>${r.included?`${r.earn} / ${r.pts}`:'対象外'}</td><td class=\"${!r.included?'':(r.earn===r.pts?'ok':(r.earn>0?'partial':'ng'))}\">${!r.included?'対象外':(r.earn===r.pts?'○':(r.earn>0?'△':'×'))}</td><td class=\"rateCell\">${statRateHtml(k,r.q)}</td><td>${esc(rowNote(k,r))}</td></tr>`).join('')}</tbody></table></div>${missedPanel(rows,k)}`;}\nfunction parseAnsCell";
+    if (gradeRegex.test(html)) html = html.replace(gradeRegex, newGrade);
+    else throw new Error('index.html の grade 関数を見つけられませんでした。');
 
     return html;
   }
