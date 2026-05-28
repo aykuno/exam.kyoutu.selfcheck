@@ -1,14 +1,17 @@
-# アップロードするもの
+GitHub Pages アップロード用 v139（2026年5月ベネッセ共通テスト模試追加＋大問別入力バグ修正）
 
-このフォルダ内の次の2ファイルを、GitHubリポジトリのルートにアップロードしてください。
-
+【アップロードするファイル】
 - index.html
 - answer_keys_mock_benesse_2026_05_verified_v2.json
 
-既存の answer_keys_verified.json は上書きしません。
-index.html 側で、既存の answer_keys_verified.json に模試20科目を自動統合して表示します。
+【手順】
+1. このZIPを解凍する。
+2. GitHubリポジトリのルートに、上の2ファイルをアップロードする。
+3. index.html は上書きする。
+4. answer_keys_mock_benesse_2026_05_verified_v2.json も置く。
+5. Commit changes を押す。
 
-アップロード後の確認:
-年度: 2026
-試験: 模擬試験-2026年5月実施ベネッセ共通テスト模試
-科目: 数学IA、数学IIBC、情報I、国語、英語R、英語L、各理社科目など
+【重要】
+- answer_keys_verified.json は上書きしない。
+- この index.html が、既存 answer_keys_verified.json と模試用JSONをブラウザ側で統合する。
+- v139では、数学・情報のように大問ごとに「ア」「イ」など同じ解答記号が出る科目で、入力が連動してしまう不具合を修正している。

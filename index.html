@@ -22,7 +22,7 @@
   const MOCK_FILE = 'answer_keys_mock_benesse_2026_05_verified_v2.json';
   const MOCK_EXAM_ID = 'mock-benesse-2026-05';
   const MOCK_EXAM_LABEL = '模擬試験-2026年5月実施ベネッセ共通テスト模試';
-  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/28 16:00';
+  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/28 17:10';
 
   function fail(message){
     document.body.innerHTML = '<pre style="white-space:pre-wrap;margin:20px;padding:16px;border-radius:12px;background:#0b1020;color:#e5e7eb">' + message + '</pre>';
@@ -30,7 +30,7 @@
 
   function patchIndex(html){
     html = html.replace(/最終更新日時：[^<]+/, UPDATE_TIME_TEXT);
-    html = html.replace('<b>バージョン：v137</b>', '<b>バージョン：v138</b>');
+    html = html.replace('<b>バージョン：v137</b>', '<b>バージョン：v139</b>');
 
     html = html.replace(
       "const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）'};",
@@ -41,6 +41,15 @@
     const newInit = "async function init(){const res=await fetch('answer_keys_verified.json',{cache:'no-store'});const obj=await res.json();BASE_KEYS=obj.keys||[];try{const mres=await fetch('" + MOCK_FILE + "',{cache:'no-store'});if(mres.ok){const mock=await mres.json();const mockKeys=mock.keys||[];const ids=new Set(mockKeys.map(k=>[String(k.year),k.exam,k.subject].join('||')));BASE_KEYS=BASE_KEYS.filter(k=>!ids.has([String(k.year),k.exam,k.subject].join('||'))).concat(mockKeys);}}catch(e){console.warn('mock keys load skipped',e);}try{const sres=await fetch('statistics_final.json',{cache:'no-store'});if(sres.ok)STAT_DATA=await sres.json();}catch(e){STAT_DATA={entries:[]};}refresh();}";
     if (!html.includes(oldInit)) throw new Error('index.html の init 関数を見つけられませんでした。');
     html = html.replace(oldInit, newInit);
+
+    const oldQid = "function rowNote(k,r){return [r.q.note||'',statNote(k,r.q)].filter(Boolean).join(' / ')}function qid(q){return norm(q.id)}";
+    const newQid = "function rowNote(k,r){return [r.q.note||'',statNote(k,r.q)].filter(Boolean).join(' / ')}function qid(q){try{const k=selected&&selected();if(k&&Array.isArray(k.questions)){const id=norm(q.id);const dup=k.questions.filter(x=>norm(x.id)===id).length>1;if(dup)return norm((q.problemNumber||q.group||'')+'||'+q.id);}}catch(e){}return norm(q.id)}";
+    if (html.includes(oldQid)) {
+      html = html.replace(oldQid, newQid);
+    } else {
+      throw new Error('index.html の qid 関数を見つけられませんでした。');
+    }
+
     return html;
   }
 
