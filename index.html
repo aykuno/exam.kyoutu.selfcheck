@@ -22,7 +22,7 @@
   const MOCK_FILE = 'answer_keys_mock_benesse_2026_05_verified_v2.json';
   const MOCK_EXAM_ID = 'mock-benesse-2026-05';
   const MOCK_EXAM_LABEL = '模擬試験-2026年5月実施ベネッセ共通テスト模試';
-  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/30 00:20';
+  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/29 23:30';
 
   function fail(message){
     document.body.innerHTML = '<pre style="white-space:pre-wrap;margin:20px;padding:16px;border-radius:12px;background:#0b1020;color:#e5e7eb">' + message + '</pre>';
@@ -30,7 +30,7 @@
 
   function patchIndex(html){
     html = html.replace(/最終更新日時：[^<]+/, UPDATE_TIME_TEXT);
-    html = html.replace(/<b>バージョン：v\d+<\/b>/, '<b>バージョン：v156</b>');
+    html = html.replace(/<b>バージョン：v\d+<\/b>/, '<b>バージョン：v153</b>');
 
     html = html.replace(
       "const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）'};",
@@ -114,8 +114,6 @@ function exportResultPdf(){if(!window.__lastGrade||window.__lastGrade.sig!==selI
     }
 
     html = html.replace("document.addEventListener('keydown',handleKeyboardInput);", "document.addEventListener('keydown',handleKeyboardInput);document.addEventListener('click',function(e){if(e.target&&e.target.closest&&e.target.closest('#exportPdfResult')){exportResultPdf();}});");
-
-    html = html.replace('</body></html>', '<scr'+'ipt src="pdf_export_v156.js?v=156"></scr'+'ipt></body></html>');
 
     return html;
   }
