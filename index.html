@@ -22,7 +22,7 @@
   const MOCK_FILE = 'answer_keys_mock_benesse_2026_05_verified_v2.json';
   const MOCK_EXAM_ID = 'mock-benesse-2026-05';
   const MOCK_EXAM_LABEL = '模擬試験-2026年5月実施ベネッセ共通テスト模試';
-  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/30 06:20';
+  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/30 07:05';
 
   function fail(message){
     document.body.innerHTML = '<pre style="white-space:pre-wrap;margin:20px;padding:16px;border-radius:12px;background:#0b1020;color:#e5e7eb">' + message + '</pre>';
@@ -31,18 +31,18 @@
   function injectV158PdfExporter(){
     try{
       const s = document.createElement('script');
-      s.src = 'pdf_export_v158.js?v=158';
+      s.src = 'pdf_export_v159.js?v=159';
       s.defer = true;
-      s.onerror = function(){ console.warn('pdf_export_v158.js could not be loaded; built-in PDF output remains available.'); };
+      s.onerror = function(){ console.warn('pdf_export_v159.js could not be loaded; built-in PDF output remains available.'); };
       (document.head || document.documentElement).appendChild(s);
     }catch(e){
-      console.warn('pdf_export_v158.js injection skipped', e);
+      console.warn('pdf_export_v159.js injection skipped', e);
     }
   }
 
   function patchIndex(html){
     html = html.replace(/最終更新日時：[^<]+/, UPDATE_TIME_TEXT);
-    html = html.replace(/<b>バージョン：v\d+<\/b>/, '<b>バージョン：v158</b>');
+    html = html.replace(/<b>バージョン：v\d+<\/b>/, '<b>バージョン：v159</b>');
 
     html = html.replace(
       "const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）'};",
