@@ -476,14 +476,14 @@ function __ctPdfIsIOSWebKitV166(){
   return /iPad|iPhone|iPod/.test(ua) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 }
 
-if(!__ctPdfIsIOSWebKitV166()){
+if(true){
 (function(){
   'use strict';
 
-  const VERSION = 'v177-hybrid-footer10mm-radar435-judge-center';
+  const VERSION = 'v192-android-300dpi-quality-ios-v191';
   const PAGE_W = 1240;
   const PAGE_H = 1754;
-  const RENDER_SCALE = 1.55;
+  const RENDER_SCALE = 2.33; // 約350dpi相当（Android/iPhone共通）
   const RASTER_W = Math.round(PAGE_W * RENDER_SCALE);
   const RASTER_H = Math.round(PAGE_H * RENDER_SCALE);
   const M_LEFT = 58;
@@ -498,6 +498,7 @@ if(!__ctPdfIsIOSWebKitV166()){
   const GOOD = '#137333';
   const BAD = '#b3261e';
   const WARN = '#8a5b00';
+  const JPEG_QUALITY = 0.97;
 
   function $(id){ return document.getElementById(id); }
   function txt(el){ return (el && (el.innerText || el.textContent) || '').replace(/\s+/g, ' ').trim(); }
@@ -812,10 +813,10 @@ if(!__ctPdfIsIOSWebKitV166()){
             if(!blob) throw new Error('canvas JPEG生成に失敗しました。');
             resolve(new Uint8Array(await blob.arrayBuffer()));
           }catch(e){ reject(e); }
-        }, 'image/jpeg', 0.94);
+        }, 'image/jpeg', JPEG_QUALITY);
       }else{
         try{
-          const dataUrl = canvas.toDataURL('image/jpeg',0.94);
+          const dataUrl = canvas.toDataURL('image/jpeg', JPEG_QUALITY);
           const bin = atob(dataUrl.split(',')[1]||'');
           const bytes = new Uint8Array(bin.length);
           for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
@@ -861,6 +862,76 @@ if(!__ctPdfIsIOSWebKitV166()){
     }catch(e){ alert('PDF出力に失敗しました: '+(e&&e.message?e.message:e)); }
   }
 
+  function isIOSSafariOnly(){
+    const ua = navigator.userAgent || '';
+    const platform = navigator.platform || '';
+    const isiOS = /iPad|iPhone|iPod/.test(ua) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if(!isiOS) return false;
+    return /Safari\//.test(ua) && !/(CriOS|FxiOS|EdgiOS|OPiOS|DuckDuckGo|Instagram|FBAN|FBAV|Line)/.test(ua);
+  }
+
+  let __iosPendingPdf = null;
+  function closeIosPdfShareBox(){
+    const old = document.getElementById('__iosPdfShareBox');
+    if(old) old.remove();
+  }
+  function showIosPdfShareBox(pdf, filename){
+    closeIosPdfShareBox();
+    __iosPendingPdf = { pdf, filename };
+    const box = document.createElement('div');
+    box.id = '__iosPdfShareBox';
+    box.style.cssText = 'position:fixed;inset:0;z-index:2147483647;background:rgba(15,23,42,.48);display:flex;align-items:center;justify-content:center;padding:22px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;';
+    box.innerHTML = '<div style="max-width:420px;width:100%;background:#fff;border-radius:18px;padding:18px;box-shadow:0 18px 50px rgba(15,23,42,.28);color:#1d2433">'
+      + '<div style="font-weight:900;font-size:18px;margin-bottom:8px">PDFの準備ができました</div>'
+      + '<div style="font-size:13px;line-height:1.55;color:#647086;font-weight:700;margin-bottom:14px">iPhone Safariでは、次のボタンからPDFファイルを共有します。共有シートで「ファイルに保存」を選んでください。プリントは使いません。</div>'
+      + '<button type="button" class="iosPdfShareSave" style="width:100%;border:0;border-radius:14px;padding:13px 14px;background:#2f5fd0;color:#fff;font-weight:900;font-size:16px">PDFを保存</button>'
+      + '<button type="button" class="iosPdfShareOpen" style="width:100%;border:0;border-radius:14px;padding:12px 14px;background:#e8ecf6;color:#1d2433;font-weight:900;font-size:15px;margin-top:8px">PDFを開く</button>'
+      + '<button type="button" class="iosPdfShareClose" style="width:100%;border:0;border-radius:14px;padding:10px 14px;background:#fff;color:#647086;font-weight:900;font-size:14px;margin-top:6px">閉じる</button>'
+      + '</div>';
+    document.body.appendChild(box);
+    const saveBtn = box.querySelector('.iosPdfShareSave');
+    const openBtn = box.querySelector('.iosPdfShareOpen');
+    const closeBtn = box.querySelector('.iosPdfShareClose');
+    saveBtn.addEventListener('click', async function(){
+      try{
+        const p = __iosPendingPdf;
+        if(!p) return;
+        const file = new File([p.pdf], p.filename, { type:'application/pdf' });
+        if(navigator.canShare && navigator.canShare({ files:[file] }) && navigator.share){
+          await navigator.share({ files:[file], title:p.filename });
+        }else{
+          const url = URL.createObjectURL(p.pdf);
+          window.open(url, '_blank', 'noopener');
+          setTimeout(()=>URL.revokeObjectURL(url), 60000);
+        }
+      }catch(e){
+        alert('PDFの共有に失敗しました: ' + (e && e.message ? e.message : e));
+      }
+    });
+    openBtn.addEventListener('click', function(){
+      try{
+        const p = __iosPendingPdf;
+        if(!p) return;
+        const url = URL.createObjectURL(p.pdf);
+        window.open(url, '_blank', 'noopener');
+        setTimeout(()=>URL.revokeObjectURL(url), 60000);
+      }catch(e){ alert('PDFを開けませんでした: ' + (e && e.message ? e.message : e)); }
+    });
+    closeBtn.addEventListener('click', closeIosPdfShareBox);
+  }
+
+  function deliverPdf(pdf, filename){
+    if(isIOSSafariOnly()){
+      showIosPdfShareBox(pdf, filename);
+      return;
+    }
+    const url = URL.createObjectURL(pdf);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename; a.rel = 'noopener';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 30000);
+  }
+
   async function exportResultPdfManual(){
     try{
       const data = getData();
@@ -871,14 +942,14 @@ if(!__ctPdfIsIOSWebKitV166()){
       const pdf = makePdfBlob(jpegs);
       const k = data.k || {};
       const filename = '採点結果_' + escFile((k.year ? String(k.year)+'_' : '') + (k.subject || '')) + '_' + fileStamp(new Date()) + '.pdf';
-      const url = URL.createObjectURL(pdf);
-      const a = document.createElement('a');
-      a.href = url; a.download = filename; a.rel = 'noopener';
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(()=>URL.revokeObjectURL(url), 30000);
+      deliverPdf(pdf, filename);
     }catch(err){
       console.error(err);
-      showPrintFallback(err);
+      if(isIOSSafariOnly()){
+        alert('PDF生成に失敗しました: ' + (err && err.message ? err.message : err));
+      }else{
+        showPrintFallback(err);
+      }
     }
   }
 
@@ -892,177 +963,4 @@ if(!__ctPdfIsIOSWebKitV166()){
   console.info('PDF export renderer loaded: ' + VERSION);
 })();
 
-} else {
-  console.info('PDF export renderer loaded: v166 iOS uses v163 fallback route');
 }
-
-/* v187: iPhone Safari direct PDF without canvas export. Android route is intentionally unchanged from v177. */
-(function(){
-  'use strict';
-  function isIOSSafari(){
-    var ua = navigator.userAgent || '';
-    var platform = navigator.platform || '';
-    var ios = /iPad|iPhone|iPod/.test(ua) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    var safari = /Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
-    return ios && safari;
-  }
-  if(!isIOSSafari()) return;
-
-  const VERSION='v187-ios-safari-vector-no-canvas-android-v177-unchanged';
-  const W=595.2756, H=841.8898;
-  const ML=34, MR=34, MT=34, FOOTER_Y=30, CONTENT_BOTTOM=H-55;
-  const LINE='0.85 0.87 0.91 rg', LINE_STROKE='0.85 0.87 0.91 RG';
-  const TEXT='0.11 0.14 0.20 rg', MUTED='0.39 0.44 0.53 rg', BLUE='0.18 0.37 0.82 rg', BAD='0.70 0.15 0.12 rg', GOOD='0.07 0.45 0.20 rg', WARN='0.54 0.36 0.00 rg';
-
-  function $(id){return document.getElementById(id);}
-  function txt(el){return (el&&(el.innerText||el.textContent)||'').replace(/\s+/g,' ').trim();}
-  function pad(n){return String(n).padStart(2,'0');}
-  function nowText(d){return d.getFullYear()+'/'+pad(d.getMonth()+1)+'/'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes());}
-  function stamp(d){return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'_'+pad(d.getHours())+pad(d.getMinutes());}
-  function escFile(s){return String(s==null?'':s).replace(/[\\/:*?"<>|\s]+/g,'_').replace(/^_+|_+$/g,'').slice(0,70)||'result';}
-  function stripHtml(s){const d=document.createElement('div');d.innerHTML=String(s||'');return txt(d);}
-  function ptY(y){return H-y;}
-  function utf16hex(s){
-    s=String(s==null?'':s);
-    let out='FEFF';
-    for(const ch of Array.from(s)){
-      const cp=ch.codePointAt(0);
-      if(cp<=0xFFFF) out+=cp.toString(16).toUpperCase().padStart(4,'0');
-      else { const u=cp-0x10000, hi=0xD800+(u>>10), lo=0xDC00+(u&1023); out+=hi.toString(16).toUpperCase().padStart(4,'0')+lo.toString(16).toUpperCase().padStart(4,'0'); }
-    }
-    return out;
-  }
-  function approxWidth(s,size){
-    let w=0; for(const ch of Array.from(String(s||''))){ const c=ch.codePointAt(0); w += (c<128?0.55:(c<256?0.65:1.0))*size; } return w;
-  }
-  function wrap(s,size,maxW,maxLines){
-    s=String(s==null?'':s).replace(/\s+/g,' ').trim(); if(!s) return [''];
-    const res=[]; let line='';
-    for(const ch of Array.from(s)){
-      const t=line+ch;
-      if(line && approxWidth(t,size)>maxW){res.push(line); line=ch; if(maxLines&&res.length>=maxLines) break;}
-      else line=t;
-    }
-    if(!(maxLines&&res.length>=maxLines)) res.push(line);
-    return maxLines?res.slice(0,maxLines):res;
-  }
-  function getData(){
-    if(!window.__lastGrade || (typeof window.selId==='function' && window.__lastGrade.sig!==window.selId())){ if(typeof window.grade==='function') window.grade(); }
-    if(!window.__lastGrade) throw new Error('先に採点してください。');
-    return window.__lastGrade;
-  }
-  function ident(data){
-    const root=$('result');
-    const subject=txt(root&&root.querySelector('.resultSubjectLine'))||txt(root&&root.querySelector('.resultSummarySubject'))||(data.k&&data.k.subject)||'';
-    const exam=txt(root&&root.querySelector('.resultExamLine'))||txt(root&&root.querySelector('.resultSummaryMeta'))||((data.k&&data.k.year?String(data.k.year)+'年度 ':'')+(data.k&&data.k.exam||''));
-    return {subject, exam};
-  }
-  function displayId(q){try{return typeof window.displayId==='function'?window.displayId(q):String(q&&q.id||'');}catch(e){return String(q&&q.id||'');}}
-  function expText(q){try{return typeof window.expText==='function'?window.expText(q):'';}catch(e){return '';}}
-  function statRate(data,q){try{return typeof window.statRateHtml==='function'?stripHtml(window.statRateHtml(data.k,q)):'—';}catch(e){return '—';}}
-  function rowNote(data,r){try{return typeof window.rowNote==='function'?window.rowNote(data.k,r):(r.q&&r.q.note||'');}catch(e){return (r.q&&r.q.note||'');}}
-  function rowCells(data,r){
-    const judge=!r.included?'—':(r.earn===r.pts?'○':(r.earn>0?'△':'×'));
-    return [displayId(r.q),(r.got||[]).join('')||'未入力',expText(r.q),r.included?(r.earn+' / '+r.pts):'対象外',judge,statRate(data,r.q),rowNote(data,r)||'—'];
-  }
-  function stats(data){
-    try{ if(typeof window.sectionStats==='function') return window.sectionStats(data.rows||[]); }catch(e){}
-    return [];
-  }
-  function summary(data){
-    const root=$('result'); const cells=Array.from(root?root.querySelectorAll('.resultSummaryStat'):[]);
-    const a=cells.map(el=>({label:txt(el.querySelector('span')), value:txt(el.querySelector('b'))}));
-    if(a.length) return a;
-    return [{label:'点数',value:Math.round((data.disp||0)*10)/10+' / '+(data.mx||'')},{label:'受験者平均点',value:'—'},{label:'得点率',value:Math.round((data.rate||0)*10)/10+'%'},{label:'未入力',value:String(data.missing||0)}];
-  }
-
-  class Page{
-    constructor(){this.ops=[];this.y=MT;}
-    raw(s){this.ops.push(s);}
-    color(c){this.raw(c+'\n');}
-    line(x1,y1,x2,y2){this.raw(LINE_STROKE+' 0.6 w '+x1.toFixed(1)+' '+ptY(y1).toFixed(1)+' m '+x2.toFixed(1)+' '+ptY(y2).toFixed(1)+' l S\n');}
-    rect(x,y,w,h,fill,stroke){this.raw((fill||'1 1 1 rg')+' '+(stroke||LINE_STROKE)+' 0.6 w '+x.toFixed(1)+' '+ptY(y+h).toFixed(1)+' '+w.toFixed(1)+' '+h.toFixed(1)+' re B\n');}
-    text(s,x,y,size,weight,color,align,maxW){
-      s=String(s==null?'':s); if(!s) return;
-      const w=approxWidth(s,size); if(align==='center') x=x-w/2; else if(align==='right') x=x-w;
-      this.raw('BT '+(color||TEXT)+' /F1 '+size.toFixed(1)+' Tf '+(weight?String(weight):'')+' 1 0 0 1 '+x.toFixed(1)+' '+ptY(y+size).toFixed(1)+' Tm <'+utf16hex(s)+'> Tj ET\n');
-    }
-    wrapped(s,x,y,size,color,maxW,lh,maxLines,weight){
-      const lines=wrap(s,size,maxW,maxLines); const step=lh||size*1.35;
-      lines.forEach((l,i)=>this.text(l,x,y+i*step,size,weight||'',color));
-      return lines.length*step;
-    }
-  }
-  function addPage(pages){const p=new Page(); pages.push(p); return p;}
-  function drawHeader(p,data){
-    const id=ident(data); p.line(ML,p.y-8,W-MR,p.y-8); p.text('採点結果',ML,p.y,8,'',MUTED); p.text('出力日時',W-MR-54,p.y-15,7,'',MUTED); p.text(nowText(new Date()),W-MR-70,p.y-3,7,'',MUTED); p.y+=20;
-    p.wrapped(id.exam||'採点結果',ML,p.y,17,TEXT,W-ML-MR,20,2,'900'); p.y+= id.exam && approxWidth(id.exam,17)>W-ML-MR ? 42:22;
-    p.wrapped(id.subject,ML,p.y,16,TEXT,W-ML-MR,20,2,'900'); p.y+=34;
-  }
-  function drawSummary(p,data){
-    const id=ident(data), ss=summary(data); const x=ML,w=W-ML-MR,h=50; p.rect(x,p.y,w,h,'0.98 0.99 1 rg',LINE_STROKE);
-    p.wrapped(id.subject,x+10,p.y+10,12,TEXT,135,15,2,'900'); p.wrapped(id.exam,x+10,p.y+27,7,MUTED,130,9,2,'700');
-    const sx=x+155, sw=(w-165)/4; ss.slice(0,4).forEach((s,i)=>{p.rect(sx+i*sw,p.y+8,sw-5,34,'1 1 1 rg','0.88 0.91 0.96 RG'); p.text(s.label,sx+i*sw+7,p.y+14,7,'700',MUTED); p.text(s.value,sx+i*sw+7,p.y+26,12,'900',TEXT);});
-    p.y+=h+10;
-  }
-  function drawRadar(p,data){
-    const st=stats(data); if(!st.length) return;
-    const x=ML,w=W-ML-MR,h=160; p.rect(x,p.y,w,h,'0.985 0.99 1 rg',LINE_STROKE); p.text('問題番号別正答率',x+9,p.y+10,11,'900',TEXT);
-    const cx=x+150, cy=p.y+87, r=57, n=st.length;
-    for(const t of [0.25,0.5,0.75,1]){let path=''; st.forEach((s,i)=>{const a=-Math.PI/2+Math.PI*2*i/n, px=cx+Math.cos(a)*r*t, py=cy+Math.sin(a)*r*t; path+=(i?' l ':'m ')+px.toFixed(1)+' '+ptY(py).toFixed(1)+' ';}); p.raw(LINE_STROKE+' 0.5 w '+path+' h S\n');}
-    st.forEach((s,i)=>{const a=-Math.PI/2+Math.PI*2*i/n, px=cx+Math.cos(a)*r, py=cy+Math.sin(a)*r; p.raw('0.78 0.82 0.89 RG 0.5 w '+cx.toFixed(1)+' '+ptY(cy).toFixed(1)+' m '+px.toFixed(1)+' '+ptY(py).toFixed(1)+' l S\n'); p.text(s.group,cx+Math.cos(a)*(r+18),cy+Math.sin(a)*(r+18)-4,7,'700',TEXT,'center');});
-    let poly=''; st.forEach((s,i)=>{const a=-Math.PI/2+Math.PI*2*i/n, rate=s.max?Math.max(0,Math.min(1,s.earn/s.max)):0, px=cx+Math.cos(a)*r*rate, py=cy+Math.sin(a)*r*rate; poly+=(i?' l ':'m ')+px.toFixed(1)+' '+ptY(py).toFixed(1)+' ';}); p.raw('0.18 0.37 0.82 RG 0.7 0.79 1 rg 1.4 w '+poly+' h B\n');
-    const tx=x+300, ty=p.y+35, cols=[55,55,45,55,35]; drawSmallTable(p,tx,ty,cols,['問題番号','得点','得点率','正答項目','未入力'],st.map(s=>[s.group,Math.round(s.earn*10)/10+'/'+s.max,(s.max?Math.round(s.earn/s.max*1000)/10:0)+'%',s.correct+'/'+s.items,String(s.missing)]),13,7);
-    p.y+=h+10;
-  }
-  function drawSmallTable(p,x,y,cols,heads,rows,rh,fs){
-    const tw=cols.reduce((a,b)=>a+b,0); p.rect(x,y,tw,rh,'0.97 0.98 0.99 rg','0.97 0.98 0.99 RG'); let xx=x; heads.forEach((h,i)=>{p.text(h,xx+3,y+4,fs,'900',MUTED); xx+=cols[i];}); y+=rh;
-    rows.forEach(r=>{xx=x; r.forEach((c,i)=>{p.text(c,xx+3,y+4,fs,'',TEXT); xx+=cols[i];}); p.line(x,y+rh, x+tw,y+rh); y+=rh;});
-  }
-  function drawResultHeader(p,continued){
-    if(continued){p.text('全問一覧（続き）',ML,p.y,12,'900',TEXT); p.y+=18;}
-    const cols=[82,72,132,52,36,72,W-ML-MR-82-72-132-52-36-72]; const heads=['番号','自分','正解','得点','判定','受験者正答率','注記'];
-    p.rect(ML,p.y,W-ML-MR,18,'0.97 0.98 0.99 rg','0.97 0.98 0.99 RG'); let x=ML; heads.forEach((h,i)=>{p.text(h,i===4?x+cols[i]/2:x+4,p.y+6,7,'900',MUTED,i===4?'center':'left'); x+=cols[i];}); p.y+=18; return cols;
-  }
-  function drawRows(pages,p,data){
-    let cols=drawResultHeader(p,false); const rows=(data.rows||[]).filter(r=>r.included!==false);
-    rows.forEach(r=>{
-      const cells=rowCells(data,r); const noteLines=wrap(cells[6],7,cols[6]-6,3).length; const ansLines=wrap(cells[2],7,cols[2]-6,2).length; const rh=Math.max(18, 8+Math.max(noteLines,ansLines)*9);
-      if(p.y+rh>CONTENT_BOTTOM){p=addPage(pages); cols=drawResultHeader(p,true);} let x=ML;
-      cells.forEach((c,i)=>{const color=i===4?(c==='○'?GOOD:(c==='△'?WARN:(c==='×'?BAD:MUTED))):(i===6?MUTED:TEXT); const size=i===4?12:7; if(i===4) p.text(c,x+cols[i]/2,p.y+5,size,'900',color,'center'); else p.wrapped(c,x+4,p.y+5,size,color,cols[i]-8,i===6?9:9,i===0?1:(i===6?3:2),i===0?'700':''); x+=cols[i];});
-      p.line(ML,p.y+rh,W-MR,p.y+rh); p.y+=rh;
-    });
-    return p;
-  }
-  function drawMissed(pages,p,data){
-    const bad=(data.rows||[]).filter(r=>r.included && (!r.got.length || r.earn<r.pts)); if(!bad.length) return p;
-    if(p.y+80>CONTENT_BOTTOM){p=addPage(pages);} p.rect(ML,p.y,W-ML-MR,80,'1 0.97 0.965 rg','0.94 0.78 0.76 RG'); p.text('間違えた問題・未入力',ML+10,p.y+10,12,'900',BAD);
-    let x=ML+10,y=p.y+28,cw=82,ch=28; bad.slice(0,30).forEach((r,i)=>{p.rect(x,y,cw,ch,'1 1 1 rg','0.94 0.82 0.80 RG'); p.wrapped(displayId(r.q)+' '+(!r.got.length?'未入力':(r.earn>0?'△':'×')),x+4,y+5,6.5,BAD,cw-8,8,1,'900'); p.wrapped('得点:'+r.earn+'/'+r.pts,x+4,y+15,6,TEXT,cw-8,8,1,''); x+=cw+5; if(x+cw>W-MR){x=ML+10; y+=ch+5;}});
-    p.y+=80+10; return p;
-  }
-  function buildPages(data){const pages=[]; let p=addPage(pages); drawHeader(p,data); drawSummary(p,data); drawRadar(p,data); p=drawRows(pages,p,data); p=drawMissed(pages,p,data); pages.forEach((pg,i)=>{pg.text((i+1)+' / '+pages.length,W/2,FOOTER_Y,8,'700',TEXT,'center');}); return pages;}
-
-  const enc=new TextEncoder();
-  function ascii(s){return enc.encode(String(s));}
-  function makePdf(pages){
-    const parts=[]; let len=0; const offsets=[0]; function add(x){if(typeof x==='string')x=ascii(x); parts.push(x); len+=x.byteLength||x.length||0;} function obj(n,body){offsets[n]=len; add(n+' 0 obj\n'); body.forEach(add); add('\nendobj\n');}
-    add('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
-    const fontObj=3+pages.length*2;
-    const kids=pages.map((_,i)=>(3+i*2)+' 0 R').join(' ');
-    obj(1,['<< /Type /Catalog /Pages 2 0 R >>']); obj(2,['<< /Type /Pages /Kids [',kids,'] /Count ',String(pages.length),' >>']);
-    pages.forEach((p,i)=>{const page=3+i*2, content=page+1, stream=p.ops.join(''); obj(page,['<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ',W.toFixed(3),' ',H.toFixed(3),'] /Resources << /Font << /F1 ',fontObj,' 0 R >> >> /Contents ',content,' 0 R >>']); obj(content,['<< /Length ',String(ascii(stream).length),' >>\nstream\n',stream,'endstream']);});
-    obj(fontObj,['<< /Type /Font /Subtype /Type0 /BaseFont /HeiseiKakuGo-W5 /Encoding /UniJIS-UCS2-H /DescendantFonts [',fontObj+1,' 0 R] >>']);
-    obj(fontObj+1,['<< /Type /Font /Subtype /CIDFontType0 /BaseFont /HeiseiKakuGo-W5 /CIDSystemInfo << /Registry (Adobe) /Ordering (Japan1) /Supplement 2 >> >>']);
-    const xref=len, max=fontObj+1; add('xref\n0 '+(max+1)+'\n0000000000 65535 f \n'); for(let i=1;i<=max;i++) add(String(offsets[i]).padStart(10,'0')+' 00000 n \n'); add('trailer\n<< /Size '+(max+1)+' /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF');
-    return new Blob(parts,{type:'application/pdf'});
-  }
-  async function exportIOSVector(){
-    try{
-      const data=getData(); const pages=buildPages(data); const blob=makePdf(pages); const k=data.k||{}; const fn='採点結果_'+escFile((k.year?String(k.year)+'_':'')+(k.subject||''))+'_'+stamp(new Date())+'.pdf';
-      const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=fn; a.rel='noopener'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),30000);
-    }catch(e){console.error(e); try{alert('iPhone Safari用PDF出力に失敗しました: '+(e&&e.message?e.message:e));}catch(_){}}
-  }
-  window.exportResultPdf=exportIOSVector;
-  document.addEventListener('click',function(e){const btn=e.target&&e.target.closest&&e.target.closest('#exportPdfResult'); if(!btn) return; e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation(); exportIOSVector();},true);
-  console.info('PDF export renderer loaded: '+VERSION);
-})();
