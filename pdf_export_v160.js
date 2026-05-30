@@ -895,3 +895,156 @@ if(!__ctPdfIsIOSWebKitV166()){
 } else {
   console.info('PDF export renderer loaded: v166 iOS uses v163 fallback route');
 }
+
+/* v182 data patch: add problemNumber/group for 2025 prototype subjects.
+ * Source: DNC R7 prototype answer tables. Keeps index.html and JSON untouched.
+ * Base: v177 PDF layout settings retained via v180.
+ */
+(function(){
+  const PATCH_NAME = 'v182-2025-prototype-all-problemNumber';
+  function normText(s){
+    return String(s || '').normalize('NFKC')
+      .replace(/^\s*試作問題\s*/, '')
+      .replace(/[，、]/g, ',')
+      .replace(/[（）]/g, m => m === '（' ? '(' : ')')
+      .replace(/\s+/g,'')
+      .trim();
+  }
+  function firstNumber(id){
+    const m = String(id || '').normalize('NFKC').match(/\d+/);
+    return m ? Number(m[0]) : NaN;
+  }
+  function inRange(n, a, b){ return Number.isFinite(n) && n >= a && n <= b; }
+  function groupByRanges(id, ranges){
+    const n = firstNumber(id);
+    for(const [a,b,g] of ranges){ if(inRange(n,a,b)) return g; }
+    return '';
+  }
+  function groupBySeq(i, ranges){
+    const one = i + 1;
+    for(const [a,b,g] of ranges){ if(one >= a && one <= b) return g; }
+    return '';
+  }
+  function variants(names){ return new Set(names.map(normText)); }
+
+  const RANGE_RULES = [
+    {
+      names: variants(['地理総合，地理探究','地理総合,地理探究']),
+      ranges: [[1,4,'Q1'],[5,8,'Q2'],[9,13,'Q3'],[14,18,'Q4'],[19,23,'Q5'],[24,30,'Q6']]
+    },
+    {
+      names: variants(['歴史総合，日本史探究','歴史総合,日本史探究']),
+      ranges: [[1,9,'Q1'],[10,14,'Q2'],[15,19,'Q3'],[20,24,'Q4'],[25,29,'Q5'],[30,34,'Q6']]
+    },
+    {
+      names: variants(['歴史総合，世界史探究','歴史総合,世界史探究']),
+      ranges: [[1,9,'Q1'],[10,13,'Q2'],[14,18,'Q3'],[19,26,'Q4'],[27,33,'Q5']]
+    },
+    {
+      names: variants(['公共，倫理','公共,倫理']),
+      ranges: [[1,4,'Q1'],[5,8,'Q2'],[9,17,'Q3'],[18,22,'Q4'],[23,28,'Q5'],[29,33,'Q6']]
+    },
+    {
+      names: variants(['公共，政治・経済','公共,政治・経済','公共，政治経済','公共,政治経済']),
+      ranges: [[1,4,'Q1'],[5,8,'Q2'],[9,14,'Q3'],[15,20,'Q4'],[21,26,'Q5'],[27,34,'Q6']]
+    },
+    {
+      names: variants(['英語リスニング','英語（リスニング）','英語(リスニング)','英語L','英語Ｌ']),
+      ranges: [[27,33,'第C問']]
+    }
+  ];
+
+  const SEQ_RULES = [
+    {
+      names: variants(['国語']),
+      ranges: [[1,5,'第A問'],[6,9,'第B問']]
+    },
+    {
+      names: variants(['数学Ⅰ，数学A','数学Ⅰ,数学A','数学IA','数学ⅠA','数学I，数学A','数学I,数学A']),
+      ranges: [[1,16,'Q1'],[17,28,'Q2'],[29,38,'Q3'],[39,46,'Q4']]
+    },
+    {
+      names: variants(['数学Ⅱ，数学B，数学C','数学Ⅱ,数学B,数学C','数学IIBC','数学ⅡBC','数学II，数学B，数学C','数学II,数学B,数学C']),
+      ranges: [[1,9,'Q1'],[10,19,'Q2'],[20,29,'Q3'],[30,39,'Q4'],[40,48,'Q5'],[49,54,'Q6'],[55,60,'Q7']]
+    },
+    {
+      names: variants(['英語リーディング','英語（リーディング）','英語(リーディング)','英語R','英語Ｒ']),
+      ranges: [[1,6,'第A問'],[7,10,'第B問']]
+    },
+    {
+      names: variants(['情報Ⅰ','情報I']),
+      ranges: [[1,9,'Q1'],[10,22,'Q2'],[23,36,'Q3'],[37,43,'Q4']]
+    },
+    {
+      names: variants(['情報Ⅰ（参考問題）','情報I（参考問題）','情報Ⅰ(参考問題)','情報I(参考問題)']),
+      ranges: [[1,7,'Q4']]
+    },
+    {
+      names: variants(['旧情報（仮）','旧情報(仮)']),
+      ranges: [[1,17,'Q1'],[18,23,'Q2'],[24,28,'Q3'],[29,39,'Q4'],[40,53,'Q5'],[54,62,'Q6']]
+    },
+    {
+      names: variants(['地理総合，歴史総合，公共','地理総合,歴史総合,公共']),
+      ranges: [
+        [1,4,'地理第1問'],[5,8,'地理第2問'],[9,12,'地理第3問'],[13,16,'地理第4問'],
+        [17,25,'歴史第1問'],[26,34,'歴史第2問'],
+        [35,38,'公共第1問'],[39,42,'公共第2問'],[43,46,'公共第3問'],[47,50,'公共第4問']
+      ]
+    }
+  ];
+
+  function findRule(k, rules){
+    const subj = normText(k && k.subject);
+    return rules.find(r => r.names.has(subj));
+  }
+  function isTargetKey(k){
+    return k && String(k.year) === '2025' && String(k.exam || '') === 'other';
+  }
+  function setGroup(q, g){
+    if(!g) return false;
+    let changed = false;
+    if(q.problemNumber !== g){ q.problemNumber = g; changed = true; }
+    if(q.group !== g){ q.group = g; changed = true; }
+    return changed;
+  }
+  function patchKey(k){
+    if(!isTargetKey(k) || !Array.isArray(k.questions)) return false;
+    const seqRule = findRule(k, SEQ_RULES);
+    const rangeRule = findRule(k, RANGE_RULES);
+    if(!seqRule && !rangeRule) return false;
+    let changed = false;
+    k.questions.forEach((q, i) => {
+      const g = seqRule ? groupBySeq(i, seqRule.ranges) : groupByRanges(q.id, rangeRule.ranges);
+      if(setGroup(q, g)) changed = true;
+    });
+    return changed;
+  }
+  function patchKeys(keys){
+    if(!Array.isArray(keys)) return false;
+    let changed = false;
+    for(const k of keys){ if(patchKey(k)) changed = true; }
+    return changed;
+  }
+  function applyPatch(){
+    try{
+      if(typeof window.load !== 'function') return false;
+      const keys = window.load();
+      const changed = patchKeys(keys);
+      if(changed){
+        console.info('Applied data patch: ' + PATCH_NAME);
+        if(typeof window.refresh === 'function') window.refresh();
+      }
+      return true;
+    }catch(e){
+      console.warn('Data patch failed: ' + PATCH_NAME, e);
+      return false;
+    }
+  }
+  let tries = 0;
+  const timer = setInterval(function(){
+    tries += 1;
+    if(applyPatch() || tries >= 80) clearInterval(timer);
+  }, 150);
+  if(document.readyState !== 'loading') setTimeout(applyPatch, 0);
+  else document.addEventListener('DOMContentLoaded', applyPatch, {once:true});
+})();
