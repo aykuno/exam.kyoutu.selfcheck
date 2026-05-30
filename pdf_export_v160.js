@@ -6,7 +6,7 @@
 (function(){
   'use strict';
 
-  const VERSION = 'v170-ios-fallback-title-quality-no-layout-overfix';
+  const VERSION = 'v171-pdf-table-main-cols-judge-center';
   const PAGE_W = 1240;
   const PAGE_H = 1754;
   const M_LEFT = 62;
@@ -81,14 +81,14 @@
       '.resultTable{min-width:0!important;max-width:none!important;width:100%!important;table-layout:fixed!important;margin:0!important;font-size:14px!important;border-collapse:collapse!important}',
       '.resultTable th,.resultTable td{padding:6px 7px!important;line-height:1.23!important;border-bottom:1px solid #d9deea!important;vertical-align:middle!important;word-break:break-word!important;overflow:visible!important;text-overflow:clip!important;white-space:normal!important;text-align:left!important}',
       '.resultTable th{font-size:13px!important;background:#f7f8fc!important;color:#4a556b!important;font-weight:900!important}',
-      '.resultTable th:nth-child(1),.resultTable td:nth-child(1){width:155px!important}',
-      '.resultTable th:nth-child(2),.resultTable td:nth-child(2){width:100px!important}',
-      '.resultTable th:nth-child(3),.resultTable td:nth-child(3){width:225px!important}',
+      '.resultTable th:nth-child(1),.resultTable td:nth-child(1){width:215px!important;white-space:nowrap!important;word-break:keep-all!important;overflow-wrap:normal!important}',
+      '.resultTable th:nth-child(2),.resultTable td:nth-child(2){width:110px!important}',
+      '.resultTable th:nth-child(3),.resultTable td:nth-child(3){width:250px!important}',
       '.resultTable th:nth-child(4),.resultTable td:nth-child(4){width:95px!important}',
       '.resultTable th:nth-child(5),.resultTable td:nth-child(5){width:70px!important;text-align:center!important}',
       '.resultTable td:nth-child(5){font-size:22px!important;line-height:1!important;font-weight:900!important}',
-      '.resultTable th:nth-child(6),.resultTable td:nth-child(6){width:126px!important}',
-      '.resultTable th:nth-child(7),.resultTable td:nth-child(7){width:auto!important;font-size:13px!important;color:#647086!important}',
+      '.resultTable th:nth-child(6),.resultTable td:nth-child(6){width:115px!important}',
+      '.resultTable th:nth-child(7),.resultTable td:nth-child(7){width:auto!important;font-size:12px!important;color:#647086!important}',
       '.ok{color:#137333!important;font-weight:900!important}.partial{color:#8a5b00!important;font-weight:900!important}.ng{color:#b3261e!important;font-weight:900!important}',
       '.missedPanel{margin:16px 0 0!important;padding:14px!important;border:1px solid #f0c7c1!important;background:#fff7f6!important;border-radius:18px!important}',
       '.missedPanel h3{margin:0 0 9px!important;font-size:21px!important;color:#8c1d18!important;font-weight:900!important}',
@@ -480,7 +480,7 @@ if(!__ctPdfIsIOSWebKitV166()){
 (function(){
   'use strict';
 
-  const VERSION = 'v170-hybrid-android-direct-ios-fallback-no-layout-overfix';
+  const VERSION = 'v171-hybrid-android-table-main-cols-judge-center';
   const PAGE_W = 1240;
   const PAGE_H = 1754;
   const RENDER_SCALE = 1.55;
@@ -718,12 +718,12 @@ if(!__ctPdfIsIOSWebKitV166()){
   }
   function rowHeight(ctx, cells, cols){
     let max = 30;
-    cells.forEach((c,i)=>{ const h = textHeight(ctx, c, cols[i]-16, i===4?20:14, i===4?20:18, i===6?3:2) + 12; if(h>max) max=h; });
+    cells.forEach((c,i)=>{ const maxLines = i===0 ? 1 : (i===6 ? 3 : 2); const h = textHeight(ctx, c, cols[i]-16, i===4?20:14, i===4?20:18, maxLines) + 12; if(h>max) max=h; });
     return Math.min(Math.max(max, 30), 76);
   }
   function drawResultTableHeader(ctx, y, continued){
     if(continued){ drawWrapped(ctx, '全問一覧（続き）', M_LEFT, y, 360, 20, '900', TEXT, 26, 1); y += 34; }
-    const cols=[150,100,240,95,70,126,PAGE_W-M_LEFT-M_RIGHT-150-100-240-95-70-126];
+    const cols=[215,110,250,95,70,115,PAGE_W-M_LEFT-M_RIGHT-215-110-250-95-70-115];
     drawTableHeader(ctx, M_LEFT, y, cols, ['番号','自分','正解','得点','判定','受験者正答率','注記'], 30, 13);
     return {y:y+30, cols};
   }
@@ -735,8 +735,8 @@ if(!__ctPdfIsIOSWebKitV166()){
       const weight = i===4 ? '900' : '500';
       const lh = i===4 ? 20 : (i===6?17:18);
       const mx = i===6 ? 3 : 2;
-      if(i===4){ setFont(ctx, size, weight, color); const tw=ctx.measureText(cell).width; ctx.fillText(cell, x + (cols[i]-tw)/2, y+6); }
-      else drawWrapped(ctx, cell, x+8, y+6, cols[i]-16, size, weight, color, lh, mx);
+      if(i===4){ setFont(ctx, size, weight, color); ctx.save(); ctx.textAlign = 'center'; ctx.fillText(cell, x + cols[i]/2, y+6); ctx.restore(); }
+      else drawWrapped(ctx, cell, x+8, y+6, cols[i]-16, size, weight, color, lh, i===0 ? 1 : mx);
       x += cols[i];
     });
     line(ctx, M_LEFT, y+h, PAGE_W-M_RIGHT, y+h, LINE, 1);
