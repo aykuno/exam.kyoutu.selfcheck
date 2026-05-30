@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const VERSION = 'v160';
+  const VERSION = 'v163-cross-device-fallback';
   const PAGE_W = 1240;
   const PAGE_H = 1754;
   const M_LEFT = 62;
@@ -344,10 +344,86 @@
     }
   }
 
-  window.exportResultPdf = function exportResultPdfV159(){
+  function isIOSWebKit(){
+    const ua = navigator.userAgent || '';
+    const platform = navigator.platform || '';
+    return /iPad|iPhone|iPod/.test(ua) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  }
+
+  function removeFallbackOverlay(){
+    const old = document.getElementById('__pdfPrintFallbackOverlay');
+    if(old) old.remove();
+  }
+
+  function showPrintFallback(reason){
+    if(!window.__lastGrade || (typeof window.selId === 'function' && window.__lastGrade.sig !== window.selId())){
+      if(typeof window.grade === 'function') window.grade();
+    }
+    if(!window.__lastGrade){
+      alert('先に採点してください。');
+      return;
+    }
+
+    let built = null;
+    try{
+      removeFallbackOverlay();
+      built = buildPages();
+      const pageBoxes = built.pages.map(function(page){
+        return '<div class="pdfPrintPageBox">' + page.outerHTML + '</div>';
+      }).join('\n');
+      const message = reason ? 'この端末では直接PDF生成が制限されたため、印刷用画面に切り替えました。' : 'この端末では印刷用画面からPDF保存します。';
+      const detail = reason ? String(reason && reason.message ? reason.message : reason) : '';
+      const fallbackCss = getCss() + '\n' + [
+        '#__pdfPrintFallbackOverlay{position:fixed;inset:0;z-index:2147483647;background:#f6f7fb;color:#1d2433;overflow:auto;-webkit-overflow-scrolling:touch;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif}',
+        '#__pdfPrintFallbackOverlay .pdfFallbackToolbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #d9deea;padding:10px 12px;display:grid;gap:8px;box-shadow:0 2px 10px rgba(22,34,64,.08)}',
+        '#__pdfPrintFallbackOverlay .pdfFallbackTitle{font-weight:900;font-size:15px;color:#1d2433}',
+        '#__pdfPrintFallbackOverlay .pdfFallbackText{font-size:12px;color:#647086;line-height:1.45;font-weight:700}',
+        '#__pdfPrintFallbackOverlay .pdfFallbackBtns{display:flex;gap:8px;flex-wrap:wrap}',
+        '#__pdfPrintFallbackOverlay button{border:0;border-radius:12px;padding:10px 14px;font-weight:900;font-size:14px}',
+        '#__pdfPrintFallbackOverlay .pdfFallbackPrint{background:#2f5fd0;color:#fff}',
+        '#__pdfPrintFallbackOverlay .pdfFallbackClose{background:#e8ecf6;color:#1d2433}',
+        '#__pdfPrintFallbackOverlay .pdfFallbackSheet{display:grid;gap:18px;justify-content:center;padding:14px 0 28px}',
+        '#__pdfPrintFallbackOverlay .pdfPrintPageBox{width:620px;height:877px;overflow:hidden;background:#fff;box-shadow:0 2px 14px rgba(22,34,64,.15)}',
+        '#__pdfPrintFallbackOverlay .pdfPrintPageBox>.pdfRasterPage{transform:scale(0.5);transform-origin:0 0;box-shadow:none}',
+        '@media(max-width:700px){#__pdfPrintFallbackOverlay .pdfFallbackSheet{justify-content:start;align-items:start;padding-left:10px;padding-right:10px}#__pdfPrintFallbackOverlay .pdfPrintPageBox{width:620px;height:877px}}',
+        '@media print{@page{size:A4;margin:0}html,body{margin:0!important;padding:0!important;background:#fff!important}body>*:not(#__pdfPrintFallbackOverlay){display:none!important}#__pdfPrintFallbackOverlay{position:static!important;inset:auto!important;z-index:auto!important;overflow:visible!important;background:#fff!important}#__pdfPrintFallbackOverlay .pdfFallbackToolbar{display:none!important}#__pdfPrintFallbackOverlay .pdfFallbackSheet{display:block!important;padding:0!important;margin:0!important}#__pdfPrintFallbackOverlay .pdfPrintPageBox{width:210mm!important;height:297mm!important;overflow:hidden!important;box-shadow:none!important;background:#fff!important;break-after:page;page-break-after:always}#__pdfPrintFallbackOverlay .pdfPrintPageBox:last-child{break-after:auto;page-break-after:auto}#__pdfPrintFallbackOverlay .pdfPrintPageBox>.pdfRasterPage{width:1240px!important;height:1754px!important;transform:scale(0.6400812806)!important;transform-origin:0 0!important;box-shadow:none!important}}'
+      ].join('\n');
+      const overlay = document.createElement('div');
+      overlay.id = '__pdfPrintFallbackOverlay';
+      const style = document.createElement('style');
+      style.textContent = fallbackCss;
+      overlay.appendChild(style);
+      const toolbar = document.createElement('div');
+      toolbar.className = 'pdfFallbackToolbar';
+      toolbar.innerHTML = '<div class="pdfFallbackTitle">PDF保存 / 印刷</div>' +
+        '<div class="pdfFallbackText">' + esc(message) + (detail ? '<br>理由: ' + esc(detail) : '') + '<br>「PDF保存 / 印刷」を押して、印刷画面からPDF保存またはプリントしてください。</div>' +
+        '<div class="pdfFallbackBtns"><button type="button" class="pdfFallbackPrint">PDF保存 / 印刷</button><button type="button" class="pdfFallbackClose">閉じる</button></div>';
+      const sheet = document.createElement('div');
+      sheet.className = 'pdfFallbackSheet';
+      sheet.innerHTML = pageBoxes;
+      overlay.appendChild(toolbar);
+      overlay.appendChild(sheet);
+      document.body.appendChild(overlay);
+      const printBtn = overlay.querySelector('.pdfFallbackPrint');
+      const closeBtn = overlay.querySelector('.pdfFallbackClose');
+      if(printBtn) printBtn.addEventListener('click', function(){ window.print(); });
+      if(closeBtn) closeBtn.addEventListener('click', removeFallbackOverlay);
+    } catch(err){
+      console.error(err);
+      alert('PDF出力画面の作成に失敗しました: ' + (err && err.message ? err.message : err));
+    } finally {
+      if(built && built.host) built.host.remove();
+    }
+  }
+
+  window.exportResultPdf = function exportResultPdfCrossDevice(){
+    if(isIOSWebKit()){
+      showPrintFallback(null);
+      return;
+    }
     exportDirectPdf().catch(function(err){
       console.error(err);
-      alert('PDF出力に失敗しました: ' + (err && err.message ? err.message : err));
+      showPrintFallback(err);
     });
   };
 
@@ -360,5 +436,5 @@
     window.exportResultPdf();
   }, true);
 
-  console.info('PDF export direct renderer loaded: ' + VERSION);
+  console.info('PDF export renderer loaded: ' + VERSION);
 })();
