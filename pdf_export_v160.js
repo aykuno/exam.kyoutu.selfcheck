@@ -13,7 +13,7 @@
   const M_RIGHT = 62;
   const M_TOP = 54;
   const M_BOTTOM_CONTENT = 92;
-  const FOOTER_BOTTOM = 106; // about 18mm from the bottom on A4; content lower bound unchanged.
+  const FOOTER_BOTTOM = 77; // about 13mm from the bottom on A4.
 
   function byId(id){ return document.getElementById(id); }
   function esc(s){
@@ -489,8 +489,8 @@ if(!__ctPdfIsIOSWebKitV166()){
   const M_LEFT = 58;
   const M_RIGHT = 58;
   const M_TOP = 58;
-  const FOOTER_Y = PAGE_H - 106;
-  const CONTENT_BOTTOM = PAGE_H - 92;
+  const FOOTER_Y = PAGE_H - 77;
+  const CONTENT_BOTTOM = PAGE_H - 82;
   const LINE = '#d9deea';
   const TEXT = '#1d2433';
   const MUTED = '#647086';
