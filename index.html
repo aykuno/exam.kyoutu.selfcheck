@@ -63,6 +63,10 @@
     if (html.includes(oldQid)) html = html.replace(oldQid, newQid);
     else throw new Error('index.html の qid 関数を見つけられませんでした。');
 
+    const oldQpts = "function qpts(q){return Number(q.points??1)||1}";
+    const newQpts = "function qpts(q){const v=q.points??q.point;return v==null?1:(Number(v)||0)}";
+    if (html.includes(oldQpts)) html = html.replace(oldQpts, newQpts);
+
     html = html.replace("${k.notes?'<div class=\"noteBlock\">注記：'+esc(k.notes)+'</div>':''}", "${cleanNote(k.notes)?'<div class=\"noteBlock\">注記：'+esc(cleanNote(k.notes))+'</div>':''}");
 
     const oldRenderKeypad = "function renderKeypad(){const k=selected();if(!k)return;const q=k.questions[currentIndex]||k.questions[0];$('currentId').textContent=q?displayId(q):'-';$('currentAnswer').textContent=q?answerString(q):'';$('keyButtons').innerHTML=tokenSet(k).map(t=>`<button data-t=\"${esc(t)}\">${t==='-'?'－':esc(t)}</button>`).join('');document.querySelectorAll('#keyButtons button').forEach(b=>b.onclick=()=>press(b.dataset.t));}";
