@@ -6,7 +6,7 @@
 (function(){
   'use strict';
 
-  const VERSION = 'v171-pdf-table-main-cols-judge-center';
+  const VERSION = 'v176-radar435-judge-center';
   const PAGE_W = 1240;
   const PAGE_H = 1754;
   const M_LEFT = 62;
@@ -85,8 +85,8 @@
       '.resultTable th:nth-child(2),.resultTable td:nth-child(2){width:110px!important}',
       '.resultTable th:nth-child(3),.resultTable td:nth-child(3){width:250px!important}',
       '.resultTable th:nth-child(4),.resultTable td:nth-child(4){width:95px!important}',
-      '.resultTable th:nth-child(5),.resultTable td:nth-child(5){width:70px!important;text-align:center!important}',
-      '.resultTable td:nth-child(5){font-size:22px!important;line-height:1!important;font-weight:900!important}',
+      '.resultTable th:nth-child(5),.resultTable td:nth-child(5){width:70px!important;text-align:center!important;padding-left:0!important;padding-right:0!important}',
+      '.resultTable td:nth-child(5){font-size:22px!important;line-height:1!important;font-weight:900!important;text-align:center!important}',
       '.resultTable th:nth-child(6),.resultTable td:nth-child(6){width:115px!important}',
       '.resultTable th:nth-child(7),.resultTable td:nth-child(7){width:auto!important;font-size:12px!important;color:#647086!important}',
       '.ok{color:#137333!important;font-weight:900!important}.partial{color:#8a5b00!important;font-weight:900!important}.ng{color:#b3261e!important;font-weight:900!important}',
@@ -480,7 +480,7 @@ if(!__ctPdfIsIOSWebKitV166()){
 (function(){
   'use strict';
 
-  const VERSION = 'v171-hybrid-android-table-main-cols-judge-center';
+  const VERSION = 'v176-hybrid-radar435-judge-center';
   const PAGE_W = 1240;
   const PAGE_H = 1754;
   const RENDER_SCALE = 1.55;
@@ -673,7 +673,7 @@ if(!__ctPdfIsIOSWebKitV166()){
   function drawRadarPanel(ctx, data, y){
     const stats = getStatsFromRows(data);
     if(!stats.length) return y;
-    const x = M_LEFT, w = PAGE_W-M_LEFT-M_RIGHT, h = 440;
+    const x = M_LEFT, w = PAGE_W-M_LEFT-M_RIGHT, h = 435;
     fillRound(ctx, x, y, w, h, 18, '#fbfcff', LINE);
     drawWrapped(ctx, '問題番号別正答率', x+16, y+16, 350, 21, '900', TEXT, 26, 1);
     const cx = x + 215, cy = y + 210, r = 142;
@@ -707,7 +707,17 @@ if(!__ctPdfIsIOSWebKitV166()){
   function drawTableHeader(ctx, x, y, cols, headers, h, fs){
     ctx.fillStyle = '#f7f8fc'; ctx.fillRect(x, y, cols.reduce((a,b)=>a+b,0), h);
     let xx=x; setFont(ctx, fs||13, '900', '#4a556b');
-    headers.forEach((head,i)=>{ ctx.fillText(head, xx+8, y+7); xx+=cols[i]; });
+    headers.forEach((head,i)=>{
+      if(head === '判定'){
+        ctx.save();
+        ctx.textAlign = 'center';
+        ctx.fillText(head, xx + cols[i] / 2, y + 7);
+        ctx.restore();
+      } else {
+        ctx.fillText(head, xx+8, y+7);
+      }
+      xx+=cols[i];
+    });
     line(ctx,x,y+h,x+cols.reduce((a,b)=>a+b,0),y+h,LINE,1);
   }
   function drawSimpleRow(ctx, x, y, cols, row, h, fs){
@@ -735,7 +745,14 @@ if(!__ctPdfIsIOSWebKitV166()){
       const weight = i===4 ? '900' : '500';
       const lh = i===4 ? 20 : (i===6?17:18);
       const mx = i===6 ? 3 : 2;
-      if(i===4){ setFont(ctx, size, weight, color); ctx.save(); ctx.textAlign = 'center'; ctx.fillText(cell, x + cols[i]/2, y+6); ctx.restore(); }
+      if(i===4){
+        setFont(ctx, size, weight, color);
+        ctx.save();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'alphabetic';
+        ctx.fillText(cell, x + cols[i] / 2, y + Math.max(21, Math.round((h + size * 0.72) / 2)));
+        ctx.restore();
+      }
       else drawWrapped(ctx, cell, x+8, y+6, cols[i]-16, size, weight, color, lh, i===0 ? 1 : mx);
       x += cols[i];
     });
