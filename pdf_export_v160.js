@@ -896,155 +896,173 @@ if(!__ctPdfIsIOSWebKitV166()){
   console.info('PDF export renderer loaded: v166 iOS uses v163 fallback route');
 }
 
-/* v182 data patch: add problemNumber/group for 2025 prototype subjects.
- * Source: DNC R7 prototype answer tables. Keeps index.html and JSON untouched.
- * Base: v177 PDF layout settings retained via v180.
- */
+/* v187: iPhone Safari direct PDF without canvas export. Android route is intentionally unchanged from v177. */
 (function(){
-  const PATCH_NAME = 'v182-2025-prototype-all-problemNumber';
-  function normText(s){
-    return String(s || '').normalize('NFKC')
-      .replace(/^\s*試作問題\s*/, '')
-      .replace(/[，、]/g, ',')
-      .replace(/[（）]/g, m => m === '（' ? '(' : ')')
-      .replace(/\s+/g,'')
-      .trim();
+  'use strict';
+  function isIOSSafari(){
+    var ua = navigator.userAgent || '';
+    var platform = navigator.platform || '';
+    var ios = /iPad|iPhone|iPod/.test(ua) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var safari = /Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
+    return ios && safari;
   }
-  function firstNumber(id){
-    const m = String(id || '').normalize('NFKC').match(/\d+/);
-    return m ? Number(m[0]) : NaN;
-  }
-  function inRange(n, a, b){ return Number.isFinite(n) && n >= a && n <= b; }
-  function groupByRanges(id, ranges){
-    const n = firstNumber(id);
-    for(const [a,b,g] of ranges){ if(inRange(n,a,b)) return g; }
-    return '';
-  }
-  function groupBySeq(i, ranges){
-    const one = i + 1;
-    for(const [a,b,g] of ranges){ if(one >= a && one <= b) return g; }
-    return '';
-  }
-  function variants(names){ return new Set(names.map(normText)); }
+  if(!isIOSSafari()) return;
 
-  const RANGE_RULES = [
-    {
-      names: variants(['地理総合，地理探究','地理総合,地理探究']),
-      ranges: [[1,4,'Q1'],[5,8,'Q2'],[9,13,'Q3'],[14,18,'Q4'],[19,23,'Q5'],[24,30,'Q6']]
-    },
-    {
-      names: variants(['歴史総合，日本史探究','歴史総合,日本史探究']),
-      ranges: [[1,9,'Q1'],[10,14,'Q2'],[15,19,'Q3'],[20,24,'Q4'],[25,29,'Q5'],[30,34,'Q6']]
-    },
-    {
-      names: variants(['歴史総合，世界史探究','歴史総合,世界史探究']),
-      ranges: [[1,9,'Q1'],[10,13,'Q2'],[14,18,'Q3'],[19,26,'Q4'],[27,33,'Q5']]
-    },
-    {
-      names: variants(['公共，倫理','公共,倫理']),
-      ranges: [[1,4,'Q1'],[5,8,'Q2'],[9,17,'Q3'],[18,22,'Q4'],[23,28,'Q5'],[29,33,'Q6']]
-    },
-    {
-      names: variants(['公共，政治・経済','公共,政治・経済','公共，政治経済','公共,政治経済']),
-      ranges: [[1,4,'Q1'],[5,8,'Q2'],[9,14,'Q3'],[15,20,'Q4'],[21,26,'Q5'],[27,34,'Q6']]
-    },
-    {
-      names: variants(['英語リスニング','英語（リスニング）','英語(リスニング)','英語L','英語Ｌ']),
-      ranges: [[27,33,'第C問']]
+  const VERSION='v187-ios-safari-vector-no-canvas-android-v177-unchanged';
+  const W=595.2756, H=841.8898;
+  const ML=34, MR=34, MT=34, FOOTER_Y=30, CONTENT_BOTTOM=H-55;
+  const LINE='0.85 0.87 0.91 rg', LINE_STROKE='0.85 0.87 0.91 RG';
+  const TEXT='0.11 0.14 0.20 rg', MUTED='0.39 0.44 0.53 rg', BLUE='0.18 0.37 0.82 rg', BAD='0.70 0.15 0.12 rg', GOOD='0.07 0.45 0.20 rg', WARN='0.54 0.36 0.00 rg';
+
+  function $(id){return document.getElementById(id);}
+  function txt(el){return (el&&(el.innerText||el.textContent)||'').replace(/\s+/g,' ').trim();}
+  function pad(n){return String(n).padStart(2,'0');}
+  function nowText(d){return d.getFullYear()+'/'+pad(d.getMonth()+1)+'/'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes());}
+  function stamp(d){return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'_'+pad(d.getHours())+pad(d.getMinutes());}
+  function escFile(s){return String(s==null?'':s).replace(/[\\/:*?"<>|\s]+/g,'_').replace(/^_+|_+$/g,'').slice(0,70)||'result';}
+  function stripHtml(s){const d=document.createElement('div');d.innerHTML=String(s||'');return txt(d);}
+  function ptY(y){return H-y;}
+  function utf16hex(s){
+    s=String(s==null?'':s);
+    let out='FEFF';
+    for(const ch of Array.from(s)){
+      const cp=ch.codePointAt(0);
+      if(cp<=0xFFFF) out+=cp.toString(16).toUpperCase().padStart(4,'0');
+      else { const u=cp-0x10000, hi=0xD800+(u>>10), lo=0xDC00+(u&1023); out+=hi.toString(16).toUpperCase().padStart(4,'0')+lo.toString(16).toUpperCase().padStart(4,'0'); }
     }
-  ];
-
-  const SEQ_RULES = [
-    {
-      names: variants(['国語']),
-      ranges: [[1,5,'第A問'],[6,9,'第B問']]
-    },
-    {
-      names: variants(['数学Ⅰ，数学A','数学Ⅰ,数学A','数学IA','数学ⅠA','数学I，数学A','数学I,数学A']),
-      ranges: [[1,16,'Q1'],[17,28,'Q2'],[29,38,'Q3'],[39,46,'Q4']]
-    },
-    {
-      names: variants(['数学Ⅱ，数学B，数学C','数学Ⅱ,数学B,数学C','数学IIBC','数学ⅡBC','数学II，数学B，数学C','数学II,数学B,数学C']),
-      ranges: [[1,9,'Q1'],[10,19,'Q2'],[20,29,'Q3'],[30,39,'Q4'],[40,48,'Q5'],[49,54,'Q6'],[55,60,'Q7']]
-    },
-    {
-      names: variants(['英語リーディング','英語（リーディング）','英語(リーディング)','英語R','英語Ｒ']),
-      ranges: [[1,6,'第A問'],[7,10,'第B問']]
-    },
-    {
-      names: variants(['情報Ⅰ','情報I']),
-      ranges: [[1,9,'Q1'],[10,22,'Q2'],[23,36,'Q3'],[37,43,'Q4']]
-    },
-    {
-      names: variants(['情報Ⅰ（参考問題）','情報I（参考問題）','情報Ⅰ(参考問題)','情報I(参考問題)']),
-      ranges: [[1,7,'Q4']]
-    },
-    {
-      names: variants(['旧情報（仮）','旧情報(仮)']),
-      ranges: [[1,17,'Q1'],[18,23,'Q2'],[24,28,'Q3'],[29,39,'Q4'],[40,53,'Q5'],[54,62,'Q6']]
-    },
-    {
-      names: variants(['地理総合，歴史総合，公共','地理総合,歴史総合,公共']),
-      ranges: [
-        [1,4,'地理第1問'],[5,8,'地理第2問'],[9,12,'地理第3問'],[13,16,'地理第4問'],
-        [17,25,'歴史第1問'],[26,34,'歴史第2問'],
-        [35,38,'公共第1問'],[39,42,'公共第2問'],[43,46,'公共第3問'],[47,50,'公共第4問']
-      ]
+    return out;
+  }
+  function approxWidth(s,size){
+    let w=0; for(const ch of Array.from(String(s||''))){ const c=ch.codePointAt(0); w += (c<128?0.55:(c<256?0.65:1.0))*size; } return w;
+  }
+  function wrap(s,size,maxW,maxLines){
+    s=String(s==null?'':s).replace(/\s+/g,' ').trim(); if(!s) return [''];
+    const res=[]; let line='';
+    for(const ch of Array.from(s)){
+      const t=line+ch;
+      if(line && approxWidth(t,size)>maxW){res.push(line); line=ch; if(maxLines&&res.length>=maxLines) break;}
+      else line=t;
     }
-  ];
+    if(!(maxLines&&res.length>=maxLines)) res.push(line);
+    return maxLines?res.slice(0,maxLines):res;
+  }
+  function getData(){
+    if(!window.__lastGrade || (typeof window.selId==='function' && window.__lastGrade.sig!==window.selId())){ if(typeof window.grade==='function') window.grade(); }
+    if(!window.__lastGrade) throw new Error('先に採点してください。');
+    return window.__lastGrade;
+  }
+  function ident(data){
+    const root=$('result');
+    const subject=txt(root&&root.querySelector('.resultSubjectLine'))||txt(root&&root.querySelector('.resultSummarySubject'))||(data.k&&data.k.subject)||'';
+    const exam=txt(root&&root.querySelector('.resultExamLine'))||txt(root&&root.querySelector('.resultSummaryMeta'))||((data.k&&data.k.year?String(data.k.year)+'年度 ':'')+(data.k&&data.k.exam||''));
+    return {subject, exam};
+  }
+  function displayId(q){try{return typeof window.displayId==='function'?window.displayId(q):String(q&&q.id||'');}catch(e){return String(q&&q.id||'');}}
+  function expText(q){try{return typeof window.expText==='function'?window.expText(q):'';}catch(e){return '';}}
+  function statRate(data,q){try{return typeof window.statRateHtml==='function'?stripHtml(window.statRateHtml(data.k,q)):'—';}catch(e){return '—';}}
+  function rowNote(data,r){try{return typeof window.rowNote==='function'?window.rowNote(data.k,r):(r.q&&r.q.note||'');}catch(e){return (r.q&&r.q.note||'');}}
+  function rowCells(data,r){
+    const judge=!r.included?'—':(r.earn===r.pts?'○':(r.earn>0?'△':'×'));
+    return [displayId(r.q),(r.got||[]).join('')||'未入力',expText(r.q),r.included?(r.earn+' / '+r.pts):'対象外',judge,statRate(data,r.q),rowNote(data,r)||'—'];
+  }
+  function stats(data){
+    try{ if(typeof window.sectionStats==='function') return window.sectionStats(data.rows||[]); }catch(e){}
+    return [];
+  }
+  function summary(data){
+    const root=$('result'); const cells=Array.from(root?root.querySelectorAll('.resultSummaryStat'):[]);
+    const a=cells.map(el=>({label:txt(el.querySelector('span')), value:txt(el.querySelector('b'))}));
+    if(a.length) return a;
+    return [{label:'点数',value:Math.round((data.disp||0)*10)/10+' / '+(data.mx||'')},{label:'受験者平均点',value:'—'},{label:'得点率',value:Math.round((data.rate||0)*10)/10+'%'},{label:'未入力',value:String(data.missing||0)}];
+  }
 
-  function findRule(k, rules){
-    const subj = normText(k && k.subject);
-    return rules.find(r => r.names.has(subj));
+  class Page{
+    constructor(){this.ops=[];this.y=MT;}
+    raw(s){this.ops.push(s);}
+    color(c){this.raw(c+'\n');}
+    line(x1,y1,x2,y2){this.raw(LINE_STROKE+' 0.6 w '+x1.toFixed(1)+' '+ptY(y1).toFixed(1)+' m '+x2.toFixed(1)+' '+ptY(y2).toFixed(1)+' l S\n');}
+    rect(x,y,w,h,fill,stroke){this.raw((fill||'1 1 1 rg')+' '+(stroke||LINE_STROKE)+' 0.6 w '+x.toFixed(1)+' '+ptY(y+h).toFixed(1)+' '+w.toFixed(1)+' '+h.toFixed(1)+' re B\n');}
+    text(s,x,y,size,weight,color,align,maxW){
+      s=String(s==null?'':s); if(!s) return;
+      const w=approxWidth(s,size); if(align==='center') x=x-w/2; else if(align==='right') x=x-w;
+      this.raw('BT '+(color||TEXT)+' /F1 '+size.toFixed(1)+' Tf '+(weight?String(weight):'')+' 1 0 0 1 '+x.toFixed(1)+' '+ptY(y+size).toFixed(1)+' Tm <'+utf16hex(s)+'> Tj ET\n');
+    }
+    wrapped(s,x,y,size,color,maxW,lh,maxLines,weight){
+      const lines=wrap(s,size,maxW,maxLines); const step=lh||size*1.35;
+      lines.forEach((l,i)=>this.text(l,x,y+i*step,size,weight||'',color));
+      return lines.length*step;
+    }
   }
-  function isTargetKey(k){
-    return k && String(k.year) === '2025' && String(k.exam || '') === 'other';
+  function addPage(pages){const p=new Page(); pages.push(p); return p;}
+  function drawHeader(p,data){
+    const id=ident(data); p.line(ML,p.y-8,W-MR,p.y-8); p.text('採点結果',ML,p.y,8,'',MUTED); p.text('出力日時',W-MR-54,p.y-15,7,'',MUTED); p.text(nowText(new Date()),W-MR-70,p.y-3,7,'',MUTED); p.y+=20;
+    p.wrapped(id.exam||'採点結果',ML,p.y,17,TEXT,W-ML-MR,20,2,'900'); p.y+= id.exam && approxWidth(id.exam,17)>W-ML-MR ? 42:22;
+    p.wrapped(id.subject,ML,p.y,16,TEXT,W-ML-MR,20,2,'900'); p.y+=34;
   }
-  function setGroup(q, g){
-    if(!g) return false;
-    let changed = false;
-    if(q.problemNumber !== g){ q.problemNumber = g; changed = true; }
-    if(q.group !== g){ q.group = g; changed = true; }
-    return changed;
+  function drawSummary(p,data){
+    const id=ident(data), ss=summary(data); const x=ML,w=W-ML-MR,h=50; p.rect(x,p.y,w,h,'0.98 0.99 1 rg',LINE_STROKE);
+    p.wrapped(id.subject,x+10,p.y+10,12,TEXT,135,15,2,'900'); p.wrapped(id.exam,x+10,p.y+27,7,MUTED,130,9,2,'700');
+    const sx=x+155, sw=(w-165)/4; ss.slice(0,4).forEach((s,i)=>{p.rect(sx+i*sw,p.y+8,sw-5,34,'1 1 1 rg','0.88 0.91 0.96 RG'); p.text(s.label,sx+i*sw+7,p.y+14,7,'700',MUTED); p.text(s.value,sx+i*sw+7,p.y+26,12,'900',TEXT);});
+    p.y+=h+10;
   }
-  function patchKey(k){
-    if(!isTargetKey(k) || !Array.isArray(k.questions)) return false;
-    const seqRule = findRule(k, SEQ_RULES);
-    const rangeRule = findRule(k, RANGE_RULES);
-    if(!seqRule && !rangeRule) return false;
-    let changed = false;
-    k.questions.forEach((q, i) => {
-      const g = seqRule ? groupBySeq(i, seqRule.ranges) : groupByRanges(q.id, rangeRule.ranges);
-      if(setGroup(q, g)) changed = true;
+  function drawRadar(p,data){
+    const st=stats(data); if(!st.length) return;
+    const x=ML,w=W-ML-MR,h=160; p.rect(x,p.y,w,h,'0.985 0.99 1 rg',LINE_STROKE); p.text('問題番号別正答率',x+9,p.y+10,11,'900',TEXT);
+    const cx=x+150, cy=p.y+87, r=57, n=st.length;
+    for(const t of [0.25,0.5,0.75,1]){let path=''; st.forEach((s,i)=>{const a=-Math.PI/2+Math.PI*2*i/n, px=cx+Math.cos(a)*r*t, py=cy+Math.sin(a)*r*t; path+=(i?' l ':'m ')+px.toFixed(1)+' '+ptY(py).toFixed(1)+' ';}); p.raw(LINE_STROKE+' 0.5 w '+path+' h S\n');}
+    st.forEach((s,i)=>{const a=-Math.PI/2+Math.PI*2*i/n, px=cx+Math.cos(a)*r, py=cy+Math.sin(a)*r; p.raw('0.78 0.82 0.89 RG 0.5 w '+cx.toFixed(1)+' '+ptY(cy).toFixed(1)+' m '+px.toFixed(1)+' '+ptY(py).toFixed(1)+' l S\n'); p.text(s.group,cx+Math.cos(a)*(r+18),cy+Math.sin(a)*(r+18)-4,7,'700',TEXT,'center');});
+    let poly=''; st.forEach((s,i)=>{const a=-Math.PI/2+Math.PI*2*i/n, rate=s.max?Math.max(0,Math.min(1,s.earn/s.max)):0, px=cx+Math.cos(a)*r*rate, py=cy+Math.sin(a)*r*rate; poly+=(i?' l ':'m ')+px.toFixed(1)+' '+ptY(py).toFixed(1)+' ';}); p.raw('0.18 0.37 0.82 RG 0.7 0.79 1 rg 1.4 w '+poly+' h B\n');
+    const tx=x+300, ty=p.y+35, cols=[55,55,45,55,35]; drawSmallTable(p,tx,ty,cols,['問題番号','得点','得点率','正答項目','未入力'],st.map(s=>[s.group,Math.round(s.earn*10)/10+'/'+s.max,(s.max?Math.round(s.earn/s.max*1000)/10:0)+'%',s.correct+'/'+s.items,String(s.missing)]),13,7);
+    p.y+=h+10;
+  }
+  function drawSmallTable(p,x,y,cols,heads,rows,rh,fs){
+    const tw=cols.reduce((a,b)=>a+b,0); p.rect(x,y,tw,rh,'0.97 0.98 0.99 rg','0.97 0.98 0.99 RG'); let xx=x; heads.forEach((h,i)=>{p.text(h,xx+3,y+4,fs,'900',MUTED); xx+=cols[i];}); y+=rh;
+    rows.forEach(r=>{xx=x; r.forEach((c,i)=>{p.text(c,xx+3,y+4,fs,'',TEXT); xx+=cols[i];}); p.line(x,y+rh, x+tw,y+rh); y+=rh;});
+  }
+  function drawResultHeader(p,continued){
+    if(continued){p.text('全問一覧（続き）',ML,p.y,12,'900',TEXT); p.y+=18;}
+    const cols=[82,72,132,52,36,72,W-ML-MR-82-72-132-52-36-72]; const heads=['番号','自分','正解','得点','判定','受験者正答率','注記'];
+    p.rect(ML,p.y,W-ML-MR,18,'0.97 0.98 0.99 rg','0.97 0.98 0.99 RG'); let x=ML; heads.forEach((h,i)=>{p.text(h,i===4?x+cols[i]/2:x+4,p.y+6,7,'900',MUTED,i===4?'center':'left'); x+=cols[i];}); p.y+=18; return cols;
+  }
+  function drawRows(pages,p,data){
+    let cols=drawResultHeader(p,false); const rows=(data.rows||[]).filter(r=>r.included!==false);
+    rows.forEach(r=>{
+      const cells=rowCells(data,r); const noteLines=wrap(cells[6],7,cols[6]-6,3).length; const ansLines=wrap(cells[2],7,cols[2]-6,2).length; const rh=Math.max(18, 8+Math.max(noteLines,ansLines)*9);
+      if(p.y+rh>CONTENT_BOTTOM){p=addPage(pages); cols=drawResultHeader(p,true);} let x=ML;
+      cells.forEach((c,i)=>{const color=i===4?(c==='○'?GOOD:(c==='△'?WARN:(c==='×'?BAD:MUTED))):(i===6?MUTED:TEXT); const size=i===4?12:7; if(i===4) p.text(c,x+cols[i]/2,p.y+5,size,'900',color,'center'); else p.wrapped(c,x+4,p.y+5,size,color,cols[i]-8,i===6?9:9,i===0?1:(i===6?3:2),i===0?'700':''); x+=cols[i];});
+      p.line(ML,p.y+rh,W-MR,p.y+rh); p.y+=rh;
     });
-    return changed;
+    return p;
   }
-  function patchKeys(keys){
-    if(!Array.isArray(keys)) return false;
-    let changed = false;
-    for(const k of keys){ if(patchKey(k)) changed = true; }
-    return changed;
+  function drawMissed(pages,p,data){
+    const bad=(data.rows||[]).filter(r=>r.included && (!r.got.length || r.earn<r.pts)); if(!bad.length) return p;
+    if(p.y+80>CONTENT_BOTTOM){p=addPage(pages);} p.rect(ML,p.y,W-ML-MR,80,'1 0.97 0.965 rg','0.94 0.78 0.76 RG'); p.text('間違えた問題・未入力',ML+10,p.y+10,12,'900',BAD);
+    let x=ML+10,y=p.y+28,cw=82,ch=28; bad.slice(0,30).forEach((r,i)=>{p.rect(x,y,cw,ch,'1 1 1 rg','0.94 0.82 0.80 RG'); p.wrapped(displayId(r.q)+' '+(!r.got.length?'未入力':(r.earn>0?'△':'×')),x+4,y+5,6.5,BAD,cw-8,8,1,'900'); p.wrapped('得点:'+r.earn+'/'+r.pts,x+4,y+15,6,TEXT,cw-8,8,1,''); x+=cw+5; if(x+cw>W-MR){x=ML+10; y+=ch+5;}});
+    p.y+=80+10; return p;
   }
-  function applyPatch(){
+  function buildPages(data){const pages=[]; let p=addPage(pages); drawHeader(p,data); drawSummary(p,data); drawRadar(p,data); p=drawRows(pages,p,data); p=drawMissed(pages,p,data); pages.forEach((pg,i)=>{pg.text((i+1)+' / '+pages.length,W/2,FOOTER_Y,8,'700',TEXT,'center');}); return pages;}
+
+  const enc=new TextEncoder();
+  function ascii(s){return enc.encode(String(s));}
+  function makePdf(pages){
+    const parts=[]; let len=0; const offsets=[0]; function add(x){if(typeof x==='string')x=ascii(x); parts.push(x); len+=x.byteLength||x.length||0;} function obj(n,body){offsets[n]=len; add(n+' 0 obj\n'); body.forEach(add); add('\nendobj\n');}
+    add('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
+    const fontObj=3+pages.length*2;
+    const kids=pages.map((_,i)=>(3+i*2)+' 0 R').join(' ');
+    obj(1,['<< /Type /Catalog /Pages 2 0 R >>']); obj(2,['<< /Type /Pages /Kids [',kids,'] /Count ',String(pages.length),' >>']);
+    pages.forEach((p,i)=>{const page=3+i*2, content=page+1, stream=p.ops.join(''); obj(page,['<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ',W.toFixed(3),' ',H.toFixed(3),'] /Resources << /Font << /F1 ',fontObj,' 0 R >> >> /Contents ',content,' 0 R >>']); obj(content,['<< /Length ',String(ascii(stream).length),' >>\nstream\n',stream,'endstream']);});
+    obj(fontObj,['<< /Type /Font /Subtype /Type0 /BaseFont /HeiseiKakuGo-W5 /Encoding /UniJIS-UCS2-H /DescendantFonts [',fontObj+1,' 0 R] >>']);
+    obj(fontObj+1,['<< /Type /Font /Subtype /CIDFontType0 /BaseFont /HeiseiKakuGo-W5 /CIDSystemInfo << /Registry (Adobe) /Ordering (Japan1) /Supplement 2 >> >>']);
+    const xref=len, max=fontObj+1; add('xref\n0 '+(max+1)+'\n0000000000 65535 f \n'); for(let i=1;i<=max;i++) add(String(offsets[i]).padStart(10,'0')+' 00000 n \n'); add('trailer\n<< /Size '+(max+1)+' /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF');
+    return new Blob(parts,{type:'application/pdf'});
+  }
+  async function exportIOSVector(){
     try{
-      if(typeof window.load !== 'function') return false;
-      const keys = window.load();
-      const changed = patchKeys(keys);
-      if(changed){
-        console.info('Applied data patch: ' + PATCH_NAME);
-        if(typeof window.refresh === 'function') window.refresh();
-      }
-      return true;
-    }catch(e){
-      console.warn('Data patch failed: ' + PATCH_NAME, e);
-      return false;
-    }
+      const data=getData(); const pages=buildPages(data); const blob=makePdf(pages); const k=data.k||{}; const fn='採点結果_'+escFile((k.year?String(k.year)+'_':'')+(k.subject||''))+'_'+stamp(new Date())+'.pdf';
+      const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=fn; a.rel='noopener'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),30000);
+    }catch(e){console.error(e); try{alert('iPhone Safari用PDF出力に失敗しました: '+(e&&e.message?e.message:e));}catch(_){}}
   }
-  let tries = 0;
-  const timer = setInterval(function(){
-    tries += 1;
-    if(applyPatch() || tries >= 80) clearInterval(timer);
-  }, 150);
-  if(document.readyState !== 'loading') setTimeout(applyPatch, 0);
-  else document.addEventListener('DOMContentLoaded', applyPatch, {once:true});
+  window.exportResultPdf=exportIOSVector;
+  document.addEventListener('click',function(e){const btn=e.target&&e.target.closest&&e.target.closest('#exportPdfResult'); if(!btn) return; e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation(); exportIOSVector();},true);
+  console.info('PDF export renderer loaded: '+VERSION);
 })();
