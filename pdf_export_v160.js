@@ -1,4 +1,4 @@
-/* v168 hybrid PDF exporter
+/* v170 hybrid PDF exporter
  * - iPhone/iPad: v163 print/PDF fallback route, with v165 title/quality adjustments
  * - Android/Chrome and other non-iOS: v165 manual-canvas direct PDF route
  * index.html is not modified. Upload this file as pdf_export_v160.js.
@@ -6,7 +6,7 @@
 (function(){
   'use strict';
 
-  const VERSION = 'v168-ios-standalone-print-fallback-title-quality';
+  const VERSION = 'v170-ios-fallback-title-quality-no-layout-overfix';
   const PAGE_W = 1240;
   const PAGE_H = 1754;
   const M_LEFT = 62;
@@ -419,40 +419,21 @@
       overlay.appendChild(style);
       const toolbar = document.createElement('div');
       toolbar.className = 'pdfFallbackToolbar';
+      const ios = isIOSWebKit();
+      const iosGuide = 'iPhone/iPadでは、この画面自体がPDF保存用です。右上または下部の共有ボタンから「プリント」または「ファイルに保存」を選んでください。画面が余分に分かれないよう、別の印刷専用画面は開きません。';
+      const normalGuide = '「PDF保存 / 印刷」を押して、印刷画面からPDF保存またはプリントしてください。';
       toolbar.innerHTML = '<div class="pdfFallbackTitle">PDF保存 / 印刷</div>' +
-        '<div class="pdfFallbackText">' + esc(message) + (detail ? '<br>理由: ' + esc(detail) : '') + '<br>「PDF保存 / 印刷」を押して、印刷画面からPDF保存またはプリントしてください。</div>' +
-        '<div class="pdfFallbackBtns"><button type="button" class="pdfFallbackPrint">PDF保存 / 印刷</button><button type="button" class="pdfFallbackClose">閉じる</button></div>';
+        '<div class="pdfFallbackText">' + esc(message) + (detail ? '<br>理由: ' + esc(detail) : '') + '<br>' + esc(ios ? iosGuide : normalGuide) + '</div>' +
+        '<div class="pdfFallbackBtns">' + (ios ? '' : '<button type="button" class="pdfFallbackPrint">PDF保存 / 印刷</button>') + '<button type="button" class="pdfFallbackClose">閉じる</button></div>';
       const sheet = document.createElement('div');
       sheet.className = 'pdfFallbackSheet';
       sheet.innerHTML = pageBoxes;
       overlay.appendChild(toolbar);
       overlay.appendChild(sheet);
       document.body.appendChild(overlay);
-      function openStandalonePrintPage(){
-        const docHtml = '<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>採点結果PDF保存</title><style>' + fallbackCss + '</style></head><body><div id="__pdfPrintFallbackOverlay"><div class="pdfFallbackToolbar"><div class="pdfFallbackTitle">PDF保存 / 印刷</div><div class="pdfFallbackText">この画面で印刷・PDF保存します。自動で印刷画面が出ない場合は、下のボタンまたはブラウザの共有ボタンから「プリント」「ファイルに保存」を選んでください。</div><div class="pdfFallbackBtns"><button type="button" class="pdfFallbackPrint" onclick="window.print()">PDF保存 / 印刷</button><button type="button" class="pdfFallbackClose" onclick="window.close()">閉じる</button></div></div><div class="pdfFallbackSheet">' + pageBoxes + '</div></div></body></html>';
-        let win = null;
-        try{ win = window.open('', '_blank'); }catch(e){ win = null; }
-        if(win && win.document){
-          win.document.open();
-          win.document.write(docHtml);
-          win.document.close();
-          setTimeout(function(){
-            try{ win.focus(); win.print(); }catch(e){}
-          }, 450);
-          return true;
-        }
-        return false;
-      }
       const printBtn = overlay.querySelector('.pdfFallbackPrint');
       const closeBtn = overlay.querySelector('.pdfFallbackClose');
-      if(printBtn) printBtn.addEventListener('click', function(){
-        const opened = openStandalonePrintPage();
-        if(!opened){
-          try{ window.print(); }catch(e){}
-          const note = overlay.querySelector('.pdfFallbackText');
-          if(note) note.innerHTML += '<br><b>別画面を開けませんでした。</b>このブラウザでは、右上/下部の共有ボタンから「プリント」または「ファイルに保存」を選んでください。';
-        }
-      });
+      if(printBtn) printBtn.addEventListener('click', function(){ try{ window.print(); }catch(e){} });
       if(closeBtn) closeBtn.addEventListener('click', removeFallbackOverlay);
     } catch(err){
       console.error(err);
@@ -499,7 +480,7 @@ if(!__ctPdfIsIOSWebKitV166()){
 (function(){
   'use strict';
 
-  const VERSION = 'v168-hybrid-android-direct-ios-standalone-fallback';
+  const VERSION = 'v170-hybrid-android-direct-ios-fallback-no-layout-overfix';
   const PAGE_W = 1240;
   const PAGE_H = 1754;
   const RENDER_SCALE = 1.55;
