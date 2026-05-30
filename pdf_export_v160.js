@@ -62,7 +62,7 @@
       '.metrics{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;margin:12px 0!important}',
       '.metric{background:#f8faff!important;border:1px solid #dfe7fb!important;border-radius:14px!important;padding:12px!important}',
       '.metric b{display:block!important;font-size:23px!important}',
-      '.radarPanel{margin-top:14px!important;margin-bottom:20px!important;padding:14px 14px 54px!important;border:1px solid #d9deea!important;border-radius:18px!important;background:#fbfcff!important;box-shadow:none!important;overflow:hidden!important}',
+      '.radarPanel{margin-top:14px!important;margin-bottom:20px!important;padding:14px 14px 40px!important;border:1px solid #d9deea!important;border-radius:18px!important;background:#fbfcff!important;box-shadow:none!important;overflow:hidden!important}',
       '.radarPanel h3{margin:0 0 8px!important;font-size:21px!important;font-weight:900!important}',
       '.radarWrap{display:grid!important;grid-template-columns:430px minmax(0,1fr)!important;gap:24px!important;align-items:center!important}',
       '.radarSvg{width:405px!important;max-width:405px!important;height:405px!important;max-height:405px!important;margin:0!important;display:block!important}',
@@ -673,7 +673,7 @@ if(!__ctPdfIsIOSWebKitV166()){
   function drawRadarPanel(ctx, data, y){
     const stats = getStatsFromRows(data);
     if(!stats.length) return y;
-    const x = M_LEFT, w = PAGE_W-M_LEFT-M_RIGHT, h = 455;
+    const x = M_LEFT, w = PAGE_W-M_LEFT-M_RIGHT, h = 440;
     fillRound(ctx, x, y, w, h, 18, '#fbfcff', LINE);
     drawWrapped(ctx, '問題番号別正答率', x+16, y+16, 350, 21, '900', TEXT, 26, 1);
     const cx = x + 215, cy = y + 210, r = 142;
