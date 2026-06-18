@@ -14,15 +14,14 @@
 <body>
 <div class="boot">
   <h1>読み込み中</h1>
-  <p>既存データに、2026年5月実施ベネッセ共通テスト模試の正解データを統合しています。</p>
+  <p>正解データを読み込んでいます。</p>
 </div>
 <script>
 (function(){
   const BASE_INDEX_URL = "https://raw.githubusercontent.com/aykuno/exam.kyoutu.selfcheck/43fde43c8481d97281a6bceed38db10a2fa63990/index.html";
-  const MOCK_FILE = 'answer_keys_mock_benesse_2026_05_verified_v2.json';
   const MOCK_EXAM_ID = 'mock-benesse-2026-05';
   const MOCK_EXAM_LABEL = '模擬試験-2026年5月実施ベネッセ共通テスト模試';
-  const UPDATE_TIME_TEXT = '最終更新日時：2026/5/30 07:15';
+  const UPDATE_TIME_TEXT = '最終更新日時：2026/6/18 08:15';
 
   function fail(message){
     document.body.innerHTML = '<pre style="white-space:pre-wrap;margin:20px;padding:16px;border-radius:12px;background:#0b1020;color:#e5e7eb">' + message + '</pre>';
@@ -42,7 +41,7 @@
 
   function patchIndex(html){
     html = html.replace(/最終更新日時：[^<]+/, UPDATE_TIME_TEXT);
-    html = html.replace(/<b>バージョン：v\d+<\/b>/, '<b>バージョン：v160</b>');
+    html = html.replace(/<b>バージョン：v\d+<\/b>/, '<b>バージョン：v179</b>');
 
     html = html.replace(
       "const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）'};",
@@ -50,9 +49,8 @@
     );
 
     const oldInit = "async function init(){const res=await fetch('answer_keys_verified.json',{cache:'no-store'});const obj=await res.json();BASE_KEYS=obj.keys||[];try{const sres=await fetch('statistics_final.json',{cache:'no-store'});if(sres.ok)STAT_DATA=await sres.json();}catch(e){STAT_DATA={entries:[]};}refresh();}";
-    const newInit = "async function init(){const res=await fetch('answer_keys_verified.json',{cache:'no-store'});const obj=await res.json();BASE_KEYS=obj.keys||[];try{const mres=await fetch('" + MOCK_FILE + "',{cache:'no-store'});if(mres.ok){const mock=await mres.json();const mockKeys=mock.keys||[];const ids=new Set(mockKeys.map(k=>[String(k.year),k.exam,k.subject].join('||')));BASE_KEYS=BASE_KEYS.filter(k=>!ids.has([String(k.year),k.exam,k.subject].join('||'))).concat(mockKeys);}}catch(e){console.warn('mock keys load skipped',e);}try{const sres=await fetch('statistics_final.json',{cache:'no-store'});if(sres.ok)STAT_DATA=await sres.json();}catch(e){STAT_DATA={entries:[]};}refresh();}";
+    // v179: 模試データは answer_keys_verified.json に統合済み。別JSONをfetchして実行時結合しない。
     if (!html.includes(oldInit)) throw new Error('index.html の init 関数を見つけられませんでした。');
-    html = html.replace(oldInit, newInit);
 
     const oldLoadSave = "function keySig(k){return [String(k.year),k.exam,k.subject].join('||')}function load(){return BASE_KEYS.map(k=>JSON.parse(JSON.stringify(k)));}function save(keys){/* 正解データのユーザー追加機能はv80で画面から削除。互換用に関数だけ残す。 */}";
     const newLoadSave = "function keySig(k){return [String(k.year),k.exam,k.subject].join('||')}function load(){return BASE_KEYS}function save(keys){/* 正解データのユーザー追加機能はv80で画面から削除。互換用に関数だけ残す。 */}";
@@ -138,7 +136,7 @@ function exportResultPdf(){if(!window.__lastGrade||window.__lastGrade.sig!==selI
     .then(r => { if(!r.ok) throw new Error('base index fetch failed: ' + r.status); return r.text(); })
     .then(html => patchIndex(html))
     .then(html => { document.open(); document.write(html); document.close(); setTimeout(injectV158PdfExporter, 0); })
-    .catch(err => fail('読み込みに失敗しました。\n' + err.message + '\n\nGitHubに ' + MOCK_FILE + ' と index.html が置かれているか確認してください。'));
+    .catch(err => fail('読み込みに失敗しました。\n' + err.message + '\n\nGitHubに index.html と answer_keys_verified.json が置かれているか確認してください。'));
 })();
 </script>
 </body>
