@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>ユーザー登録データ作成テスト</title>
+<style>
+:root{--bg:#f6f7fb;--panel:#fff;--text:#1d2433;--muted:#647086;--line:#d9deea;--accent:#2f5fd0;--bad:#b3261e;--good:#137333;--warn:#8a5b00;--soft:#f8faff}*{box-sizing:border-box}html{touch-action:manipulation;-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.55}header{padding:22px 16px;background:linear-gradient(135deg,#1e3a8a,#3454d1);color:#fff}header div,main,footer{max-width:1120px;margin:auto}h1{font-size:25px;margin:0 0 6px}header p{margin:0;color:#e5eaff}main{padding:16px;display:grid;gap:14px}section{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 24px rgba(22,34,64,.06);padding:16px}h2{font-size:20px;margin:0 0 10px}h3{font-size:16px;margin:14px 0 8px}label{display:block;margin:10px 0 6px;font-size:13px;font-weight:800}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fff}textarea{min-height:130px;resize:vertical;font-family:ui-monospace,Consolas,monospace;font-size:14px}button{border:0;border-radius:12px;padding:10px 14px;background:#e8ecf6;cursor:pointer;font-weight:900;touch-action:manipulation;-webkit-user-select:none;user-select:none}button.primary{background:var(--accent);color:#fff}button.danger{background:#ffe7e3;color:#9f1d14}.muted{font-size:13px;color:var(--muted)}.box{background:#f8faff;border:1px solid #dfe7fb;border-radius:14px;padding:12px}.notice{background:#fff3cd;border:2px solid #e0a800;color:#3b2a00;border-radius:14px;padding:12px;font-weight:800}.tabs{display:flex;gap:8px;flex-wrap:wrap}.tab.active{background:#2f5fd0;color:#fff}.panel{display:none}.panel.active{display:block}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.btns{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}.current{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}.currentTitle{font-size:22px;font-weight:900}.currentAns{font-family:ui-monospace,Consolas,monospace;background:#f8fafc;border:1px solid #d9deea;border-radius:12px;padding:8px 10px;min-width:120px;text-align:center;font-size:18px;font-weight:900}.keys{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.keys button{min-width:43px;height:38px;padding:0}.keys button.selected{background:#2f5fd0;color:#fff}.slots{display:flex;flex-wrap:wrap;gap:6px;max-height:190px;overflow:auto;margin-top:12px}.slot{border:1px solid #dfe7fb;background:#f8faff;border-radius:11px;padding:6px 8px;font-size:12px;text-align:left}.slot.active{border-color:#2f5fd0;box-shadow:0 0 0 2px rgba(47,95,208,.12)}.slot.missing{background:#fff7f6;border-color:#f0c7c1}.slot b{display:block}.warn{border:1px solid #ead7a0;background:#fffaf0;color:#533f04;border-radius:12px;padding:9px;margin-top:8px;font-size:13px;font-weight:800}.okBox{border:1px solid #cfe8d4;background:#f3faf5;color:#137333;border-radius:12px;padding:9px;margin-top:8px;font-size:13px;font-weight:900}.savedList{display:grid;gap:8px}.savedItem{border:1px solid #dfe7fb;background:#fff;border-radius:12px;padding:10px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center}.savedTitle{font-weight:900}.savedMeta{font-size:12px;color:#647086}.smallBtns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.smallBtns button{padding:7px 9px;font-size:12px}pre{white-space:pre-wrap;overflow:auto;background:#0b1020;color:#e5e7eb;border-radius:12px;padding:12px;font-size:12px;max-height:280px}table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}th,td{border-bottom:1px solid var(--line);padding:7px 5px;text-align:left;vertical-align:top}th{background:#f7f8fc;color:#4a556b;font-size:12px}.privacy{font-size:12px;color:#647086;font-weight:800;margin-top:8px}footer{padding:0 16px 28px;color:#647086;font-size:12px}@media(max-width:760px){.grid4,.grid3,.grid2{grid-template-columns:1fr}.current{grid-template-columns:1fr}.currentAns{text-align:left}.savedItem{grid-template-columns:1fr}.smallBtns{justify-content:flex-start}.keys button{min-width:38px}section{padding:12px}h1{font-size:23px}}
+</style>
+</head>
+<body>
+<header><div><h1>ユーザー登録データ作成テスト</h1><p>本番の採点ページとは別の検証用ページです。index.html には触りません。</p></div></header>
+<main>
+<section class="notice">このページはユーザー登録機能の単体テスト用です。保存先はこのブラウザ内の localStorage だけで、公式データには一切書き込みません。</section>
+<section>
+<h2>解答キー作成</h2>
+<div class="tabs">
+<button type="button" class="tab active" data-tab="meta">1 基本情報</button>
+<button type="button" class="tab" data-tab="answers">2 正解入力</button>
+<button type="button" class="tab" data-tab="points">3 配点設定</button>
+<button type="button" class="tab" data-tab="check">4 確認・保存</button>
+</div>
+<div id="panelMeta" class="panel active">
+<div class="grid4">
+<div><label>年度</label><input id="year" inputmode="numeric" placeholder="2026"></div>
+<div><label>試験名</label><input id="title" placeholder="2026年7月模試"></div>
+<div><label>科目</label><input id="subject" placeholder="物理"></div>
+<div><label>満点</label><input id="maxScore" inputmode="decimal" placeholder="100"></div>
+</div>
+<div class="grid2">
+<div><label>入力ボタン</label><select id="inputMode"><option value="num">数字 0〜9</option><option value="math">数学 －・0〜9</option><option value="info">情報 0〜9・a〜f</option><option value="kana">カタカナ ア〜ン</option></select></div>
+<div><label>標準配点</label><input id="defaultPoints" inputmode="decimal" value="3"></div>
+</div>
+<label>大問構成</label>
+<textarea id="structure" placeholder="第1問 1-8&#10;第2問 9-17&#10;第3問 18-25">第1問 1-10
+第2問 11-20
+第3問 21-30</textarea>
+<div class="btns"><button type="button" class="primary" id="createSlots">解答番号を作成</button><button type="button" id="clearDraft">作成中データをクリア</button></div>
+<div id="metaStatus" class="muted"></div>
+</div>
+<div id="panelAnswers" class="panel">
+<div class="box">
+<div class="current"><div><div id="currentTitle" class="currentTitle">未作成</div><div id="currentSub" class="muted">基本情報で解答番号を作成してください。</div></div><div id="currentAns" class="currentAns">-</div></div>
+<div id="keys" class="keys"></div>
+<div class="btns"><button type="button" id="prevSlot">前へ</button><button type="button" id="nextSlot">次へ</button><button type="button" id="nextBlank">次の未入力へ</button><button type="button" id="multiMode">正解候補を追加：OFF</button><button type="button" class="danger" id="clearSlot">この番号をクリア</button></div>
+<p class="muted">通常はボタンを押すと1つ登録して次へ進みます。「正解候補を追加」をONにすると、1つの解答番号に「2 または 4」のような候補を複数入れられます。</p>
+</div>
+<div id="slotList" class="slots"></div>
+</div>
+<div id="panelPoints" class="panel">
+<div class="grid3"><div><label>開始番号</label><input id="pointStart" inputmode="numeric" placeholder="1"></div><div><label>終了番号</label><input id="pointEnd" inputmode="numeric" placeholder="8"></div><div><label>配点</label><input id="pointValue" inputmode="decimal" placeholder="3"></div></div>
+<label>採点方式</label><select id="pointRule"><option value="each">それぞれ単独で採点</option><option value="group_all">範囲をまとめて完答</option><option value="unordered_all">範囲を順不同完答</option></select>
+<div class="btns"><button type="button" class="primary" id="applyPoints">範囲に適用</button><button type="button" class="danger" id="clearPoints">配点設定を全削除</button></div>
+<div id="pointStatus"></div>
+</div>
+<div id="panelCheck" class="panel">
+<h3>保存前チェック</h3>
+<div id="checkStatus"></div>
+<div class="btns"><button type="button" class="primary" id="saveKey">ユーザー登録データとして保存</button><button type="button" id="makePreview">生成JSONを更新</button><button type="button" id="exportKeys">保存済みをJSON書き出し</button><button type="button" id="importKeys">下のJSONを読み込み</button></div>
+<label>生成JSON / 書き出し・読み込み用JSON</label><textarea id="jsonBox" style="min-height:160px"></textarea>
+<div class="privacy">保存キー：ct-marker-user-answer-keys-v1</div>
+</div>
+</section>
+<section>
+<h2>登録済みユーザーデータ</h2>
+<div id="savedList" class="savedList"></div>
+</section>
+<section>
+<h2>生成プレビュー</h2>
+<div id="preview"></div>
+<pre id="previewJson">未生成</pre>
+</section>
+</main>
+<footer>このページはユーザー登録機能の検証用です。本番ページへ統合する前に、スマホでの作成・保存・再編集・JSON書き出しを確認するためのものです。</footer>
+<script>
+(function(){
+'use strict';
+const STORAGE='ct-marker-user-answer-keys-v1';
+const DRAFT='ct-marker-user-key-builder-test-draft-v1';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>String(s??'').normalize('NFKC').trim().replace(/[−ー―–—－]/g,'-').toLowerCase();
+const state={editingId:null,slots:[],units:[],index:0,multi:false};
+const kana='アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'.split('');
+function readJson(s,f){try{return JSON.parse(s)}catch(e){return f}}
+function readKeys(){const obj=readJson(localStorage.getItem(STORAGE),{keys:[]});return Array.isArray(obj)?obj:(Array.isArray(obj.keys)?obj.keys:[])}
+function writeKeys(keys){localStorage.setItem(STORAGE,JSON.stringify({version:1,updatedAt:new Date().toISOString(),keys:keys||[]}));}
+function meta(){return{year:$('year').value.trim(),title:$('title').value.trim(),subject:$('subject').value.trim(),maxScore:$('maxScore').value.trim(),inputMode:$('inputMode').value,defaultPoints:$('defaultPoints').value.trim()||'3',structure:$('structure').value};}
+function saveDraft(){try{localStorage.setItem(DRAFT,JSON.stringify({editingId:state.editingId,slots:state.slots,units:state.units,index:state.index,multi:state.multi,meta:meta()}));}catch(e){}}
+function loadDraft(){const d=readJson(localStorage.getItem(DRAFT),null);if(!d)return;state.editingId=d.editingId||null;state.slots=Array.isArray(d.slots)?d.slots:[];state.units=Array.isArray(d.units)?d.units:[];state.index=Number(d.index||0);state.multi=!!d.multi;const m=d.meta||{};['year','title','subject','maxScore','inputMode','defaultPoints','structure'].forEach(id=>{if($(id)&&m[id]!=null)$(id).value=m[id];});}
+function tokenList(){const m=$('inputMode').value;if(m==='math')return ['-','0','1','2','3','4','5','6','7','8','9'];if(m==='info')return ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];if(m==='kana')return kana;return ['0','1','2','3','4','5','6','7','8','9'];}
+function parseNums(text){let s=String(text||'').normalize('NFKC').replace(/[〜～ー―–—－]/g,'-').replace(/[，、]/g,',').trim();if(/^\d+\s*-\s*\d+$/.test(s)){let parts=s.split('-').map(x=>Number(x.trim()));let a=parts[0],b=parts[1];if(a>b){const t=a;a=b;b=t;}return Array.from({length:b-a+1},(_,i)=>String(a+i));}return s.split(/[\s,]+/).map(x=>x.trim()).filter(Boolean);}
+function parseStructure(){const lines=$('structure').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);const slots=[];let seq=1;for(const line of lines){const m=line.match(/^(.+?)\s+([0-9０-９,，、\s\-－〜～ー―–—]+)$/);const group=m?m[1].trim():'第1問';const nums=parseNums(m?m[2]:line);for(const label of nums){slots.push({sid:'s'+seq++,problemNumber:group,label:String(label),correct:[]});}}return slots;}
+function currentSlot(){return state.slots[state.index]||null;}
+function correctText(s){return s&&s.correct&&s.correct.length?s.correct.join(' または '):'未設定';}
+function setTab(name){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));const p=$('panel'+name.charAt(0).toUpperCase()+name.slice(1));if(p)p.classList.add('active');render();}
+function renderKeys(){const s=currentSlot();$('keys').innerHTML=tokenList().map(t=>'<button type="button" data-token="'+esc(t)+'" class="'+(s&&s.correct&&s.correct.includes(norm(t))?'selected':'')+'">'+esc(t==='-'?'－':t)+'</button>').join('');}
+function renderSlots(){$('slotList').innerHTML=state.slots.map((s,i)=>'<button type="button" class="slot '+(i===state.index?'active ':'')+(!(s.correct&&s.correct.length)?'missing':'')+'" data-i="'+i+'"><b>'+esc(s.problemNumber+'-'+s.label)+'</b>'+esc(correctText(s))+'</button>').join('');}
+function unitLabel(u){const ss=u.slotIds.map(id=>state.slots.find(s=>s.sid===id)).filter(Boolean);if(!ss.length)return '';const range=ss.length===1?ss[0].label:ss[0].label+'〜'+ss[ss.length-1].label;const rule=u.rule==='unordered_all'?'順不同完答':(u.rule==='group_all'?'完答':'単独');return range+'：'+u.points+'点 / '+rule;}
+function checkHtml(){const pointTotal=state.units.reduce((a,u)=>a+Number(u.points||0),0);const max=Number($('maxScore').value||0);const missing=state.slots.filter(s=>!(s.correct&&s.correct.length)).map(s=>s.label);const scored=new Set(state.units.flatMap(u=>u.slotIds));const unscored=state.slots.filter(s=>!scored.has(s.sid)).map(s=>s.label);let html='<div class="box">解答番号：<b>'+state.slots.length+'</b>個 / 採点単位：<b>'+state.units.length+'</b>個 / 配点合計：<b>'+pointTotal+'</b>点'+(max?' / 満点：<b>'+max+'</b>点':'')+'</div>';if(state.slots.length&&missing.length===0&&unscored.length===0&&(!max||Math.abs(max-pointTotal)<0.001))html+='<div class="okBox">保存前チェックに大きな問題はありません。</div>';if(max&&Math.abs(max-pointTotal)>0.001)html+='<div class="warn">配点合計が満点と一致していません。</div>';if(missing.length)html+='<div class="warn">未入力：'+esc(missing.slice(0,50).join(', '))+(missing.length>50?' ほか':'')+'</div>';if(unscored.length)html+='<div class="warn">未配点：'+esc(unscored.slice(0,50).join(', '))+(unscored.length>50?' ほか':'')+'</div>';if(state.units.length)html+='<div class="box"><b>配点設定</b><br>'+esc(state.units.map(unitLabel).join(' / '))+'</div>';return html;}
+function renderSaved(){const keys=readKeys();$('savedList').innerHTML=keys.length?keys.map((k,i)=>'<div class="savedItem"><div><div class="savedTitle">'+esc(k.title||String(k.exam||'').replace(/^ユーザー登録：/,''))+' / '+esc(k.subject||'')+'</div><div class="savedMeta">'+esc(k.year||'')+'年度・'+esc(k.questions&&k.questions.length||0)+'採点単位・'+esc(k.maxScore??'')+'点</div></div><div class="smallBtns"><button type="button" data-edit="'+i+'">編集</button><button type="button" data-json="'+i+'">JSON</button><button type="button" class="danger" data-del="'+i+'">削除</button></div></div>').join(''):'<div class="muted">登録済みデータはありません。</div>';}
+function renderPreview(){let key=null;try{key=buildKey(false);}catch(e){}if(!key){$('preview').innerHTML='<div class="muted">生成可能なデータがまだありません。</div>';$('previewJson').textContent='未生成';return;}const rows=(key.questions||[]).map(q=>'<tr><td>'+esc(q.id)+'</td><td>'+esc(q.problemNumber||'')+'</td><td>'+esc(expectedText(q))+'</td><td>'+esc(q.points)+'</td><td>'+esc(q.unordered?'順不同':'通常')+'</td></tr>').join('');$('preview').innerHTML='<div class="box"><b>'+esc(key.year)+'年度 '+esc(key.title)+' / '+esc(key.subject)+'</b><br>満点：'+esc(key.maxScore)+'点 / 採点単位：'+esc(key.questions.length)+'</div><table><thead><tr><th>番号</th><th>大問</th><th>正解</th><th>配点</th><th>方式</th></tr></thead><tbody>'+rows+'</tbody></table>';$('previewJson').textContent=JSON.stringify(key,null,2);}
+function render(){const s=currentSlot();$('currentTitle').textContent=s?s.problemNumber+'　解答番号 '+s.label:'未作成';$('currentSub').textContent=s?(state.index+1)+' / '+state.slots.length:'基本情報で解答番号を作成してください。';$('currentAns').textContent=s?correctText(s):'-';$('multiMode').textContent='正解候補を追加：'+(state.multi?'ON':'OFF');$('metaStatus').textContent=state.slots.length?'解答番号 '+state.slots.length+' 個を作成済み。':'未作成';$('pointStatus').innerHTML=checkHtml();$('checkStatus').innerHTML=checkHtml();renderKeys();renderSlots();renderSaved();renderPreview();saveDraft();}
+function putToken(t){const s=currentSlot();if(!s)return;const v=norm(t);if(state.multi){const set=new Set(s.correct||[]);if(set.has(v))set.delete(v);else set.add(v);s.correct=[...set];}else{s.correct=[v];if(state.index<state.slots.length-1)state.index++;}render();}
+function slotRange(a,b){const an=norm(a),bn=norm(b||a);let ia=state.slots.findIndex(s=>norm(s.label)===an);let ib=state.slots.findIndex(s=>norm(s.label)===bn);if(ia<0||ib<0)return[];if(ia>ib){const t=ia;ia=ib;ib=t;}return state.slots.slice(ia,ib+1);}
+function createSlots(){const slots=parseStructure();if(!slots.length){alert('大問構成を入力してください。');return;}state.editingId=state.editingId||('uk_'+Date.now());state.slots=slots;state.units=[];state.index=0;const p=Number($('defaultPoints').value||3)||0;for(const s of state.slots)state.units.push({slotIds:[s.sid],points:p,rule:'each'});setTab('answers');}
+function applyPoints(){const ss=slotRange($('pointStart').value,$('pointEnd').value);if(!ss.length){alert('開始番号・終了番号を確認してください。');return;}const target=new Set(ss.map(s=>s.sid));state.units=state.units.filter(u=>!u.slotIds.some(id=>target.has(id)));const p=Number($('pointValue').value||0);const rule=$('pointRule').value;if(rule==='each')ss.forEach(s=>state.units.push({slotIds:[s.sid],points:p,rule:'each'}));else state.units.push({slotIds:ss.map(s=>s.sid),points:p,rule});render();}
+function cartesian(arrs){return arrs.reduce((acc,cur)=>acc.flatMap(a=>cur.map(v=>a.concat([v]))),[[]]);}
+function groupName(ss){return ss.every(s=>s.problemNumber===ss[0].problemNumber)?ss[0].problemNumber:ss[0].problemNumber;}
+function buildQuestions(){const map=new Map(state.slots.map(s=>[s.sid,s]));return state.units.map(u=>{const ss=u.slotIds.map(id=>map.get(id)).filter(Boolean);const choices=ss.map(s=>(s.correct&&s.correct.length?s.correct:['']));const opts=cartesian(choices);const id=ss.length===1?ss[0].label:ss[0].label+'-'+ss[ss.length-1].label;const q={id:id,problemNumber:groupName(ss),points:Number(u.points||0)};if(u.rule==='unordered_all')q.unordered=true;if(opts.length>1)q.correctOptions=opts;else if(opts[0]&&opts[0].length>1)q.answers=opts[0];else q.answer=(opts[0]&&opts[0][0])||'';return q;});}
+function buildKey(strict){const m=meta();if(strict&&(!m.year||!m.title||!m.subject)){throw new Error('年度・試験名・科目が必要です。');}if(!state.slots.length||!state.units.length){if(strict)throw new Error('解答番号・配点設定が必要です。');return null;}const questions=buildQuestions();const pts=questions.reduce((a,q)=>a+Number(q.points||0),0);const max=Number(m.maxScore||pts)||pts;return{userKeyId:state.editingId||('uk_'+Date.now()),sourceType:'user',year:/^\d+$/.test(m.year)?Number(m.year):m.year,exam:'ユーザー登録：'+m.title,title:m.title,subject:m.subject,maxScore:max,source:'ユーザー登録（端末内）',notes:'ユーザー登録データ。公式データとは別に、この端末内だけへ保存。',questions:questions,builderRaw:{slots:state.slots,units:state.units,inputMode:m.inputMode,defaultPoints:m.defaultPoints,structure:m.structure},createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()};}
+function expectedText(q){if(q.correctOptions)return q.correctOptions.map(o=>o.join('')).join(' または ');if(q.answers)return q.answers.join('');return q.answer||'';}
+function saveKey(){let key;try{key=buildKey(true);}catch(e){alert(e.message);return;}const missing=state.slots.filter(s=>!(s.correct&&s.correct.length));if(missing.length&&!confirm('未入力の解答番号があります。このまま保存しますか？'))return;let keys=readKeys().filter(k=>k.userKeyId!==key.userKeyId);keys.push(key);writeKeys(keys);state.editingId=key.userKeyId;$('jsonBox').value=JSON.stringify(key,null,2);render();alert('保存しました。');}
+function loadKey(k){const raw=k.builderRaw||{};state.editingId=k.userKeyId||('uk_'+Date.now());state.slots=Array.isArray(raw.slots)?JSON.parse(JSON.stringify(raw.slots)):[];state.units=Array.isArray(raw.units)?JSON.parse(JSON.stringify(raw.units)):[];state.index=0;state.multi=false;$('year').value=k.year||'';$('title').value=k.title||String(k.exam||'').replace(/^ユーザー登録：/,'');$('subject').value=k.subject||'';$('maxScore').value=k.maxScore||'';if(raw.inputMode)$('inputMode').value=raw.inputMode;if(raw.defaultPoints)$('defaultPoints').value=raw.defaultPoints;if(raw.structure)$('structure').value=raw.structure;setTab('answers');}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.tab)));
+$('createSlots').onclick=createSlots;
+$('clearDraft').onclick=()=>{if(confirm('作成中データをクリアしますか？')){state.editingId=null;state.slots=[];state.units=[];state.index=0;state.multi=false;localStorage.removeItem(DRAFT);render();}};
+$('keys').addEventListener('click',e=>{const b=e.target.closest('button[data-token]');if(b)putToken(b.dataset.token);});
+$('slotList').addEventListener('click',e=>{const b=e.target.closest('button[data-i]');if(b){state.index=Number(b.dataset.i);render();}});
+$('prevSlot').onclick=()=>{state.index=Math.max(0,state.index-1);render();};
+$('nextSlot').onclick=()=>{state.index=Math.min(state.slots.length-1,state.index+1);render();};
+$('nextBlank').onclick=()=>{const next=state.slots.findIndex((s,i)=>i>state.index&&!(s.correct&&s.correct.length));const any=state.slots.findIndex(s=>!(s.correct&&s.correct.length));state.index=next>=0?next:Math.max(0,any);render();};
+$('multiMode').onclick=()=>{state.multi=!state.multi;render();};
+$('clearSlot').onclick=()=>{const s=currentSlot();if(s)s.correct=[];render();};
+$('applyPoints').onclick=applyPoints;
+$('clearPoints').onclick=()=>{if(confirm('配点設定を全削除しますか？')){state.units=[];render();}};
+$('saveKey').onclick=saveKey;
+$('makePreview').onclick=()=>{const key=buildKey(false);$('jsonBox').value=key?JSON.stringify(key,null,2):'';render();};
+$('exportKeys').onclick=()=>{$('jsonBox').value=JSON.stringify({version:1,exportedAt:new Date().toISOString(),keys:readKeys()},null,2);};
+$('importKeys').onclick=()=>{try{const obj=JSON.parse($('jsonBox').value);const keys=Array.isArray(obj)?obj:(Array.isArray(obj.keys)?obj.keys:[]);if(!keys.length){alert('読み込めるデータがありません。');return;}writeKeys(keys);render();alert('読み込みました。');}catch(e){alert('JSONを読み込めませんでした。');}};
+$('savedList').addEventListener('click',e=>{const edit=e.target.closest('[data-edit]'),del=e.target.closest('[data-del]'),json=e.target.closest('[data-json]');const keys=readKeys();if(edit){loadKey(keys[Number(edit.dataset.edit)]);return;}if(json){$('jsonBox').value=JSON.stringify(keys[Number(json.dataset.json)],null,2);setTab('check');return;}if(del&&confirm('この登録データを削除しますか？')){keys.splice(Number(del.dataset.del),1);writeKeys(keys);render();}});
+['year','title','subject','maxScore','inputMode','defaultPoints','structure'].forEach(id=>$(id).addEventListener('input',saveDraft));
+loadDraft();render();
+})();
+</script>
+</body>
+</html>
