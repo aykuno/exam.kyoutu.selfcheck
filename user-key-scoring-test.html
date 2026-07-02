@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>ユーザー登録データ採点テスト</title>
+<style>
+*{box-sizing:border-box}html,body{width:100%;max-width:100%;overflow-x:hidden}body{margin:0;background:#f6f7fb;color:#1d2433;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}header{background:#2448b8;color:#fff;padding:20px 16px}header div,main{max-width:1160px;margin:auto}h1{font-size:24px;margin:0 0 5px}h2{margin:0 0 14px}h3{margin:16px 0 10px}main{padding:16px;display:grid;gap:16px;min-width:0}section{background:#fff;border:1px solid #d9deea;border-radius:18px;padding:16px;box-shadow:0 8px 22px #16224012;min-width:0;max-width:100%}label{display:block;margin:10px 0 5px;font-size:13px;font-weight:800}select,input,textarea,button{font:inherit}select,input,textarea{width:100%;border:1px solid #d9deea;border-radius:12px;padding:9px 11px;background:#fff}textarea{min-height:140px;font-family:ui-monospace,Consolas,monospace}button{border:0;border-radius:12px;padding:9px 12px;background:#e8ecf6;font-weight:900;cursor:pointer;color:#1d2433;white-space:nowrap}button.primary{background:#2f5fd0;color:#fff}button.danger{background:#ffe7e3;color:#9f1d14}button.good{background:#e8f5ec;color:#137333}.muted{color:#647086;font-size:13px}.notice{background:#fff3cd;border:2px solid #e0a800;color:#3b2a00;font-weight:800}.grid3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btns,.keys,.slots{display:flex;gap:9px;flex-wrap:wrap;margin:8px 0}.box{background:#f8faff;border:1px solid #dfe7fb;border-radius:14px;padding:11px;margin:10px 0}.warn{background:#fffaf0;border:1px solid #ead7a0;color:#533f04;border-radius:12px;padding:9px;margin:9px 0;font-weight:800}.ok{background:#f3faf5;border:1px solid #cfe8d4;color:#137333;border-radius:12px;padding:9px;margin:9px 0;font-weight:900}.bad{background:#fff7f6;border:1px solid #f0c7c1;color:#9f1d14;border-radius:12px;padding:9px;margin:9px 0;font-weight:900}.current{display:grid;grid-template-columns:minmax(0,1fr) minmax(110px,170px);gap:12px;align-items:center;background:#f8faff;border:1px solid #dfe7fb;border-radius:16px;padding:14px;margin:10px 0}.current b{font-size:20px}.current input{font-family:ui-monospace,Consolas,monospace;font-size:18px;font-weight:900;text-align:center}.keys{position:sticky;top:0;z-index:1200;background:#fff;border:1px solid #cbdcff;border-radius:14px;padding:8px;box-shadow:0 6px 14px #16224016}.keys button{min-width:46px;height:40px;padding:0}.slot{border:1px solid #dfe7fb;background:#f8faff;border-radius:12px;padding:7px 9px;font-size:13px;text-align:left;line-height:1.35;min-width:88px}.slot.active{border-color:#2f5fd0;box-shadow:0 0 0 2px #2f5fd020}.slot.blank{background:#fffaf0}.slot.correct{background:#f3faf5;border-color:#cfe8d4}.slot.wrong{background:#fff7f6;border-color:#f0c7c1}.slot small{display:block;color:#647086}.tablewrap{display:block;width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:10px}.resTable{min-width:920px;width:max-content;border-collapse:collapse;font-size:13px}.resTable th,.resTable td{border-bottom:1px solid #d9deea;padding:9px 8px;text-align:left;vertical-align:middle}.resTable th{background:#f7f8fc;color:#4a556b}.pill{display:inline-block;border:1px solid #d9deea;border-radius:999px;padding:3px 8px;background:#fff;font-weight:900}.pill.okp{color:#137333;border-color:#cfe8d4;background:#f3faf5}.pill.ngp{color:#9f1d14;border-color:#f0c7c1;background:#fff7f6}.pill.blankp{color:#533f04;border-color:#ead7a0;background:#fffaf0}.scoreBox{font-size:24px;font-weight:900}.scoreBox small{font-size:13px;color:#647086}.summaryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.summaryCell{background:#f8faff;border:1px solid #dfe7fb;border-radius:14px;padding:10px}.summaryCell b{font-size:18px}.debug{white-space:pre-wrap;font-family:ui-monospace,Consolas,monospace;font-size:12px;max-height:260px;overflow:auto;background:#0b1020;color:#e5e7eb;border-radius:12px;padding:12px}@media(max-width:760px){header{padding:16px 12px}h1{font-size:21px}main{padding:10px;gap:12px}section{padding:12px;border-radius:14px}.grid3,.grid2,.current,.summaryGrid{grid-template-columns:1fr}.current input{text-align:left}.keys{top:0;padding:7px;gap:7px}.keys button{min-width:42px}.resTable{min-width:860px}.scoreBox{font-size:22px}}
+</style>
+</head>
+<body>
+<header><div><h1>ユーザー登録データ採点テスト</h1><p>保存済みユーザー登録データを読み込み、正誤判定だけを検証します。</p></div></header>
+<main>
+<section class="notice">本番 index.html は未変更。公式データにも書き込みません。保存済みキー：ct-marker-user-answer-keys-v1</section>
+
+<section>
+<h2>1 採点データ選択</h2>
+<div class="grid3">
+  <div><label>保存済みユーザーデータ</label><select id="keySelect"></select></div>
+  <div><label>入力モード</label><select id="mode"><option value="num">数字 0〜9</option><option value="math">数学 －・0〜9</option><option value="info">情報 0〜9・a〜f</option><option value="kana">カタカナ ア〜ン</option></select></div>
+  <div><label>表示</label><select id="showFilter"><option value="all">全番号</option><option value="blank">未入力のみ</option><option value="wrong">誤答のみ</option></select></div>
+</div>
+<div class="btns"><button id="load" class="primary">このデータを読み込む</button><button id="score" class="good">採点する</button><button id="clearAns" class="danger">受験者解答をクリア</button><button id="reloadKeys">保存データ再読込</button></div>
+<div id="keyInfo" class="box muted">保存済みデータを選択してください。</div>
+
+<h3>JSONから読み込む</h3>
+<p class="muted">別端末で作ったJSONもここに貼り付ければ、このブラウザへ保存して採点できます。単体JSON、または {keys:[...]} 形式に対応。</p>
+<textarea id="importJson" placeholder="JSONを貼り付け"></textarea>
+<div class="btns"><button id="importBtn">JSONを保存済みデータへ読み込み</button></div>
+<div id="msg"></div>
+</section>
+
+<section>
+<h2>2 受験者解答入力</h2>
+<div class="current">
+  <div><b id="curTitle">未読込</b><div id="curSub" class="muted">採点データを読み込んでください。</div></div>
+  <input id="curInput" autocomplete="off" inputmode="text" placeholder="解答">
+</div>
+<div id="keys" class="keys"></div>
+<div class="btns"><button id="prev">前へ</button><button id="next">次へ</button><button id="blank">次の未入力へ</button><button id="clearOne" class="danger">この番号をクリア</button><button id="score2" class="good">採点する</button></div>
+<p class="muted">通常はボタン入力で次へ進みます。複数文字の解答が必要な場合は、上の解答欄に直接入力してください。</p>
+<div id="slotList" class="slots"></div>
+</section>
+
+<section>
+<h2>3 採点結果</h2>
+<div id="resultTop" class="box">まだ採点していません。</div>
+<div id="problemSummary"></div>
+<h3>設問別判定</h3>
+<div id="resultTable" class="tablewrap"></div>
+<h3>誤答・未入力一覧</h3>
+<div id="wrongList" class="box muted">まだ採点していません。</div>
+<details><summary>判定ロジック確認</summary>
+<div class="box">
+<p>単独：その解答番号が正解候補のいずれかと一致すれば得点。</p>
+<p>まとめて完答：グループ内の全スロットが、順番通りすべて一致した場合のみ得点。</p>
+<p>順不同完答：グループ内の解答を並べ替えて、正解候補の組と多重集合として一致した場合のみ得点。重複値も区別します。</p>
+<p>複数正解候補：各スロットの候補を直積展開して判定。例：Aが1/2、Bが3/4なら、[1,3],[1,4],[2,3],[2,4] を正解候補として扱います。</p>
+</div>
+</details>
+</section>
+</main>
+
+<script>
+(()=>{'use strict';
+const STORE='ct-marker-user-answer-keys-v1';
+const DRAFT='ct-marker-user-scoring-test-answers-v1';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>String(s??'').normalize('NFKC').trim().replace(/[−ー―–—－]/g,'-').replace(/\s+/g,'').toLowerCase();
+const KANA='アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'.split('');
+const st={keys:[],key:null,slots:[],units:[],answers:{},idx:0,lastResult:null};
+
+function safeParse(s,f){if(!s)return f;try{return JSON.parse(s)??f}catch(e){return f}}
+function msg(ok,t){$('msg').innerHTML=`<div class="${ok?'ok':'bad'}">${esc(t)}</div>`}
+function readKeys(){const o=safeParse(localStorage.getItem(STORE),{keys:[]});return Array.isArray(o)?o:(o&&Array.isArray(o.keys)?o.keys:[])}
+function writeKeys(a){localStorage.setItem(STORE,JSON.stringify({version:1,updatedAt:new Date().toISOString(),keys:a||[]}))}
+function draftAll(){return safeParse(localStorage.getItem(DRAFT),{})}
+function saveDraft(){if(!st.key)return;const d=draftAll();d[st.key.userKeyId||'current']={answers:st.answers,idx:st.idx,updatedAt:new Date().toISOString()};localStorage.setItem(DRAFT,JSON.stringify(d))}
+function loadDraftForKey(id){const d=draftAll()[id||'current'];if(d&&d.answers){st.answers=d.answers||{};st.idx=Number(d.idx||0)}else{st.answers={};st.idx=0}}
+function detectMode(k){return k?.builderRaw?.inputMode || (String(k?.subject||'').includes('情報')?'info':(String(k?.subject||'').includes('数学')?'math':'num'))}
+function toks(){const m=$('mode').value;if(m==='math')return ['-','0','1','2','3','4','5','6','7','8','9'];if(m==='info')return ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];if(m==='kana')return KANA;return ['0','1','2','3','4','5','6','7','8','9']}
+function label(s){return s?`${s.problemNumber}-${s.label}`:''}
+function cands(s){return Array.isArray(s.correct)?s.correct.map(norm).filter(v=>v!==''):[]}
+function cart(arrs){return arrs.reduce((x,y)=>x.flatMap(p=>y.map(v=>p.concat([v]))),[[]])}
+function sameOrdered(a,b){return a.length===b.length&&a.every((v,i)=>norm(v)===norm(b[i]))}
+function sameUnordered(a,b){if(a.length!==b.length)return false;const x=a.map(norm).sort(),y=b.map(norm).sort();return x.every((v,i)=>v===y[i])}
+function correctOptionsForUnit(u){if(Array.isArray(u.correctOptions)&&u.correctOptions.length)return u.correctOptions.map(o=>Array.isArray(o)?o.map(norm):[norm(o)]);const arrs=u.slotIds.map(id=>{const s=st.slots.find(x=>x.sid===id);const cs=cands(s);return cs.length?cs:['']});return cart(arrs)}
+function answerArrayForUnit(u){return u.slotIds.map(id=>norm(st.answers[id]||''))}
+function answerTextForUnit(u){return u.slotIds.map(id=>st.answers[id]||'').join(u.rule==='unordered'?' / ':'')}
+function correctTextForUnit(u){if(Array.isArray(u.correctOptions)&&u.correctOptions.length)return u.correctOptions.map(o=>(Array.isArray(o)?o:[o]).map(norm).join(u.rule==='unordered'?' / ':'')).join(' または ');return u.slotIds.map(id=>{const s=st.slots.find(x=>x.sid===id);const cs=cands(s);return cs.length?cs.join(' または '):'未設定'}).join(u.rule==='unordered'?' / ':'')}
+function scoreUnit(u){const actual=answerArrayForUnit(u);const blank=actual.some(v=>v==='');const opts=correctOptionsForUnit(u);const correct=!blank&&opts.some(opt=>u.rule==='unordered'?sameUnordered(actual,opt):sameOrdered(actual,opt));return{unit:u,actual,blank,correct,points:correct?Number(u.points||0):0,max:Number(u.points||0),options:opts}}
+function slotStatus(s){if(!st.lastResult)return '';const unit=st.lastResult.units.find(r=>r.unit.slotIds.includes(s.sid));if(!unit)return '';if(unit.blank)return 'blank';return unit.correct?'correct':'wrong'}
+function unitLabel(u){const rs=u.slotIds.map(id=>st.slots.find(s=>s.sid===id)).filter(Boolean);if(!rs.length)return '';return rs.length===1?label(rs[0]):`${label(rs[0])}〜${rs[rs.length-1].label}`}
+function ruleText(r){return r==='unordered'?'順不同完答':(r==='group'?'まとめて完答':'単独')}
+
+function modelFromKey(k){
+  const raw=k.builderRaw||{};
+  if(Array.isArray(raw.slots)&&Array.isArray(raw.units)&&raw.slots.length&&raw.units.length){
+    const slots=raw.slots.map((s,i)=>({sid:String(s.sid||`s${i+1}`),problemNumber:String(s.problemNumber||''),label:String(s.label||i+1),correct:Array.isArray(s.correct)?s.correct.map(norm):[]}));
+    const valid=new Set(slots.map(s=>s.sid));
+    const units=raw.units.map((u,i)=>({unitId:`u${i+1}`,slotIds:(u.slotIds||[]).map(String).filter(id=>valid.has(id)),points:Number(u.points||0),rule:u.rule==='unordered'?'unordered':(u.rule==='group'?'group':'each')})).filter(u=>u.slotIds.length);
+    return{slots,units,mode:raw.inputMode||detectMode(k)};
+  }
+  const slots=[],units=[];
+  (k.questions||[]).forEach((q,qi)=>{
+    let opts=[];
+    if(Array.isArray(q.correctOptions)&&q.correctOptions.length)opts=q.correctOptions.map(o=>Array.isArray(o)?o.map(norm):[norm(o)]);
+    else if(Array.isArray(q.answers))opts=[q.answers.map(norm)];
+    else opts=[[norm(q.answer??'')]];
+    const len=Math.max(1,...opts.map(o=>o.length));
+    const ids=[];
+    for(let i=0;i<len;i++){
+      const sid=`q${qi+1}_${i+1}`;
+      ids.push(sid);
+      const correct=[...new Set(opts.map(o=>norm(o[i]??'')).filter(v=>v!==''))];
+      slots.push({sid,problemNumber:String(q.problemNumber||''),label:len===1?String(q.id||qi+1):`${q.id||qi+1}-${i+1}`,correct});
+    }
+    units.push({unitId:`u${qi+1}`,slotIds:ids,points:Number(q.points||0),rule:q.unordered?'unordered':(ids.length>1?'group':'each'),correctOptions:opts});
+  });
+  return{slots,units,mode:detectMode(k)};
+}
+
+function refreshKeyList(){
+  st.keys=readKeys();
+  $('keySelect').innerHTML=st.keys.length?st.keys.map((k,i)=>`<option value="${i}">${esc(k.year||'')} ${esc(k.title||String(k.exam||'').replace(/^ユーザー登録：/,''))} / ${esc(k.subject||'')}</option>`).join(''):'<option value="">保存データなし</option>';
+  if(!st.keys.length)$('keyInfo').innerHTML='<div class="warn">保存済みユーザーデータがありません。先に user-key-builder-test.html で保存するか、JSONを読み込んでください。</div>';
+}
+function loadSelected(){
+  const i=Number($('keySelect').value||0),k=st.keys[i];
+  if(!k){msg(false,'読み込むデータがありません。');return}
+  st.key=k;
+  const m=modelFromKey(k);
+  st.slots=m.slots;st.units=m.units;st.lastResult=null;$('mode').value=m.mode||'num';
+  loadDraftForKey(k.userKeyId);
+  st.idx=Math.min(st.idx,Math.max(0,st.slots.length-1));
+  $('keyInfo').innerHTML=`<b>${esc(k.title||String(k.exam||'').replace(/^ユーザー登録：/,''))} / ${esc(k.subject||'')}</b><div class="muted">${esc(k.year||'')}年度・解答番号${st.slots.length}個・採点単位${st.units.length}個・満点${esc(k.maxScore??sumMax())}点</div>`;
+  msg(true,'採点データを読み込みました。');
+  render();renderResult();
+}
+function sumMax(){return st.units.reduce((a,u)=>a+Number(u.points||0),0)}
+function cur(){return st.slots[st.idx]||null}
+function render(){
+  const s=cur();
+  $('curTitle').textContent=s?`${s.problemNumber}　解答番号 ${s.label}`:'未読込';
+  $('curSub').textContent=s?`${st.idx+1} / ${st.slots.length}　正解候補：${cands(s).join(' または ')||'未設定'}`:'採点データを読み込んでください。';
+  $('curInput').value=s?(st.answers[s.sid]||''):'';
+  $('keys').innerHTML=toks().map(t=>`<button data-t="${esc(t)}">${esc(t==='-'?'－':t)}</button>`).join('');
+  renderSlots();
+  saveDraft();
+}
+function renderSlots(){
+  const filter=$('showFilter').value;
+  let arr=st.slots;
+  if(filter==='blank')arr=arr.filter(s=>!st.answers[s.sid]);
+  if(filter==='wrong'&&st.lastResult)arr=arr.filter(s=>slotStatus(s)==='wrong'||slotStatus(s)==='blank');
+  $('slotList').innerHTML=arr.length?arr.map(s=>{
+    const i=st.slots.indexOf(s),status=slotStatus(s),ans=st.answers[s.sid]||'';
+    return `<button class="slot ${i===st.idx?'active ':''}${status}" data-i="${i}"><b>${esc(label(s))}</b><small>解答：${esc(ans||'未入力')}</small></button>`;
+  }).join(''):'<p class="muted">表示対象がありません。</p>';
+}
+function setAnswer(v,advance){
+  const s=cur();if(!s)return;
+  st.answers[s.sid]=norm(v);
+  if(advance&&st.idx<st.slots.length-1)st.idx++;
+  render();
+}
+function clearCurrent(){const s=cur();if(!s)return;delete st.answers[s.sid];render()}
+function nextBlank(){const n=st.slots.findIndex((s,i)=>i>st.idx&&!st.answers[s.sid]);const a=st.slots.findIndex(s=>!st.answers[s.sid]);st.idx=n>=0?n:Math.max(0,a);render()}
+
+function scoreAll(){
+  if(!st.key||!st.units.length){msg(false,'採点データを読み込んでください。');return}
+  const results=st.units.map(scoreUnit),score=results.reduce((a,r)=>a+r.points,0),max=results.reduce((a,r)=>a+r.max,0);
+  st.lastResult={score,max,units:results,at:new Date().toISOString()};
+  renderResult();renderSlots();msg(true,'採点しました。');
+}
+function renderResult(){
+  const r=st.lastResult;if(!r){$('resultTop').innerHTML='まだ採点していません。';$('problemSummary').innerHTML='';$('resultTable').innerHTML='';$('wrongList').innerHTML='まだ採点していません。';return}
+  const fullMax=Number(st.key?.maxScore||r.max)||r.max;
+  $('resultTop').innerHTML=`<div class="scoreBox">${r.score} / ${fullMax} 点 <small>採点対象配点合計 ${r.max} 点</small></div>`;
+  const by={};
+  r.units.forEach(x=>{
+    const first=st.slots.find(s=>s.sid===x.unit.slotIds[0]);
+    const g=first?.problemNumber||'未分類';
+    by[g]=by[g]||{score:0,max:0,ok:0,total:0};
+    by[g].score+=x.points;by[g].max+=x.max;by[g].ok+=x.correct?1:0;by[g].total++;
+  });
+  $('problemSummary').innerHTML='<div class="summaryGrid">'+Object.entries(by).map(([g,v])=>`<div class="summaryCell"><b>${esc(g)}</b><div>${v.score}/${v.max}点</div><div class="muted">${v.ok}/${v.total}採点単位 正解</div></div>`).join('')+'</div>';
+  $('resultTable').innerHTML=`<table class="resTable"><thead><tr><th>判定</th><th>番号</th><th>方式</th><th>配点</th><th>あなたの解答</th><th>正解</th></tr></thead><tbody>${r.units.map(x=>{
+    const cls=x.blank?'blankp':(x.correct?'okp':'ngp'),mark=x.blank?'未入力':(x.correct?'○':'×');
+    return `<tr><td><span class="pill ${cls}">${mark}</span></td><td><b>${esc(unitLabel(x.unit))}</b></td><td>${esc(ruleText(x.unit.rule))}</td><td>${x.points}/${x.max}</td><td>${esc(answerTextForUnit(x.unit)||'未入力')}</td><td>${esc(correctTextForUnit(x.unit))}</td></tr>`;
+  }).join('')}</tbody></table>`;
+  const wrong=r.units.filter(x=>!x.correct);
+  $('wrongList').innerHTML=wrong.length?wrong.map(x=>`<div class="${x.blank?'warn':'bad'}"><b>${esc(unitLabel(x.unit))}</b>　${x.blank?'未入力':'誤答'}　${x.points}/${x.max}点<br><span class="muted">あなた：${esc(answerTextForUnit(x.unit)||'未入力')} / 正解：${esc(correctTextForUnit(x.unit))}</span></div>`).join(''):'<div class="ok">誤答・未入力はありません。</div>';
+}
+function importJson(){
+  let o;try{o=JSON.parse($('importJson').value)}catch(e){msg(false,'JSONを解析できません。');return}
+  let arr=Array.isArray(o)?o:(o&&Array.isArray(o.keys)?o.keys:[o]);
+  arr=arr.filter(x=>x&&typeof x==='object'&&(Array.isArray(x.questions)||x.builderRaw));
+  if(!arr.length){msg(false,'読み込める解答キーデータがありません。');return}
+  const existing=readKeys();const map=new Map(existing.map(k=>[k.userKeyId,k]));
+  arr.forEach(k=>{k.userKeyId=k.userKeyId||('uk_'+Date.now()+'_'+Math.random().toString(36).slice(2));map.set(k.userKeyId,k)});
+  writeKeys([...map.values()]);refreshKeyList();msg(true,`${arr.length}件を保存済みデータへ読み込みました。`);
+}
+function keydown(e){
+  const tag=(e.target&&e.target.tagName||'').toLowerCase();
+  if(e.target===$('curInput')){if(e.key==='Enter'){e.preventDefault();setAnswer($('curInput').value,true)}return}
+  if(['input','textarea','select'].includes(tag)||e.ctrlKey||e.metaKey||e.altKey)return;
+  if(e.key==='Backspace'||e.key==='Delete'){e.preventDefault();clearCurrent();return}
+  if(e.key==='Enter'||e.key==='ArrowRight'){e.preventDefault();st.idx=Math.min(st.slots.length-1,st.idx+1);render();return}
+  if(e.key==='ArrowLeft'){e.preventDefault();st.idx=Math.max(0,st.idx-1);render();return}
+  const v=norm(e.key);if(toks().map(norm).includes(v)){e.preventDefault();setAnswer(v,true)}
+}
+
+$('reloadKeys').onclick=refreshKeyList;
+$('load').onclick=loadSelected;
+$('score').onclick=scoreAll;$('score2').onclick=scoreAll;
+$('clearAns').onclick=()=>{if(confirm('受験者解答をすべてクリアしますか？')){st.answers={};st.lastResult=null;render();renderResult();}};
+$('prev').onclick=()=>{st.idx=Math.max(0,st.idx-1);render()};
+$('next').onclick=()=>{st.idx=Math.min(st.slots.length-1,st.idx+1);render()};
+$('blank').onclick=nextBlank;
+$('clearOne').onclick=clearCurrent;
+$('keys').onclick=e=>{const b=e.target.closest('[data-t]');if(b)setAnswer(b.dataset.t,true)};
+$('slotList').onclick=e=>{const b=e.target.closest('[data-i]');if(b){st.idx=Number(b.dataset.i);render()}};
+$('curInput').oninput=()=>{const s=cur();if(s){st.answers[s.sid]=norm($('curInput').value);saveDraft();renderSlots();}};
+$('showFilter').onchange=renderSlots;
+$('mode').onchange=render;
+$('importBtn').onclick=importJson;
+document.addEventListener('keydown',keydown);
+refreshKeyList();
+if(st.keys.length){loadSelected()}else{render()}
+})();
+</script>
+</body>
+</html>
