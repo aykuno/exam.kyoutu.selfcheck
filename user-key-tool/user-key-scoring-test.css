@@ -41,3 +41,62 @@
 .keypad.is-fixed .kbdHelp{display:none}
 @media(max-width:760px){.inputPanel .keys{grid-template-columns:repeat(8,minmax(0,1fr))}.inputPanel .inputActions{grid-template-columns:1fr 1fr}.answerSavePanel .saveActions{display:grid;grid-template-columns:1fr 1fr}.answerSavePanel .saveActions #deleteAnswer{grid-column:1 / -1}}
 @media(max-width:560px){.inputPanel{padding:10px}.inputHead{grid-template-columns:minmax(0,1fr) 116px;gap:8px;margin-bottom:8px}.inputQuestion b{font-size:18px}.inputAnswer .display{font-size:18px}.inputPanel .keys{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.inputPanel .keys button{height:36px}.inputPanel .inputActions{grid-template-columns:1fr 1fr;gap:7px}.inputPanel .inputActions button{font-size:13px;padding:8px 6px}.keypad.is-fixed.inputPanel{width:calc(100% - 16px);padding:8px}.keypad.is-fixed .inputHead{grid-template-columns:minmax(0,1fr) 104px}.keypad.is-fixed .keys{grid-template-columns:repeat(5,minmax(0,1fr))}.answerSavePanel{padding:9px 10px}.answerSavePanel .saveActions{grid-template-columns:1fr}.answerSavePanel .saveActions #deleteAnswer{grid-column:auto}}
+
+/* v4 fix: prevent lower text in answer cards from being clipped on Android/mobile. */
+.answerCard{
+  min-height:92px!important;
+  height:auto!important;
+  padding:8px 8px 9px!important;
+  overflow:visible!important;
+  display:grid!important;
+  grid-template-rows:auto auto minmax(30px,auto)!important;
+  gap:3px!important;
+}
+.answerCard .cardTop{
+  min-height:16px!important;
+  line-height:1.2!important;
+}
+.answerCard .cardGroup,
+.answerCard .cardMeta,
+.answerCard .cardId{
+  line-height:1.25!important;
+}
+.answerCard .cardId{
+  min-height:18px!important;
+  overflow:visible!important;
+}
+.answerCard .ans{
+  margin-top:0!important;
+  height:auto!important;
+  min-height:30px!important;
+  line-height:1.35!important;
+  padding:4px 6px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+}
+.answerCard:not(.done) .ans:empty::before{
+  line-height:1.35!important;
+  display:inline-block!important;
+}
+@media(max-width:560px){
+  .answers{
+    grid-template-columns:repeat(auto-fill,minmax(90px,1fr))!important;
+    gap:7px!important;
+  }
+  .answerCard{
+    min-height:88px!important;
+    padding:7px 7px 8px!important;
+  }
+  .answerCard .cardId{
+    font-size:14px!important;
+    min-height:18px!important;
+  }
+  .answerCard .ans{
+    min-height:29px!important;
+    font-size:15px!important;
+    padding:4px 5px!important;
+  }
+}
