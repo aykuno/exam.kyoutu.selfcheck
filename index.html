@@ -17,7 +17,7 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,
 (function(){
   'use strict';
   const SRC='https://raw.githubusercontent.com/aykuno/exam.kyoutu.selfcheck/43fde43c8481d97281a6bceed38db10a2fa63990/index.html';
-  const UPDATE_TIME_TEXT='最終更新日時：2026/7/3 15:30';
+  const UPDATE_TIME_TEXT='最終更新日時：2026/7/3 18:20';
   const MOCK_EXAM_ID='mock-benesse-2026-05';
   const MOCK_EXAM_LABEL='模擬試験-2026年5月実施ベネッセ共通テスト模試';
   function fail(e){
@@ -26,12 +26,12 @@ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,
   }
   function patch(html){
     html=html.replace(/最終更新日時：[^<]+/,UPDATE_TIME_TEXT);
-    html=html.replace(/<b>バージョン：v\d+<\/b>/,'<b>バージョン：v181</b>');
+    html=html.replace(/<b>バージョン：v\d+<\/b>/,'<b>バージョン：v183</b>');
     const oldLabel="const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）'};";
     const newLabel="const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）','"+MOCK_EXAM_ID+"':'"+MOCK_EXAM_LABEL+"'};";
     if(html.includes(oldLabel)) html=html.replace(oldLabel,newLabel);
     if(!html.includes('pdf_export_v160.js')){
-      html=html.replace('</body>','<script src="pdf_export_v160.js?v=160" defer><\\/script></body>');
+      html=html.replace('</body>','<script src="pdf_export_v160.js?v=183" defer><\/script></body>');
     }
     return html;
   }
