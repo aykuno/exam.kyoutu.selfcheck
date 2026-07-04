@@ -39,9 +39,23 @@
     }
   }
 
+  function injectUserKeyToolLink(){
+    try{
+      if(document.getElementById('userKeyToolLink')) return;
+      const main = document.querySelector('main');
+      if(!main) return;
+      const sec = document.createElement('section');
+      sec.id = 'userKeyToolLink';
+      sec.innerHTML = '<h2>自分で登録した正答データで採点</h2><p class="muted">学校の小テスト・模試・自作問題など、公式データにない正答データを自分で登録して採点できます。通常の本試験・追試験・模試の採点とは別機能です。</p><div class="btns"><a href="user-key-tool/" style="display:inline-block;border-radius:12px;padding:10px 14px;background:#eef4ff;color:#1d4ed8;border:1px solid #cbdcff;font-weight:900;text-decoration:none">ユーザー登録データで採点する</a></div>';
+      main.insertBefore(sec, main.firstElementChild || null);
+    }catch(e){
+      console.warn('user-key-tool link injection skipped', e);
+    }
+  }
+
   function patchIndex(html){
     html = html.replace(/最終更新日時：[^<]+/, UPDATE_TIME_TEXT);
-    html = html.replace(/<b>バージョン：v\d+<\/b>/, '<b>バージョン：v179</b>');
+    html = html.replace(/<b>バージョン：v\d+<\/b>/, '<b>バージョン：v181</b>');
 
     html = html.replace(
       "const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）'};",
@@ -135,7 +149,7 @@ function exportResultPdf(){if(!window.__lastGrade||window.__lastGrade.sig!==selI
   fetch(BASE_INDEX_URL, {cache:'no-store'})
     .then(r => { if(!r.ok) throw new Error('base index fetch failed: ' + r.status); return r.text(); })
     .then(html => patchIndex(html))
-    .then(html => { document.open(); document.write(html); document.close(); setTimeout(injectV158PdfExporter, 0); })
+    .then(html => { document.open(); document.write(html); document.close(); setTimeout(injectV158PdfExporter, 0); setTimeout(injectUserKeyToolLink, 0); })
     .catch(err => fail('読み込みに失敗しました。\n' + err.message + '\n\nGitHubに index.html と answer_keys_verified.json が置かれているか確認してください。'));
 })();
 </script>
