@@ -16,8 +16,9 @@ function cleanNote(s){return String(s||'').replace(/(?:^|[\/／]\s*)v\d+修正[:
 function normalizeQuestion(q){const x=JSON.parse(JSON.stringify(q||{}));if(x.answer!=null)x.answer=norm(x.answer);if(Array.isArray(x.answers))x.answers=x.answers.map(norm);if(Array.isArray(x.correctOptions))x.correctOptions=x.correctOptions.map(o=>Array.isArray(o)?o.map(norm):[norm(o)]);return x}
 function normalizeKey(k){const x=JSON.parse(JSON.stringify(k||{}));const base=String(x.userKeyId||[x.year||'',x.exam||x.title||'',x.subject||''].join('||')||'user-key');x.questions=(x.questions||[]).map((q,i)=>{const nq=normalizeQuestion(q);nq.__answerId=norm(base+'||'+i+'||'+(nq.problemNumber||nq.group||'')+'||'+(nq.id||''));return nq});x.exam=x.exam||('ユーザー登録：'+(x.title||'無題'));return x}
 function legacyQid(q){const k=selected(),id=norm(q.id),m=new Map();(k?.questions||[]).forEach(qq=>{const x=norm(qq.id);m.set(x,(m.get(x)||0)+1)});if((m.get(id)||0)>1)return norm((q.problemNumber||q.group||'')+'||'+q.id);return id}
-function qid(q){return q&&q.__answerId?q.__answerId:legacyQid(q)}
-function answerArray(q){const id=qid(q),old=legacyQid(q);if(user[id])return user[id];if(old&&user[old]){user[id]=user[old];delete user[old];return user[id]}return []}
+function qIndex(q){const k=selected();const i=k&&Array.isArray(k.questions)?k.questions.indexOf(q):-1;return i>=0?String(i):legacyQid(q)}
+function qid(q){return qIndex(q)}
+function answerArray(q){const id=qid(q);if(Array.isArray(user[id]))return user[id];const oldIds=[legacyQid(q),q&&q.__answerId].filter(Boolean);for(const old of oldIds){if(old!==id&&Array.isArray(user[old])){user[id]=user[old];delete user[old];return user[id]}}return []}
 function expected(q){if(Array.isArray(q.answers))return q.answers.map(norm);if(q.answer!=null)return String(norm(q.answer)).split('');return []}
 function expectedLen(q){if(Array.isArray(q.answers))return q.answers.length;if(q.correctOptions)return Math.max(...q.correctOptions.map(c=>c.length),1);const a=norm(q.answer);return Math.max(1,a.length)}
 function answerString(q){return answerArray(q).join('')}
