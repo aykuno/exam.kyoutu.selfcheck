@@ -5,48 +5,65 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
   <title>ユーザー登録データ ツール</title>
   <style>
-    :root{--bg:#f5f7fb;--card:#fff;--ink:#1f2937;--muted:#667085;--line:#d9e2ef;--blue:#2563eb;--blue2:#eff6ff;--green:#07875b;--green2:#ecfdf3;--shadow:0 14px 34px rgba(15,23,42,.08)}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65}a{color:inherit;text-decoration:none}
-    header{background:linear-gradient(135deg,#1d4ed8,#06b6d4);color:white;padding:28px 18px 34px}.wrap{max-width:920px;margin:0 auto}h1{font-size:clamp(24px,6vw,38px);line-height:1.25;margin:0 0 8px;font-weight:800}header p{margin:0;color:rgba(255,255,255,.9);font-size:15px}
-    main{max-width:920px;margin:-18px auto 0;padding:0 14px 28px}.card,.step{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}.card{padding:18px}.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;background:var(--blue2);color:#1d4ed8;font-weight:700;font-size:12px;margin-bottom:10px}.badge.green{background:var(--green2);color:var(--green)}
-    h2{font-size:22px;line-height:1.35;margin:0 0 8px}.card p{margin:0 0 14px;color:var(--muted);font-size:14px}.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;border-radius:14px;background:var(--blue);color:#fff;font-weight:800;border:0;box-shadow:0 10px 20px rgba(37,99,235,.18)}.btn.green{background:var(--green);box-shadow:0 10px 20px rgba(7,135,91,.16)}
-    .flow{margin-top:16px;padding:18px}.flow h2{margin-bottom:12px}.steps{display:grid;gap:10px}.step{box-shadow:none;padding:14px 14px 14px 52px;position:relative}.num{position:absolute;left:14px;top:15px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#eef4ff;color:#1d4ed8;font-weight:800;font-size:13px}.step b{display:block;margin-bottom:2px}.step span{display:block;color:var(--muted);font-size:13px}
-    .links{margin-top:14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.smalllink{border:1px solid var(--line);border-radius:14px;background:white;padding:12px;text-align:center;font-size:13px;color:var(--muted)}.smalllink b{display:block;color:var(--ink);font-size:14px}
-    footer{max-width:920px;margin:0 auto;padding:12px 14px 24px;text-align:center;color:var(--muted);font-size:12px;font-weight:800}footer b{color:var(--ink)}@media(max-width:720px){.grid{grid-template-columns:1fr}.links{grid-template-columns:1fr}header{padding-top:24px}.card{padding:16px}}
+    :root{--bg:#f5f7fb;--card:#fff;--ink:#1f2937;--muted:#667085;--line:#d9e2ef;--blue:#2563eb;--blue2:#eff6ff;--green:#07875b;--green2:#ecfdf3;--amber:#b45309;--amber2:#fff7ed;--shadow:0 14px 34px rgba(15,23,42,.08)}
+    *{box-sizing:border-box}html,body{width:100%;max-width:100%;overflow-x:hidden}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65}a{color:inherit;text-decoration:none}
+    header{background:linear-gradient(135deg,#1d4ed8,#06b6d4);color:white;padding:28px 18px 34px}.wrap{max-width:980px;margin:0 auto}h1{font-size:clamp(24px,6vw,38px);line-height:1.25;margin:0 0 8px;font-weight:800}header p{margin:0;color:rgba(255,255,255,.92);font-size:15px}
+    main{max-width:980px;margin:-18px auto 0;padding:0 14px 28px}.card,.step,.infoBox{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);min-width:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}.card{padding:18px}.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;background:var(--blue2);color:#1d4ed8;font-weight:800;font-size:12px;margin-bottom:10px}.badge.green{background:var(--green2);color:var(--green)}.badge.amber{background:var(--amber2);color:var(--amber)}
+    h2{font-size:22px;line-height:1.35;margin:0 0 8px}.card p,.infoBox p{margin:0 0 12px;color:var(--muted);font-size:14px}.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;border-radius:14px;background:var(--blue);color:#fff;font-weight:900;border:0;box-shadow:0 10px 20px rgba(37,99,235,.18)}.btn.green{background:var(--green);box-shadow:0 10px 20px rgba(7,135,91,.16)}
+    .flow,.infoBox{margin-top:16px;padding:18px}.flow h2,.infoBox h2{margin-bottom:12px}.steps{display:grid;gap:10px}.step{box-shadow:none;padding:14px 14px 14px 52px;position:relative}.num{position:absolute;left:14px;top:15px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#eef4ff;color:#1d4ed8;font-weight:900;font-size:13px}.step b{display:block;margin-bottom:2px}.step span{display:block;color:var(--muted);font-size:13px}
+    .list{display:grid;gap:10px;margin:0;padding:0;list-style:none}.list li{border:1px solid #e5ebf5;border-radius:14px;background:#fbfdff;padding:12px}.list b{display:block;margin-bottom:2px}.list span{display:block;color:var(--muted);font-size:13px}.links{margin-top:14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.smalllink{border:1px solid var(--line);border-radius:14px;background:white;padding:12px;text-align:center;font-size:13px;color:var(--muted)}.smalllink b{display:block;color:var(--ink);font-size:14px}
+    footer{max-width:980px;margin:0 auto;padding:12px 14px 24px;text-align:center;color:var(--muted);font-size:12px;font-weight:800}footer b{color:var(--ink)}@media(max-width:720px){.grid{grid-template-columns:1fr}.links{grid-template-columns:1fr}header{padding-top:24px}.card,.flow,.infoBox{padding:16px}.step{padding-right:12px}}
   </style>
 </head>
 <body>
-  <header><div class="wrap"><h1>ユーザー登録データ ツール</h1><p>正答データの作成と、作成済みデータによる採点ができます。</p></div></header>
+  <header><div class="wrap"><h1>ユーザー登録データ ツール</h1><p>自分で作った正答データを保存し、そのデータを使って採点できます。</p></div></header>
   <main>
     <section class="grid" aria-label="主要メニュー">
       <article class="card">
         <div class="badge">① 正答データ作成</div>
         <h2>正答データを作成する</h2>
-        <p>年度・試験名・科目を入力し、正答・配点・問題番号を登録します。作成済みデータの管理やJSON書き出しもできます。</p>
-        <a class="btn" href="user-key-builder.html">作成画面を開く</a>
+        <p>年度・試験名・科目を入力し、解答番号、正答、配点、問題番号を登録します。作成したデータは同じブラウザ内に保存されます。</p>
+        <a class="btn" href="user-key-builder.html?v=23">作成画面を開く</a>
       </article>
       <article class="card">
         <div class="badge green">② 採点</div>
         <h2>作成済みデータで採点する</h2>
-        <p>作成済みの正答データを選び、自分の解答を入力して採点します。JSONファイルの読み込みもできます。</p>
-        <a class="btn green" href="user-key-scoring-test.html?v=22">採点画面を開く</a>
+        <p>保存済みの正答データを選び、自分の解答を入力して採点します。結果は設問別に確認でき、PDF出力もできます。</p>
+        <a class="btn green" href="user-key-scoring-test.html?v=23">採点画面を開く</a>
       </article>
     </section>
+
     <section class="flow card">
       <h2>使う順番</h2>
       <div class="steps">
-        <div class="step"><span class="num">1</span><b>正答データを作る</b><span>試験・科目・正答・配点・問題番号を登録して保存します。</span></div>
-        <div class="step"><span class="num">2</span><b>採点画面でデータを選ぶ</b><span>保存済みデータを選択します。JSONファイルから読み込むこともできます。</span></div>
-        <div class="step"><span class="num">3</span><b>自分の解答を入力して採点する</b><span>入力カードに解答を入れ、採点ボタンで照合します。採点結果はPDF出力できます。</span></div>
+        <div class="step"><span class="num">1</span><b>正答データを作る</b><span>大問構成を入力し、解答番号を作成します。その後、各番号の正答を入力します。</span></div>
+        <div class="step"><span class="num">2</span><b>配点を設定して保存する</b><span>各番号の配点を確認します。まとめて完答や順不同完答が必要な問題は、配点設定で調整できます。</span></div>
+        <div class="step"><span class="num">3</span><b>採点画面でデータを選ぶ</b><span>保存済みデータを選択します。別端末で作ったJSONファイルを読み込むこともできます。</span></div>
+        <div class="step"><span class="num">4</span><b>自分の解答を入力して採点する</b><span>解答カードに自分の解答を入力し、「採点する」で点数・正誤・未入力を確認します。</span></div>
       </div>
+    </section>
+
+    <section class="infoBox">
+      <h2>このツールでできること</h2>
+      <ul class="list">
+        <li><b>正答データの作成</b><span>模試・学校内テスト・自作問題など、公式データにない試験の正答データを作れます。</span></li>
+        <li><b>保存済みデータの管理</b><span>作成済みデータの編集、複製、削除、JSON保存ができます。更新順・五十音順で並び替えられます。</span></li>
+        <li><b>自分の解答の保存</b><span>採点画面で入力した自分の解答も保存・読み込みできます。続きから入力するときに使えます。</span></li>
+        <li><b>JSONでの移動</b><span>作成した正答データはJSONファイルとして保存できます。別端末や別ブラウザへ移すときはJSONを使います。</span></li>
+      </ul>
+    </section>
+
+    <section class="infoBox">
+      <h2>保存について</h2>
+      <p>作成した正答データと自分の解答は、このブラウザ内に保存されます。別のスマホ・別のPC・別ブラウザでは自動共有されません。</p>
+      <p>別端末で使う場合は、作成画面のJSON保存でファイルを書き出し、使いたい端末でJSON読み込みを行ってください。</p>
       <div class="links">
-        <a class="smalllink" href="user-key-builder.html"><b>作成画面</b>正答・配点登録</a>
-        <a class="smalllink" href="user-key-scoring-test.html?v=22#import"><b>JSON読み込み</b>採点画面内で実行</a>
+        <a class="smalllink" href="user-key-builder.html?v=23"><b>作成画面</b>正答・配点登録</a>
+        <a class="smalllink" href="user-key-scoring-test.html?v=23#import"><b>JSON読み込み</b>採点画面内で実行</a>
         <a class="smalllink" href="../"><b>通常の採点サイト</b>本試験・追試験など</a>
       </div>
     </section>
   </main>
-  <footer><b>v22</b>｜更新：2026/7/4 22:10</footer>
+  <footer><b>v23</b>｜更新：2026/7/4 23:10</footer>
 </body>
 </html>
