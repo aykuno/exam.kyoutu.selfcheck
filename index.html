@@ -21,7 +21,7 @@
   const BASE_INDEX_URL = "https://raw.githubusercontent.com/aykuno/exam.kyoutu.selfcheck/43fde43c8481d97281a6bceed38db10a2fa63990/index.html";
   const MOCK_EXAM_ID = 'mock-benesse-2026-05';
   const MOCK_EXAM_LABEL = '模擬試験-2026年5月実施ベネッセ共通テスト模試';
-  const UPDATE_TIME_TEXT = '最終更新日時：2026/7/5 00:12';
+  const UPDATE_TIME_TEXT = '最終更新日時：2026/6/18 08:15';
 
   function fail(message){
     document.body.innerHTML = '<pre style="white-space:pre-wrap;margin:20px;padding:16px;border-radius:12px;background:#0b1020;color:#e5e7eb">' + message + '</pre>';
@@ -41,7 +41,7 @@
 
   function patchIndex(html){
     html = html.replace(/最終更新日時：[^<]+/, UPDATE_TIME_TEXT);
-    html = html.replace(/<b>バージョン：v\d+<\/b>/, '<b>バージョン：v180</b>');
+    html = html.replace(/<b>バージョン：v\d+<\/b>/, '<b>バージョン：v179</b>');
 
     html = html.replace(
       "const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）'};",
@@ -128,13 +128,6 @@ function exportResultPdf(){if(!window.__lastGrade||window.__lastGrade.sig!==selI
     }
 
     html = html.replace("document.addEventListener('keydown',handleKeyboardInput);", "document.addEventListener('keydown',handleKeyboardInput);document.addEventListener('click',function(e){if(e.target&&e.target.closest&&e.target.closest('#exportPdfResult')){exportResultPdf();}});");
-
-
-    // v180: 本体トップにユーザー登録データツールへの導線を追加。既存採点ロジックには触らない。
-    const userKeyToolCss = ".userKeyToolSection{display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 24px rgba(22,34,64,.06);padding:16px 18px}.userKeyToolSection h2{margin:0 0 4px;font-size:18px}.userKeyToolSection p{margin:0;color:var(--muted);font-size:13px}.userKeyToolBtn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 14px;border-radius:12px;background:var(--accent);color:#fff;text-decoration:none;font-weight:900;white-space:nowrap}@media(max-width:620px){.userKeyToolSection{display:block}.userKeyToolBtn{width:100%;margin-top:12px}}";
-    if (!html.includes('.userKeyToolSection')) html = html.replace('</style>', userKeyToolCss + '</style>');
-    const userKeyToolScript = `<script>(function(){function addUserKeyToolLink(){if(document.getElementById('userKeyToolLink'))return;const main=document.querySelector('main');if(!main)return;const sec=document.createElement('section');sec.className='userKeyToolSection';sec.id='userKeyToolLink';sec.innerHTML='<div><h2>自分で登録した正答データで採点</h2><p>学校の演習・模試など、一覧にない問題の正答データを作成して採点できます。</p></div><a class="userKeyToolBtn" href="user-key-tool/">作成・採点ページへ</a>';main.insertBefore(sec,main.firstChild);}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',addUserKeyToolLink);else addUserKeyToolLink();})();<\/script>`;
-    if (!html.includes('addUserKeyToolLink')) html = html.replace('</body>', userKeyToolScript + '</body>');
 
     return html;
   }
