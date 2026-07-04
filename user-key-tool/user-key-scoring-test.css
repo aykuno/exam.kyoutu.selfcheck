@@ -1,105 +1,39 @@
 :root{--bg:#f6f7fb;--text:#1d2433;--muted:#647086;--line:#d9deea;--accent:#2f5fd0;--bad:#b3261e;--good:#137333;--warn:#8a5b00}*{box-sizing:border-box}html{touch-action:manipulation;-webkit-text-size-adjust:100%;width:100%;max-width:100%;overflow-x:hidden}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.55;width:100%;max-width:100%;overflow-x:hidden}header{padding:24px 20px;background:linear-gradient(135deg,#1e3a8a,#3454d1);color:#fff}header div,main,footer{max-width:1240px;margin:auto}h1{margin:0 0 6px;font-size:28px}header p{margin:0;color:#e5eaff}main{padding:20px 16px 48px;display:grid;gap:16px;min-width:0}section{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 24px rgba(22,34,64,.06);padding:18px;min-width:0;max-width:100%}h2{font-size:20px;margin:0 0 12px}h3{font-size:16px;margin:16px 0 8px}label{font-weight:700;font-size:13px;display:block;margin:10px 0 6px}select,input,textarea,button{font:inherit}select,input,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:white}textarea{min-height:150px;resize:vertical;font-family:ui-monospace,Consolas,monospace;font-size:14px}button{touch-action:manipulation;-webkit-user-select:none;user-select:none;border:0;border-radius:12px;padding:10px 14px;background:#e8ecf6;cursor:pointer;font-weight:800}button.primary{background:var(--accent);color:#fff}button.danger{background:#ffe7e3;color:#9f1d14}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}.muted{color:var(--muted);font-size:13px}.box{background:#f8faff;border:1px solid #dfe7fb;border-radius:14px;padding:12px;margin-top:10px}.notice{background:#fff3cd;border:2px solid #e0a800;border-radius:14px;padding:12px;color:#3b2a00;font-weight:800;box-shadow:0 2px 10px rgba(224,168,0,.12)}.noticeTime{margin-top:6px;font-size:12px;color:#6b5200;font-weight:500}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}.metric{background:#f8faff;border:1px solid #dfe7fb;border-radius:14px;padding:12px}.metric b{display:block;font-size:22px}.ok{color:var(--good);font-weight:800}.ng{color:var(--bad);font-weight:800}.partial{color:var(--warn);font-weight:800}.keypad{background:rgba(255,255,255,.98);border:1px solid var(--line);border-radius:16px;padding:12px;margin:12px 0;box-shadow:0 10px 24px rgba(22,34,64,.13);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}#keypadSpacer{display:none}.keypad.is-fixed{position:fixed;top:max(0px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(100% - 32px,1240px);z-index:1000;margin:0}.current{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.current b{font-size:18px}.display{min-height:36px;min-width:110px;border:1px solid var(--line);border-radius:12px;background:#f8fafc;padding:6px 10px;font-family:ui-monospace,Consolas,monospace;font-size:19px;text-align:center}.keys{display:flex;flex-wrap:wrap;gap:8px}.keys button{min-width:48px;height:42px;padding:0}.answers{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:7px;margin-top:12px}.answerCard{touch-action:manipulation;-webkit-user-select:none;user-select:none;border:1px solid var(--line);border-radius:11px;padding:21px 7px 7px;background:#fff;cursor:pointer;min-width:0;height:86px;position:relative;overflow:hidden}.answerCard.active{border-color:#2f5fd0;box-shadow:0 0 0 2px rgba(47,95,208,.12)}.answerCard.done{background:#f3faf5}.answerCard .id{font-weight:900;font-size:11px;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.answerCard .ans{margin-top:5px;font-family:ui-monospace,Consolas,monospace;font-size:15px;height:26px;min-height:26px;background:#f8fafc;border-radius:8px;padding:2px 5px;text-align:center;overflow:hidden;text-overflow:ellipsis}.answerCard .pt{position:absolute;top:5px;right:6px;font-size:10px;color:var(--muted);line-height:1;border:1px solid #e1e7f5;background:#f8fafc;border-radius:999px;padding:3px 5px;min-width:42px;text-align:center;pointer-events:none}.infoMeta{display:grid;gap:10px}.infoMetaTop{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.infoPill{background:#fff;border:1px solid #dfe7fb;border-radius:999px;padding:4px 10px;color:#344054}.privacyNote{margin-top:10px;font-size:12px;color:var(--muted);font-weight:800}.saveStatus{margin-top:8px;font-size:12px;color:var(--muted)}.resultTableWrap{overflow-x:auto;margin-top:12px;display:block;width:100%;max-width:100%;-webkit-overflow-scrolling:touch}.resultTableWrap table{min-width:850px}.resultTable{table-layout:fixed;width:100%;border-collapse:collapse;margin-top:12px;font-size:14px;max-width:none}th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}th{background:#f7f8fc;color:#4a556b;font-size:12px}.resultTable th:nth-child(1),.resultTable td:nth-child(1){width:150px}.resultTable th:nth-child(2),.resultTable td:nth-child(2){width:105px}.resultTable th:nth-child(3),.resultTable td:nth-child(3){width:165px}.resultTable th:nth-child(4),.resultTable td:nth-child(4){width:85px}.resultTable th:nth-child(5),.resultTable td:nth-child(5){width:70px}.resultTable th:nth-child(6),.resultTable td:nth-child(6){width:125px}.resultTable th:nth-child(7),.resultTable td:nth-child(7){width:150px;font-size:11px;line-height:1.35;color:var(--muted)}.resultTable td{word-break:break-word}.tableScrollNotice{margin:14px 0 6px;font-weight:900;color:#263247;font-size:14px}.radarPanel{margin-top:14px;border:1px solid var(--line);border-radius:16px;padding:12px;background:#fbfcff;overflow:hidden}.radarWrap{display:grid;grid-template-columns:minmax(300px,420px) minmax(360px,1fr);gap:14px;align-items:center}.radarSvg{width:100%;height:auto;max-width:420px}.radarGrid{fill:none;stroke:#d9deea;stroke-width:1}.radarAxis{stroke:#cbd3e3;stroke-width:1}.radarShape{fill:rgba(47,95,208,.20);stroke:#2f5fd0;stroke-width:2}.radarPoint{fill:#2f5fd0}.sectionStats{font-size:13px;overflow-x:auto}.sectionStats table{margin-top:0;min-width:430px;width:100%;border-collapse:collapse}.sectionStats th,.sectionStats td{padding:6px 5px}.wrongList{display:grid;gap:8px}.wrongItem{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff7f6}.wrongItem.missing{background:#fffaf0}.sourceBlock{border-top:1px solid #dfe7fb;padding-top:10px}.sourceTitle{font-weight:800;color:#344054;margin:8px 0 6px;word-break:break-word}.sourceLinks{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.sourceLink{display:inline-flex;align-items:center;gap:4px;color:#1d4ed8;font-weight:800;text-decoration:none;background:#eef4ff;border:1px solid #cbdcff;border-radius:999px;padding:5px 10px;font-size:13px;margin:0}.sourceLink.disabled{color:#8a94a6;background:#f1f3f7;cursor:default;text-decoration:none}.noteBlock{border-top:1px solid #dfe7fb;padding-top:10px;color:#344054}footer{padding:0 16px 30px;color:var(--muted);font-size:12px}@media(max-width:760px){.row{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.radarWrap{display:block}.radarSvg{display:block;width:100%;max-width:270px;margin:4px auto 10px}.resultTableWrap table{min-width:720px;font-size:12px}.resultTable th,.resultTable td{padding:6px 5px}}@media(max-width:560px){section{padding:12px}.answers{grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px}.answerCard{height:84px;padding:21px 6px 6px}.keys{gap:6px}.keys button{min-width:38px;height:36px}.keypad{padding:9px;border-radius:14px}.keypad .btns{gap:6px;margin-top:8px}.keypad .btns button{padding:8px 10px;font-size:13px}.display{min-height:32px;font-size:17px}.keypad.is-fixed{width:calc(100% - 16px);border-radius:0 0 14px 14px;box-shadow:0 8px 20px rgba(22,34,64,.18)}}
 
-/* v2 isolated cleanup: cards are simplified; details remain in title/tooltip. */
-.answerCard{height:74px;padding:8px 8px 7px;display:flex;flex-direction:column;gap:4px}
-.answerCard .id,.answerCard .pt{display:none!important}
-.cardTop{display:flex;align-items:center;justify-content:space-between;gap:6px;min-height:15px}
-.cardGroup{font-size:10px;color:var(--muted);font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cardMeta{font-size:10px;color:var(--muted);background:#f6f8fd;border:1px solid #e1e7f5;border-radius:999px;padding:1px 5px;white-space:nowrap}
-.cardId{font-size:15px;font-weight:900;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.answerCard .ans{margin-top:auto;height:24px;min-height:24px;font-size:15px;line-height:20px}
-.answerCard:not(.done) .ans:empty::before{content:'未入力';color:#c0c7d6;font-size:12px;font-weight:700}
-@media(max-width:560px){.answers{grid-template-columns:repeat(auto-fill,minmax(92px,1fr))}.answerCard{height:72px;padding:7px}.cardId{font-size:14px}.cardMeta{display:none}}
 
-
-/* v3 isolated cleanup: input panel is made compact and save controls are moved outside the sticky area. */
-.inputPanel{padding:12px 14px 11px;border-radius:18px;background:#fff;box-shadow:0 8px 20px rgba(22,34,64,.09)}
-.inputHead{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,180px);gap:10px;align-items:stretch;margin-bottom:10px}
-.inputQuestion,.inputAnswer{border:1px solid #e1e7f5;background:#f8faff;border-radius:14px;padding:8px 10px;min-width:0}
-.inputQuestion b{display:block;font-size:20px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#182033}
-.miniLabel{font-size:11px;color:var(--muted);font-weight:900;letter-spacing:.02em;margin-bottom:3px}
-.inputAnswer .display{width:100%;min-width:0;min-height:32px;border:0;background:transparent;padding:0;text-align:left;font-size:20px;line-height:1.35;font-weight:900;color:#182033}
-.inputAnswer .display:empty::before{content:'未入力';color:#b5bdcc;font-weight:800}
-.inputPanel .keys{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:7px;margin-top:4px}
-.inputPanel .keys button{min-width:0;width:100%;height:40px;border-radius:12px;background:#eef2fb;font-size:16px;font-weight:900}
-.inputPanel .inputActions{display:grid;grid-template-columns:1fr 1fr 1fr 1.15fr;gap:8px;margin-top:10px}
-.inputPanel .inputActions button{width:100%;min-width:0;padding:10px 8px;white-space:nowrap}
-.inputPanel .kbdHelp{margin-top:8px;font-size:12px;line-height:1.35}
-.answerSavePanel{border:1px solid #e1e7f5;background:#fbfcff;border-radius:14px;padding:10px 12px;margin:10px 0 12px}
-.answerSavePanel .privacyNote{margin-top:0;font-size:12px;line-height:1.45;color:var(--muted);font-weight:800}
-.answerSavePanel .saveActions{margin-top:8px;gap:8px}
-.answerSavePanel .saveActions button{padding:9px 12px}
-.answerSavePanel .saveStatus{margin-top:7px}
-.keypad.is-fixed.inputPanel{border-radius:0 0 18px 18px;padding:9px 10px 10px;box-shadow:0 8px 22px rgba(22,34,64,.16)}
-.keypad.is-fixed .inputHead{grid-template-columns:minmax(0,1fr) minmax(98px,150px);margin-bottom:7px}
-.keypad.is-fixed .inputQuestion,.keypad.is-fixed .inputAnswer{padding:6px 8px;border-radius:12px}
-.keypad.is-fixed .inputQuestion b{font-size:18px}
-.keypad.is-fixed .inputAnswer .display{font-size:18px;min-height:28px}
-.keypad.is-fixed .keys button{height:34px;font-size:15px;border-radius:10px}
-.keypad.is-fixed .inputActions{margin-top:7px;gap:6px}
-.keypad.is-fixed .inputActions button{padding:7px 5px;font-size:12px;border-radius:10px}
-.keypad.is-fixed .kbdHelp{display:none}
-@media(max-width:760px){.inputPanel .keys{grid-template-columns:repeat(8,minmax(0,1fr))}.inputPanel .inputActions{grid-template-columns:1fr 1fr}.answerSavePanel .saveActions{display:grid;grid-template-columns:1fr 1fr}.answerSavePanel .saveActions #deleteAnswer{grid-column:1 / -1}}
-@media(max-width:560px){.inputPanel{padding:10px}.inputHead{grid-template-columns:minmax(0,1fr) 116px;gap:8px;margin-bottom:8px}.inputQuestion b{font-size:18px}.inputAnswer .display{font-size:18px}.inputPanel .keys{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.inputPanel .keys button{height:36px}.inputPanel .inputActions{grid-template-columns:1fr 1fr;gap:7px}.inputPanel .inputActions button{font-size:13px;padding:8px 6px}.keypad.is-fixed.inputPanel{width:calc(100% - 16px);padding:8px}.keypad.is-fixed .inputHead{grid-template-columns:minmax(0,1fr) 104px}.keypad.is-fixed .keys{grid-template-columns:repeat(5,minmax(0,1fr))}.answerSavePanel{padding:9px 10px}.answerSavePanel .saveActions{grid-template-columns:1fr}.answerSavePanel .saveActions #deleteAnswer{grid-column:auto}}
-
-/* v4 fix: prevent lower text in answer cards from being clipped on Android/mobile. */
-.answerCard{
-  min-height:92px!important;
-  height:auto!important;
-  padding:8px 8px 9px!important;
-  overflow:visible!important;
-  display:grid!important;
-  grid-template-rows:auto auto minmax(30px,auto)!important;
-  gap:3px!important;
+/* v18 mobile layout fix */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{min-width:0}
+header div,main,footer{width:100%;max-width:1240px;min-width:0}
+.flowSteps,.flowStep,.scoreSection,#step-input,#step-result,#answerCards,.answers,#result{min-width:0;max-width:100%;overflow-x:hidden}
+#answerCards.answers{width:100%;display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px;align-items:stretch}
+.answerCard{min-width:0;width:100%}
+.answerCard .cardTop{display:flex;align-items:center;justify-content:space-between;gap:6px;min-width:0}
+.answerCard .cardGroup{font-size:12px;font-weight:900;color:#344054;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.answerCard .cardMeta{font-size:11px;color:#647086;border:1px solid #e1e7f5;background:#f8fafc;border-radius:999px;padding:2px 7px;white-space:nowrap;flex:0 0 auto}
+.answerCard .cardId{font-weight:900;font-size:18px;line-height:1.15;margin-top:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.answerCard .ans{display:flex;align-items:center;justify-content:center;font-weight:900;color:#2f3b52}
+.toolFooter,.privacyNote{font-size:12px;color:#647086;font-weight:800}
+.toolFooter b{color:#4a556b;font-weight:900}
+@media(max-width:760px){
+  body{overflow-x:hidden}
+  main{padding-left:8px!important;padding-right:8px!important;overflow-x:hidden}
+  section,.flowStep{max-width:100%;overflow:hidden}
+  .answers,#answerCards.answers{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:100%;overflow:hidden}
+  .answerCard{height:auto;min-height:108px;padding:10px 8px;border-radius:12px;overflow:hidden}
+  .answerCard .cardTop{min-height:18px}
+  .answerCard .cardGroup{font-size:11px}
+  .answerCard .cardMeta{font-size:10px;padding:2px 6px}
+  .answerCard .cardId{font-size:17px;margin-top:5px;white-space:nowrap}
+  .answerCard .ans{min-height:38px;margin-top:9px;border-radius:10px;font-size:14px;background:#f8fafc}
+  .metrics,.resultSummaryStats{grid-template-columns:1fr 1fr!important}
+  .radarPanel{overflow:hidden}
+  .radarWrap{display:block!important;min-width:0!important;overflow:hidden}
+  .radarSvg{max-width:260px!important;margin:0 auto 8px!important}
+  .sectionStats{max-width:100%;overflow-x:auto}
+  .resultTableWrap{max-width:100%;overflow-x:auto!important;-webkit-overflow-scrolling:touch}
 }
-.answerCard .cardTop{
-  min-height:16px!important;
-  line-height:1.2!important;
+@media(max-width:380px){
+  .answers,#answerCards.answers{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .metrics,.resultSummaryStats{grid-template-columns:1fr!important}
 }
-.answerCard .cardGroup,
-.answerCard .cardMeta,
-.answerCard .cardId{
-  line-height:1.25!important;
-}
-.answerCard .cardId{
-  min-height:18px!important;
-  overflow:visible!important;
-}
-.answerCard .ans{
-  margin-top:0!important;
-  height:auto!important;
-  min-height:30px!important;
-  line-height:1.35!important;
-  padding:4px 6px!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  overflow:visible!important;
-  white-space:nowrap!important;
-}
-.answerCard:not(.done) .ans:empty::before{
-  line-height:1.35!important;
-  display:inline-block!important;
-}
-@media(max-width:560px){
-  .answers{
-    grid-template-columns:repeat(auto-fill,minmax(90px,1fr))!important;
-    gap:7px!important;
-  }
-  .answerCard{
-    min-height:88px!important;
-    padding:7px 7px 8px!important;
-  }
-  .answerCard .cardId{
-    font-size:14px!important;
-    min-height:18px!important;
-  }
-  .answerCard .ans{
-    min-height:29px!important;
-    font-size:15px!important;
-    padding:4px 5px!important;
-  }
-}
-
-/* v5 footer version/update display */
-footer b{font-weight:900;color:#4a556b}
