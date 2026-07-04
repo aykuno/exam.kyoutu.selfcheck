@@ -100,3 +100,6 @@
     padding:4px 5px!important;
   }
 }
+
+/* v5 footer version/update display */
+footer b{font-weight:900;color:#4a556b}
