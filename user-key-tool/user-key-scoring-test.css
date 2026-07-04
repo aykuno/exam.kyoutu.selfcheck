@@ -139,3 +139,16 @@ main,.flowSteps,.flowStep,.scoreSection,.inputPanel,.answerSavePanel,.answers,#r
   .answers{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   .inputHead{grid-template-columns:1fr!important}
 }
+
+
+/* v22: keep the answer input panel the same size when it becomes fixed. */
+.keypad.is-fixed.inputPanel{padding:12px 14px 11px!important;border-radius:0 0 18px 18px!important}
+.keypad.is-fixed .inputHead{grid-template-columns:minmax(0,1fr) minmax(120px,180px)!important;gap:10px!important;margin-bottom:10px!important}
+.keypad.is-fixed .inputQuestion,.keypad.is-fixed .inputAnswer{padding:8px 10px!important;border-radius:14px!important}
+.keypad.is-fixed .inputQuestion b{font-size:20px!important;line-height:1.25!important}
+.keypad.is-fixed .inputAnswer .display{font-size:20px!important;min-height:32px!important;line-height:1.35!important}
+.keypad.is-fixed .keys button{height:40px!important;font-size:16px!important;border-radius:12px!important}
+.keypad.is-fixed .inputActions{grid-template-columns:1fr 1fr 1fr 1.15fr!important;margin-top:10px!important;gap:8px!important}
+.keypad.is-fixed .inputActions button{padding:10px 8px!important;font-size:inherit!important;border-radius:12px!important}
+@media(max-width:760px){.keypad.is-fixed .inputActions{grid-template-columns:1fr 1fr!important}}
+@media(max-width:560px){.keypad.is-fixed.inputPanel{padding:10px!important;width:calc(100% - 16px)!important}.keypad.is-fixed .inputHead{grid-template-columns:minmax(0,1fr) 116px!important;gap:8px!important;margin-bottom:8px!important}.keypad.is-fixed .inputQuestion b{font-size:18px!important}.keypad.is-fixed .inputAnswer .display{font-size:18px!important}.keypad.is-fixed .keys{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:6px!important}.keypad.is-fixed .keys button{height:36px!important}.keypad.is-fixed .inputActions{grid-template-columns:1fr 1fr!important;gap:7px!important}.keypad.is-fixed .inputActions button{font-size:13px!important;padding:8px 6px!important}}
