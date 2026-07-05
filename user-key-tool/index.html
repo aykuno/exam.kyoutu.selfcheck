@@ -3,67 +3,91 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-  <title>ユーザー登録データ ツール</title>
+  <title>ユーザー登録データで採点</title>
   <style>
-    :root{--bg:#f5f7fb;--card:#fff;--ink:#1f2937;--muted:#667085;--line:#d9e2ef;--blue:#2563eb;--blue2:#eff6ff;--green:#07875b;--green2:#ecfdf3;--amber:#b45309;--amber2:#fff7ed;--shadow:0 14px 34px rgba(15,23,42,.08)}
+    :root{--bg:#f5f7fb;--card:#fff;--ink:#1f2937;--muted:#667085;--line:#d9e2ef;--blue:#2563eb;--blue2:#eff6ff;--green:#07875b;--green2:#ecfdf3;--amber:#b45309;--amber2:#fff7ed;--red:#b42318;--red2:#fff1f0;--shadow:0 14px 34px rgba(15,23,42,.08)}
     *{box-sizing:border-box}html,body{width:100%;max-width:100%;overflow-x:hidden}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65}a{color:inherit;text-decoration:none}
-    header{background:linear-gradient(135deg,#1d4ed8,#06b6d4);color:white;padding:28px 18px 34px}.wrap{max-width:980px;margin:0 auto}h1{font-size:clamp(24px,6vw,38px);line-height:1.25;margin:0 0 8px;font-weight:800}header p{margin:0;color:rgba(255,255,255,.92);font-size:15px}
-    main{max-width:980px;margin:-18px auto 0;padding:0 14px 28px}.card,.step,.infoBox{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);min-width:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}.card{padding:18px}.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;background:var(--blue2);color:#1d4ed8;font-weight:800;font-size:12px;margin-bottom:10px}.badge.green{background:var(--green2);color:var(--green)}.badge.amber{background:var(--amber2);color:var(--amber)}
-    h2{font-size:22px;line-height:1.35;margin:0 0 8px}.card p,.infoBox p{margin:0 0 12px;color:var(--muted);font-size:14px}.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:50px;border-radius:14px;background:var(--blue);color:#fff;font-weight:900;border:0;box-shadow:0 10px 20px rgba(37,99,235,.18)}.btn.green{background:var(--green);box-shadow:0 10px 20px rgba(7,135,91,.16)}
+    header{background:linear-gradient(135deg,#1d4ed8,#06b6d4);color:white;padding:28px 18px 36px}.wrap{max-width:980px;margin:0 auto}h1{font-size:clamp(25px,6vw,40px);line-height:1.25;margin:0 0 8px;font-weight:900}header p{margin:0;color:rgba(255,255,255,.94);font-size:15px;font-weight:700}
+    main{max-width:980px;margin:-20px auto 0;padding:0 14px 28px}.card,.step,.infoBox,.guide{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);min-width:0}.guide{padding:18px;margin-bottom:14px}.guide h2,.infoBox h2{font-size:22px;line-height:1.35;margin:0 0 8px}.guide p,.infoBox p{margin:0 0 12px;color:var(--muted);font-size:14px}.guide strong{color:var(--ink)}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}.card{padding:18px}.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;background:var(--blue2);color:#1d4ed8;font-weight:900;font-size:12px;margin-bottom:10px}.badge.green{background:var(--green2);color:var(--green)}.badge.amber{background:var(--amber2);color:var(--amber)}.badge.red{background:var(--red2);color:var(--red)}
+    h2{font-size:22px;line-height:1.35;margin:0 0 8px}.card p{margin:0 0 12px;color:var(--muted);font-size:14px}.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border-radius:14px;background:var(--blue);color:#fff;font-weight:900;border:0;box-shadow:0 10px 20px rgba(37,99,235,.18)}.btn.green{background:var(--green);box-shadow:0 10px 20px rgba(7,135,91,.16)}
     .flow,.infoBox{margin-top:16px;padding:18px}.flow h2,.infoBox h2{margin-bottom:12px}.steps{display:grid;gap:10px}.step{box-shadow:none;padding:14px 14px 14px 52px;position:relative}.num{position:absolute;left:14px;top:15px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#eef4ff;color:#1d4ed8;font-weight:900;font-size:13px}.step b{display:block;margin-bottom:2px}.step span{display:block;color:var(--muted);font-size:13px}
-    .list{display:grid;gap:10px;margin:0;padding:0;list-style:none}.list li{border:1px solid #e5ebf5;border-radius:14px;background:#fbfdff;padding:12px}.list b{display:block;margin-bottom:2px}.list span{display:block;color:var(--muted);font-size:13px}.links{margin-top:14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.smalllink{border:1px solid var(--line);border-radius:14px;background:white;padding:12px;text-align:center;font-size:13px;color:var(--muted)}.smalllink b{display:block;color:var(--ink);font-size:14px}
-    footer{max-width:980px;margin:0 auto;padding:12px 14px 24px;text-align:center;color:var(--muted);font-size:12px;font-weight:800}footer b{color:var(--ink)}@media(max-width:720px){.grid{grid-template-columns:1fr}.links{grid-template-columns:1fr}header{padding-top:24px}.card,.flow,.infoBox{padding:16px}.step{padding-right:12px}}
+    .list{display:grid;gap:10px;margin:0;padding:0;list-style:none}.list li{border:1px solid #e5ebf5;border-radius:14px;background:#fbfdff;padding:12px}.list b{display:block;margin-bottom:2px}.list span{display:block;color:var(--muted);font-size:13px}.links{margin-top:14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.smalllink{border:1px solid var(--line);border-radius:14px;background:white;padding:12px;text-align:center;font-size:13px;color:var(--muted)}.smalllink b{display:block;color:var(--ink);font-size:14px}.note{border:1px solid #cbd5e1;border-radius:14px;background:#f8fafc;padding:12px;margin-top:10px;color:#475467;font-size:13px;font-weight:700}
+    footer{max-width:980px;margin:0 auto;padding:12px 14px 24px;text-align:center;color:var(--muted);font-size:12px;font-weight:800}footer b{color:var(--ink)}@media(max-width:720px){.grid{grid-template-columns:1fr}.links{grid-template-columns:1fr}header{padding-top:24px}.card,.flow,.infoBox,.guide{padding:16px}.step{padding-right:12px}}
   </style>
 </head>
 <body>
-  <header><div class="wrap"><h1>ユーザー登録データ ツール</h1><p>自分で作った正答データを保存し、そのデータを使って採点できます。</p></div></header>
+  <header>
+    <div class="wrap">
+      <h1>ユーザー登録データで採点する</h1>
+      <p>自分で作った正答データを使って、模試・プリント・自作問題などを採点するページです。</p>
+    </div>
+  </header>
+
   <main>
+    <section class="guide" aria-label="このページの説明">
+      <h2>まず最初に</h2>
+      <p>この機能は、通常の共通テスト・センター試験採点とは別です。通常ページはサイト側に登録済みの正答データで採点しますが、ここでは<strong>利用者が自分で登録した正答データ</strong>で採点します。</p>
+      <p>使う順番は、<strong>正答データを作る → 保存する → 採点画面で選ぶ → 自分の解答を入力する</strong>、です。</p>
+      <div class="note">JSONは、作成した正答データをバックアップしたり、別のスマホ・PCへ移したりするためのファイルです。普段は意識しなくて構いません。</div>
+    </section>
+
     <section class="grid" aria-label="主要メニュー">
       <article class="card">
-        <div class="badge">① 正答データ作成</div>
-        <h2>正答データを作成する</h2>
-        <p>年度・試験名・科目を入力し、解答番号、正答、配点、問題番号を登録します。作成したデータは同じブラウザ内に保存されます。</p>
-        <a class="btn" href="user-key-builder.html?v=23">作成画面を開く</a>
+        <div class="badge">最初に使う</div>
+        <h2>正答データを作る</h2>
+        <p>テスト名、科目、解答番号、正解、配点を登録します。学校プリントや模試など、公式登録されていない問題を採点したいときはここから始めます。</p>
+        <a class="btn" href="user-key-builder.html?v=24">作成画面を開く</a>
       </article>
       <article class="card">
-        <div class="badge green">② 採点</div>
+        <div class="badge green">保存後に使う</div>
         <h2>作成済みデータで採点する</h2>
-        <p>保存済みの正答データを選び、自分の解答を入力して採点します。結果は設問別に確認でき、PDF出力もできます。</p>
-        <a class="btn green" href="user-key-scoring-test.html?v=23">採点画面を開く</a>
+        <p>保存した正答データを選び、自分の解答を入力して採点します。点数・正誤一覧を確認し、PDFとして保存できます。</p>
+        <a class="btn green" href="user-key-scoring-test.html?v=24">採点画面を開く</a>
       </article>
     </section>
 
     <section class="flow card">
-      <h2>使う順番</h2>
+      <h2>基本の流れ</h2>
       <div class="steps">
-        <div class="step"><span class="num">1</span><b>正答データを作る</b><span>大問構成を入力し、解答番号を作成します。その後、各番号の正答を入力します。</span></div>
-        <div class="step"><span class="num">2</span><b>配点を設定して保存する</b><span>各番号の配点を確認します。まとめて完答や順不同完答が必要な問題は、配点設定で調整できます。</span></div>
-        <div class="step"><span class="num">3</span><b>採点画面でデータを選ぶ</b><span>保存済みデータを選択します。別端末で作ったJSONファイルを読み込むこともできます。</span></div>
-        <div class="step"><span class="num">4</span><b>自分の解答を入力して採点する</b><span>解答カードに自分の解答を入力し、「採点する」で点数・正誤・未入力を確認します。</span></div>
+        <div class="step"><span class="num">1</span><b>正答データを作る</b><span>作成画面で、年度・試験名・科目・満点を入力し、大問構成から解答番号を作ります。</span></div>
+        <div class="step"><span class="num">2</span><b>正解と配点を入れる</b><span>各解答番号の正解を入力し、配点を確認します。まとめて完答・順不同完答が必要な問題は配点設定で調整します。</span></div>
+        <div class="step"><span class="num">3</span><b>ユーザー登録データとして保存する</b><span>保存すると、同じブラウザ内の「登録済みユーザーデータ」に残ります。</span></div>
+        <div class="step"><span class="num">4</span><b>採点画面でデータを選ぶ</b><span>保存済みデータを選び、自分の解答を入力して採点します。</span></div>
+        <div class="step"><span class="num">5</span><b>必要ならPDF・JSONで保存する</b><span>採点結果はPDF保存できます。正答データを別端末へ移す場合はJSON保存を使います。</span></div>
       </div>
+    </section>
+
+    <section class="infoBox">
+      <h2>どちらを使えばよいか</h2>
+      <ul class="list">
+        <li><b>共通テスト・センター試験の本試験や追試験を採点したい</b><span>通常の採点サイトを使います。登録済みの公式データで採点します。</span></li>
+        <li><b>学校のプリント・模試・自作問題を採点したい</b><span>このページを使います。自分で正答データを作ってから採点します。</span></li>
+        <li><b>別端末でも同じ正答データを使いたい</b><span>作成画面でJSON保存し、別端末の採点画面でJSON読み込みを行います。</span></li>
+      </ul>
     </section>
 
     <section class="infoBox">
       <h2>このツールでできること</h2>
       <ul class="list">
-        <li><b>正答データの作成</b><span>模試・学校内テスト・自作問題など、公式データにない試験の正答データを作れます。</span></li>
+        <li><b>正答データの作成</b><span>解答番号、正解、配点、大問構成を登録できます。</span></li>
         <li><b>保存済みデータの管理</b><span>作成済みデータの編集、複製、削除、JSON保存ができます。更新順・五十音順で並び替えられます。</span></li>
-        <li><b>自分の解答の保存</b><span>採点画面で入力した自分の解答も保存・読み込みできます。続きから入力するときに使えます。</span></li>
-        <li><b>JSONでの移動</b><span>作成した正答データはJSONファイルとして保存できます。別端末や別ブラウザへ移すときはJSONを使います。</span></li>
+        <li><b>自分の解答の保存</b><span>採点画面で入力した自分の解答を保存・読み込みできます。途中まで入力した解答を後で続けられます。</span></li>
+        <li><b>PDF保存</b><span>採点結果をPDFで保存できます。</span></li>
       </ul>
     </section>
 
     <section class="infoBox">
       <h2>保存について</h2>
-      <p>作成した正答データと自分の解答は、このブラウザ内に保存されます。別のスマホ・別のPC・別ブラウザでは自動共有されません。</p>
-      <p>別端末で使う場合は、作成画面のJSON保存でファイルを書き出し、使いたい端末でJSON読み込みを行ってください。</p>
+      <p>作成した正答データと自分の解答は、<strong>このブラウザ内</strong>に保存されます。サイト管理者が保存内容を見ることはできません。</p>
+      <p>ブラウザのデータを削除した場合、別の端末を使った場合、別のブラウザで開いた場合は、保存済みデータは自動では表示されません。必要なデータはJSONファイルとしてバックアップしてください。</p>
       <div class="links">
-        <a class="smalllink" href="user-key-builder.html?v=23"><b>作成画面</b>正答・配点登録</a>
-        <a class="smalllink" href="user-key-scoring-test.html?v=23#import"><b>JSON読み込み</b>採点画面内で実行</a>
+        <a class="smalllink" href="user-key-builder.html?v=24"><b>作成画面</b>正答・配点登録</a>
+        <a class="smalllink" href="user-key-scoring-test.html?v=24#import"><b>JSON読み込み</b>採点画面内で実行</a>
         <a class="smalllink" href="../"><b>通常の採点サイト</b>本試験・追試験など</a>
       </div>
     </section>
   </main>
-  <footer><b>v23</b>｜更新：2026/7/4 23:10</footer>
+  <footer><b>v24</b>｜更新：2026/7/5 22:00</footer>
 </body>
 </html>
