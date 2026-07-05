@@ -55,7 +55,7 @@
 
   function patchIndex(html){
     html = html.replace(/最終更新日時：[^<]+/, UPDATE_TIME_TEXT);
-    html = html.replace(/<b>バージョン：v\d+<\/b>/, '<b>バージョン：v181</b>');
+    html = html.replace(/<b>バージョン：v\d+<\/b>/, '<b>バージョン：v182</b>');
 
     html = html.replace(
       "const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）'};",
@@ -115,7 +115,7 @@
     html = html.replace('<button class="primary" id="grade">採点する</button><button id="saveAnswer">解答を保存</button>', '<button class="primary" id="grade">採点する</button><button id="exportPdf" class="pdfBtn">PDF出力（A4）</button><button id="saveAnswer">解答を保存</button>');
 
     const gradeStateNeedle = "const mx=k.maxScore??possible,disp=possible?score*mx/possible:score,rate=possible?score/possible*100:0;$('result').innerHTML=";
-    if (html.includes(gradeStateNeedle)) html = html.replace(gradeStateNeedle, "const mx=k.maxScore??possible,disp=possible?score*mx/possible:score,rate=possible?score/possible*100:0;window.__lastGrade={sig:selId(),k,rows,score,possible,okc,missing,mx,disp,rate};$('result').innerHTML=");
+    if (html.includes(gradeStateNeedle)) html = html.replace(gradeStateNeedle, "const mx=k.maxScore??possible,disp=possible?score*mx/possible:score,rate=possible?score/possible*100:0;window.__lastGrade={sig:selId(),k,rows,score,possible,okc,missing,mx,disp,rate};try{if(typeof saveCurrentAnswer==='function')saveCurrentAnswer();}catch(e){console.warn('answer autosave failed',e)}$('result').innerHTML=");
 
     const pdfHelpers = `function pdfDateText(d){const p=n=>String(n).padStart(2,'0');return d.getFullYear()+'/'+p(d.getMonth()+1)+'/'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes())}
 function judgeText(r){if(!r.included)return '対象外';if(!r.got.length)return '未入力';if(r.earn===r.pts)return '○';return r.earn>0?'△':'×'}
