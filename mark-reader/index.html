@@ -4,62 +4,72 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
-  <title>マークシート自動読取</title>
+  <title>数学マークシート自動読取</title>
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <header>
     <p class="eyebrow">共テ・センター自動採点サイト</p>
-    <h1>マークシート自動読取</h1>
-    <span class="badge">実験版 v2</span>
+    <h1>数学マークシート自動読取</h1>
+    <span class="badge">実験版 v3</span>
   </header>
 
   <main>
     <section class="notice">
-      <strong>黒鉛筆で記入した指定様式の用紙を、全体が入るように撮影してください。</strong>
-      <span>画像は端末内だけで処理され、外部には送信されません。</span>
+      <strong>数学①・数学②の両面を、順番に撮影するだけで読み取ります。</strong>
+      <span>黒鉛筆で記入し、用紙全体が入るように撮影してください。画像は端末外へ送信されません。</span>
     </section>
 
-    <section class="card action-card">
-      <label class="camera-button">
-        <span class="camera-icon" aria-hidden="true">▣</span>
-        撮影する・写真を選ぶ
-        <input id="fileInput" type="file" accept="image/*" capture="environment">
-      </label>
-      <p>四隅指定・位置合わせ・感度調整は不要です。</p>
+    <section id="setupCard" class="card action-card">
+      <h2>科目を選択</h2>
+      <div class="subject-buttons" role="group" aria-label="科目">
+        <button class="subject selected" data-subject="math1" type="button">数学①</button>
+        <button class="subject" data-subject="math2" type="button">数学②</button>
+      </div>
+      <button id="startButton" class="camera-button" type="button">第1面を撮影する</button>
+      <p>第1面の読取り後、そのまま第2面へ進みます。</p>
+    </section>
+
+    <section id="captureCard" class="card action-card hidden">
+      <div class="step-indicator"><span class="done">科目選択</span><i></i><span id="step1">第1面</span><i></i><span id="step2">第2面</span></div>
+      <h2 id="captureTitle">第1面を撮影</h2>
+      <p id="captureHelp">用紙全体と解答欄の黒い四角が入るようにしてください。</p>
+      <label class="camera-button">撮影する・写真を選ぶ<input id="fileInput" type="file" accept="image/*" capture="environment"></label>
+      <button id="backButton" class="secondary" type="button">科目選択に戻る</button>
     </section>
 
     <section id="workingCard" class="card hidden" aria-live="polite">
       <div class="spinner"></div>
       <h2>自動で読み取っています</h2>
-      <p id="workingText">用紙の基準マークを探しています…</p>
+      <p id="workingText">写真を読み込んでいます…</p>
     </section>
 
     <section id="errorCard" class="card error hidden" aria-live="assertive">
       <h2>読み取れませんでした</h2>
       <p id="errorText"></p>
-      <label class="retry-button">撮り直す<input type="file" accept="image/*" capture="environment"></label>
+      <button id="retryButton" class="retry-button" type="button">同じ面を撮り直す</button>
     </section>
 
     <section id="resultCard" class="card hidden">
       <div class="result-head">
-        <div>
-          <h2>読取結果</h2>
-          <p id="summary"></p>
-        </div>
-        <button id="rescanButton" class="secondary" type="button">別の写真を読む</button>
+        <div><h2>両面の読取結果</h2><p id="summary"></p></div>
+        <button id="rescanButton" class="secondary" type="button">最初から読み直す</button>
       </div>
       <div class="legend"><span class="ok-dot"></span>読取済み <span class="warn-dot"></span>要確認 <span class="blank-dot"></span>未記入</div>
-      <div id="results" class="results"></div>
+      <section id="selectionPanel" class="selection-panel hidden">
+        <strong>数学② 選択した大問（3問）</strong>
+        <p>記入状況から推定しています。違う場合は直してください。</p>
+        <div id="selectionButtons"></div>
+      </section>
+      <div id="results" class="question-results"></div>
       <button id="copyButton" class="primary" type="button">確認した解答番号をコピー</button>
       <p id="copyStatus" class="copy-status"></p>
       <details>
         <summary>検出画像を確認</summary>
-        <canvas id="previewCanvas"></canvas>
+        <div id="previews" class="previews"></div>
       </details>
     </section>
   </main>
-
   <script src="./reader.js"></script>
 </body>
 </html>
