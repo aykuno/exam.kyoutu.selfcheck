@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>マークシート読取 実験ページ</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header>
+    <div>
+      <p class="eyebrow">共テ・センター自動採点サイト</p>
+      <h1>マークシート読取 実験ページ</h1>
+    </div>
+    <span class="badge">試作版 v1</span>
+  </header>
+
+  <main>
+    <section class="notice">
+      <strong>このページは読取精度を調整するための実験用です。</strong>
+      <span>画像はサーバーへ送信されず、この端末のブラウザ内だけで処理されます。現時点では採点画面へ自動反映しません。</span>
+    </section>
+
+    <section class="card">
+      <h2><span>1</span> 写真を読み込む</h2>
+      <p>用紙全体が写った、黒鉛筆で記入したマークシートを選んでください。</p>
+      <label class="file-button">
+        カメラで撮影・写真を選択
+        <input id="fileInput" type="file" accept="image/*" capture="environment">
+      </label>
+      <p id="fileName" class="muted">画像はまだ選択されていません。</p>
+    </section>
+
+    <section id="cornerCard" class="card hidden">
+      <h2><span>2</span> 用紙の四隅を指定</h2>
+      <p>写真上で、用紙の <b>左上 → 右上 → 右下 → 左下</b> の順にタップしてください。</p>
+      <div class="canvas-wrap">
+        <canvas id="sourceCanvas"></canvas>
+      </div>
+      <div class="row">
+        <button id="undoCorner" class="secondary" type="button">1つ戻す</button>
+        <button id="resetCorners" class="secondary" type="button">四隅をやり直す</button>
+        <button id="rectifyButton" type="button" disabled>用紙を正面補正</button>
+      </div>
+      <p id="cornerStatus" class="status">左上をタップしてください。</p>
+    </section>
+
+    <section id="scanCard" class="card hidden">
+      <h2><span>3</span> 読取範囲を合わせる</h2>
+      <p>青い丸が実際のマーク欄に重なるよう調整します。初期値は「左右2列・各30問・選択肢1〜9」です。</p>
+      <div class="controls">
+        <label>左列の開始位置 <input id="leftX" type="range" min="10" max="48" value="23"><output>23%</output></label>
+        <label>右列の開始位置 <input id="rightX" type="range" min="52" max="90" value="64"><output>64%</output></label>
+        <label>選択肢の横幅 <input id="choiceWidth" type="range" min="18" max="42" value="30"><output>30%</output></label>
+        <label>最初の行 <input id="topY" type="range" min="8" max="35" value="19"><output>19%</output></label>
+        <label>最後の行 <input id="bottomY" type="range" min="60" max="94" value="83"><output>83%</output></label>
+        <label>判定感度 <input id="threshold" type="range" min="5" max="45" value="18"><output>18</output></label>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="sheetCanvas"></canvas>
+      </div>
+      <div class="row">
+        <button id="readButton" type="button">この位置で読み取る</button>
+      </div>
+    </section>
+
+    <section id="resultCard" class="card hidden">
+      <h2><span>4</span> 読取結果を確認</h2>
+      <div id="summary" class="summary"></div>
+      <p class="legend"><i class="ok"></i>読取　<i class="warn"></i>要確認　<i class="blank"></i>未記入</p>
+      <div id="results" class="results"></div>
+      <div class="row">
+        <button id="copyButton" type="button">解答番号をコピー</button>
+      </div>
+      <p id="copyStatus" class="status"></p>
+    </section>
+  </main>
+
+  <script src="./reader.js"></script>
+</body>
+</html>
