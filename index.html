@@ -32,12 +32,12 @@
 `  const MOCK_EXAM_LABEL = '模擬試験-2026年5月実施ベネッセ共通テスト模試';
   const KAWAI_EXAM_ID = 'mock-kawai-zento-2026-02';
   const KAWAI_EXAM_LABEL = '模擬試験-第２回 河合全統共通テスト模試';
-  const UPDATE_TIME_TEXT = '最終更新日時：2026/7/26 22:42';`,
+  const UPDATE_TIME_TEXT = '最終更新日時：2026/7/26 23:59';`,
       '模試定義');
 
     html = replaceRequired(html,
       "html = html.replace(/<b>バージョン：v\\d+<\\/b>/, '<b>バージョン：v182</b>');",
-      "html = html.replace(/<b>バージョン：v\\d+<\\/b>/, '<b>バージョン：v183</b>');",
+      "html = html.replace(/<b>バージョン：v\\d+<\\/b>/, '<b>バージョン：v184</b>');",
       'バージョン定義');
 
     html = replaceRequired(html,
@@ -50,7 +50,7 @@
     // v179: 模試データは answer_keys_verified.json に統合済み。別JSONをfetchして実行時結合しない。
     if (!html.includes(oldInit)) throw new Error('index.html の init 関数を見つけられませんでした。');`,
 `    const oldInit = "async function init(){const res=await fetch('answer_keys_verified.json',{cache:'no-store'});const obj=await res.json();BASE_KEYS=obj.keys||[];try{const sres=await fetch('statistics_final.json',{cache:'no-store'});if(sres.ok)STAT_DATA=await sres.json();}catch(e){STAT_DATA={entries:[]};}refresh();}";
-    const newInit = "async function init(){const res=await fetch('answer_keys_verified.json',{cache:'no-store'});const obj=await res.json();BASE_KEYS=obj.keys||[];for(const file of ['answer_keys_mock_kawai_2026_02_english_info.json','answer_keys_mock_kawai_2026_02_geo_history.json','answer_keys_mock_kawai_2026_02_civics_combined.json','answer_keys_mock_kawai_2026_02_japanese.json','answer_keys_mock_kawai_2026_02_math1.json','answer_keys_mock_kawai_2026_02_math2.json','answer_keys_mock_kawai_2026_02_science_basic.json','answer_keys_mock_kawai_2026_02_science_advanced.json']){try{const mres=await fetch(file,{cache:'no-store'});if(mres.ok){const mobj=await mres.json();BASE_KEYS=BASE_KEYS.concat(mobj.keys||[]);}}catch(e){console.warn('Kawai mock answer data could not be loaded: '+file,e);}}try{const sres=await fetch('statistics_final.json',{cache:'no-store'});if(sres.ok)STAT_DATA=await sres.json();}catch(e){STAT_DATA={entries:[]};}refresh();}";
+    const newInit = "async function init(){const res=await fetch('answer_keys_verified.json',{cache:'no-store'});const obj=await res.json();BASE_KEYS=obj.keys||[];for(const file of ['answer_keys_mock_kawai_2026_02_english_info.json','answer_keys_mock_kawai_2026_02_geo_history.json','answer_keys_mock_kawai_2026_02_civics_combined.json','answer_keys_mock_kawai_2026_02_japanese.json','answer_keys_mock_kawai_2026_02_math1.json','answer_keys_mock_kawai_2026_02_math2.json','answer_keys_mock_kawai_2026_02_science_basic.json','answer_keys_mock_kawai_2026_02_science_advanced.json']){try{const mres=await fetch(file,{cache:'no-store'});if(mres.ok){const mobj=await mres.json();BASE_KEYS=BASE_KEYS.concat(mobj.keys||[]);}}catch(e){console.warn('Kawai mock answer data could not be loaded: '+file,e);}}const infoGroupLabels={Q2A:'第2問 A',Q2B:'第2問 B',Q4A:'第4問 A',Q4B:'第4問 B'};for(const k of BASE_KEYS){if(k.exam==='mock-kawai-zento-2026-02'&&k.subject==='情報I'){for(const q of (k.questions||[])){if(infoGroupLabels[q.group])q.group=infoGroupLabels[q.group];}}}try{const sres=await fetch('statistics_final.json',{cache:'no-store'});if(sres.ok)STAT_DATA=await sres.json();}catch(e){STAT_DATA={entries:[]};}refresh();}";
     if (!html.includes(oldInit)) throw new Error('index.html の init 関数を見つけられませんでした。');
     html = html.replace(oldInit, newInit);`,
       '正解データ読込定義');
