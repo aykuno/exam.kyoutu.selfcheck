@@ -4,38 +4,50 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
-  <title>数学マークシート自動読取</title>
+  <title>マークシート自動読取</title>
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <header>
     <p class="eyebrow">共テ・センター自動採点サイト</p>
-    <h1>数学マークシート自動読取</h1>
-    <span class="badge">実験版 v3</span>
+    <h1>マークシート自動読取</h1>
+    <span class="badge">実験版 v4</span>
   </header>
 
   <main>
     <section class="notice">
-      <strong>数学①・数学②の両面を、順番に撮影するだけで読み取ります。</strong>
-      <span>黒鉛筆で記入し、用紙全体が入るように撮影してください。画像は端末外へ送信されません。</span>
+      <strong>科目ごとに専用の読取方法を使います。</strong>
+      <span>黒鉛筆で記入し、用紙全体と黒い基準四角が入るように撮影してください。画像は端末内だけで処理されます。</span>
     </section>
 
     <section id="setupCard" class="card action-card">
-      <h2>科目を選択</h2>
-      <div class="subject-buttons" role="group" aria-label="科目">
-        <button class="subject selected" data-subject="math1" type="button">数学①</button>
-        <button class="subject" data-subject="math2" type="button">数学②</button>
+      <h2>用紙を選択</h2>
+      <div class="subject-buttons" role="group" aria-label="用紙形式">
+        <button class="subject selected" data-subject="standard" type="button">
+          <b>国語・通常型</b><small>1〜60・片面</small>
+        </button>
+        <button class="subject" data-subject="math1" type="button">
+          <b>数学①</b><small>第1面＋第2面</small>
+        </button>
+        <button class="subject" data-subject="math2" type="button">
+          <b>数学②</b><small>両面・選択問題</small>
+        </button>
       </div>
-      <button id="startButton" class="camera-button" type="button">第1面を撮影する</button>
-      <p>第1面の読取り後、そのまま第2面へ進みます。</p>
+      <button id="startButton" class="camera-button" type="button">国語・通常型を撮影する</button>
+      <p id="setupHelp">国語で精度を確認できた従来の読取処理をそのまま使用します。</p>
     </section>
 
     <section id="captureCard" class="card action-card hidden">
-      <div class="step-indicator"><span class="done">科目選択</span><i></i><span id="step1">第1面</span><i></i><span id="step2">第2面</span></div>
-      <h2 id="captureTitle">第1面を撮影</h2>
-      <p id="captureHelp">用紙全体と解答欄の黒い四角が入るようにしてください。</p>
-      <label class="camera-button">撮影する・写真を選ぶ<input id="fileInput" type="file" accept="image/*" capture="environment"></label>
-      <button id="backButton" class="secondary" type="button">科目選択に戻る</button>
+      <div id="stepIndicator" class="step-indicator hidden">
+        <span class="done">科目選択</span><i></i><span id="step1">第1面</span><i></i><span id="step2">第2面</span>
+      </div>
+      <h2 id="captureTitle">用紙を撮影</h2>
+      <p id="captureHelp"></p>
+      <label class="camera-button">
+        撮影する・写真を選ぶ
+        <input id="fileInput" type="file" accept="image/*" capture="environment">
+      </label>
+      <button id="backButton" class="secondary" type="button">用紙選択に戻る</button>
     </section>
 
     <section id="workingCard" class="card hidden" aria-live="polite">
@@ -48,24 +60,30 @@
       <h2>読み取れませんでした</h2>
       <p id="errorText"></p>
       <button id="retryButton" class="retry-button" type="button">同じ面を撮り直す</button>
+      <button id="errorBackButton" class="secondary" type="button">用紙選択に戻る</button>
     </section>
 
     <section id="resultCard" class="card hidden">
       <div class="result-head">
-        <div><h2>両面の読取結果</h2><p id="summary"></p></div>
+        <div><h2>読取結果</h2><p id="summary"></p></div>
         <button id="rescanButton" class="secondary" type="button">最初から読み直す</button>
       </div>
-      <div class="legend"><span class="ok-dot"></span>読取済み <span class="warn-dot"></span>要確認 <span class="blank-dot"></span>未記入</div>
+      <div class="legend">
+        <span class="ok-dot"></span>読取済み
+        <span class="warn-dot"></span>要確認
+        <span class="blank-dot"></span>未記入
+      </div>
       <section id="selectionPanel" class="selection-panel hidden">
         <strong>数学② 選択した大問（3問）</strong>
-        <p>記入状況から推定しています。違う場合は直してください。</p>
+        <p>記入状況から推定しています。違う場合だけ直してください。</p>
         <div id="selectionButtons"></div>
       </section>
-      <div id="results" class="question-results"></div>
+      <div id="standardResults" class="standard-results hidden"></div>
+      <div id="mathResults" class="question-results hidden"></div>
       <button id="copyButton" class="primary" type="button">確認した解答番号をコピー</button>
       <p id="copyStatus" class="copy-status"></p>
       <details>
-        <summary>検出画像を確認</summary>
+        <summary>検出位置を確認</summary>
         <div id="previews" class="previews"></div>
       </details>
     </section>

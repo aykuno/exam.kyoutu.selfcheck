@@ -1,21 +1,49 @@
 (() => {
   "use strict";
+
   const $ = id => document.getElementById(id);
   const KANA = ["ア","イ","ウ","エ","オ","カ","キ","ク","ケ","コ","サ","シ","ス","セ","ソ","タ","チ","ツ","テ","ト","ナ","ニ","ヌ","ネ","ノ","ハ","ヒ","フ","ヘ","ホ"];
   const TEMPLATES = {
-    math1: {name:"数学①", pages:[[1,2],[3,4]], choices:null},
-    math2: {name:"数学②", pages:[[1,2,3],[4,5,6,7]], choices:[4,5,6,7]}
+    standard: {
+      name: "国語・通常型",
+      help: "国語で精度を確認できた従来の読取処理をそのまま使用します。",
+      pages: [[1, 2]],
+      standard: true
+    },
+    math1: {
+      name: "数学①",
+      help: "第1面と第2面を順に撮影します。数学専用の位置・判定基準を使用します。",
+      pages: [[1, 2], [3, 4]]
+    },
+    math2: {
+      name: "数学②",
+      help: "両面を順に撮影し、第4〜7問から選択した3問を推定します。",
+      pages: [[1, 2, 3], [4, 5, 6, 7]],
+      choices: [4, 5, 6, 7]
+    }
   };
-  let subject = "math1", pageIndex = 0, pageData = [], selectedQuestions = new Set();
 
-  document.querySelectorAll(".subject").forEach(button => button.onclick = () => {
-    subject = button.dataset.subject;
-    document.querySelectorAll(".subject").forEach(x => x.classList.toggle("selected", x === button));
-    $("startButton").textContent = `${TEMPLATES[subject].name} 第1面を撮影する`;
+  let subject = "standard";
+  let pageIndex = 0;
+  let pageData = [];
+  let standardAnswers = [];
+  let selectedQuestions = new Set();
+
+  document.querySelectorAll(".subject").forEach(button => {
+    button.onclick = () => {
+      subject = button.dataset.subject;
+      document.querySelectorAll(".subject").forEach(x => x.classList.toggle("selected", x === button));
+      $("startButton").textContent = subject === "standard"
+        ? "国語・通常型を撮影する"
+        : `${TEMPLATES[subject].name} 第1面を撮影する`;
+      $("setupHelp").textContent = TEMPLATES[subject].help;
+    };
   });
+
   $("startButton").onclick = begin;
-  $("backButton").onclick = () => show("setupCard");
-  $("retryButton").onclick = () => showCapture();
+  $("backButton").onclick = reset;
+  $("errorBackButton").onclick = reset;
+  $("retryButton").onclick = showCapture;
   $("rescanButton").onclick = reset;
   $("fileInput").onchange = () => {
     const file = $("fileInput").files && $("fileInput").files[0];
@@ -23,136 +51,761 @@
     $("fileInput").value = "";
   };
 
-  function begin(){ pageIndex=0;pageData=[];selectedQuestions.clear();showCapture(); }
-  function reset(){ pageIndex=0;pageData=[];selectedQuestions.clear();show("setupCard"); }
-  function show(id){ ["setupCard","captureCard","workingCard","errorCard","resultCard"].forEach(x => $(x).classList.toggle("hidden",x!==id)); }
-  function showCapture(){
-    $("captureTitle").textContent=`${TEMPLATES[subject].name} 第${pageIndex+1}面を撮影`;
-    $("captureHelp").textContent=pageIndex===0?"用紙全体と、各解答欄の四隅にある黒い四角を入れてください。":"裏返した第2面を、同じように用紙全体が入るよう撮影してください。";
-    $("step1").className=pageIndex===0?"active":"done";
-    $("step2").className=pageIndex===1?"active":"";
+  function begin() {
+    pageIndex = 0;
+    pageData = [];
+    standardAnswers = [];
+    selectedQuestions.clear();
+    showCapture();
+  }
+
+  function reset() {
+    pageIndex = 0;
+    pageData = [];
+    standardAnswers = [];
+    selectedQuestions.clear();
+    show("setupCard");
+  }
+
+  function show(id) {
+    ["setupCard","captureCard","workingCard","errorCard","resultCard"]
+      .forEach(x => $(x).classList.toggle("hidden", x !== id));
+  }
+
+  function showCapture() {
+    const standard = subject === "standard";
+    $("stepIndicator").classList.toggle("hidden", standard);
+    $("captureTitle").textContent = standard
+      ? "国語・通常型を撮影"
+      : `${TEMPLATES[subject].name} 第${pageIndex + 1}面を撮影`;
+    $("captureHelp").textContent = standard
+      ? "用紙全体と、左右の解答欄にある黒い基準四角をすべて入れてください。"
+      : pageIndex === 0
+        ? "第1面の用紙全体と、各解答欄の四隅にある黒い四角を入れてください。"
+        : "裏返した第2面を、同じように用紙全体が入るよう撮影してください。";
+    $("step1").className = pageIndex === 0 ? "active" : "done";
+    $("step2").className = pageIndex === 1 ? "active" : "";
     show("captureCard");
   }
-  function nextFrame(){ return new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve,0))); }
-  function rotateCanvas(source,angle){
-    if(!angle)return source;
-    const out=document.createElement("canvas");out.width=source.height;out.height=source.width;
-    const ctx=out.getContext("2d");ctx.translate(out.width/2,out.height/2);ctx.rotate(angle*Math.PI/180);ctx.drawImage(source,-source.width/2,-source.height/2);
+
+  function nextFrame() {
+    return new Promise(resolve => requestAnimationFrame(() => setTimeout(resolve, 0)));
+  }
+
+  function rotateCanvas(source, angle) {
+    if (!angle) return source;
+    const out = document.createElement("canvas");
+    if (Math.abs(angle) === 90) {
+      out.width = source.height;
+      out.height = source.width;
+    } else {
+      out.width = source.width;
+      out.height = source.height;
+    }
+    const ctx = out.getContext("2d");
+    ctx.translate(out.width / 2, out.height / 2);
+    ctx.rotate(angle * Math.PI / 180);
+    ctx.drawImage(source, -source.width / 2, -source.height / 2);
     return out;
   }
 
-  async function readPage(file){
-    show("workingCard");$("workingText").textContent="写真を読み込んでいます…";
-    try{
-      const bitmap=await createImageBitmap(file,{imageOrientation:"from-image"});
-      const scale=Math.min(1,2000/Math.max(bitmap.width,bitmap.height));
-      const base=document.createElement("canvas");
-      base.width=Math.round(bitmap.width*scale);base.height=Math.round(bitmap.height*scale);
-      base.getContext("2d").drawImage(bitmap,0,0,base.width,base.height);bitmap.close();
-      await nextFrame();$("workingText").textContent="解答欄を自動検出しています…";
-      const expected=TEMPLATES[subject].pages[pageIndex].length;
-      let canvas,image,boxes=[];
-      for(const angle of[0,90,-90]){
-        const candidate=rotateCanvas(base,angle);
-        const candidateImage=candidate.getContext("2d",{willReadFrequently:true}).getImageData(0,0,candidate.width,candidate.height);
-        const candidateBoxes=detectAnswerBoxes(candidateImage,expected);
-        if(candidateBoxes.length===expected){canvas=candidate;image=candidateImage;boxes=candidateBoxes;break;}
+  async function readPage(file) {
+    show("workingCard");
+    $("workingText").textContent = "写真を読み込んでいます…";
+    try {
+      const bitmap = await createImageBitmap(file, {imageOrientation: "from-image"});
+      const maxSide = subject === "standard" ? 1800 : 2200;
+      const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
+      const base = document.createElement("canvas");
+      base.width = Math.round(bitmap.width * scale);
+      base.height = Math.round(bitmap.height * scale);
+      base.getContext("2d").drawImage(bitmap, 0, 0, base.width, base.height);
+      bitmap.close();
+      await nextFrame();
+
+      if (subject === "standard") {
+        await readStandardPage(base, file.name);
+      } else {
+        await readMathPage(base, file.name);
       }
-      if(boxes.length!==expected) throw new Error(`第${pageIndex+1}面の解答欄を${expected}個すべて検出できませんでした。用紙全体を入れ、影や反射を避けて撮り直してください。`);
-      await nextFrame();$("workingText").textContent="鉛筆のマークを判定しています…";
-      const questionNumbers=TEMPLATES[subject].pages[pageIndex];
-      const questions=boxes.map((box,i)=>({number:questionNumbers[i],answers:readBlock(image,box)}));
-      pageData.push({questions,preview:makePreview(canvas,boxes,questionNumbers),fileName:file.name});
-      pageIndex++;
-      if(pageIndex<2) showCapture(); else finish();
-    }catch(error){
-      $("errorText").textContent=error?.message||"画像を処理できませんでした。別の写真でお試しください。";
+    } catch (error) {
+      $("errorText").textContent = error && error.message
+        ? error.message
+        : "画像を処理できませんでした。別の写真でお試しください。";
       show("errorCard");
     }
   }
 
-  function grayAt(data,i){ return(data[i]*77+data[i+1]*150+data[i+2]*29)>>8; }
-  function detectComponents(image){
-    const {width:w,height:h,data}=image,dark=new Uint8Array(w*h),seen=new Uint8Array(w*h),queue=new Int32Array(w*h),found=[];
-    for(let p=0,i=0;p<dark.length;p++,i+=4)dark[p]=grayAt(data,i)<90?1:0;
-    for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){
-      const seed=y*w+x;if(!dark[seed]||seen[seed])continue;
-      let head=0,tail=1,area=0,minX=x,maxX=x,minY=y,maxY=y;queue[0]=seed;seen[seed]=1;
-      while(head<tail){const q=queue[head++],qx=q%w,qy=(q/w)|0;area++;minX=Math.min(minX,qx);maxX=Math.max(maxX,qx);minY=Math.min(minY,qy);maxY=Math.max(maxY,qy);
-        for(const n of[q-1,q+1,q-w,q+w])if(n>0&&n<dark.length&&!seen[n]&&dark[n]){seen[n]=1;queue[tail++]=n;}
-      }
-      const bw=maxX-minX+1,bh=maxY-minY+1,fill=area/(bw*bh),aspect=bw/bh;
-      if(area>=20&&area<=10000&&bw>=5&&bh>=5&&aspect>.45&&aspect<2.1&&fill>.22&&bw<w*.055&&bh<h*.09)found.push({x:(minX+maxX)/2,y:(minY+maxY)/2,w:bw,h:bh});
-    }return found;
-  }
-  function detectAnswerBoxes(image,expected){
-    const {width:w,height:h}=image,c=detectComponents(image),quads=[];
-    for(let i=0;i<c.length;i++)for(let j=i+1;j<c.length;j++){
-      let tl=c[i],tr=c[j];if(tl.x>tr.x)[tl,tr]=[tr,tl];
-      const dx=tr.x-tl.x;if(dx<w*.105||dx>w*.245||Math.abs(tr.y-tl.y)>h*.05||((tl.y+tr.y)/2)>h*.25)continue;
-      for(const bl of c){const tall=bl.y-tl.y;if(tall<h*.58||tall>h*1.04||Math.abs(bl.x-tl.x)>w*.05)continue;
-        const target={x:bl.x+(tr.x-tl.x),y:bl.y+(tr.y-tl.y)},near=c.map(p=>({...p,d:Math.hypot(p.x-target.x,(p.y-target.y)*1.35)})).sort((a,b)=>a.d-b.d)[0];
-        if(!near||near.d>w*.06)continue;const br=near,centerX=(tl.x+tr.x+bl.x+br.x)/4,centerY=(tl.y+tr.y+bl.y+br.y)/4;
-        const widthChange=Math.abs((br.x-bl.x)-dx),score=tall*2+(tl.w+tr.w+bl.w+br.w)*1.5-widthChange*3;
-        quads.push({tl,tr,br,bl,centerX,centerY,score});
-      }
+  async function readStandardPage(canvas, fileName) {
+    $("workingText").textContent = "国語・通常型の基準マークを検出しています…";
+    await nextFrame();
+    const image = canvas.getContext("2d", {willReadFrequently: true})
+      .getImageData(0, 0, canvas.width, canvas.height);
+    const boxes = detectStandardBoxes(image);
+    if (boxes.length !== 2) {
+      throw new Error("左右の解答欄を2組とも検出できませんでした。用紙全体を入れ、影や反射を避けて撮り直してください。");
     }
-    quads.sort((a,b)=>b.score-a.score);const picked=[];
-    for(const q of quads){if(picked.every(p=>Math.abs(p.centerX-q.centerX)>w*.09))picked.push(q);if(picked.length===expected)break;}
-    return picked.sort((a,b)=>a.centerX-b.centerX);
-  }
-  function homography(dst,src){
-    const a=[],b=[];for(let i=0;i<4;i++){const{x,y}=dst[i],u=src[i].x,v=src[i].y;a.push([x,y,1,0,0,0,-u*x,-u*y]);b.push(u);a.push([0,0,0,x,y,1,-v*x,-v*y]);b.push(v);}
-    for(let i=0;i<8;i++){let pivot=i;for(let r=i+1;r<8;r++)if(Math.abs(a[r][i])>Math.abs(a[pivot][i]))pivot=r;[a[i],a[pivot]]=[a[pivot],a[i]];[b[i],b[pivot]]=[b[pivot],b[i]];
-      const d=a[i][i];if(Math.abs(d)<1e-9)throw new Error("用紙の傾きを補正できませんでした。");for(let x=i;x<8;x++)a[i][x]/=d;b[i]/=d;
-      for(let r=0;r<8;r++)if(r!==i){const f=a[r][i];for(let x=i;x<8;x++)a[r][x]-=f*a[i][x];b[r]-=f*b[i];}
-    }return[...b,1];
-  }
-  function sampleDarkness(image,h,x,y,rx,ry){
-    let sum=0,count=0;for(let yy=Math.floor(y-ry);yy<=Math.ceil(y+ry);yy++)for(let xx=Math.floor(x-rx);xx<=Math.ceil(x+rx);xx++){
-      if(((xx-x)/rx)**2+((yy-y)/ry)**2>1)continue;const z=h[6]*xx+h[7]*yy+1,sx=Math.round((h[0]*xx+h[1]*yy+h[2])/z),sy=Math.round((h[3]*xx+h[4]*yy+h[5])/z);
-      if(sx<0||sy<0||sx>=image.width||sy>=image.height)continue;sum+=255-grayAt(image.data,(sy*image.width+sx)*4);count++;
-    }return count?sum/count:0;
-  }
-  function readBlock(image,box){
-    const W=600,H=1800,h=homography([{x:0,y:0},{x:W,y:0},{x:W,y:H},{x:0,y:H}],[box.tl,box.tr,box.br,box.bl]),out=[];
-    for(let row=0;row<30;row++){const y=84+row*(1790-84)/29,scores=[];for(let choice=0;choice<10;choice++)scores.push(sampleDarkness(image,h,115+choice*48.3,y,14,20));
-      const ranked=scores.map((score,i)=>({score,i})).sort((a,b)=>b.score-a.score),baseline=scores.slice().sort((a,b)=>a-b)[5],lift=ranked[0].score-baseline,gap=ranked[0].score-ranked[1].score;
-      let state="ok",value=ranked[0].i;if(ranked[0].score<52||lift<20){state="blank";value="";}else if(gap<12)state="warn";
-      out.push({symbol:KANA[row],value,state,best:ranked[0].score,gap});
-    }return out;
-  }
-  function makePreview(source,boxes,numbers){
-    const canvas=document.createElement("canvas"),ctx=canvas.getContext("2d");canvas.width=source.width;canvas.height=source.height;ctx.drawImage(source,0,0);
-    ctx.strokeStyle="#1769ff";ctx.fillStyle="#1769ff";ctx.lineWidth=Math.max(3,source.width/450);ctx.font=`bold ${Math.max(18,source.width/55)}px sans-serif`;
-    boxes.forEach((q,i)=>{ctx.beginPath();ctx.moveTo(q.tl.x,q.tl.y);ctx.lineTo(q.tr.x,q.tr.y);ctx.lineTo(q.br.x,q.br.y);ctx.lineTo(q.bl.x,q.bl.y);ctx.closePath();ctx.stroke();ctx.fillText(`第${numbers[i]}問`,q.tl.x,q.tl.y-8);});
-    return canvas.toDataURL("image/jpeg",.82);
+    boxes.sort((a, b) => a.centerX - b.centerX);
+    $("workingText").textContent = "1〜60のマークを判定しています…";
+    await nextFrame();
+    standardAnswers = boxes.flatMap((box, block) => readStandardBlock(image, box, block));
+    pageData = [{preview: makePreview(canvas, boxes, ["1〜30", "31〜60"]), fileName}];
+    finishStandard();
   }
 
-  function finish(){
-    const questions=pageData.flatMap(p=>p.questions),counts={ok:0,warn:0,blank:0};questions.flatMap(q=>q.answers).forEach(a=>counts[a.state]++);
-    $("summary").textContent=`${TEMPLATES[subject].name}・全${questions.length}欄／読取済み ${counts.ok}・要確認 ${counts.warn}・未記入 ${counts.blank}`;
-    if(subject==="math2"){const activity=questions.filter(q=>q.number>=4).map(q=>({number:q.number,count:q.answers.filter(a=>a.value!==""&&a.state!=="blank").length})).sort((a,b)=>b.count-a.count);selectedQuestions=new Set(activity.slice(0,3).map(x=>x.number));renderSelection();}
-    else $("selectionPanel").classList.add("hidden");
-    $("results").innerHTML=questions.map(renderQuestion).join("");
-    $("results").querySelectorAll("select").forEach(select=>select.onchange=()=>{const q=questions.find(x=>x.number===+select.dataset.question),a=q.answers[+select.dataset.row];a.value=select.value===""?"":+select.value;a.state=select.value===""?"blank":"ok";select.closest(".answer").className=`answer ${a.state}`;});
-    $("previews").innerHTML=pageData.map((p,i)=>`<figure><figcaption>第${i+1}面</figcaption><img src="${p.preview}" alt="第${i+1}面の検出結果"></figure>`).join("");
-    $("copyStatus").textContent="";show("resultCard");
+  async function readMathPage(base, fileName) {
+    const expected = TEMPLATES[subject].pages[pageIndex].length;
+    $("workingText").textContent = `第${pageIndex + 1}面の解答欄を自動検出しています…`;
+    await nextFrame();
+
+    const attempts = [];
+    for (const angle of [0, 180, 90, -90]) {
+      const canvas = rotateCanvas(base, angle);
+      const image = canvas.getContext("2d", {willReadFrequently: true})
+        .getImageData(0, 0, canvas.width, canvas.height);
+      const result = detectMathBoxes(image, expected);
+      attempts.push({angle, canvas, image, ...result});
+    }
+    attempts.sort((a, b) => b.quality - a.quality);
+    const best = attempts[0];
+    if (!best || best.boxes.length !== expected || best.quality < 0) {
+      throw new Error(`第${pageIndex + 1}面の解答欄を${expected}個すべて特定できませんでした。用紙の端を切らず、黒い基準四角が全部入るように撮り直してください。`);
+    }
+
+    $("workingText").textContent = "数学専用の判定基準で鉛筆のマークを読んでいます…";
+    await nextFrame();
+    const questionNumbers = TEMPLATES[subject].pages[pageIndex];
+    const questions = best.boxes.map((box, i) => ({
+      number: questionNumbers[i],
+      answers: readMathBlock(best.image, box)
+    }));
+    pageData.push({
+      questions,
+      preview: makePreview(best.canvas, best.boxes, questionNumbers.map(n => `第${n}問`)),
+      fileName,
+      angle: best.angle
+    });
+    pageIndex++;
+    if (pageIndex < TEMPLATES[subject].pages.length) showCapture();
+    else finishMath();
   }
-  function renderQuestion(q){
-    return `<section class="question${subject==="math2"&&q.number>=4&&!selectedQuestions.has(q.number)?" unselected":""}" data-question="${q.number}"><h3>第${q.number}問${subject==="math2"&&q.number>=4?` <span>${selectedQuestions.has(q.number)?"選択":"未選択"}</span>`:""}</h3><div class="results">${q.answers.map((a,row)=>`<div class="answer ${a.state}"><label>${a.symbol}</label><select data-question="${q.number}" data-row="${row}" aria-label="第${q.number}問 ${a.symbol}"><option value="">—</option>${Array.from({length:10},(_,i)=>`<option value="${i}"${a.value===i?" selected":""}>${i}</option>`).join("")}</select></div>`).join("")}</div></section>`;
+
+  function grayAt(data, i) {
+    return (data[i] * 77 + data[i + 1] * 150 + data[i + 2] * 29) >> 8;
   }
-  function renderSelection(){
+
+  /*
+   * 国語・通常型は、精度が確認できた v2 の検出条件と座標を維持する。
+   * 数学側の調整がこの処理へ影響しないよう、関数も完全に分離している。
+   */
+  function detectStandardComponents(image) {
+    const {width: w, height: h, data} = image;
+    const dark = new Uint8Array(w * h);
+    for (let p = 0, i = 0; p < dark.length; p++, i += 4) {
+      dark[p] = grayAt(data, i) < 72 ? 1 : 0;
+    }
+    const seen = new Uint8Array(w * h);
+    const queue = new Int32Array(w * h);
+    const found = [];
+    for (let y = 1; y < h - 1; y++) for (let x = 1; x < w - 1; x++) {
+      const seed = y * w + x;
+      if (!dark[seed] || seen[seed]) continue;
+      let head = 0, tail = 1, area = 0, minX = x, maxX = x, minY = y, maxY = y;
+      queue[0] = seed;
+      seen[seed] = 1;
+      while (head < tail) {
+        const q = queue[head++], qx = q % w, qy = (q / w) | 0;
+        area++;
+        if (qx < minX) minX = qx;
+        if (qx > maxX) maxX = qx;
+        if (qy < minY) minY = qy;
+        if (qy > maxY) maxY = qy;
+        for (const n of [q - 1, q + 1, q - w, q + w]) {
+          if (n > 0 && n < dark.length && !seen[n] && dark[n]) {
+            seen[n] = 1;
+            queue[tail++] = n;
+          }
+        }
+      }
+      const bw = maxX - minX + 1, bh = maxY - minY + 1;
+      const fill = area / (bw * bh), aspect = bw / bh;
+      if (area >= 35 && area <= 5000 && bw >= 7 && bh >= 7 &&
+          aspect > .62 && aspect < 1.6 && fill > .48 &&
+          bw < w * .045 && bh < h * .07) {
+        found.push({x: (minX + maxX) / 2, y: (minY + maxY) / 2, w: bw, h: bh, area, fill});
+      }
+    }
+    return found;
+  }
+
+  function detectStandardBoxes(image) {
+    const {width: w, height: h} = image;
+    const c = detectStandardComponents(image);
+    const quads = [];
+    for (let i = 0; i < c.length; i++) for (let j = i + 1; j < c.length; j++) {
+      let tl = c[i], tr = c[j];
+      if (tl.x > tr.x) [tl, tr] = [tr, tl];
+      const dx = tr.x - tl.x;
+      if (dx < w * .12 || dx > w * .20 || Math.abs(tr.y - tl.y) > h * .035 ||
+          ((tl.y + tr.y) / 2) > h * .22) continue;
+      for (const bl of c) {
+        const tall = bl.y - tl.y;
+        if (tall < h * .62 || tall > h * 1.02 || Math.abs(bl.x - tl.x) > w * .04) continue;
+        const predicted = {x: bl.x + (tr.x - tl.x), y: bl.y + (tr.y - tl.y), w: tr.w, h: tr.h};
+        const br = c.reduce((best, p) => {
+          const distance = Math.hypot(p.x - predicted.x, (p.y - predicted.y) * 1.4);
+          return distance < (best.distance || w * .055) ? {...p, distance} : best;
+        }, predicted);
+        delete br.distance;
+        const centerX = (tl.x + tr.x + bl.x + br.x) / 4;
+        if (centerX < w * .48) continue;
+        const size = [tl, tr, bl, br].reduce((sum, p) => sum + p.w + p.h, 0) / 8;
+        const widthChange = Math.abs((br.x - bl.x) - dx);
+        quads.push({tl, tr, br, bl, centerX, score: tall * 2 + size * 3 - widthChange * 3});
+      }
+    }
+    quads.sort((a, b) => b.score - a.score);
+    const picked = [];
+    for (const q of quads) {
+      if (picked.every(p => Math.abs(p.centerX - q.centerX) > w * .12)) picked.push(q);
+      if (picked.length === 2) break;
+    }
+    return picked;
+  }
+
+  function detectMathComponents(image) {
+    const {width: w, height: h, data} = image;
+    const rawDark = new Uint8Array(w * h);
+    for (let p = 0, i = 0; p < rawDark.length; p++, i += 4) {
+      const max = Math.max(data[i], data[i + 1], data[i + 2]);
+      const min = Math.min(data[i], data[i + 1], data[i + 2]);
+      rawDark[p] = grayAt(data, i) < 120 && max - min < 70 ? 1 : 0;
+    }
+    /*
+     * 解答欄の黒四角が罫線へ接触して一つの巨大成分になる写真がある。
+     * 3×3 の収縮で細い罫線だけを落としてから成分を取る。
+     */
+    const dark = new Uint8Array(w * h);
+    for (let y = 1; y < h - 1; y++) for (let x = 1; x < w - 1; x++) {
+      const p = y * w + x;
+      let neighbors = 0;
+      for (let yy = -1; yy <= 1; yy++) for (let xx = -1; xx <= 1; xx++) {
+        neighbors += rawDark[p + yy * w + xx];
+      }
+      dark[p] = neighbors >= 8 ? 1 : 0;
+    }
+    const seen = new Uint8Array(w * h);
+    const queue = new Int32Array(w * h);
+    const found = [];
+    for (let y = 1; y < h - 1; y++) for (let x = 1; x < w - 1; x++) {
+      const seed = y * w + x;
+      if (!dark[seed] || seen[seed]) continue;
+      let head = 0, tail = 1, area = 0, minX = x, maxX = x, minY = y, maxY = y;
+      queue[0] = seed;
+      seen[seed] = 1;
+      while (head < tail) {
+        const q = queue[head++], qx = q % w, qy = (q / w) | 0;
+        area++;
+        minX = Math.min(minX, qx);
+        maxX = Math.max(maxX, qx);
+        minY = Math.min(minY, qy);
+        maxY = Math.max(maxY, qy);
+        for (const n of [q - 1, q + 1, q - w, q + w]) {
+          if (n > 0 && n < dark.length && !seen[n] && dark[n]) {
+            seen[n] = 1;
+            queue[tail++] = n;
+          }
+        }
+      }
+      const bw = maxX - minX + 1, bh = maxY - minY + 1;
+      const fill = area / (bw * bh), aspect = bw / bh;
+      if (area >= 8 && area <= 12000 && bw >= 3 && bh >= 3 &&
+          aspect > .45 && aspect < 2.2 && fill > .32 &&
+          bw < w * .055 && bh < h * .09) {
+        found.push({
+          x: (minX + maxX) / 2,
+          y: (minY + maxY) / 2,
+          w: bw,
+          h: bh,
+          area,
+          fill
+        });
+      }
+    }
+    return found;
+  }
+
+  function detectMathBoxes(image, expected) {
+    const {width: w, height: h} = image;
+    const components = detectMathComponents(image);
+    const squareCandidates = components.filter(p => {
+      const aspect = p.w / p.h;
+      return p.fill >= .84 && aspect >= .65 && aspect <= 1.55 &&
+        p.w >= 7 && p.h >= 7 && p.y < h * .22;
+    });
+
+    const rows = [];
+    for (const seed of squareCandidates) {
+      const row = squareCandidates
+        .filter(p => Math.abs(p.y - seed.y) <= h * .014)
+        .sort((a, b) => a.x - b.x);
+      const unique = [];
+      for (const p of row) {
+        if (!unique.length || Math.abs(unique[unique.length - 1].x - p.x) > w * .008) {
+          unique.push(p);
+        } else if (p.fill * p.area > unique[unique.length - 1].fill * unique[unique.length - 1].area) {
+          unique[unique.length - 1] = p;
+        }
+      }
+      if (unique.length >= expected * 2) rows.push(unique);
+    }
+    if (!rows.length) return {boxes: [], quality: -Infinity, reason: "top-row"};
+
+    let topMarkers = null;
+    let topScore = -Infinity;
+    for (const row of rows) {
+      const chooseMarkers = (start, picked) => {
+        if (picked.length === expected * 2) {
+          const inside = [];
+          const between = [];
+          for (let i = 0; i < expected; i++) inside.push(picked[i * 2 + 1].x - picked[i * 2].x);
+          for (let i = 0; i < expected - 1; i++) between.push(picked[i * 2 + 2].x - picked[i * 2 + 1].x);
+          if (inside.some(g => g < w * .14 || g > w * .22)) return;
+          if (between.some(g => g < w * .006 || g > w * .07)) return;
+          const spread = values => values.length ? Math.max(...values) - Math.min(...values) : 0;
+          const sizes = picked.map(p => (p.w + p.h) / 2);
+          const score = picked.reduce((s, p) => s + p.fill * 30 + Math.sqrt(p.area), 0) -
+            spread(inside) / w * 800 -
+            spread(picked.map(p => p.y)) / h * 1000 -
+            spread(sizes) * 2;
+          if (score > topScore) {
+            topScore = score;
+            topMarkers = picked.slice();
+          }
+          return;
+        }
+        for (let i = start; i <= row.length - (expected * 2 - picked.length); i++) {
+          chooseMarkers(i + 1, [...picked, row[i]]);
+        }
+      };
+      chooseMarkers(0, []);
+    }
+    if (!topMarkers) return {boxes: [], quality: -Infinity, reason: "top-layout"};
+
+    const markerSize = topMarkers.reduce((sum, p) => sum + (p.w + p.h) / 2, 0) / topMarkers.length;
+    const bottomMarkers = findBottomMarkers(image, topMarkers, markerSize);
+    if (bottomMarkers.some(marker => !marker || marker.density < .68)) {
+      return {boxes: [], quality: -Infinity, reason: "bottom-density", debug: {topMarkers, bottomMarkers}};
+    }
+    const bottomSpread = Math.max(...bottomMarkers.map(p => p.y)) - Math.min(...bottomMarkers.map(p => p.y));
+    if (bottomSpread > h * .055) {
+      return {boxes: [], quality: -Infinity, reason: "bottom-row", debug: {topMarkers, bottomMarkers, bottomSpread}};
+    }
+
+    const boxes = [];
+    for (let i = 0; i < expected; i++) {
+      const tl = topMarkers[i * 2], tr = topMarkers[i * 2 + 1];
+      const bl = bottomMarkers[i * 2], br = bottomMarkers[i * 2 + 1];
+      const topWidth = tr.x - tl.x, bottomWidth = br.x - bl.x;
+      const leftHeight = bl.y - tl.y, rightHeight = br.y - tr.y;
+      const ratio = ((leftHeight + rightHeight) / 2) / ((topWidth + bottomWidth) / 2);
+      const widthError = Math.abs(bottomWidth - topWidth) / topWidth;
+      const heightError = Math.abs(rightHeight - leftHeight) / Math.max(1, leftHeight);
+      if (ratio < 2.25 || ratio > 3.45 || widthError > .2 || heightError > .08) {
+        return {boxes: [], quality: -Infinity, reason: "geometry", debug: {topMarkers, bottomMarkers, ratio, widthError, heightError}};
+      }
+      boxes.push({
+        tl, tr, br, bl,
+        centerX: (tl.x + tr.x + br.x + bl.x) / 4,
+        centerY: (tl.y + tr.y + br.y + bl.y) / 4,
+        width: (topWidth + bottomWidth) / 2,
+        height: (leftHeight + rightHeight) / 2,
+        quality: 300 - widthError * 200 - heightError * 300
+      });
+    }
+    const bottomDensity = bottomMarkers.reduce((sum, p) => sum + p.density, 0);
+    return {boxes, quality: topScore + bottomDensity * 50};
+  }
+
+  function findBottomMarkers(image, topMarkers, markerSize) {
+    const {width: w, height: h, data} = image;
+    const half = Math.max(4, Math.round(markerSize * .4));
+    const patchDensity = (x, y) => {
+      let dark = 0, count = 0;
+      for (let yy = y - half; yy <= y + half; yy++) {
+        for (let xx = x - half; xx <= x + half; xx++) {
+          const i = (yy * w + xx) * 4;
+          const r = data[i], g = data[i + 1], b = data[i + 2];
+          const chroma = Math.max(r, g, b) - Math.min(r, g, b);
+          if (grayAt(data, i) < 130 && chroma < 70) dark++;
+          count++;
+        }
+      }
+      return dark / count;
+    };
+    const bestAtY = (estimatedX, y) => {
+      const minX = Math.max(half, Math.floor(estimatedX - w * .04));
+      const maxX = Math.min(w - half - 1, Math.ceil(estimatedX + w * .04));
+      let best = null;
+      for (let x = minX; x <= maxX; x += 2) {
+        const density = patchDensity(x, y);
+        const score = density * 100 - Math.abs(x - estimatedX) / w * 55;
+        if (!best || score > best.score) best = {x, y, density, score};
+      }
+      return best;
+    };
+
+    const topY = Math.max(...topMarkers.map(p => p.y));
+    const minY = Math.max(half, Math.floor(topY + h * .72));
+    const maxY = Math.min(h - half - 1, Math.ceil(topY + h * .99));
+    let common = null;
+    for (let y = minY; y <= maxY; y += 3) {
+      const points = topMarkers.map(marker => bestAtY(marker.x, y));
+      const densities = points.map(p => p.density);
+      const minDensity = Math.min(...densities);
+      const average = densities.reduce((sum, value) => sum + value, 0) / densities.length;
+      const score = minDensity * 100 + average * 35 + y / h;
+      if (!common || score > common.score) common = {y, score};
+    }
+    if (!common) return [];
+
+    return topMarkers.map(marker => {
+      let best = null;
+      const lowY = Math.max(minY, common.y - Math.ceil(h * .018));
+      const highY = Math.min(maxY, common.y + Math.ceil(h * .018));
+      for (let y = lowY; y <= highY; y += 2) {
+        const point = bestAtY(marker.x, y);
+        const score = point.score - Math.abs(y - common.y) * .18;
+        if (!best || score > best.score) {
+          best = {...point, score, w: half * 2 + 1, h: half * 2 + 1, fill: point.density};
+        }
+      }
+      return best;
+    });
+  }
+
+  function homography(dst, src) {
+    const a = [], b = [];
+    for (let i = 0; i < 4; i++) {
+      const {x, y} = dst[i], u = src[i].x, v = src[i].y;
+      a.push([x,y,1,0,0,0,-u*x,-u*y]); b.push(u);
+      a.push([0,0,0,x,y,1,-v*x,-v*y]); b.push(v);
+    }
+    for (let i = 0; i < 8; i++) {
+      let pivot = i;
+      for (let r = i + 1; r < 8; r++) if (Math.abs(a[r][i]) > Math.abs(a[pivot][i])) pivot = r;
+      [a[i], a[pivot]] = [a[pivot], a[i]];
+      [b[i], b[pivot]] = [b[pivot], b[i]];
+      const d = a[i][i];
+      if (Math.abs(d) < 1e-9) throw new Error("用紙の傾きを補正できませんでした。");
+      for (let x = i; x < 8; x++) a[i][x] /= d;
+      b[i] /= d;
+      for (let r = 0; r < 8; r++) if (r !== i) {
+        const f = a[r][i];
+        for (let x = i; x < 8; x++) a[r][x] -= f * a[i][x];
+        b[r] -= f * b[i];
+      }
+    }
+    return [...b, 1];
+  }
+
+  function sourcePoint(h, x, y) {
+    const z = h[6] * x + h[7] * y + 1;
+    return {
+      x: Math.round((h[0] * x + h[1] * y + h[2]) / z),
+      y: Math.round((h[3] * x + h[4] * y + h[5]) / z)
+    };
+  }
+
+  function sampleStandardDarkness(image, h, x, y, rx, ry) {
+    let sum = 0, count = 0;
+    for (let yy = Math.floor(y - ry); yy <= Math.ceil(y + ry); yy++) {
+      for (let xx = Math.floor(x - rx); xx <= Math.ceil(x + rx); xx++) {
+        if (((xx - x) / rx) ** 2 + ((yy - y) / ry) ** 2 > 1) continue;
+        const p = sourcePoint(h, xx, yy);
+        if (p.x < 0 || p.y < 0 || p.x >= image.width || p.y >= image.height) continue;
+        sum += 255 - grayAt(image.data, (p.y * image.width + p.x) * 4);
+        count++;
+      }
+    }
+    return count ? sum / count : 0;
+  }
+
+  function readStandardBlock(image, box, block) {
+    const W = 600, H = 1800;
+    const h = homography(
+      [{x:0,y:0},{x:W,y:0},{x:W,y:H},{x:0,y:H}],
+      [box.tl,box.tr,box.br,box.bl]
+    );
+    const out = [];
+    for (let row = 0; row < 30; row++) {
+      const y = 84 + row * (1790 - 84) / 29;
+      const scores = [];
+      for (let choice = 0; choice < 9; choice++) {
+        scores.push(sampleStandardDarkness(image, h, 163 + choice * 48.3, y, 14, 20));
+      }
+      const ranked = scores.map((score, i) => ({score, i})).sort((a, b) => b.score - a.score);
+      const baseline = scores.slice().sort((a, b) => a - b)[4];
+      const lift = ranked[0].score - baseline;
+      const gap = ranked[0].score - ranked[1].score;
+      let state = "ok", value = ranked[0].i + 1;
+      if (ranked[0].score < 52 || lift < 20) { state = "blank"; value = ""; }
+      else if (gap < 12) state = "warn";
+      out.push({number: block * 30 + row + 1, value, state, best: ranked[0].score, gap});
+    }
+    return out;
+  }
+
+  function sampleMathInk(image, h, x, y, rx, ry) {
+    const inner = [];
+    const background = [];
+    const outerX = rx + 7, outerY = ry + 7;
+    for (let yy = Math.floor(y - outerY); yy <= Math.ceil(y + outerY); yy++) {
+      for (let xx = Math.floor(x - outerX); xx <= Math.ceil(x + outerX); xx++) {
+        const p = sourcePoint(h, xx, yy);
+        if (p.x < 0 || p.y < 0 || p.x >= image.width || p.y >= image.height) continue;
+        const i = (p.y * image.width + p.x) * 4;
+        const r = image.data[i], g = image.data[i + 1], b = image.data[i + 2];
+        const gray = grayAt(image.data, i);
+        const chroma = Math.max(r, g, b) - Math.min(r, g, b);
+        if (chroma >= 65) continue;
+        const ellipse = ((xx - x) / rx) ** 2 + ((yy - y) / ry) ** 2;
+        if (ellipse <= 1) inner.push(gray);
+        else if (Math.abs(xx - x) >= rx + 3 || Math.abs(yy - y) >= ry + 3) background.push(gray);
+      }
+    }
+    if (!inner.length || !background.length) return {mean: 0, density: 0};
+    background.sort((a, b) => a - b);
+    const trim = Math.floor(background.length * .15);
+    const bg = background.slice(trim, background.length - trim);
+    const backgroundMean = bg.reduce((sum, value) => sum + value, 0) / bg.length;
+    const innerMean = inner.reduce((sum, value) => sum + value, 0) / inner.length;
+    const density = inner.filter(value => value < backgroundMean - 34).length / inner.length;
+    return {mean: Math.max(0, backgroundMean - innerMean), density};
+  }
+
+  function readMathBlock(image, box) {
+    const W = 600, H = 1800;
+    const h = homography(
+      [{x:0,y:0},{x:W,y:0},{x:W,y:H},{x:0,y:H}],
+      [box.tl,box.tr,box.br,box.bl]
+    );
+    const sampleRows = [];
+    for (let row = 0; row < 30; row++) {
+      const y = 94 + row * (1760 - 94) / 29;
+      sampleRows.push(Array.from({length: 10}, (_, choice) =>
+        sampleMathInk(image, h, 142 + choice * 44, y, 13, 18)
+      ));
+    }
+    const rawRows = sampleRows.map(samples => samples.map(s => s.mean + s.density * 120));
+    const columnBaselines = Array.from({length: 10}, (_, choice) => {
+      const values = rawRows.map(row => row[choice]).sort((a, b) => a - b);
+      return values[12];
+    });
+    const out = [];
+    for (let row = 0; row < 30; row++) {
+      const corrected = rawRows[row].map((score, choice) => score - columnBaselines[choice]);
+      const rowSorted = corrected.slice().sort((a, b) => a - b);
+      const rowBaseline = (rowSorted[4] + rowSorted[5]) / 2;
+      const scores = corrected.map(score => score - rowBaseline);
+      const ranked = scores.map((score, i) => ({score, i, sample: sampleRows[row][i]}))
+        .sort((a, b) => b.score - a.score);
+      const lift = ranked[0].score;
+      const gap = ranked[0].score - ranked[1].score;
+      let state = "ok", value = ranked[0].i;
+      if (ranked[0].sample.density < .18 || lift < 10 || ranked[0].sample.mean < 10) {
+        state = "blank";
+        value = "";
+      } else if (ranked[0].sample.density < .34 || gap < 9 || lift < 25) {
+        state = "warn";
+      }
+      out.push({
+        symbol: KANA[row],
+        value,
+        state,
+        best: ranked[0].score,
+        gap,
+        density: ranked[0].sample.density
+      });
+    }
+    return out;
+  }
+
+  function makePreview(source, boxes, labels) {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = source.width;
+    canvas.height = source.height;
+    ctx.drawImage(source, 0, 0);
+    ctx.strokeStyle = "#1769ff";
+    ctx.fillStyle = "#1769ff";
+    ctx.lineWidth = Math.max(3, source.width / 450);
+    ctx.font = `bold ${Math.max(18, source.width / 55)}px sans-serif`;
+    boxes.forEach((q, i) => {
+      ctx.beginPath();
+      ctx.moveTo(q.tl.x, q.tl.y);
+      ctx.lineTo(q.tr.x, q.tr.y);
+      ctx.lineTo(q.br.x, q.br.y);
+      ctx.lineTo(q.bl.x, q.bl.y);
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fillText(labels[i], q.tl.x, Math.max(20, q.tl.y - 8));
+    });
+    return canvas.toDataURL("image/jpeg", .82);
+  }
+
+  function finishStandard() {
+    const counts = countStates(standardAnswers);
+    $("summary").textContent = `国語・通常型・読取済み ${counts.ok}問・要確認 ${counts.warn}問・未記入 ${counts.blank}問`;
+    $("selectionPanel").classList.add("hidden");
+    $("mathResults").classList.add("hidden");
+    $("standardResults").classList.remove("hidden");
+    $("standardResults").innerHTML = standardAnswers.map(a => `
+      <div class="answer ${a.state}" title="判定差 ${a.gap.toFixed(1)}">
+        <label for="a${a.number}">${a.number}</label>
+        <select id="a${a.number}" data-index="${a.number - 1}" aria-label="${a.number}番">
+          <option value="">—</option>
+          ${Array.from({length: 9}, (_, i) => `<option value="${i + 1}"${a.value === i + 1 ? " selected" : ""}>${i + 1}</option>`).join("")}
+        </select>
+      </div>`).join("");
+    $("standardResults").querySelectorAll("select").forEach(select => {
+      select.onchange = () => {
+        const answer = standardAnswers[+select.dataset.index];
+        answer.value = select.value ? +select.value : "";
+        answer.state = select.value ? "ok" : "blank";
+        select.parentElement.className = `answer ${answer.state}`;
+      };
+    });
+    renderPreviews();
+    $("copyStatus").textContent = "";
+    show("resultCard");
+  }
+
+  function finishMath() {
+    const questions = pageData.flatMap(p => p.questions);
+    const counts = countStates(questions.flatMap(q => q.answers));
+    $("summary").textContent = `${TEMPLATES[subject].name}・読取済み ${counts.ok}欄・要確認 ${counts.warn}欄・未記入 ${counts.blank}欄`;
+    if (subject === "math2") {
+      const activity = questions.filter(q => q.number >= 4).map(q => ({
+        number: q.number,
+        confident: q.answers.filter(a => a.value !== "" && a.state === "ok").length,
+        total: q.answers.filter(a => a.value !== "").length
+      })).sort((a, b) => b.confident - a.confident || b.total - a.total || a.number - b.number);
+      selectedQuestions = new Set(activity.slice(0, 3).map(x => x.number));
+      renderSelection();
+    } else {
+      $("selectionPanel").classList.add("hidden");
+    }
+    $("standardResults").classList.add("hidden");
+    $("mathResults").classList.remove("hidden");
+    $("mathResults").innerHTML = questions.map(renderQuestion).join("");
+    $("mathResults").querySelectorAll("select").forEach(select => {
+      select.onchange = () => {
+        const question = questions.find(x => x.number === +select.dataset.question);
+        const answer = question.answers[+select.dataset.row];
+        answer.value = select.value === "" ? "" : +select.value;
+        answer.state = select.value === "" ? "blank" : "ok";
+        select.closest(".answer").className = `answer ${answer.state}`;
+      };
+    });
+    renderPreviews();
+    $("copyStatus").textContent = "";
+    show("resultCard");
+  }
+
+  function countStates(items) {
+    return items.reduce((counts, item) => {
+      counts[item.state]++;
+      return counts;
+    }, {ok: 0, warn: 0, blank: 0});
+  }
+
+  function renderQuestion(question) {
+    const isChoice = subject === "math2" && question.number >= 4;
+    const selected = !isChoice || selectedQuestions.has(question.number);
+    return `
+      <section class="question${selected ? "" : " unselected"}" data-question="${question.number}">
+        <h3>第${question.number}問${isChoice ? ` <span>${selected ? "選択" : "未選択"}</span>` : ""}</h3>
+        <div class="answers">
+          ${question.answers.map((answer, row) => `
+            <div class="answer ${answer.state}" title="濃度 ${(answer.density * 100).toFixed(1)}%・判定差 ${answer.gap.toFixed(1)}">
+              <label>${answer.symbol}</label>
+              <select data-question="${question.number}" data-row="${row}" aria-label="第${question.number}問 ${answer.symbol}">
+                <option value="">—</option>
+                ${Array.from({length: 10}, (_, i) => `<option value="${i}"${answer.value === i ? " selected" : ""}>${i}</option>`).join("")}
+              </select>
+            </div>`).join("")}
+        </div>
+      </section>`;
+  }
+
+  function renderSelection() {
     $("selectionPanel").classList.remove("hidden");
-    $("selectionButtons").innerHTML=[4,5,6,7].map(n=>`<button type="button" data-number="${n}" class="${selectedQuestions.has(n)?"selected":""}">第${n}問</button>`).join("");
-    $("selectionButtons").querySelectorAll("button").forEach(button=>button.onclick=()=>{const n=+button.dataset.number;if(selectedQuestions.has(n))selectedQuestions.delete(n);else if(selectedQuestions.size<3)selectedQuestions.add(n);else{$("copyStatus").textContent="選択できる大問は3問です。";return;}renderSelectionState();});
+    $("selectionButtons").innerHTML = [4,5,6,7].map(n =>
+      `<button type="button" data-number="${n}" class="${selectedQuestions.has(n) ? "selected" : ""}">第${n}問</button>`
+    ).join("");
+    $("selectionButtons").querySelectorAll("button").forEach(button => {
+      button.onclick = () => {
+        const n = +button.dataset.number;
+        if (selectedQuestions.has(n)) selectedQuestions.delete(n);
+        else if (selectedQuestions.size < 3) selectedQuestions.add(n);
+        else {
+          $("copyStatus").textContent = "選択できる大問は3問です。";
+          return;
+        }
+        renderSelectionState();
+      };
+    });
   }
-  function renderSelectionState(){
-    renderSelection();document.querySelectorAll(".question[data-question]").forEach(el=>{const n=+el.dataset.question;if(n<4)return;const on=selectedQuestions.has(n);el.classList.toggle("unselected",!on);el.querySelector("h3 span").textContent=on?"選択":"未選択";});
+
+  function renderSelectionState() {
+    renderSelection();
+    document.querySelectorAll(".question[data-question]").forEach(element => {
+      const number = +element.dataset.question;
+      if (number < 4) return;
+      const selected = selectedQuestions.has(number);
+      element.classList.toggle("unselected", !selected);
+      element.querySelector("h3 span").textContent = selected ? "選択" : "未選択";
+    });
   }
-  $("copyButton").onclick=async()=>{
-    if(subject==="math2"&&selectedQuestions.size!==3){$("copyStatus").textContent="選択した大問を3問にしてください。";return;}
-    const questions=pageData.flatMap(p=>p.questions).filter(q=>subject!=="math2"||q.number<4||selectedQuestions.has(q.number)),text=questions.flatMap(q=>q.answers).map(a=>a.value).join("");
-    try{await navigator.clipboard.writeText(text);$("copyStatus").textContent=`${TEMPLATES[subject].name}の解答番号をコピーしました。`;}catch(_){$("copyStatus").textContent=`コピーできませんでした：${text}`;}
+
+  function renderPreviews() {
+    $("previews").innerHTML = pageData.map((page, i) => `
+      <figure>
+        <figcaption>${subject === "standard" ? "検出結果" : `第${i + 1}面の検出結果`}</figcaption>
+        <img src="${page.preview}" alt="${subject === "standard" ? "検出結果" : `第${i + 1}面の検出結果`}">
+      </figure>`).join("");
+  }
+
+  $("copyButton").onclick = async () => {
+    let text;
+    if (subject === "standard") {
+      text = standardAnswers.map(a => a.value || "").join("");
+    } else {
+      if (subject === "math2" && selectedQuestions.size !== 3) {
+        $("copyStatus").textContent = "選択した大問を3問にしてください。";
+        return;
+      }
+      text = pageData.flatMap(p => p.questions)
+        .filter(q => subject !== "math2" || q.number < 4 || selectedQuestions.has(q.number))
+        .flatMap(q => q.answers)
+        .map(a => a.value)
+        .join("");
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      $("copyStatus").textContent = `${TEMPLATES[subject].name}の解答番号をコピーしました。`;
+    } catch (_) {
+      $("copyStatus").textContent = `コピーできませんでした：${text}`;
+    }
+  };
+
+  // 実物写真を使う回帰テストから、検出結果と判定値だけを参照する。
+  window.__markReaderDebug = {
+    detectStandardBoxes,
+    detectMathBoxes,
+    detectMathComponents,
+    readStandardBlock,
+    readMathBlock
   };
 })();
