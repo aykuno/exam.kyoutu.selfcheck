@@ -11,18 +11,20 @@
     config.firebaseConfig.projectId &&
     config.appCheckSiteKey
   );
-  let modelPromise = null;
+  let aiContextPromise = null;
+  let mathModelPromise = null;
+  let answerKeyModelPromise = null;
 
   function isConfigured() {
     return configured;
   }
 
-  async function getModel() {
+  async function getAiContext() {
     if (!configured) {
       throw new Error("Firebase AI Logicがまだ設定されていません。");
     }
-    if (!modelPromise) {
-      modelPromise = (async () => {
+    if (!aiContextPromise) {
+      aiContextPromise = (async () => {
         const version = "12.16.0";
         const [{initializeApp}, appCheckSdk, aiSdk] = await Promise.all([
           import(`https://www.gstatic.com/firebasejs/${version}/firebase-app.js`),
@@ -37,6 +39,19 @@
         const ai = aiSdk.getAI(firebaseApp, {
           backend: new aiSdk.GoogleAIBackend()
         });
+        return {ai, aiSdk};
+      })().catch(error => {
+        aiContextPromise = null;
+        throw error;
+      });
+    }
+    return aiContextPromise;
+  }
+
+  async function getMathModel() {
+    if (!mathModelPromise) {
+      mathModelPromise = (async () => {
+        const {ai, aiSdk} = await getAiContext();
         const responseSchema = aiSdk.Schema.object({
           properties: {
             questions: aiSdk.Schema.array({
@@ -71,11 +86,47 @@
           }
         });
       })().catch(error => {
-        modelPromise = null;
+        mathModelPromise = null;
         throw error;
       });
     }
-    return modelPromise;
+    return mathModelPromise;
+  }
+
+  async function getAnswerKeyModel() {
+    if (!answerKeyModelPromise) {
+      answerKeyModelPromise = (async () => {
+        const {ai, aiSdk} = await getAiContext();
+        const responseSchema = aiSdk.Schema.object({
+          properties: {
+            answers: aiSdk.Schema.array({
+              items: aiSdk.Schema.object({
+                properties: {
+                  code: aiSdk.Schema.string(),
+                  answer: aiSdk.Schema.string(),
+                  confidence: aiSdk.Schema.enumString({
+                    enum: ["high", "medium", "low"]
+                  })
+                }
+              })
+            })
+          }
+        });
+        return aiSdk.getGenerativeModel(ai, {
+          model: config.model || "gemini-3.5-flash-lite",
+          generationConfig: {
+            temperature: 0,
+            maxOutputTokens: 8192,
+            responseMimeType: "application/json",
+            responseSchema
+          }
+        });
+      })().catch(error => {
+        answerKeyModelPromise = null;
+        throw error;
+      });
+    }
+    return answerKeyModelPromise;
   }
 
   function validateResponse(value, expectedQuestions) {
@@ -117,7 +168,7 @@
   }
 
   async function analyzeMathPage({subject, pageNumber, blocks}) {
-    const model = await getModel();
+    const model = await getMathModel();
     const questionNumbers = blocks.map(block => block.question);
     const prompt = [
       "日本の大学入学共通テスト数学のマークシート解答欄を読み取ってください。",
@@ -153,6 +204,80 @@
     return validateResponse(parsed, questionNumbers);
   }
 
-  window.MarkReaderAI = Object.freeze({isConfigured, analyzeMathPage});
+  function validateAnswerKeyResponse(value, expectedCodes) {
+    if (!value || !Array.isArray(value.answers)) {
+      throw new Error("解答写真のAI応答形式を確認できませんでした。");
+    }
+    const expected = new Set(expectedCodes);
+    const used = new Set();
+    const answers = [];
+    for (const item of value.answers) {
+      const code = typeof item?.code === "string" ? item.code.trim() : "";
+      if (
+        !expected.has(code) ||
+        used.has(code) ||
+        typeof item.answer !== "string" ||
+        !["high", "medium", "low"].includes(item.confidence)
+      ) {
+        continue;
+      }
+      used.add(code);
+      answers.push({
+        code,
+        answer: item.answer.trim(),
+        confidence: item.confidence
+      });
+    }
+    return answers;
+  }
+
+  async function analyzeAnswerKey({examLabel, subjectLabel, entries, images}) {
+    if (!Array.isArray(entries) || !entries.length) {
+      throw new Error("照合する正答項目がありません。");
+    }
+    if (!Array.isArray(images) || !images.length) {
+      throw new Error("解答の写真がありません。");
+    }
+    const model = await getAnswerKeyModel();
+    const entryList = entries.map(entry =>
+      `${entry.code}: ${entry.group} / ${entry.label}`
+    ).join("\n");
+    const prompt = [
+      "日本の大学入学共通テストまたは模擬試験の、正解・正答一覧の写真を読み取ってください。",
+      `試験: ${examLabel}`,
+      `科目: ${subjectLabel}`,
+      "下記は写真と照合する項目コード・大問・解答欄名です。正答の値は含まれていません。",
+      entryList,
+      "",
+      "写真に実際に掲載され、正答を判読できる項目だけを返してください。",
+      "codeは上記のR1、R2…をそのまま返してください。項目を推測で追加しないでください。",
+      "answerは半角の数字と半角マイナス記号だけを、解答欄名の順に連結してください。",
+      "例: ア・イ・ウが「−、1、6」ならanswer=\"-16\"、番号19-20が「5、3」ならanswer=\"53\"です。",
+      "「−」は負号として独立した1文字です。長音やダッシュにせず半角の\"-\"にしてください。",
+      "順不同と明記された組も、写真に印刷された順で返してください。",
+      "配点、得点、問題番号、ページ番号はanswerへ混ぜないでください。",
+      "写真にない項目、隠れている項目、判読できない項目は返さないでください。",
+      "複数写真に同じ項目がある場合は、最も鮮明なものを1件だけ返してください。"
+    ].join("\n");
+    const parts = [{text: prompt}];
+    images.forEach((image, index) => {
+      parts.push({text: `解答一覧の写真 ${index + 1}/${images.length}`});
+      parts.push({inlineData: {data: image.data, mimeType: image.mimeType}});
+    });
+    const result = await model.generateContent(parts);
+    let parsed;
+    try {
+      parsed = JSON.parse(result.response.text());
+    } catch (_) {
+      throw new Error("解答写真のAI応答をJSONとして読み取れませんでした。");
+    }
+    return validateAnswerKeyResponse(parsed, entries.map(entry => entry.code));
+  }
+
+  window.MarkReaderAI = Object.freeze({
+    isConfigured,
+    analyzeMathPage,
+    analyzeAnswerKey
+  });
   window.dispatchEvent(new CustomEvent("mark-reader-ai-ready"));
 })();

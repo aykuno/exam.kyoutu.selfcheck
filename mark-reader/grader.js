@@ -21,6 +21,12 @@
     return value == null ? 1 : (Number(value) || 0);
   }
 
+  function groupLabel(value) {
+    const text = String(value || "全体").trim();
+    const match = text.match(/^Q\s*([0-9]+)$/i);
+    return match ? `第${Number(match[1])}問` : text;
+  }
+
   function expected(question) {
     if (Array.isArray(question.answers)) return question.answers.map(norm);
     return [norm(question.answer)];
@@ -272,7 +278,7 @@
     for (const group of groupNames) {
       const groupRows = included.filter(row => (row.question.group || "全体") === group);
       groups.push({
-        group,
+        group: groupLabel(group),
         earned: groupRows.reduce((sum, row) => sum + row.earned, 0),
         possible: groupRows.reduce((sum, row) => sum + row.points, 0),
         correct: groupRows.filter(row => row.earned === row.points).length,
@@ -293,7 +299,7 @@
       partial: included.filter(row => row.earned > 0 && row.earned < row.points).length,
       wrong: included.filter(row => row.answered && row.earned === 0).length,
       missing: included.filter(row => !row.answered).length,
-      chosenGroups: [...chosenGroups]
+      chosenGroups: [...chosenGroups].map(groupLabel)
     };
   }
 
@@ -307,6 +313,7 @@
     answerSymbols,
     standardNumbers,
     standardNumber,
-    equalAnswers
+    equalAnswers,
+    groupLabel
   });
 })();

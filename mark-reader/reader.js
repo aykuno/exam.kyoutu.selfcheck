@@ -31,6 +31,7 @@
   let selectedExam = "";
   let pendingPhoto = null;
   let lastGrade = null;
+  let answerKeyPhotoRun = 0;
   const ANSWER_STORE = "ct-mark-reader-answers-v1";
 
   function escapeHtml(value) {
@@ -153,6 +154,21 @@
     const keyReady = Boolean(selectedAnswerKey());
     const readerReady = subject === "standard" || aiConfigured();
     $("startButton").disabled = !keyReady || !readerReady;
+    updateAnswerKeyPhotoAvailability();
+  }
+
+  function updateAnswerKeyPhotoAvailability() {
+    const available = Boolean(selectedAnswerKey()) && aiConfigured();
+    $("answerKeyPhotoInput").disabled = !available;
+    $("answerKeyPhotoButton").classList.toggle("disabled", !available);
+  }
+
+  function clearAnswerKeyPhotoResult() {
+    answerKeyPhotoRun++;
+    $("answerKeyPhotoStatus").className = "answer-key-photo-status";
+    $("answerKeyPhotoStatus").textContent = "";
+    $("answerKeyPhotoResult").classList.add("hidden");
+    $("answerKeyPhotoResult").innerHTML = "";
   }
 
   function updateAnswerKeyHelp() {
@@ -236,13 +252,17 @@
   document.querySelectorAll(".subject").forEach(button => {
     button.onclick = () => {
       subject = button.dataset.subject;
+      clearAnswerKeyPhotoResult();
       updateSubjectUi();
     };
   });
   if (window.addEventListener) {
     window.addEventListener("mark-reader-ai-ready", updateAiAvailability);
   }
-  $("answerKeySelect").onchange = updateAnswerKeyHelp;
+  $("answerKeySelect").onchange = () => {
+    clearAnswerKeyPhotoResult();
+    updateAnswerKeyHelp();
+  };
   updateSubjectUi();
   loadAnswerKeys();
 
@@ -267,6 +287,11 @@
     const file = $("fileInput").files && $("fileInput").files[0];
     if (file) readPage(file);
     $("fileInput").value = "";
+  };
+  $("answerKeyPhotoInput").onchange = () => {
+    const files = [...($("answerKeyPhotoInput").files || [])];
+    $("answerKeyPhotoInput").value = "";
+    if (files.length) compareAnswerKeyPhotos(files);
   };
 
   function begin() {
@@ -490,6 +515,190 @@
       issues.push("手ぶれ・ピンぼけの可能性があります。端末を止めて文字にピントを合わせてください。");
     }
     return {issues, mean, sharpness, shortSide};
+  }
+
+  function answerKeyPhotoStatus(kind, text) {
+    $("answerKeyPhotoStatus").className = `answer-key-photo-status ${kind || ""}`.trim();
+    $("answerKeyPhotoStatus").textContent = text;
+  }
+
+  function answerKeyEntryLabel(question) {
+    if (subject === "standard") return String(question.id || "");
+    const number = window.MarkReaderGrader.questionNumber(question);
+    const symbols = window.MarkReaderGrader.answerSymbols(question);
+    return number && symbols.length
+      ? `第${number}問 ${symbols.join("・")}`
+      : String(question.id || "");
+  }
+
+  function answerKeyEntries(key) {
+    return (key.questions || []).map((question, index) => ({
+      code: `R${index + 1}`,
+      group: window.MarkReaderGrader.groupLabel(question.group || question.problemNumber || "全体"),
+      label: answerKeyEntryLabel(question),
+      question
+    }));
+  }
+
+  function normalizePrintedAnswer(value) {
+    return String(value ?? "")
+      .normalize("NFKC")
+      .replace(/[−‐‑‒–—―ー]/g, "-")
+      .replace(/[^0-9-]/g, "");
+  }
+
+  function registeredAnswerOptions(question) {
+    const options = [];
+    if (Array.isArray(question.correctOptions)) {
+      options.push(...question.correctOptions);
+    }
+    if (Array.isArray(question.conditionalCorrect)) {
+      for (const condition of question.conditionalCorrect) {
+        if (Array.isArray(condition.answers)) options.push(condition.answers);
+      }
+    }
+    if (Array.isArray(question.answers)) options.push(question.answers);
+    else if (question.answer !== undefined && question.answer !== null) {
+      options.push([question.answer]);
+    }
+    return [...new Set(options.map(option =>
+      normalizePrintedAnswer((option || []).join(""))
+    ).filter(Boolean))];
+  }
+
+  function printedAnswerMatches(value, question) {
+    const got = normalizePrintedAnswer(value);
+    const options = registeredAnswerOptions(question);
+    if (!got || !options.length) return false;
+    if (!question.unordered) return options.includes(got);
+    const sorted = [...got].sort().join("");
+    return options.some(option => [...option].sort().join("") === sorted);
+  }
+
+  async function answerKeyPhotoImage(file) {
+    const bitmap = await createImageBitmap(file, {imageOrientation: "from-image"});
+    const maxSide = 2200;
+    const scale = Math.min(1, maxSide / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(bitmap.width * scale));
+    canvas.height = Math.max(1, Math.round(bitmap.height * scale));
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    const quality = photoQuality(canvas, bitmap.width, bitmap.height);
+    bitmap.close();
+    return {
+      mimeType: "image/jpeg",
+      data: canvas.toDataURL("image/jpeg", .9).split(",")[1],
+      issues: quality.issues
+    };
+  }
+
+  function renderAnswerKeyComparison(entries, readAnswers, qualityIssues) {
+    const byCode = new Map(readAnswers.map(answer => [answer.code, answer]));
+    const compared = [];
+    const missing = [];
+    for (const entry of entries) {
+      const read = byCode.get(entry.code);
+      if (!read || !normalizePrintedAnswer(read.answer)) {
+        missing.push(entry);
+        continue;
+      }
+      compared.push({
+        ...entry,
+        read,
+        matches: printedAnswerMatches(read.answer, entry.question),
+        registered: registeredAnswerOptions(entry.question)
+      });
+    }
+    const mismatches = compared.filter(item => !item.matches);
+    const lowConfidence = compared.filter(item => item.read.confidence === "low");
+    const matched = compared.length - mismatches.length;
+    $("answerKeyPhotoResult").classList.remove("hidden");
+    $("answerKeyPhotoResult").innerHTML = `
+      <div class="answer-key-photo-summary">
+        <div><span>一致</span><b>${matched}</b></div>
+        <div><span>不一致候補</span><b>${mismatches.length}</b></div>
+        <div><span>写真で未確認</span><b>${missing.length}</b></div>
+      </div>
+      ${mismatches.length ? `
+        <ul class="answer-key-photo-mismatches">
+          ${mismatches.map(item => `
+            <li>
+              <b>${escapeHtml(item.label)}</b>：
+              写真「${escapeHtml(normalizePrintedAnswer(item.read.answer))}」／
+              登録「${escapeHtml(item.registered.join(" または "))}」
+            </li>`).join("")}
+        </ul>` : ""}
+      <p class="answer-key-photo-notes">
+        ${qualityIssues.length
+          ? `写真の注意：${escapeHtml([...new Set(qualityIssues)].join(" "))}<br>`
+          : ""}
+        ${lowConfidence.length
+          ? `AI確信度が低い項目：${escapeHtml(lowConfidence.map(item => item.label).join("、"))}<br>`
+          : ""}
+        写真で未確認の項目は、不一致ではなく照合対象外です。写真・照合結果は保存されません。
+      </p>`;
+    if (!mismatches.length && compared.length) {
+      answerKeyPhotoStatus("success", `写真から読めた${compared.length}項目は、登録済み正答と一致しました。`);
+    } else if (compared.length) {
+      answerKeyPhotoStatus("warning", `${mismatches.length}項目に不一致候補があります。写真と登録データを確認してください。`);
+    } else {
+      answerKeyPhotoStatus("error", "写真から照合できる正答を読み取れませんでした。解答表全体を大きく写してください。");
+    }
+  }
+
+  async function compareAnswerKeyPhotos(files) {
+    const key = selectedAnswerKey();
+    if (!key) {
+      answerKeyPhotoStatus("error", "先に採点する正答データを選択してください。");
+      return;
+    }
+    if (!aiConfigured() || !window.MarkReaderAI?.analyzeAnswerKey) {
+      answerKeyPhotoStatus("error", "解答写真の読取を準備できませんでした。ページを再読み込みしてください。");
+      return;
+    }
+    if (files.length > 4) {
+      answerKeyPhotoStatus("error", "一度に照合できる写真は4枚までです。");
+      return;
+    }
+    const run = ++answerKeyPhotoRun;
+    $("answerKeyPhotoResult").classList.add("hidden");
+    $("answerKeyPhotoResult").innerHTML = "";
+    $("answerKeyPhotoInput").disabled = true;
+    $("answerKeyPhotoButton").classList.add("disabled");
+    answerKeyPhotoStatus("working", `${files.length}枚の解答写真を読み込んでいます…`);
+    try {
+      const converted = [];
+      for (const file of files) {
+        converted.push(await answerKeyPhotoImage(file));
+        if (run !== answerKeyPhotoRun) return;
+      }
+      const entries = answerKeyEntries(key);
+      answerKeyPhotoStatus("working", "写真の正答を読み取り、登録済みデータと照合しています…");
+      const readAnswers = await window.MarkReaderAI.analyzeAnswerKey({
+        examLabel: key.examLabel,
+        subjectLabel: TEMPLATES[subject].name,
+        entries: entries.map(({code, group, label}) => ({code, group, label})),
+        images: converted.map(({data, mimeType}) => ({data, mimeType}))
+      });
+      if (run !== answerKeyPhotoRun) return;
+      renderAnswerKeyComparison(
+        entries,
+        readAnswers,
+        converted.flatMap(image => image.issues || [])
+      );
+    } catch (error) {
+      if (run !== answerKeyPhotoRun) return;
+      console.error("answer key photo comparison failed", error);
+      answerKeyPhotoStatus(
+        "error",
+        `解答写真を照合できませんでした：${error && error.message ? error.message : error}`
+      );
+    } finally {
+      if (run === answerKeyPhotoRun) updateAnswerKeyPhotoAvailability();
+    }
   }
 
   async function processPageCanvas(canvas, fileName) {
@@ -1227,12 +1436,7 @@
   }
 
   function displayGradeId(question) {
-    if (subject === "standard") return String(question.id || "");
-    const number = window.MarkReaderGrader.questionNumber(question);
-    const symbols = window.MarkReaderGrader.answerSymbols(question);
-    return number && symbols.length
-      ? `第${number}問 ${symbols.join("・")}`
-      : String(question.id || "");
+    return answerKeyEntryLabel(question);
   }
 
   function gradeStatus(row) {
@@ -1244,7 +1448,7 @@
   }
 
   function shortGroupLabel(value) {
-    return String(value || "全体")
+    return window.MarkReaderGrader.groupLabel(value)
       .replace(/模擬試験|共通テスト|数学|国語/g, "")
       .replace(/\s+/g, "")
       .slice(0, 10) || "全体";

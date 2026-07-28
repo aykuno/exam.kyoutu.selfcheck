@@ -184,7 +184,8 @@
   }
 
   function shortLabel(value) {
-    return String(value || "全体")
+    const text = String(value || "全体").replace(/^Q\s*([0-9]+)$/i, "第$1問");
+    return text
       .replace(/模擬試験|共通テスト|数学|国語/g, "")
       .replace(/\s+/g, "")
       .slice(0, 9) || "全体";
@@ -261,7 +262,7 @@
       xx = x + 16;
       const rate = group.possible ? Math.round(group.earned / group.possible * 1000) / 10 : 0;
       const values = [
-        group.group,
+        String(group.group || "全体").replace(/^Q\s*([0-9]+)$/i, "第$1問"),
         `${scoreText(group.earned)} / ${scoreText(group.possible)}`,
         `${rate}%`
       ];

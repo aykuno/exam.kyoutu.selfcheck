@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
   <title>マークシート自動読取</title>
-  <link rel="stylesheet" href="./style.css?v=7.0">
+  <link rel="stylesheet" href="./style.css?v=7.1">
 </head>
 <body>
   <header>
     <p class="eyebrow">共テ・センター自動採点サイト</p>
     <h1>マークシート自動読取</h1>
-    <span class="badge">実験版 v7.0</span>
+    <span class="badge">実験版 v7.1</span>
   </header>
 
   <main>
@@ -38,6 +38,18 @@
         <select id="answerKeySelect" aria-describedby="answerKeyHelp"></select>
         <p id="answerKeyHelp">実験用に登録した正答データから選択してください。</p>
       </div>
+      <section id="answerKeyPhotoPanel" class="answer-key-photo">
+        <div>
+          <h3>解答の写真で正解データを照合</h3>
+          <p>選択中の試験・科目について、解答一覧の写真をGeminiで読み取り、登録済み正答との不一致候補を表示します。登録データや採点結果は変更しません。</p>
+        </div>
+        <label id="answerKeyPhotoButton" class="answer-key-photo-button">
+          解答の写真を撮影・選択
+          <input id="answerKeyPhotoInput" type="file" accept="image/*" capture="environment" multiple>
+        </label>
+        <p id="answerKeyPhotoStatus" class="answer-key-photo-status" aria-live="polite"></p>
+        <div id="answerKeyPhotoResult" class="answer-key-photo-result hidden"></div>
+      </section>
       <div id="aiOption" class="ai-option hidden">
         <b>数学はGeminiで読み取ります</b>
         <small>端末では画像の向き補正と解答欄の切抜きだけを行い、マーク値はAIだけで判定します。</small>
@@ -143,10 +155,10 @@
       </details>
     </section>
   </main>
-  <script src="./ai-config.js?v=7.0"></script>
-  <script type="module" src="./ai-reader.js?v=7.0"></script>
-  <script src="./grader.js?v=7.0"></script>
-  <script src="./pdf-export.js?v=7.0"></script>
-  <script src="./reader.js?v=7.0"></script>
+  <script src="./ai-config.js?v=7.1"></script>
+  <script type="module" src="./ai-reader.js?v=7.1"></script>
+  <script src="./grader.js?v=7.1"></script>
+  <script src="./pdf-export.js?v=7.1"></script>
+  <script src="./reader.js?v=7.1"></script>
 </body>
 </html>
