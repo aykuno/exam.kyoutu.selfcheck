@@ -223,10 +223,13 @@
           blocks
         });
         const comparison = reconcileMathAnswers(questions, aiQuestions);
+        const calibrationNote = comparison.offset
+          ? `（数字列の位置ずれを${comparison.offset > 0 ? "+" : ""}${comparison.offset}補正）`
+          : "";
         aiStatus = comparison.disagreed ? "partial" : "verified";
         aiMessage = comparison.disagreed
-          ? `Geminiと${comparison.disagreed}欄で不一致です。赤色の欄を確認してください。`
-          : `Geminiと${comparison.agreed}欄で一致しました。`;
+          ? `Geminiと${comparison.disagreed}欄で不一致です${calibrationNote}。赤色の欄を確認してください。`
+          : `Geminiと${comparison.agreed}欄で一致しました${calibrationNote}。`;
       } catch (error) {
         aiStatus = "failed";
         aiMessage = `Gemini照合に失敗したため端末内判定を使用しました。${error && error.message ? `（${error.message}）` : ""}`;
@@ -737,6 +740,31 @@
 
   function reconcileMathAnswers(questions, aiQuestions) {
     const aiByQuestion = new Map(aiQuestions.map(question => [question.question, question]));
+    const offsetCounts = new Map();
+    let offsetSamples = 0;
+    questions.forEach(question => {
+      const aiQuestion = aiByQuestion.get(question.number);
+      if (!aiQuestion) return;
+      const aiBySymbol = new Map(aiQuestion.answers.map(answer => [answer.symbol, answer]));
+      question.answers.forEach(answer => {
+        const ai = aiBySymbol.get(answer.symbol);
+        if (
+          !ai ||
+          answer.value === "" ||
+          ai.value < 0 ||
+          ai.confidence === "low"
+        ) return;
+        const offset = answer.value - ai.value;
+        if (Math.abs(offset) > 2) return;
+        offsetSamples++;
+        offsetCounts.set(offset, (offsetCounts.get(offset) || 0) + 1);
+      });
+    });
+    const [bestOffset = 0, bestOffsetCount = 0] = [...offsetCounts.entries()]
+      .sort((a, b) => b[1] - a[1])[0] || [];
+    const offset = bestOffsetCount >= 4 && bestOffsetCount / offsetSamples >= .6
+      ? bestOffset
+      : 0;
     let agreed = 0, disagreed = 0;
     questions.forEach(question => {
       const aiQuestion = aiByQuestion.get(question.number);
@@ -746,10 +774,12 @@
         const ai = aiBySymbol.get(answer.symbol);
         if (!ai) return;
         const localValue = answer.value === "" ? -1 : answer.value;
+        const adjustedAiValue = ai.value < 0 ? -1 : ai.value + offset;
+        if (adjustedAiValue > 9 || adjustedAiValue < -1) return;
         answer.localValue = localValue;
-        answer.aiValue = ai.value;
+        answer.aiValue = adjustedAiValue;
         answer.aiConfidence = ai.confidence;
-        if (localValue === ai.value) {
+        if (localValue === adjustedAiValue) {
           agreed++;
           answer.aiMatched = true;
           if (localValue >= 0 && ai.confidence === "high") {
@@ -762,7 +792,7 @@
         answer.state = "warn";
       });
     });
-    return {agreed, disagreed};
+    return {agreed, disagreed, offset};
   }
 
   function finishStandard() {
