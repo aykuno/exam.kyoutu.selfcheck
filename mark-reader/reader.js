@@ -2,7 +2,6 @@
   "use strict";
 
   const $ = id => document.getElementById(id);
-  const KANA = ["ア","イ","ウ","エ","オ","カ","キ","ク","ケ","コ","サ","シ","ス","セ","ソ","タ","チ","ツ","テ","ト","ナ","ニ","ヌ","ネ","ノ","ハ","ヒ","フ","ヘ","ホ"];
   const TEMPLATES = {
     standard: {
       name: "国語・通常型",
@@ -12,7 +11,7 @@
     },
     math1: {
       name: "数学①",
-      help: "第1面と第2面を順に撮影します。数学専用の位置・判定基準を使用します。",
+      help: "第1面と第2面を順に撮影し、Geminiで解答欄を読み取ります。",
       pages: [[1, 2], [3, 4]]
     },
     math2: {
@@ -35,14 +34,12 @@
 
   function updateAiAvailability() {
     const available = aiConfigured();
-    const checkbox = $("aiAssist");
-    checkbox.disabled = !available;
-    if (!available) checkbox.checked = false;
     $("aiOption").classList.toggle("disabled", !available);
+    if (subject !== "standard") $("startButton").disabled = !available;
     $("aiAvailability").className = `ai-availability ${available ? "ready" : "unavailable"}`;
     $("aiAvailability").textContent = available
-      ? "AI照合を利用できます。解答欄の切抜きだけを送信します。"
-      : "Firebase AI Logicの設定後に利用できます。現在は端末内判定のみです。";
+      ? "AI読取を利用できます。解答欄の切抜きだけを送信します。"
+      : "AI読取を準備できませんでした。ページを再読み込みしてください。";
   }
 
   function updateSubjectUi() {
@@ -54,6 +51,7 @@
       : `${TEMPLATES[subject].name} 第1面を撮影する`;
     $("setupHelp").textContent = TEMPLATES[subject].help;
     $("aiOption").classList.toggle("hidden", subject === "standard");
+    $("startButton").disabled = false;
     if (subject !== "standard") updateAiAvailability();
   }
 
@@ -80,6 +78,11 @@
   };
 
   function begin() {
+    if (subject !== "standard" && !aiConfigured()) {
+      $("errorText").textContent = "数学のAI読取を準備できませんでした。通信状態を確認してページを再読み込みしてください。";
+      show("errorCard");
+      return;
+    }
     pageIndex = 0;
     pageData = [];
     standardAnswers = [];
@@ -200,41 +203,28 @@
       throw new Error(`第${pageIndex + 1}面の解答欄を${expected}個すべて特定できませんでした。用紙の端を切らず、黒い基準四角が全部入るように撮り直してください。`);
     }
 
-    $("workingText").textContent = "数学専用の判定基準で鉛筆のマークを読んでいます…";
+    if (!aiConfigured()) {
+      throw new Error("数学のAI読取を準備できませんでした。通信状態を確認してページを再読み込みしてください。");
+    }
+    $("workingText").textContent = "解答欄だけをGeminiで読み取っています…";
     await nextFrame();
     const questionNumbers = TEMPLATES[subject].pages[pageIndex];
-    const questions = best.boxes.map((box, i) => ({
-      number: questionNumbers[i],
-      answers: readMathBlock(best.image, box)
+    const blocks = best.boxes.map((box, i) => ({
+      question: questionNumbers[i],
+      ...cropMathBlock(best.canvas, box)
     }));
-    let aiStatus = "not-used";
-    let aiMessage = "AI照合は使用していません。";
-    if ($("aiAssist").checked && aiConfigured()) {
-      $("workingText").textContent = "解答欄だけをGeminiで照合しています…";
-      await nextFrame();
-      try {
-        const blocks = best.boxes.map((box, i) => ({
-          question: questionNumbers[i],
-          ...cropMathBlock(best.canvas, box)
-        }));
-        const aiQuestions = await window.MarkReaderAI.analyzeMathPage({
-          subject,
-          pageNumber: pageIndex + 1,
-          blocks
-        });
-        const comparison = reconcileMathAnswers(questions, aiQuestions);
-        const calibrationNote = comparison.offset
-          ? `（数字列の位置ずれを${comparison.offset > 0 ? "+" : ""}${comparison.offset}補正）`
-          : "";
-        aiStatus = comparison.disagreed ? "partial" : "verified";
-        aiMessage = comparison.disagreed
-          ? `Geminiと${comparison.disagreed}欄で不一致です${calibrationNote}。赤色の欄を確認してください。`
-          : `Geminiと${comparison.agreed}欄で一致しました${calibrationNote}。`;
-      } catch (error) {
-        aiStatus = "failed";
-        aiMessage = `Gemini照合に失敗したため端末内判定を使用しました。${error && error.message ? `（${error.message}）` : ""}`;
-      }
-    }
+    const aiQuestions = await window.MarkReaderAI.analyzeMathPage({
+      subject,
+      pageNumber: pageIndex + 1,
+      blocks
+    });
+    const questions = makeAiMathQuestions(aiQuestions, questionNumbers);
+    const needsReview = questions.flatMap(question => question.answers)
+      .filter(answer => answer.state === "warn").length;
+    const aiStatus = needsReview ? "partial" : "verified";
+    const aiMessage = needsReview
+      ? `Geminiで読み取りました。判別が難しい${needsReview}欄を確認してください。`
+      : "Geminiで読み取りました。";
     pageData.push({
       questions,
       preview: makePreview(best.canvas, best.boxes, questionNumbers.map(n => `第${n}問`)),
@@ -615,81 +605,6 @@
     return out;
   }
 
-  function sampleMathInk(image, h, x, y, rx, ry) {
-    const inner = [];
-    const background = [];
-    const outerX = rx + 7, outerY = ry + 7;
-    for (let yy = Math.floor(y - outerY); yy <= Math.ceil(y + outerY); yy++) {
-      for (let xx = Math.floor(x - outerX); xx <= Math.ceil(x + outerX); xx++) {
-        const p = sourcePoint(h, xx, yy);
-        if (p.x < 0 || p.y < 0 || p.x >= image.width || p.y >= image.height) continue;
-        const i = (p.y * image.width + p.x) * 4;
-        const r = image.data[i], g = image.data[i + 1], b = image.data[i + 2];
-        const gray = grayAt(image.data, i);
-        const chroma = Math.max(r, g, b) - Math.min(r, g, b);
-        if (chroma >= 65) continue;
-        const ellipse = ((xx - x) / rx) ** 2 + ((yy - y) / ry) ** 2;
-        if (ellipse <= 1) inner.push(gray);
-        else if (Math.abs(xx - x) >= rx + 3 || Math.abs(yy - y) >= ry + 3) background.push(gray);
-      }
-    }
-    if (!inner.length || !background.length) return {mean: 0, density: 0};
-    background.sort((a, b) => a - b);
-    const trim = Math.floor(background.length * .15);
-    const bg = background.slice(trim, background.length - trim);
-    const backgroundMean = bg.reduce((sum, value) => sum + value, 0) / bg.length;
-    const innerMean = inner.reduce((sum, value) => sum + value, 0) / inner.length;
-    const density = inner.filter(value => value < backgroundMean - 34).length / inner.length;
-    return {mean: Math.max(0, backgroundMean - innerMean), density};
-  }
-
-  function readMathBlock(image, box) {
-    const W = 600, H = 1800;
-    const h = homography(
-      [{x:0,y:0},{x:W,y:0},{x:W,y:H},{x:0,y:H}],
-      [box.tl,box.tr,box.br,box.bl]
-    );
-    const sampleRows = [];
-    for (let row = 0; row < 30; row++) {
-      const y = 94 + row * (1760 - 94) / 29;
-      sampleRows.push(Array.from({length: 10}, (_, choice) =>
-        sampleMathInk(image, h, 142 + choice * 44, y, 13, 18)
-      ));
-    }
-    const rawRows = sampleRows.map(samples => samples.map(s => s.mean + s.density * 120));
-    const columnBaselines = Array.from({length: 10}, (_, choice) => {
-      const values = rawRows.map(row => row[choice]).sort((a, b) => a - b);
-      return values[12];
-    });
-    const out = [];
-    for (let row = 0; row < 30; row++) {
-      const corrected = rawRows[row].map((score, choice) => score - columnBaselines[choice]);
-      const rowSorted = corrected.slice().sort((a, b) => a - b);
-      const rowBaseline = (rowSorted[4] + rowSorted[5]) / 2;
-      const scores = corrected.map(score => score - rowBaseline);
-      const ranked = scores.map((score, i) => ({score, i, sample: sampleRows[row][i]}))
-        .sort((a, b) => b.score - a.score);
-      const lift = ranked[0].score;
-      const gap = ranked[0].score - ranked[1].score;
-      let state = "ok", value = ranked[0].i;
-      if (ranked[0].sample.density < .18 || lift < 10 || ranked[0].sample.mean < 10) {
-        state = "blank";
-        value = "";
-      } else if (ranked[0].sample.density < .34 || gap < 9 || lift < 25) {
-        state = "warn";
-      }
-      out.push({
-        symbol: KANA[row],
-        value,
-        state,
-        best: ranked[0].score,
-        gap,
-        density: ranked[0].sample.density
-      });
-    }
-    return out;
-  }
-
   function makePreview(source, boxes, labels) {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
@@ -738,61 +653,25 @@
     };
   }
 
-  function reconcileMathAnswers(questions, aiQuestions) {
-    const aiByQuestion = new Map(aiQuestions.map(question => [question.question, question]));
-    const offsetCounts = new Map();
-    let offsetSamples = 0;
-    questions.forEach(question => {
-      const aiQuestion = aiByQuestion.get(question.number);
-      if (!aiQuestion) return;
-      const aiBySymbol = new Map(aiQuestion.answers.map(answer => [answer.symbol, answer]));
-      question.answers.forEach(answer => {
-        const ai = aiBySymbol.get(answer.symbol);
-        if (
-          !ai ||
-          answer.value === "" ||
-          ai.value < 0 ||
-          ai.confidence === "low"
-        ) return;
-        const offset = answer.value - ai.value;
-        if (Math.abs(offset) > 2) return;
-        offsetSamples++;
-        offsetCounts.set(offset, (offsetCounts.get(offset) || 0) + 1);
-      });
+  function makeAiMathQuestions(aiQuestions, questionNumbers) {
+    const byNumber = new Map(aiQuestions.map(question => [question.question, question]));
+    return questionNumbers.map(number => {
+      const question = byNumber.get(number);
+      if (!question || !question.answers.length) {
+        throw new Error(`Geminiが第${number}問の解答欄を返しませんでした。同じ面をもう一度読み取ってください。`);
+      }
+      return {
+        number,
+        answers: question.answers.map(answer => ({
+          symbol: answer.symbol,
+          value: answer.value === "blank" ? "" : answer.value,
+          state: answer.confidence === "low"
+            ? "warn"
+            : answer.value === "blank" ? "blank" : "ok",
+          aiConfidence: answer.confidence
+        }))
+      };
     });
-    const [bestOffset = 0, bestOffsetCount = 0] = [...offsetCounts.entries()]
-      .sort((a, b) => b[1] - a[1])[0] || [];
-    const offset = bestOffsetCount >= 4 && bestOffsetCount / offsetSamples >= .6
-      ? bestOffset
-      : 0;
-    let agreed = 0, disagreed = 0;
-    questions.forEach(question => {
-      const aiQuestion = aiByQuestion.get(question.number);
-      if (!aiQuestion) return;
-      const aiBySymbol = new Map(aiQuestion.answers.map(answer => [answer.symbol, answer]));
-      question.answers.forEach(answer => {
-        const ai = aiBySymbol.get(answer.symbol);
-        if (!ai) return;
-        const localValue = answer.value === "" ? -1 : answer.value;
-        const adjustedAiValue = ai.value < 0 ? -1 : ai.value + offset;
-        if (adjustedAiValue > 9 || adjustedAiValue < -1) return;
-        answer.localValue = localValue;
-        answer.aiValue = adjustedAiValue;
-        answer.aiConfidence = ai.confidence;
-        if (localValue === adjustedAiValue) {
-          agreed++;
-          answer.aiMatched = true;
-          if (localValue >= 0 && ai.confidence === "high") {
-            answer.state = "ok";
-          }
-          return;
-        }
-        disagreed++;
-        answer.aiMatched = false;
-        answer.state = "warn";
-      });
-    });
-    return {agreed, disagreed, offset};
   }
 
   function finishStandard() {
@@ -827,11 +706,10 @@
     const questions = pageData.flatMap(p => p.questions);
     const counts = countStates(questions.flatMap(q => q.answers));
     $("summary").textContent = `${TEMPLATES[subject].name}・読取済み ${counts.ok}欄・要確認 ${counts.warn}欄・未記入 ${counts.blank}欄`;
-    const aiPages = pageData.filter(page => page.aiStatus && page.aiStatus !== "not-used");
+    const aiPages = pageData.filter(page => page.aiStatus);
     if (aiPages.length) {
-      const failed = aiPages.some(page => page.aiStatus === "failed");
       const partial = aiPages.some(page => page.aiStatus === "partial");
-      $("aiResultStatus").className = `ai-result-status ${failed ? "failed" : partial ? "partial" : "verified"}`;
+      $("aiResultStatus").className = `ai-result-status ${partial ? "partial" : "verified"}`;
       $("aiResultStatus").textContent = aiPages.map(page =>
         `第${page.pageNumber}面：${page.aiMessage}`
       ).join(" ");
@@ -856,7 +734,7 @@
       select.onchange = () => {
         const question = questions.find(x => x.number === +select.dataset.question);
         const answer = question.answers[+select.dataset.row];
-        answer.value = select.value === "" ? "" : +select.value;
+        answer.value = select.value;
         answer.state = select.value === "" ? "blank" : "ok";
         select.closest(".answer").className = `answer ${answer.state}`;
       };
@@ -885,25 +763,16 @@
               <label>${answer.symbol}</label>
               <select data-question="${question.number}" data-row="${row}" aria-label="第${question.number}問 ${answer.symbol}">
                 <option value="">—</option>
-                ${Array.from({length: 10}, (_, i) => `<option value="${i}"${answer.value === i ? " selected" : ""}>${i}</option>`).join("")}
+                ${["-", "1", "2", "3", "4", "5", "6", "7", "8", "9"].map(value => `<option value="${value}"${answer.value === value ? " selected" : ""}>${value === "-" ? "－" : value}</option>`).join("")}
               </select>
-              ${answer.aiMatched === false ? `<small class="ai-note">端末:${displayValue(answer.localValue)} AI:${displayValue(answer.aiValue)}</small>` : ""}
             </div>`).join("")}
         </div>
       </section>`;
   }
 
-  function displayValue(value) {
-    return value === -1 || value === "" ? "空欄" : value;
-  }
-
   function answerTitle(answer) {
-    const base = `濃度 ${(answer.density * 100).toFixed(1)}%・判定差 ${answer.gap.toFixed(1)}`;
-    if (answer.aiMatched === true) return `${base}・Geminiと一致`;
-    if (answer.aiMatched === false) {
-      return `${base}・端末 ${displayValue(answer.localValue)}・Gemini ${displayValue(answer.aiValue)}（${answer.aiConfidence}）`;
-    }
-    return base;
+    const confidence = {high: "高", medium: "中", low: "低"}[answer.aiConfidence] || "不明";
+    return `Gemini読取・確信度 ${confidence}`;
   }
 
   function renderSelection() {
@@ -967,13 +836,12 @@
     }
   };
 
-  // 実物写真を使う回帰テストから、検出結果と判定値だけを参照する。
+  // 実物写真を使う回帰テストから、検出結果と国語の端末内判定だけを参照する。
   window.__markReaderDebug = {
     detectStandardBoxes,
     detectMathBoxes,
     detectMathComponents,
     readStandardBlock,
-    readMathBlock,
-    reconcileMathAnswers
+    makeAiMathQuestions
   };
 })();
