@@ -27,12 +27,11 @@
   let pageData = [];
   let standardAnswers = [];
   let selectedQuestions = new Set();
-  let answerKeys = [];
-  let selectedExam = "";
+  let photoAnswerKey = null;
   let pendingPhoto = null;
   let lastGrade = null;
   let answerKeyPhotoRun = 0;
-  const ANSWER_STORE = "ct-mark-reader-answers-v1";
+  const ANSWER_STORE = "ct-mark-reader-photo-answers-v2";
 
   function escapeHtml(value) {
     return String(value ?? "").replace(/[&<>"']/g, character => ({
@@ -44,33 +43,27 @@
     })[character]);
   }
 
-  function keySignature(key) {
-    return [key.year, key.exam, key.readerSubject].join("||");
-  }
-
-  function keysForSubject() {
-    return answerKeys.filter(key => key.readerSubject === subject);
-  }
-
   function selectedAnswerKey() {
-    const signature = $("answerKeySelect").value;
-    return answerKeys.find(key => keySignature(key) === signature) || null;
+    return photoAnswerKey;
+  }
+
+  function subjectStoreKey() {
+    return `photo||${subject}`;
   }
 
   function readAnswerStore() {
     try {
       const value = JSON.parse(localStorage.getItem(ANSWER_STORE) || "{}");
-      return value && value.version === 1 && value.entries && typeof value.entries === "object"
+      return value && value.version === 2 && value.entries && typeof value.entries === "object"
         ? value
-        : {version: 1, entries: {}};
+        : {version: 2, entries: {}};
     } catch (_) {
-      return {version: 1, entries: {}};
+      return {version: 2, entries: {}};
     }
   }
 
   function savedEntry() {
-    const key = selectedAnswerKey();
-    return key ? readAnswerStore().entries[keySignature(key)] || null : null;
+    return readAnswerStore().entries[subjectStoreKey()] || null;
   }
 
   function formatSavedTime(value) {
@@ -100,15 +93,13 @@
   }
 
   function answerSnapshot() {
-    const key = selectedAnswerKey();
-    if (!key) return null;
     const entry = {
-      version: 1,
-      keySignature: keySignature(key),
+      version: 2,
+      keySignature: subjectStoreKey(),
       subject,
-      exam: key.exam,
       updatedAt: new Date().toISOString(),
-      selectedQuestions: [...selectedQuestions].sort((a, b) => a - b)
+      selectedQuestions: [...selectedQuestions].sort((a, b) => a - b),
+      photoAnswerKey
     };
     if (subject === "standard") {
       entry.standardAnswers = standardAnswers.map(answer => ({
@@ -151,14 +142,16 @@
   }
 
   function updateStartAvailability() {
-    const keyReady = Boolean(selectedAnswerKey());
     const readerReady = subject === "standard" || aiConfigured();
-    $("startButton").disabled = !keyReady || !readerReady;
+    $("startButton").disabled = !readerReady;
     updateAnswerKeyPhotoAvailability();
   }
 
   function updateAnswerKeyPhotoAvailability() {
-    const available = Boolean(selectedAnswerKey()) && aiConfigured();
+    const hasAnswers = subject === "standard"
+      ? standardAnswers.length > 0
+      : pageData.some(page => (page.questions || []).length);
+    const available = hasAnswers && aiConfigured();
     $("answerKeyPhotoInput").disabled = !available;
     $("answerKeyPhotoButton").classList.toggle("disabled", !available);
   }
@@ -169,56 +162,6 @@
     $("answerKeyPhotoStatus").textContent = "";
     $("answerKeyPhotoResult").classList.add("hidden");
     $("answerKeyPhotoResult").innerHTML = "";
-  }
-
-  function updateAnswerKeyHelp() {
-    const key = selectedAnswerKey();
-    if (!key) {
-      $("answerKeyHelp").textContent = answerKeys.length
-        ? "この用紙形式で採点できる正答データがありません。"
-        : "正答データを読み込んでいます…";
-      updateStartAvailability();
-      return;
-    }
-    selectedExam = key.exam;
-    const source = key.source || "登録済み正答データ";
-    $("answerKeyHelp").textContent = `${key.examLabel}・${source}`;
-    updateStartAvailability();
-    refreshSavedUi();
-  }
-
-  function updateAnswerKeyOptions() {
-    const keys = keysForSubject();
-    const current = keys.find(key => key.exam === selectedExam) || keys[0];
-    $("answerKeySelect").innerHTML = keys.length
-      ? keys.map(key => `
-          <option value="${escapeHtml(keySignature(key))}">
-            ${escapeHtml(key.examLabel)}
-          </option>`).join("")
-      : '<option value="">読み込み中…</option>';
-    if (current) $("answerKeySelect").value = keySignature(current);
-    updateAnswerKeyHelp();
-    refreshSavedUi();
-  }
-
-  async function loadAnswerKeys() {
-    try {
-      const response = await fetch("./answer-keys.json?v=1", {cache: "no-store"});
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
-      if (!data || !Array.isArray(data.keys) || !data.keys.length) {
-        throw new Error("正答データが空です");
-      }
-      answerKeys = data.keys;
-      updateAnswerKeyOptions();
-      refreshSavedUi();
-    } catch (error) {
-      answerKeys = [];
-      $("answerKeySelect").innerHTML = '<option value="">正答データを読み込めませんでした</option>';
-      $("answerKeyHelp").textContent = "ページを再読み込みしてください。";
-      updateStartAvailability();
-      console.error("answer key loading failed", error);
-    }
   }
 
   function aiConfigured() {
@@ -244,7 +187,9 @@
       : `${TEMPLATES[subject].name} 第1面を撮影する`;
     $("setupHelp").textContent = TEMPLATES[subject].help;
     $("aiOption").classList.toggle("hidden", subject === "standard");
-    updateAnswerKeyOptions();
+    photoAnswerKey = null;
+    clearAnswerKeyPhotoResult();
+    refreshSavedUi();
     if (subject !== "standard") updateAiAvailability();
     else updateStartAvailability();
   }
@@ -259,12 +204,7 @@
   if (window.addEventListener) {
     window.addEventListener("mark-reader-ai-ready", updateAiAvailability);
   }
-  $("answerKeySelect").onchange = () => {
-    clearAnswerKeyPhotoResult();
-    updateAnswerKeyHelp();
-  };
   updateSubjectUi();
-  loadAnswerKeys();
 
   $("startButton").onclick = begin;
   $("backButton").onclick = reset;
@@ -295,11 +235,6 @@
   };
 
   function begin() {
-    if (!selectedAnswerKey()) {
-      $("errorText").textContent = "採点する正答データを読み込めませんでした。ページを再読み込みしてください。";
-      show("errorCard");
-      return;
-    }
     if (subject !== "standard" && !aiConfigured()) {
       $("errorText").textContent = "数学のAI読取を準備できませんでした。通信状態を確認してページを再読み込みしてください。";
       show("errorCard");
@@ -309,7 +244,9 @@
     pageData = [];
     standardAnswers = [];
     selectedQuestions.clear();
+    photoAnswerKey = null;
     pendingPhoto = null;
+    clearAnswerKeyPhotoResult();
     clearGrade();
     showCapture();
   }
@@ -319,7 +256,9 @@
     pageData = [];
     standardAnswers = [];
     selectedQuestions.clear();
+    photoAnswerKey = null;
     pendingPhoto = null;
+    clearAnswerKeyPhotoResult();
     clearGrade();
     refreshSavedUi();
     show("setupCard");
@@ -334,6 +273,9 @@
     pageIndex = TEMPLATES[subject].pages.length;
     pendingPhoto = null;
     clearGrade();
+    photoAnswerKey = entry.photoAnswerKey && Array.isArray(entry.photoAnswerKey.questions)
+      ? entry.photoAnswerKey
+      : null;
     if (subject === "standard") {
       standardAnswers = (entry.standardAnswers || []).map(answer => ({
         number: Number(answer.number),
@@ -531,13 +473,22 @@
       : String(question.id || "");
   }
 
-  function answerKeyEntries(key) {
-    return (key.questions || []).map((question, index) => ({
-      code: `R${index + 1}`,
-      group: window.MarkReaderGrader.groupLabel(question.group || question.problemNumber || "全体"),
-      label: answerKeyEntryLabel(question),
-      question
-    }));
+  function answerSheetEntries() {
+    if (subject === "standard") {
+      return standardAnswers.map(answer => ({
+        code: `N${answer.number}`,
+        label: `解答番号${answer.number}`,
+        number: Number(answer.number)
+      }));
+    }
+    return pageData.flatMap(page => page.questions || []).flatMap(question =>
+      (question.answers || []).map(answer => ({
+        code: `Q${question.number}-${answer.symbol}`,
+        label: `第${question.number}問 ${answer.symbol}`,
+        number: Number(question.number),
+        symbol: answer.symbol
+      }))
+    );
   }
 
   function normalizePrintedAnswer(value) {
@@ -547,32 +498,78 @@
       .replace(/[^0-9-]/g, "");
   }
 
-  function registeredAnswerOptions(question) {
-    const options = [];
-    if (Array.isArray(question.correctOptions)) {
-      options.push(...question.correctOptions);
-    }
-    if (Array.isArray(question.conditionalCorrect)) {
-      for (const condition of question.conditionalCorrect) {
-        if (Array.isArray(condition.answers)) options.push(condition.answers);
-      }
-    }
-    if (Array.isArray(question.answers)) options.push(question.answers);
-    else if (question.answer !== undefined && question.answer !== null) {
-      options.push([question.answer]);
-    }
-    return [...new Set(options.map(option =>
-      normalizePrintedAnswer((option || []).join(""))
-    ).filter(Boolean))];
+  function answerOption(value, length) {
+    const normalized = normalizePrintedAnswer(value);
+    const characters = [...normalized];
+    return characters.length === length ? characters : null;
   }
 
-  function printedAnswerMatches(value, question) {
-    const got = normalizePrintedAnswer(value);
-    const options = registeredAnswerOptions(question);
-    if (!got || !options.length) return false;
-    if (!question.unordered) return options.includes(got);
-    const sorted = [...got].sort().join("");
-    return options.some(option => [...option].sort().join("") === sorted);
+  function makePhotoAnswerKey(readResult, entries) {
+    const byCode = new Map(entries.map(entry => [entry.code, entry]));
+    const usedCodes = new Set();
+    const questions = [];
+    for (const item of readResult.answers || []) {
+      const mapped = item.codes.map(code => byCode.get(code));
+      if (
+        mapped.some(entry => !entry) ||
+        item.codes.some(code => usedCodes.has(code))
+      ) continue;
+      const answers = item.answers.map(normalizePrintedAnswer);
+      if (
+        answers.some(answer => !/^[-0-9]$/.test(answer)) ||
+        answers.length !== mapped.length
+      ) continue;
+      const alternatives = (item.alternatives || [])
+        .map(value => answerOption(value, answers.length))
+        .filter(Boolean);
+      item.codes.forEach(code => usedCodes.add(code));
+      const group = window.MarkReaderGrader.groupLabel(item.group || (
+        subject === "standard" ? "全体" : `第${mapped[0].number}問`
+      ));
+      const question = {
+        id: subject === "standard"
+          ? mapped.map(entry => entry.number).join("-")
+          : mapped.map(entry => entry.symbol).join("・"),
+        group,
+        problemNumber: group,
+        answers,
+        points: item.points || 1,
+        unordered: Boolean(item.unordered),
+        photoPoints: Boolean(item.points),
+        photoConfidence: item.confidence,
+        photoCodes: item.codes.slice()
+      };
+      if (alternatives.length) {
+        question.correctOptions = [answers, ...alternatives];
+      }
+      questions.push(question);
+    }
+    if (!questions.length) {
+      throw new Error("解答写真から、答案用紙と対応する正解を読み取れませんでした。");
+    }
+    const pointsAvailable = questions.every(question => question.photoPoints);
+    const key = {
+      year: "",
+      exam: "photo",
+      examLabel: readResult.examLabel || "解答写真",
+      readerSubject: subject,
+      source: "撮影した解答・配点一覧",
+      questions,
+      pointsAvailable,
+      photoCoverage: usedCodes.size,
+      photoEntryCount: entries.length,
+      photoDeclaredMaxScore: readResult.maxScore || null
+    };
+    if (subject === "math2") {
+      const groups = [...new Set(questions
+        .map(question => window.MarkReaderGrader.questionNumber(question))
+        .filter(number => number >= 4 && number <= 7)
+        .map(number => `第${number}問`))];
+      if (groups.length >= 3) {
+        key.selectionRules = [{groups, choose: 3}];
+      }
+    }
+    return key;
   }
 
   async function answerKeyPhotoImage(file) {
@@ -595,64 +592,89 @@
     };
   }
 
-  function renderAnswerKeyComparison(entries, readAnswers, qualityIssues) {
-    const byCode = new Map(readAnswers.map(answer => [answer.code, answer]));
-    const compared = [];
-    const missing = [];
-    for (const entry of entries) {
-      const read = byCode.get(entry.code);
-      if (!read || !normalizePrintedAnswer(read.answer)) {
-        missing.push(entry);
-        continue;
-      }
-      compared.push({
-        ...entry,
-        read,
-        matches: printedAnswerMatches(read.answer, entry.question),
-        registered: registeredAnswerOptions(entry.question)
-      });
-    }
-    const mismatches = compared.filter(item => !item.matches);
-    const lowConfidence = compared.filter(item => item.read.confidence === "low");
-    const matched = compared.length - mismatches.length;
+  function renderPhotoAnswerKey(qualityIssues) {
+    const key = photoAnswerKey;
+    const lowConfidence = key.questions.filter(question => question.photoConfidence === "low");
+    const missing = Math.max(0, key.photoEntryCount - key.photoCoverage);
     $("answerKeyPhotoResult").classList.remove("hidden");
     $("answerKeyPhotoResult").innerHTML = `
       <div class="answer-key-photo-summary">
-        <div><span>一致</span><b>${matched}</b></div>
-        <div><span>不一致候補</span><b>${mismatches.length}</b></div>
-        <div><span>写真で未確認</span><b>${missing.length}</b></div>
+        <div><span>採点単位</span><b>${key.questions.length}</b></div>
+        <div><span>対応した解答欄</span><b>${key.photoCoverage}</b></div>
+        <div><span>配点</span><b>${key.pointsAvailable ? "読取済み" : "一部なし"}</b></div>
       </div>
-      ${mismatches.length ? `
-        <ul class="answer-key-photo-mismatches">
-          ${mismatches.map(item => `
-            <li>
-              <b>${escapeHtml(item.label)}</b>：
-              写真「${escapeHtml(normalizePrintedAnswer(item.read.answer))}」／
-              登録「${escapeHtml(item.registered.join(" または "))}」
-            </li>`).join("")}
-        </ul>` : ""}
+      <div class="answer-key-editor-wrap">
+        <table class="answer-key-editor">
+          <thead><tr><th>番号</th><th>正解</th><th>配点</th><th>AI確信度</th></tr></thead>
+          <tbody>
+            ${key.questions.map((question, index) => `
+              <tr>
+                <td>${escapeHtml(answerKeyEntryLabel(question))}</td>
+                <td><input data-key-index="${index}" data-key-field="answer" value="${escapeHtml(question.answers.join(""))}" aria-label="${escapeHtml(answerKeyEntryLabel(question))}の正解"></td>
+                <td><input type="number" min="0" step="1" data-key-index="${index}" data-key-field="points" value="${question.photoPoints ? question.points : ""}" placeholder="不明" aria-label="${escapeHtml(answerKeyEntryLabel(question))}の配点"></td>
+                <td><span class="answer-key-confidence ${escapeHtml(question.photoConfidence)}">${({high:"高",medium:"中",low:"低"})[question.photoConfidence] || "—"}</span></td>
+              </tr>`).join("")}
+          </tbody>
+        </table>
+      </div>
       <p class="answer-key-photo-notes">
         ${qualityIssues.length
           ? `写真の注意：${escapeHtml([...new Set(qualityIssues)].join(" "))}<br>`
           : ""}
         ${lowConfidence.length
-          ? `AI確信度が低い項目：${escapeHtml(lowConfidence.map(item => item.label).join("、"))}<br>`
+          ? `AI確信度が低い項目：${escapeHtml(lowConfidence.map(answerKeyEntryLabel).join("、"))}<br>`
           : ""}
-        写真で未確認の項目は、不一致ではなく照合対象外です。写真・照合結果は保存されません。
+        ${missing
+          ? `答案用紙のうち${missing}欄は、解答写真から正解を確認できなかったため採点対象外です。<br>`
+          : ""}
+        読取結果を直すと、その内容で自動的に再採点します。写真自体は保存されません。
       </p>`;
-    if (!mismatches.length && compared.length) {
-      answerKeyPhotoStatus("success", `写真から読めた${compared.length}項目は、登録済み正答と一致しました。`);
-    } else if (compared.length) {
-      answerKeyPhotoStatus("warning", `${mismatches.length}項目に不一致候補があります。写真と登録データを確認してください。`);
+    $("answerKeyPhotoResult").querySelectorAll("input").forEach(input => {
+      input.onchange = updatePhotoAnswerKeyFromEditor;
+    });
+    $("gradeButton").classList.remove("hidden");
+    $("selectedKeyLabel").textContent =
+      `${key.examLabel}・解答写真から${key.photoCoverage}欄を読取`;
+    answerKeyPhotoStatus(
+      key.pointsAvailable && !lowConfidence.length ? "success" : "warning",
+      key.pointsAvailable
+        ? "解答写真から正解と配点を読み取り、答案写真を採点しました。"
+        : "解答写真から正解を読み取りました。配点のない項目は正解数として採点します。"
+    );
+  }
+
+  function updatePhotoAnswerKeyFromEditor(event) {
+    const input = event.currentTarget;
+    const question = photoAnswerKey?.questions?.[Number(input.dataset.keyIndex)];
+    if (!question) return;
+    if (input.dataset.keyField === "answer") {
+      const option = answerOption(input.value, question.answers.length);
+      if (!option) {
+        input.setCustomValidity(`正解は${question.answers.length}文字で入力してください。`);
+        input.reportValidity();
+        return;
+      }
+      input.setCustomValidity("");
+      question.answers = option;
+      if (Array.isArray(question.correctOptions) && question.correctOptions.length) {
+        question.correctOptions[0] = option;
+      }
     } else {
-      answerKeyPhotoStatus("error", "写真から照合できる正答を読み取れませんでした。解答表全体を大きく写してください。");
+      const value = Number(input.value);
+      question.photoPoints = Number.isFinite(value) && value > 0;
+      question.points = question.photoPoints ? value : 1;
+      photoAnswerKey.pointsAvailable = photoAnswerKey.questions.every(item => item.photoPoints);
+      delete photoAnswerKey.maxScore;
     }
+    clearGrade();
+    saveAnswers();
+    gradeAnswers();
   }
 
   async function compareAnswerKeyPhotos(files) {
-    const key = selectedAnswerKey();
-    if (!key) {
-      answerKeyPhotoStatus("error", "先に採点する正答データを選択してください。");
+    const entries = answerSheetEntries();
+    if (!entries.length) {
+      answerKeyPhotoStatus("error", "先に答案用紙を撮影して、読取結果を表示してください。");
       return;
     }
     if (!aiConfigured() || !window.MarkReaderAI?.analyzeAnswerKey) {
@@ -675,26 +697,23 @@
         converted.push(await answerKeyPhotoImage(file));
         if (run !== answerKeyPhotoRun) return;
       }
-      const entries = answerKeyEntries(key);
-      answerKeyPhotoStatus("working", "写真の正答を読み取り、登録済みデータと照合しています…");
-      const readAnswers = await window.MarkReaderAI.analyzeAnswerKey({
-        examLabel: key.examLabel,
+      answerKeyPhotoStatus("working", "解答写真から正解・配点を読み取り、答案写真と照合しています…");
+      const readResult = await window.MarkReaderAI.analyzeAnswerKey({
         subjectLabel: TEMPLATES[subject].name,
-        entries: entries.map(({code, group, label}) => ({code, group, label})),
+        entries: entries.map(({code, label}) => ({code, label})),
         images: converted.map(({data, mimeType}) => ({data, mimeType}))
       });
       if (run !== answerKeyPhotoRun) return;
-      renderAnswerKeyComparison(
-        entries,
-        readAnswers,
-        converted.flatMap(image => image.issues || [])
-      );
+      photoAnswerKey = makePhotoAnswerKey(readResult, entries);
+      renderPhotoAnswerKey(converted.flatMap(image => image.issues || []));
+      clearGrade();
+      gradeAnswers();
     } catch (error) {
       if (run !== answerKeyPhotoRun) return;
       console.error("answer key photo comparison failed", error);
       answerKeyPhotoStatus(
         "error",
-        `解答写真を照合できませんでした：${error && error.message ? error.message : error}`
+        `解答写真から採点できませんでした：${error && error.message ? error.message : error}`
       );
     } finally {
       if (run === answerKeyPhotoRun) updateAnswerKeyPhotoAvailability();
@@ -1261,8 +1280,8 @@
   function updateGradingHeader() {
     const key = selectedAnswerKey();
     $("selectedKeyLabel").textContent = key
-      ? `${key.examLabel}・${TEMPLATES[subject].name}`
-      : "正答データ未選択";
+      ? `${key.examLabel}・解答写真から${key.photoCoverage || 0}欄を読取`
+      : "解答写真を読み取ると自動採点します。";
   }
 
   function clearGrade() {
@@ -1273,6 +1292,7 @@
     lastGrade = null;
     window.__markReaderPdfData = null;
     $("pdfButton").classList.add("hidden");
+    $("gradeButton").classList.toggle("hidden", !selectedAnswerKey());
   }
 
   function finishStandard() {
@@ -1306,6 +1326,11 @@
     $("copyStatus").textContent = "";
     show("resultCard");
     saveAnswers();
+    updateAnswerKeyPhotoAvailability();
+    if (photoAnswerKey) {
+      renderPhotoAnswerKey([]);
+      gradeAnswers();
+    }
   }
 
   function finishMath(preserveSelection = false) {
@@ -1355,6 +1380,11 @@
     $("copyStatus").textContent = "";
     show("resultCard");
     saveAnswers();
+    updateAnswerKeyPhotoAvailability();
+    if (photoAnswerKey) {
+      renderPhotoAnswerKey([]);
+      gradeAnswers();
+    }
   }
 
   function countStates(items) {
@@ -1521,6 +1551,7 @@
       subject: TEMPLATES[subject].name,
       score: result.score,
       maxScore: result.maxScore,
+      pointsAvailable: result.pointsAvailable,
       correct: result.correct,
       partial: result.partial,
       wrong: result.wrong,
@@ -1547,7 +1578,9 @@
     const groupHtml = result.groups.map(group => `
       <div>
         <span>${escapeHtml(group.group)}</span>
-        <b>${formatScore(group.earned)} / ${formatScore(group.possible)}</b>
+        <b>${result.pointsAvailable
+          ? `${formatScore(group.earned)} / ${formatScore(group.possible)}`
+          : `${group.correct} / ${group.items}`}</b>
       </div>`).join("");
     const rowsHtml = result.rows.map(row => {
       const status = gradeStatus(row);
@@ -1557,7 +1590,9 @@
           <td>${escapeHtml(row.got.join("") || "未入力")}</td>
           <td>${escapeHtml(row.expected)}</td>
           <td>${row.included
-            ? `${formatScore(row.earned)} / ${formatScore(row.points)}`
+            ? result.pointsAvailable
+              ? `${formatScore(row.earned)} / ${formatScore(row.points)}`
+              : "配点なし"
             : "—"}</td>
           <td>${status.text}</td>
         </tr>`;
@@ -1565,14 +1600,18 @@
     const groupTableHtml = result.groups.map(group => `
       <tr>
         <td>${escapeHtml(group.group)}</td>
-        <td>${formatScore(group.earned)} / ${formatScore(group.possible)}</td>
-        <td>${group.possible ? Math.round(group.earned / group.possible * 1000) / 10 : 0}%</td>
+        <td>${result.pointsAvailable
+          ? `${formatScore(group.earned)} / ${formatScore(group.possible)}`
+          : `${group.correct} / ${group.items}`}</td>
+        <td>${group.items ? Math.round(group.correct / group.items * 1000) / 10 : 0}%</td>
       </tr>`).join("");
     $("gradingResult").className = "grading-result";
     $("gradingResult").innerHTML = `
       <div class="score-summary">
-        <div class="score-main"><span>得点</span><b>${formatScore(result.score)} / ${formatScore(result.maxScore)}</b></div>
-        <div><span>正答項目</span><b>${result.correct} / ${includedCount}</b></div>
+        <div class="score-main"><span>${result.pointsAvailable ? "得点" : "正解数"}</span><b>${result.pointsAvailable
+          ? `${formatScore(result.score)} / ${formatScore(result.maxScore)}`
+          : `${result.correct} / ${includedCount}`}</b></div>
+        <div><span>採点単位</span><b>${includedCount}</b></div>
         <div><span>誤答・部分点</span><b>${result.wrong + result.partial}</b></div>
         <div><span>未入力</span><b>${result.missing}</b></div>
       </div>
@@ -1586,9 +1625,9 @@
           <canvas id="scoreRadar" aria-label="大問別得点率のレーダーチャート"></canvas>
         </section>
         <section class="group-table-card">
-          <h3>大問別得点</h3>
+          <h3>${result.pointsAvailable ? "大問別得点" : "大問別正解数"}</h3>
           <table class="group-score-table">
-            <thead><tr><th>大問</th><th>得点</th><th>得点率</th></tr></thead>
+            <thead><tr><th>大問</th><th>${result.pointsAvailable ? "得点" : "正解数"}</th><th>正答率</th></tr></thead>
             <tbody>${groupTableHtml}</tbody>
           </table>
         </section>
@@ -1609,7 +1648,7 @@
     const key = selectedAnswerKey();
     if (!key) {
       $("gradingResult").className = "grading-result grade-error";
-      $("gradingResult").textContent = "正答データを選択できませんでした。";
+      $("gradingResult").textContent = "先に解答写真を読み取ってください。";
       return;
     }
     if (subject === "math2" && selectedQuestions.size !== 3) {
@@ -1697,6 +1736,8 @@
     detectMathComponents,
     readStandardBlock,
     makeAiMathQuestions,
+    makePhotoAnswerKey,
+    answerOption,
     photoQuality,
     mathLayoutBias,
     rotateMathBoxes180,

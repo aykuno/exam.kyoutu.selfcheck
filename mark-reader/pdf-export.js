@@ -150,9 +150,10 @@
   }
 
   function drawSummary(ctx, data, y) {
+    const itemCount = (data.rows || []).length;
     const cards = [
-      {label: "得点", value: `${scoreText(data.score)} / ${scoreText(data.maxScore)}`, color: COLORS.blue, fill: COLORS.blueSoft, width: 350},
-      {label: "正答項目", value: String(data.correct), color: COLORS.green, fill: "#f2faf5", width: 240},
+      {label: data.pointsAvailable ? "得点" : "正解数", value: data.pointsAvailable ? `${scoreText(data.score)} / ${scoreText(data.maxScore)}` : `${data.correct} / ${itemCount}`, color: COLORS.blue, fill: COLORS.blueSoft, width: 350},
+      {label: "採点単位", value: String(itemCount), color: COLORS.green, fill: "#f2faf5", width: 240},
       {label: "誤答・部分点", value: String(Number(data.wrong || 0) + Number(data.partial || 0)), color: COLORS.red, fill: "#fff6f5", width: 260},
       {label: "未入力", value: String(data.missing), color: COLORS.amber, fill: "#fffaf0", width: 238}
     ];
@@ -161,7 +162,7 @@
       roundRect(ctx, x, y, card.width, 92, 15, card.fill, COLORS.line);
       setFont(ctx, 13, "800", COLORS.muted);
       ctx.fillText(card.label, x + 16, y + 13);
-      setFont(ctx, card.label === "得点" ? 30 : 27, "900", card.color);
+      setFont(ctx, card.label === "得点" || card.label === "正解数" ? 30 : 27, "900", card.color);
       ctx.fillText(card.value, x + 16, y + 42);
       x += card.width + 12;
     }
@@ -240,12 +241,12 @@
     ctx.stroke();
   }
 
-  function drawGroupTable(ctx, groups, x, y, width, height) {
+  function drawGroupTable(ctx, groups, x, y, width, height, pointsAvailable) {
     roundRect(ctx, x, y, width, height, 16, "#fff", COLORS.line);
     setFont(ctx, 18, "900", COLORS.text);
-    ctx.fillText("大問別得点", x + 18, y + 15);
+    ctx.fillText(pointsAvailable ? "大問別得点" : "大問別正解数", x + 18, y + 15);
     const columns = [width - 315, 170, 115];
-    const headers = ["大問", "得点", "得点率"];
+    const headers = ["大問", pointsAvailable ? "得点" : "正解数", "正答率"];
     let xx = x + 16;
     const headerY = y + 52;
     ctx.fillStyle = "#f5f7fb";
@@ -260,10 +261,12 @@
     const rowHeight = Math.min(42, Math.max(28, (height - 94) / Math.max(1, groups.length)));
     groups.forEach(group => {
       xx = x + 16;
-      const rate = group.possible ? Math.round(group.earned / group.possible * 1000) / 10 : 0;
+      const rate = group.items ? Math.round(group.correct / group.items * 1000) / 10 : 0;
       const values = [
         String(group.group || "全体").replace(/^Q\s*([0-9]+)$/i, "第$1問"),
-        `${scoreText(group.earned)} / ${scoreText(group.possible)}`,
+        pointsAvailable
+          ? `${scoreText(group.earned)} / ${scoreText(group.possible)}`
+          : `${group.correct} / ${group.items}`,
         `${rate}%`
       ];
       values.forEach((value, index) => {
@@ -281,13 +284,13 @@
     const height = 350;
     const leftWidth = 470;
     drawRadar(ctx, data.groups || [], LEFT, y, leftWidth, height);
-    drawGroupTable(ctx, data.groups || [], LEFT + leftWidth + 14, y, CONTENT_W - leftWidth - 14, height);
+    drawGroupTable(ctx, data.groups || [], LEFT + leftWidth + 14, y, CONTENT_W - leftWidth - 14, height, data.pointsAvailable !== false);
     return y + height + 24;
   }
 
   const TABLE_COLUMNS = [205, 180, 405, 190, 144];
 
-  function drawTableHeader(ctx, y, continued) {
+  function drawTableHeader(ctx, y, continued, pointsAvailable) {
     if (continued) {
       setFont(ctx, 20, "900", COLORS.text);
       ctx.fillText("全問正誤（続き）", LEFT, y);
@@ -297,7 +300,7 @@
       ctx.fillText("全問正誤", LEFT, y);
       y += 38;
     }
-    const headers = ["番号", "自分", "正解", "得点", "判定"];
+    const headers = ["番号", "自分", "正解", pointsAvailable ? "得点" : "配点", "判定"];
     ctx.fillStyle = "#f5f7fb";
     ctx.fillRect(LEFT, y, CONTENT_W, 32);
     let x = LEFT;
@@ -317,12 +320,12 @@
     return Math.max(34, 14 + Math.max(gotLines, expectedLines) * 18);
   }
 
-  function drawRow(ctx, row, y, height) {
+  function drawRow(ctx, row, y, height, pointsAvailable) {
     const values = [
       row.id,
       row.got,
       row.expected,
-      `${scoreText(row.earned)} / ${scoreText(row.points)}`,
+      pointsAvailable ? `${scoreText(row.earned)} / ${scoreText(row.points)}` : "なし",
       row.judge
     ];
     let x = LEFT;
@@ -405,14 +408,15 @@
     page.y = drawHeader(page.ctx, data, page.y);
     page.y = drawSummary(page.ctx, data, page.y);
     page.y = drawAnalytics(page.ctx, data, page.y);
-    page.y = drawTableHeader(page.ctx, page.y, false);
+    const pointsAvailable = data.pointsAvailable !== false;
+    page.y = drawTableHeader(page.ctx, page.y, false, pointsAvailable);
     for (const row of data.rows || []) {
       const height = rowHeight(page.ctx, row);
       if (page.y + height > CONTENT_BOTTOM) {
         page = newPage(pages);
-        page.y = drawTableHeader(page.ctx, TOP, true);
+        page.y = drawTableHeader(page.ctx, TOP, true, pointsAvailable);
       }
-      drawRow(page.ctx, row, page.y, height);
+      drawRow(page.ctx, row, page.y, height, pointsAvailable);
       page.y += height;
     }
     page.y += 24;

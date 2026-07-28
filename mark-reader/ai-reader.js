@@ -99,11 +99,23 @@
         const {ai, aiSdk} = await getAiContext();
         const responseSchema = aiSdk.Schema.object({
           properties: {
+            examLabel: aiSdk.Schema.string(),
+            maxScore: aiSdk.Schema.integer(),
             answers: aiSdk.Schema.array({
               items: aiSdk.Schema.object({
                 properties: {
-                  code: aiSdk.Schema.string(),
-                  answer: aiSdk.Schema.string(),
+                  codes: aiSdk.Schema.array({
+                    items: aiSdk.Schema.string()
+                  }),
+                  answers: aiSdk.Schema.array({
+                    items: aiSdk.Schema.string()
+                  }),
+                  alternatives: aiSdk.Schema.array({
+                    items: aiSdk.Schema.string()
+                  }),
+                  group: aiSdk.Schema.string(),
+                  points: aiSdk.Schema.integer(),
+                  unordered: aiSdk.Schema.boolean(),
                   confidence: aiSdk.Schema.enumString({
                     enum: ["high", "medium", "low"]
                   })
@@ -212,52 +224,72 @@
     const used = new Set();
     const answers = [];
     for (const item of value.answers) {
-      const code = typeof item?.code === "string" ? item.code.trim() : "";
+      const codes = Array.isArray(item?.codes)
+        ? item.codes.map(code => typeof code === "string" ? code.trim() : "").filter(Boolean)
+        : [];
+      const values = Array.isArray(item?.answers)
+        ? item.answers.map(answer => typeof answer === "string" ? answer.trim() : "")
+        : [];
       if (
-        !expected.has(code) ||
-        used.has(code) ||
-        typeof item.answer !== "string" ||
+        !codes.length ||
+        codes.length !== values.length ||
+        codes.some(code => !expected.has(code) || used.has(code)) ||
         !["high", "medium", "low"].includes(item.confidence)
       ) {
         continue;
       }
-      used.add(code);
+      codes.forEach(code => used.add(code));
       answers.push({
-        code,
-        answer: item.answer.trim(),
+        codes,
+        answers: values,
+        alternatives: Array.isArray(item.alternatives)
+          ? item.alternatives.map(value => String(value || "").trim()).filter(Boolean)
+          : [],
+        group: typeof item.group === "string" && item.group.trim()
+          ? item.group.trim()
+          : "全体",
+        points: Number.isInteger(item.points) && item.points > 0 ? item.points : null,
+        unordered: Boolean(item.unordered),
         confidence: item.confidence
       });
     }
-    return answers;
+    return {
+      examLabel: typeof value.examLabel === "string" ? value.examLabel.trim() : "",
+      maxScore: Number.isInteger(value.maxScore) && value.maxScore > 0 ? value.maxScore : null,
+      answers
+    };
   }
 
-  async function analyzeAnswerKey({examLabel, subjectLabel, entries, images}) {
+  async function analyzeAnswerKey({subjectLabel, entries, images}) {
     if (!Array.isArray(entries) || !entries.length) {
-      throw new Error("照合する正答項目がありません。");
+      throw new Error("答案用紙の解答欄を確認できません。");
     }
     if (!Array.isArray(images) || !images.length) {
       throw new Error("解答の写真がありません。");
     }
     const model = await getAnswerKeyModel();
-    const entryList = entries.map(entry =>
-      `${entry.code}: ${entry.group} / ${entry.label}`
-    ).join("\n");
+    const entryList = entries.map(entry => `${entry.code}: ${entry.label}`).join("\n");
     const prompt = [
-      "日本の大学入学共通テストまたは模擬試験の、正解・正答一覧の写真を読み取ってください。",
-      `試験: ${examLabel}`,
+      "日本の大学入学共通テストまたは模擬試験の、正解・配点一覧の写真を読み取ってください。",
       `科目: ${subjectLabel}`,
-      "下記は写真と照合する項目コード・大問・解答欄名です。正答の値は含まれていません。",
+      "下記は、別の写真から読み取った答案用紙の解答欄コードと印刷ラベルです。正答の値は含まれていません。",
       entryList,
       "",
-      "写真に実際に掲載され、正答を判読できる項目だけを返してください。",
-      "codeは上記のR1、R2…をそのまま返してください。項目を推測で追加しないでください。",
-      "answerは半角の数字と半角マイナス記号だけを、解答欄名の順に連結してください。",
-      "例: ア・イ・ウが「−、1、6」ならanswer=\"-16\"、番号19-20が「5、3」ならanswer=\"53\"です。",
-      "「−」は負号として独立した1文字です。長音やダッシュにせず半角の\"-\"にしてください。",
-      "順不同と明記された組も、写真に印刷された順で返してください。",
-      "配点、得点、問題番号、ページ番号はanswerへ混ぜないでください。",
+      "写真に実際に掲載され、正答を判読できる採点単位だけをanswersへ返してください。",
+      "codesには上記コードをそのまま使い、answersには各コードに対応する正解を同じ順で1文字ずつ入れてください。",
+      "例: Q1-ア、Q1-イ、Q1-ウが「−、1、6」ならcodesを3件、answersを[\"-\",\"1\",\"6\"]にします。",
+      "番号19と20が一括で4点なら、codesを2件まとめ、points=4の1採点単位にしてください。各欄が別配点なら分けてください。",
+      "「−」は独立した正解1文字です。長音やダッシュにせず半角の\"-\"にしてください。",
+      "別解が印刷されている場合、正解をコード順に連結した文字列をalternativesへ追加してください。",
+      "順不同と明記されている採点単位だけunordered=trueにしてください。",
+      "groupは必ず「第1問」の形に統一してください。写真から大問を確認できなければ「全体」にしてください。",
+      "pointsは、その採点単位の配点が写真に明記されている場合だけ正の整数にしてください。配点がない、または判読不能なら0にしてください。",
+      "写真に試験名が明記されていればexamLabelへ転記し、なければ空文字にしてください。",
+      "満点が明記されていればmaxScoreへ入れ、なければ0にしてください。配点や満点を推測しないでください。",
       "写真にない項目、隠れている項目、判読できない項目は返さないでください。",
-      "複数写真に同じ項目がある場合は、最も鮮明なものを1件だけ返してください。"
+      "一つのコードを複数の採点単位へ重複させないでください。",
+      "複数写真に同じ項目がある場合は、最も鮮明なものを1件だけ返してください。",
+      "返答前に、answers配列の各値と、左端の「−」を一つずつ再確認してください。"
     ].join("\n");
     const parts = [{text: prompt}];
     images.forEach((image, index) => {
@@ -277,7 +309,8 @@
   window.MarkReaderAI = Object.freeze({
     isConfigured,
     analyzeMathPage,
-    analyzeAnswerKey
+    analyzeAnswerKey,
+    debug: Object.freeze({validateAnswerKeyResponse})
   });
   window.dispatchEvent(new CustomEvent("mark-reader-ai-ready"));
 })();

@@ -232,7 +232,7 @@
 
   function grade({key, mode, standardAnswers, mathQuestions, selectedQuestions}) {
     if (!key || !Array.isArray(key.questions)) {
-      throw new Error("正答データを選択してください。");
+      throw new Error("先に解答写真を読み取ってください。");
     }
     const mathLookup = buildMathLookup(mathQuestions);
     const rows = key.questions.map((question, index) => {
@@ -242,14 +242,18 @@
         question,
         got,
         answered: got.some(value => norm(value) !== ""),
-        points: points(question),
+        points: key.pointsAvailable === false ? 1 : points(question),
         earned: 0,
         included: true
       };
     });
     const getById = makeAnswerLookup(rows);
     rows.forEach(row => {
-      row.earned = match(row.got, row.question, getById);
+      const scoredQuestion = key.pointsAvailable === false
+        ? {...row.question, points: 1, point: 1}
+        : row.question;
+      const earned = match(row.got, scoredQuestion, getById);
+      row.earned = key.pointsAvailable === false ? (earned > 0 ? 1 : 0) : earned;
       row.expected = expectedText(row.question);
     });
 
@@ -271,7 +275,8 @@
     const included = rows.filter(row => row.included);
     const rawScore = included.reduce((sum, row) => sum + row.earned, 0);
     const possible = included.reduce((sum, row) => sum + row.points, 0);
-    const maxScore = Number(key.maxScore ?? possible);
+    const pointsAvailable = key.pointsAvailable !== false;
+    const maxScore = Number(pointsAvailable ? (key.maxScore ?? possible) : possible);
     const score = possible ? rawScore * maxScore / possible : rawScore;
     const groups = [];
     const groupNames = [...new Set(included.map(row => row.question.group || "全体"))];
@@ -295,6 +300,7 @@
       maxScore,
       rawScore,
       possible,
+      pointsAvailable,
       correct: included.filter(row => row.earned === row.points).length,
       partial: included.filter(row => row.earned > 0 && row.earned < row.points).length,
       wrong: included.filter(row => row.answered && row.earned === 0).length,
