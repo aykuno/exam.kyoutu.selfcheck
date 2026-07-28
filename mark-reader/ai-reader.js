@@ -33,8 +33,7 @@
           isTokenAutoRefreshEnabled: true
         });
         const ai = aiSdk.getAI(firebaseApp, {
-          backend: new aiSdk.GoogleAIBackend(),
-          useLimitedUseAppCheckTokens: true
+          backend: new aiSdk.GoogleAIBackend()
         });
         const responseSchema = aiSdk.Schema.object({
           properties: {
@@ -59,7 +58,7 @@
           }
         });
         return aiSdk.getGenerativeModel(ai, {
-          model: config.model || "gemini-2.5-flash",
+          model: config.model || "gemini-3.5-flash-lite",
           generationConfig: {
             temperature: 0,
             maxOutputTokens: 4096,

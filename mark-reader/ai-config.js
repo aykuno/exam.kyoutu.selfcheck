@@ -12,5 +12,5 @@ window.MARK_READER_AI_CONFIG = Object.freeze({
     appId: "1:763743312414:web:80be6a73ecca631d79ac0f"
   }),
   appCheckSiteKey: "6LfD2mgtAAAAAEzka_LYwy4zl_rggdKrxKfPJf0Z",
-  model: "gemini-2.5-flash-lite"
+  model: "gemini-3.5-flash-lite"
 });
