@@ -175,15 +175,14 @@
   }
 
   /*
-   * 数学の解答用紙は、正しい天地では説明欄が左、解答欄が右にある。
+   * 実物の数学解答用紙は、日本語が正立する向きでは解答欄が左側にある。
    * 黒い基準四角だけでは 0° と 180° を区別できないため、左右の余白で
-   * 天地を確定し、逆向きなら画像と大問順を一緒に戻す。
+   * 天地を確定し、解答欄が右側なら画像と大問順を一緒に180°戻す。
    */
   function normalizeMathOrientation(attempt) {
     if (!attempt || !attempt.boxes.length) return attempt;
     const bias = mathLayoutBias(attempt.boxes, attempt.canvas.width);
-    if (bias >= .03) return {...attempt, layoutBias: bias, orientationCorrected: false};
-    if (bias > -.03) return {...attempt, layoutBias: bias, orientationCorrected: false};
+    if (bias < .03) return {...attempt, layoutBias: bias, orientationCorrected: false};
     const canvas = rotateCanvas(attempt.canvas, 180);
     const boxes = rotateMathBoxes180(
       attempt.boxes,
@@ -691,12 +690,15 @@
   function cropMathBlock(source, box) {
     const xs = [box.tl.x, box.tr.x, box.br.x, box.bl.x];
     const ys = [box.tl.y, box.tr.y, box.br.y, box.bl.y];
-    const padX = Math.max(8, source.width * .008);
-    const padY = Math.max(8, source.height * .006);
+    const blockWidth = Math.max(...xs) - Math.min(...xs);
+    const blockHeight = Math.max(...ys) - Math.min(...ys);
+    const padX = Math.max(10, blockWidth * .035);
+    const padTop = Math.max(12, blockHeight * .025);
+    const padBottom = Math.max(10, blockHeight * .015);
     const sx = Math.max(0, Math.floor(Math.min(...xs) - padX));
-    const sy = Math.max(0, Math.floor(Math.min(...ys) - padY));
+    const sy = Math.max(0, Math.floor(Math.min(...ys) - padTop));
     const ex = Math.min(source.width, Math.ceil(Math.max(...xs) + padX));
-    const ey = Math.min(source.height, Math.ceil(Math.max(...ys) + padY));
+    const ey = Math.min(source.height, Math.ceil(Math.max(...ys) + padBottom));
     const sw = Math.max(1, ex - sx);
     const sh = Math.max(1, ey - sy);
     const scale = Math.min(1.5, 1400 / Math.max(sw, sh));
@@ -904,6 +906,7 @@
     readStandardBlock,
     makeAiMathQuestions,
     mathLayoutBias,
-    rotateMathBoxes180
+    rotateMathBoxes180,
+    normalizeMathOrientation
   };
 })();

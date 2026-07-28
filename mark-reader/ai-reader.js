@@ -124,7 +124,8 @@
       `科目は${subject === "math1" ? "数学①" : "数学②"}、第${pageNumber}面です。`,
       "この後の画像は大問ごとの解答欄です。",
       `この面にある大問番号の集合: ${questionNumbers.join(", ")}`,
-      "画像の順番から大問番号を推測しないでください。各画像上部の枠内に印刷された大きな大問番号（1、2…）を読み、その実際の番号をquestionにしてください。",
+      "各画像の直前に示す大問番号を、その画像のquestionとしてそのまま返してください。",
+      "画像上部の枠内に印刷された大きな大問番号（1、2…）は照合に使い、別の大問の解答を混ぜないでください。",
       "まず、印刷された日本語とア・イ・ウ…が正立して読める向きを確認してください。画像が上下逆なら、頭の中で180度回転してから上から下へ読み取ってください。",
       "黒または灰色の鉛筆で塗られた丸だけを解答として扱ってください。",
       "赤ペン、赤鉛筆、印刷済みの黒い数字・罫線・丸の輪郭、薄い消し跡は無視してください。",
@@ -138,7 +139,7 @@
     ].join("\n");
     const parts = [{text: prompt}];
     blocks.forEach((block, index) => {
-      parts.push({text: `解答欄画像${index + 1}。大問番号は画像内の印刷見出しから判定してください。`});
+      parts.push({text: `解答欄画像${index + 1}は第${block.question}問です。question=${block.question}として返してください。`});
       parts.push({inlineData: {data: block.data, mimeType: block.mimeType}});
     });
     const result = await model.generateContent(parts);
