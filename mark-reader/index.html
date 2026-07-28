@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
   <title>マークシート自動読取</title>
-  <link rel="stylesheet" href="./style.css?v=5.3">
+  <link rel="stylesheet" href="./style.css?v=5.4">
 </head>
 <body>
   <header>
     <p class="eyebrow">共テ・センター自動採点サイト</p>
     <h1>マークシート自動読取</h1>
-    <span class="badge">実験版 v5.3</span>
+    <span class="badge">実験版 v5.4</span>
   </header>
 
   <main>
     <section class="notice">
       <strong>科目ごとに専用の読取方法を使います。</strong>
-      <span>国語・通常型は端末内だけで処理します。数学でAI照合を有効にした場合は、氏名欄などを除いた解答欄の切抜きだけをGoogle Geminiへ送信します。</span>
+      <span>国語・通常型は端末内だけで処理します。数学は、氏名欄などを除いた解答欄の切抜きだけをGoogle Geminiへ送信し、AIの読取結果を使用します。</span>
     </section>
 
     <section id="setupCard" class="card action-card">
@@ -34,10 +34,8 @@
         </button>
       </div>
       <div id="aiOption" class="ai-option hidden">
-        <label>
-          <input id="aiAssist" type="checkbox" checked>
-          <span><b>Geminiでも照合する</b><small>端末判定と一致した欄は確定し、不一致だけ要確認にします。</small></span>
-        </label>
+        <b>数学はGeminiで読み取ります</b>
+        <small>端末では画像の向き補正と解答欄の切抜きだけを行い、マーク値はAIだけで判定します。</small>
         <p id="aiAvailability" class="ai-availability" aria-live="polite"></p>
       </div>
       <button id="startButton" class="camera-button" type="button">国語・通常型を撮影する</button>
@@ -96,8 +94,8 @@
       </details>
     </section>
   </main>
-  <script src="./ai-config.js?v=5.3"></script>
-  <script type="module" src="./ai-reader.js?v=5.3"></script>
-  <script src="./reader.js?v=5.3"></script>
+  <script src="./ai-config.js?v=5.4"></script>
+  <script type="module" src="./ai-reader.js?v=5.4"></script>
+  <script src="./reader.js?v=5.4"></script>
 </body>
 </html>

@@ -2,6 +2,8 @@
   "use strict";
 
   const config = window.MARK_READER_AI_CONFIG || {};
+  const MATH_VALUES = ["-", "1", "2", "3", "4", "5", "6", "7", "8", "9", "blank"];
+  const KANA_ORDER = ["ア","イ","ウ","エ","オ","カ","キ","ク","ケ","コ","サ","シ","ス","セ","ソ","タ","チ","ツ","テ","ト","ナ","ニ","ヌ","ネ","ノ","ハ","ヒ","フ","ヘ","ホ"];
   const configured = Boolean(
     config.firebaseConfig &&
     config.firebaseConfig.apiKey &&
@@ -45,7 +47,9 @@
                     items: aiSdk.Schema.object({
                       properties: {
                         symbol: aiSdk.Schema.string(),
-                        value: aiSdk.Schema.integer(),
+                        value: aiSdk.Schema.enumString({
+                          enum: MATH_VALUES
+                        }),
                         confidence: aiSdk.Schema.enumString({
                           enum: ["high", "medium", "low"]
                         })
@@ -90,9 +94,7 @@
         answers: question.answers
           .filter(answer =>
             typeof answer.symbol === "string" &&
-            Number.isInteger(answer.value) &&
-            answer.value >= -1 &&
-            answer.value <= 9 &&
+            MATH_VALUES.includes(answer.value) &&
             ["high", "medium", "low"].includes(answer.confidence)
           )
           .map(answer => ({
@@ -100,8 +102,15 @@
             value: answer.value,
             confidence: answer.confidence
           }))
+          .filter(answer => KANA_ORDER.includes(answer.symbol))
+          .sort((a, b) => KANA_ORDER.indexOf(a.symbol) - KANA_ORDER.indexOf(b.symbol))
       }));
-    if (!questions.length) {
+    const returnedQuestions = new Set(questions.map(question => question.question));
+    if (
+      questions.length !== expected.size ||
+      [...expected].some(question => !returnedQuestions.has(question)) ||
+      questions.some(question => !question.answers.length)
+    ) {
       throw new Error("Geminiが有効な解答を返しませんでした。");
     }
     return questions;
@@ -117,12 +126,13 @@
       `大問番号: ${questionNumbers.join(", ")}`,
       "黒または灰色の鉛筆で塗られた丸だけを解答として扱ってください。",
       "赤ペン、赤鉛筆、印刷済みの黒い数字・罫線・丸の輪郭、薄い消し跡は無視してください。",
-      "各行の左側に印刷されたア、イ、ウ…の記号と、数字0〜9のどの丸が塗られているかを対応付けてください。",
-      "数字0の左側には、負の数を示すための独立した「−」欄があります。この符号欄は無視し、数字欄として数えないでください。",
-      "valueには左から数えた位置ではなく、塗られた丸の上に印刷されている数字そのものを返してください。例えば数字2の丸ならvalue=2です。",
-      "数字の丸に明確な鉛筆の塗りがない行は、印刷された輪郭だけを選ばず必ずvalue=-1としてください。",
-      "二重マークや判別困難は最も有力な値を返しconfidence=lowとしてください。",
-      "画像に実在する解答記号だけを返し、存在しない行を補完しないでください。"
+      "各行の左側に印刷されたア、イ、ウ…の記号と、どの丸が塗られているかを対応付けてください。",
+      "数学の選択肢は、各行とも左から「−、1、2、3、4、5、6、7、8、9」です。0の選択肢はありません。",
+      "先頭の「−」も正規の解答選択肢です。塗られている場合は無視せず、valueを半角文字列の\"-\"にしてください。",
+      "数字が塗られている場合、valueには位置番号ではなく、丸の上に印刷された数字を文字列で返してください。例えば2の丸ならvalue=\"2\"です。",
+      "明確な鉛筆の塗りがない行は、印刷された輪郭だけを選ばずvalue=\"blank\"にしてください。",
+      "二重マークや判別困難は最も有力な値を返し、confidence=\"low\"にしてください。",
+      "画像に実在する解答記号を上から順にすべて返してください。未記入行も省略せず、存在しない行は補完しないでください。"
     ].join("\n");
     const parts = [{text: prompt}];
     blocks.forEach(block => {
