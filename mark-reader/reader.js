@@ -175,14 +175,15 @@
   }
 
   /*
-   * 実物の数学解答用紙は、日本語が正立する向きでは解答欄が左側にある。
-   * 黒い基準四角だけでは 0° と 180° を区別できないため、左右の余白で
-   * 天地を確定し、解答欄が右側なら画像と大問順を一緒に180°戻す。
+   * 実物の数学解答用紙は、日本語が正立する向きでは解答欄が右寄りになる。
+   * 黒い基準四角だけでは 0° と 180° を区別できないため、解答欄が明確に
+   * 左寄りなら、画像と大問順を一緒に180°戻す。左右差が小さい面は、
+   * 検出時に選ばれた向きを維持する。
    */
   function normalizeMathOrientation(attempt) {
     if (!attempt || !attempt.boxes.length) return attempt;
     const bias = mathLayoutBias(attempt.boxes, attempt.canvas.width);
-    if (bias < .03) return {...attempt, layoutBias: bias, orientationCorrected: false};
+    if (bias > -.03) return {...attempt, layoutBias: bias, orientationCorrected: false};
     const canvas = rotateCanvas(attempt.canvas, 180);
     const boxes = rotateMathBoxes180(
       attempt.boxes,
