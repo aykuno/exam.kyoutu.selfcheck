@@ -752,14 +752,14 @@
         if (localValue === ai.value) {
           agreed++;
           answer.aiMatched = true;
+          if (localValue >= 0 && ai.confidence === "high") {
+            answer.state = "ok";
+          }
           return;
         }
         disagreed++;
         answer.aiMatched = false;
         answer.state = "warn";
-        if (ai.value >= 0 && ai.confidence !== "low") {
-          answer.value = ai.value;
-        }
       });
     });
     return {agreed, disagreed};
