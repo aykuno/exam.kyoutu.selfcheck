@@ -140,6 +140,66 @@
     return out;
   }
 
+  function normalizeAngle(angle) {
+    const normalized = ((angle % 360) + 360) % 360;
+    return normalized > 180 ? normalized - 360 : normalized;
+  }
+
+  function mathLayoutBias(boxes, width) {
+    if (!boxes.length || !width) return 0;
+    const leftEdge = Math.min(...boxes.flatMap(box => [box.tl.x, box.bl.x]));
+    const rightEdge = Math.max(...boxes.flatMap(box => [box.tr.x, box.br.x]));
+    const leftMargin = leftEdge / width;
+    const rightMargin = (width - rightEdge) / width;
+    return leftMargin - rightMargin;
+  }
+
+  function rotateMathBoxes180(boxes, width, height) {
+    const turn = point => ({
+      ...point,
+      x: width - point.x,
+      y: height - point.y
+    });
+    return boxes.map(box => {
+      const tl = turn(box.br);
+      const tr = turn(box.bl);
+      const br = turn(box.tl);
+      const bl = turn(box.tr);
+      return {
+        ...box,
+        tl, tr, br, bl,
+        centerX: (tl.x + tr.x + br.x + bl.x) / 4,
+        centerY: (tl.y + tr.y + br.y + bl.y) / 4
+      };
+    }).sort((a, b) => a.centerX - b.centerX);
+  }
+
+  /*
+   * 数学の解答用紙は、正しい天地では説明欄が左、解答欄が右にある。
+   * 黒い基準四角だけでは 0° と 180° を区別できないため、左右の余白で
+   * 天地を確定し、逆向きなら画像と大問順を一緒に戻す。
+   */
+  function normalizeMathOrientation(attempt) {
+    if (!attempt || !attempt.boxes.length) return attempt;
+    const bias = mathLayoutBias(attempt.boxes, attempt.canvas.width);
+    if (bias >= .03) return {...attempt, layoutBias: bias, orientationCorrected: false};
+    if (bias > -.03) return {...attempt, layoutBias: bias, orientationCorrected: false};
+    const canvas = rotateCanvas(attempt.canvas, 180);
+    const boxes = rotateMathBoxes180(
+      attempt.boxes,
+      attempt.canvas.width,
+      attempt.canvas.height
+    );
+    return {
+      ...attempt,
+      angle: normalizeAngle(attempt.angle + 180),
+      canvas,
+      boxes,
+      layoutBias: mathLayoutBias(boxes, canvas.width),
+      orientationCorrected: true
+    };
+  }
+
   async function readPage(file) {
     show("workingCard");
     $("workingText").textContent = "写真を読み込んでいます…";
@@ -198,7 +258,7 @@
       attempts.push({angle, canvas, image, ...result});
     }
     attempts.sort((a, b) => b.quality - a.quality);
-    const best = attempts[0];
+    const best = normalizeMathOrientation(attempts[0]);
     if (!best || best.boxes.length !== expected || best.quality < 0) {
       throw new Error(`第${pageIndex + 1}面の解答欄を${expected}個すべて特定できませんでした。用紙の端を切らず、黒い基準四角が全部入るように撮り直してください。`);
     }
@@ -842,6 +902,8 @@
     detectMathBoxes,
     detectMathComponents,
     readStandardBlock,
-    makeAiMathQuestions
+    makeAiMathQuestions,
+    mathLayoutBias,
+    rotateMathBoxes180
   };
 })();
