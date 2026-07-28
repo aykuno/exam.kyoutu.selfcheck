@@ -29,16 +29,44 @@
   let standardAnswers = [];
   let selectedQuestions = new Set();
 
+  function aiConfigured() {
+    return Boolean(window.MarkReaderAI && window.MarkReaderAI.isConfigured());
+  }
+
+  function updateAiAvailability() {
+    const available = aiConfigured();
+    const checkbox = $("aiAssist");
+    checkbox.disabled = !available;
+    if (!available) checkbox.checked = false;
+    $("aiOption").classList.toggle("disabled", !available);
+    $("aiAvailability").className = `ai-availability ${available ? "ready" : "unavailable"}`;
+    $("aiAvailability").textContent = available
+      ? "AI照合を利用できます。解答欄の切抜きだけを送信します。"
+      : "Firebase AI Logicの設定後に利用できます。現在は端末内判定のみです。";
+  }
+
+  function updateSubjectUi() {
+    document.querySelectorAll(".subject").forEach(button =>
+      button.classList.toggle("selected", button.dataset.subject === subject)
+    );
+    $("startButton").textContent = subject === "standard"
+      ? "国語・通常型を撮影する"
+      : `${TEMPLATES[subject].name} 第1面を撮影する`;
+    $("setupHelp").textContent = TEMPLATES[subject].help;
+    $("aiOption").classList.toggle("hidden", subject === "standard");
+    if (subject !== "standard") updateAiAvailability();
+  }
+
   document.querySelectorAll(".subject").forEach(button => {
     button.onclick = () => {
       subject = button.dataset.subject;
-      document.querySelectorAll(".subject").forEach(x => x.classList.toggle("selected", x === button));
-      $("startButton").textContent = subject === "standard"
-        ? "国語・通常型を撮影する"
-        : `${TEMPLATES[subject].name} 第1面を撮影する`;
-      $("setupHelp").textContent = TEMPLATES[subject].help;
+      updateSubjectUi();
     };
   });
+  if (window.addEventListener) {
+    window.addEventListener("mark-reader-ai-ready", updateAiAvailability);
+  }
+  updateSubjectUi();
 
   $("startButton").onclick = begin;
   $("backButton").onclick = reset;
@@ -179,11 +207,39 @@
       number: questionNumbers[i],
       answers: readMathBlock(best.image, box)
     }));
+    let aiStatus = "not-used";
+    let aiMessage = "AI照合は使用していません。";
+    if ($("aiAssist").checked && aiConfigured()) {
+      $("workingText").textContent = "解答欄だけをGeminiで照合しています…";
+      await nextFrame();
+      try {
+        const blocks = best.boxes.map((box, i) => ({
+          question: questionNumbers[i],
+          ...cropMathBlock(best.canvas, box)
+        }));
+        const aiQuestions = await window.MarkReaderAI.analyzeMathPage({
+          subject,
+          pageNumber: pageIndex + 1,
+          blocks
+        });
+        const comparison = reconcileMathAnswers(questions, aiQuestions);
+        aiStatus = comparison.disagreed ? "partial" : "verified";
+        aiMessage = comparison.disagreed
+          ? `Geminiと${comparison.disagreed}欄で不一致です。赤色の欄を確認してください。`
+          : `Geminiと${comparison.agreed}欄で一致しました。`;
+      } catch (error) {
+        aiStatus = "failed";
+        aiMessage = `Gemini照合に失敗したため端末内判定を使用しました。${error && error.message ? `（${error.message}）` : ""}`;
+      }
+    }
     pageData.push({
       questions,
       preview: makePreview(best.canvas, best.boxes, questionNumbers.map(n => `第${n}問`)),
       fileName,
-      angle: best.angle
+      angle: best.angle,
+      pageNumber: pageIndex + 1,
+      aiStatus,
+      aiMessage
     });
     pageIndex++;
     if (pageIndex < TEMPLATES[subject].pages.length) showCapture();
@@ -654,10 +710,66 @@
     return canvas.toDataURL("image/jpeg", .82);
   }
 
+  function cropMathBlock(source, box) {
+    const xs = [box.tl.x, box.tr.x, box.br.x, box.bl.x];
+    const ys = [box.tl.y, box.tr.y, box.br.y, box.bl.y];
+    const padX = Math.max(8, source.width * .008);
+    const padY = Math.max(8, source.height * .006);
+    const sx = Math.max(0, Math.floor(Math.min(...xs) - padX));
+    const sy = Math.max(0, Math.floor(Math.min(...ys) - padY));
+    const ex = Math.min(source.width, Math.ceil(Math.max(...xs) + padX));
+    const ey = Math.min(source.height, Math.ceil(Math.max(...ys) + padY));
+    const sw = Math.max(1, ex - sx);
+    const sh = Math.max(1, ey - sy);
+    const scale = Math.min(1.5, 1400 / Math.max(sw, sh));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(sw * scale));
+    canvas.height = Math.max(1, Math.round(sh * scale));
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(source, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
+    return {
+      mimeType: "image/jpeg",
+      data: canvas.toDataURL("image/jpeg", .88).split(",")[1]
+    };
+  }
+
+  function reconcileMathAnswers(questions, aiQuestions) {
+    const aiByQuestion = new Map(aiQuestions.map(question => [question.question, question]));
+    let agreed = 0, disagreed = 0;
+    questions.forEach(question => {
+      const aiQuestion = aiByQuestion.get(question.number);
+      if (!aiQuestion) return;
+      const aiBySymbol = new Map(aiQuestion.answers.map(answer => [answer.symbol, answer]));
+      question.answers.forEach(answer => {
+        const ai = aiBySymbol.get(answer.symbol);
+        if (!ai) return;
+        const localValue = answer.value === "" ? -1 : answer.value;
+        answer.localValue = localValue;
+        answer.aiValue = ai.value;
+        answer.aiConfidence = ai.confidence;
+        if (localValue === ai.value) {
+          agreed++;
+          answer.aiMatched = true;
+          return;
+        }
+        disagreed++;
+        answer.aiMatched = false;
+        answer.state = "warn";
+        if (ai.value >= 0 && ai.confidence !== "low") {
+          answer.value = ai.value;
+        }
+      });
+    });
+    return {agreed, disagreed};
+  }
+
   function finishStandard() {
     const counts = countStates(standardAnswers);
     $("summary").textContent = `国語・通常型・読取済み ${counts.ok}問・要確認 ${counts.warn}問・未記入 ${counts.blank}問`;
     $("selectionPanel").classList.add("hidden");
+    $("aiResultStatus").classList.add("hidden");
     $("mathResults").classList.add("hidden");
     $("standardResults").classList.remove("hidden");
     $("standardResults").innerHTML = standardAnswers.map(a => `
@@ -685,6 +797,17 @@
     const questions = pageData.flatMap(p => p.questions);
     const counts = countStates(questions.flatMap(q => q.answers));
     $("summary").textContent = `${TEMPLATES[subject].name}・読取済み ${counts.ok}欄・要確認 ${counts.warn}欄・未記入 ${counts.blank}欄`;
+    const aiPages = pageData.filter(page => page.aiStatus && page.aiStatus !== "not-used");
+    if (aiPages.length) {
+      const failed = aiPages.some(page => page.aiStatus === "failed");
+      const partial = aiPages.some(page => page.aiStatus === "partial");
+      $("aiResultStatus").className = `ai-result-status ${failed ? "failed" : partial ? "partial" : "verified"}`;
+      $("aiResultStatus").textContent = aiPages.map(page =>
+        `第${page.pageNumber}面：${page.aiMessage}`
+      ).join(" ");
+    } else {
+      $("aiResultStatus").classList.add("hidden");
+    }
     if (subject === "math2") {
       const activity = questions.filter(q => q.number >= 4).map(q => ({
         number: q.number,
@@ -728,15 +851,29 @@
         <h3>第${question.number}問${isChoice ? ` <span>${selected ? "選択" : "未選択"}</span>` : ""}</h3>
         <div class="answers">
           ${question.answers.map((answer, row) => `
-            <div class="answer ${answer.state}" title="濃度 ${(answer.density * 100).toFixed(1)}%・判定差 ${answer.gap.toFixed(1)}">
+            <div class="answer ${answer.state}" title="${answerTitle(answer)}">
               <label>${answer.symbol}</label>
               <select data-question="${question.number}" data-row="${row}" aria-label="第${question.number}問 ${answer.symbol}">
                 <option value="">—</option>
                 ${Array.from({length: 10}, (_, i) => `<option value="${i}"${answer.value === i ? " selected" : ""}>${i}</option>`).join("")}
               </select>
+              ${answer.aiMatched === false ? `<small class="ai-note">端末:${displayValue(answer.localValue)} AI:${displayValue(answer.aiValue)}</small>` : ""}
             </div>`).join("")}
         </div>
       </section>`;
+  }
+
+  function displayValue(value) {
+    return value === -1 || value === "" ? "空欄" : value;
+  }
+
+  function answerTitle(answer) {
+    const base = `濃度 ${(answer.density * 100).toFixed(1)}%・判定差 ${answer.gap.toFixed(1)}`;
+    if (answer.aiMatched === true) return `${base}・Geminiと一致`;
+    if (answer.aiMatched === false) {
+      return `${base}・端末 ${displayValue(answer.localValue)}・Gemini ${displayValue(answer.aiValue)}（${answer.aiConfidence}）`;
+    }
+    return base;
   }
 
   function renderSelection() {
@@ -806,6 +943,7 @@
     detectMathBoxes,
     detectMathComponents,
     readStandardBlock,
-    readMathBlock
+    readMathBlock,
+    reconcileMathAnswers
   };
 })();
