@@ -763,7 +763,7 @@
               <label>${answer.symbol}</label>
               <select data-question="${question.number}" data-row="${row}" aria-label="第${question.number}問 ${answer.symbol}">
                 <option value="">—</option>
-                ${["-", "1", "2", "3", "4", "5", "6", "7", "8", "9"].map(value => `<option value="${value}"${answer.value === value ? " selected" : ""}>${value === "-" ? "－" : value}</option>`).join("")}
+                ${["-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].map(value => `<option value="${value}"${answer.value === value ? " selected" : ""}>${value === "-" ? "－" : value}</option>`).join("")}
               </select>
             </div>`).join("")}
         </div>
