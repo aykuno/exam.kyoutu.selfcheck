@@ -29,6 +29,9 @@
   let selectedQuestions = new Set();
   let answerKeys = [];
   let selectedExam = "";
+  let pendingPhoto = null;
+  let lastGrade = null;
+  const ANSWER_STORE = "ct-mark-reader-answers-v1";
 
   function escapeHtml(value) {
     return String(value ?? "").replace(/[&<>"']/g, character => ({
@@ -53,6 +56,99 @@
     return answerKeys.find(key => keySignature(key) === signature) || null;
   }
 
+  function readAnswerStore() {
+    try {
+      const value = JSON.parse(localStorage.getItem(ANSWER_STORE) || "{}");
+      return value && value.version === 1 && value.entries && typeof value.entries === "object"
+        ? value
+        : {version: 1, entries: {}};
+    } catch (_) {
+      return {version: 1, entries: {}};
+    }
+  }
+
+  function savedEntry() {
+    const key = selectedAnswerKey();
+    return key ? readAnswerStore().entries[keySignature(key)] || null : null;
+  }
+
+  function formatSavedTime(value) {
+    try {
+      return new Date(value).toLocaleString("ja-JP", {
+        month: "numeric",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      });
+    } catch (_) {
+      return "";
+    }
+  }
+
+  function refreshSavedUi() {
+    const entry = savedEntry();
+    $("savedResumePanel").classList.toggle("hidden", !entry);
+    if (!entry) return;
+    const count = entry.subject === "standard"
+      ? (entry.standardAnswers || []).filter(answer => answer.value !== "").length
+      : (entry.mathQuestions || []).flatMap(question => question.answers || [])
+        .filter(answer => answer.value !== "").length;
+    $("savedResumeText").textContent =
+      `${formatSavedTime(entry.updatedAt)}更新・${count}欄入力済み`;
+  }
+
+  function answerSnapshot() {
+    const key = selectedAnswerKey();
+    if (!key) return null;
+    const entry = {
+      version: 1,
+      keySignature: keySignature(key),
+      subject,
+      exam: key.exam,
+      updatedAt: new Date().toISOString(),
+      selectedQuestions: [...selectedQuestions].sort((a, b) => a - b)
+    };
+    if (subject === "standard") {
+      entry.standardAnswers = standardAnswers.map(answer => ({
+        number: Number(answer.number),
+        value: answer.value === "" ? "" : Number(answer.value),
+        state: answer.state === "warn" ? "warn" : answer.value === "" ? "blank" : "ok"
+      }));
+    } else {
+      entry.mathQuestions = pageData.flatMap(page => page.questions || []).map(question => ({
+        number: Number(question.number),
+        answers: (question.answers || []).map(answer => ({
+          symbol: answer.symbol,
+          value: answer.value || "",
+          state: answer.state === "warn" ? "warn" : answer.value === "" ? "blank" : "ok",
+          aiConfidence: answer.aiConfidence || ""
+        }))
+      }));
+    }
+    if (lastGrade) {
+      entry.lastScore = lastGrade.score;
+      entry.maxScore = lastGrade.maxScore;
+    }
+    return entry;
+  }
+
+  function saveAnswers() {
+    const entry = answerSnapshot();
+    if (!entry) return;
+    try {
+      const store = readAnswerStore();
+      store.entries[entry.keySignature] = entry;
+      localStorage.setItem(ANSWER_STORE, JSON.stringify(store));
+      $("autosaveStatus").textContent =
+        `解答番号をこの端末に自動保存しました（${formatSavedTime(entry.updatedAt)}）。`;
+      refreshSavedUi();
+    } catch (error) {
+      $("autosaveStatus").textContent = "この端末へ解答番号を保存できませんでした。";
+      console.error("answer autosave failed", error);
+    }
+  }
+
   function updateStartAvailability() {
     const keyReady = Boolean(selectedAnswerKey());
     const readerReady = subject === "standard" || aiConfigured();
@@ -72,6 +168,7 @@
     const source = key.source || "登録済み正答データ";
     $("answerKeyHelp").textContent = `${key.examLabel}・${source}`;
     updateStartAvailability();
+    refreshSavedUi();
   }
 
   function updateAnswerKeyOptions() {
@@ -85,6 +182,7 @@
       : '<option value="">読み込み中…</option>';
     if (current) $("answerKeySelect").value = keySignature(current);
     updateAnswerKeyHelp();
+    refreshSavedUi();
   }
 
   async function loadAnswerKeys() {
@@ -97,6 +195,7 @@
       }
       answerKeys = data.keys;
       updateAnswerKeyOptions();
+      refreshSavedUi();
     } catch (error) {
       answerKeys = [];
       $("answerKeySelect").innerHTML = '<option value="">正答データを読み込めませんでした</option>';
@@ -152,6 +251,18 @@
   $("errorBackButton").onclick = reset;
   $("retryButton").onclick = showCapture;
   $("rescanButton").onclick = reset;
+  $("resumeButton").onclick = restoreSavedAnswers;
+  $("qualityRetakeButton").onclick = () => {
+    pendingPhoto = null;
+    showCapture();
+  };
+  $("qualityUseButton").onclick = () => {
+    if (!pendingPhoto) return showCapture();
+    const photo = pendingPhoto;
+    pendingPhoto = null;
+    processPageCanvas(photo.canvas, photo.fileName);
+  };
+  $("pdfButton").onclick = exportPdf;
   $("fileInput").onchange = () => {
     const file = $("fileInput").files && $("fileInput").files[0];
     if (file) readPage(file);
@@ -173,6 +284,7 @@
     pageData = [];
     standardAnswers = [];
     selectedQuestions.clear();
+    pendingPhoto = null;
     clearGrade();
     showCapture();
   }
@@ -182,12 +294,52 @@
     pageData = [];
     standardAnswers = [];
     selectedQuestions.clear();
+    pendingPhoto = null;
     clearGrade();
+    refreshSavedUi();
     show("setupCard");
   }
 
+  function restoreSavedAnswers() {
+    const entry = savedEntry();
+    if (!entry || entry.subject !== subject) {
+      refreshSavedUi();
+      return;
+    }
+    pageIndex = TEMPLATES[subject].pages.length;
+    pendingPhoto = null;
+    clearGrade();
+    if (subject === "standard") {
+      standardAnswers = (entry.standardAnswers || []).map(answer => ({
+        number: Number(answer.number),
+        value: answer.value === "" ? "" : Number(answer.value),
+        state: answer.state === "warn" ? "warn" : answer.value === "" ? "blank" : "ok",
+        best: 0,
+        gap: 0
+      }));
+      pageData = [];
+      if (!standardAnswers.length) return;
+      finishStandard();
+      return;
+    }
+    standardAnswers = [];
+    selectedQuestions = new Set((entry.selectedQuestions || []).map(Number));
+    const questions = (entry.mathQuestions || []).map(question => ({
+      number: Number(question.number),
+      answers: (question.answers || []).map(answer => ({
+        symbol: answer.symbol,
+        value: answer.value || "",
+        state: answer.state === "warn" ? "warn" : answer.value === "" ? "blank" : "ok",
+        aiConfidence: answer.aiConfidence || ""
+      }))
+    }));
+    if (!questions.length) return;
+    pageData = [{questions}];
+    finishMath(true);
+  }
+
   function show(id) {
-    ["setupCard","captureCard","workingCard","errorCard","resultCard"]
+    ["setupCard","captureCard","qualityCard","workingCard","errorCard","resultCard"]
       .forEach(x => $(x).classList.toggle("hidden", x !== id));
   }
 
@@ -288,6 +440,74 @@
     };
   }
 
+  function photoQuality(canvas, originalWidth, originalHeight) {
+    const sample = document.createElement("canvas");
+    const scale = Math.min(1, 480 / Math.max(canvas.width, canvas.height));
+    sample.width = Math.max(1, Math.round(canvas.width * scale));
+    sample.height = Math.max(1, Math.round(canvas.height * scale));
+    const ctx = sample.getContext("2d", {willReadFrequently: true});
+    ctx.drawImage(canvas, 0, 0, sample.width, sample.height);
+    const {data, width, height} = ctx.getImageData(0, 0, sample.width, sample.height);
+    const gray = new Uint8Array(width * height);
+    let total = 0;
+    let dark = 0;
+    for (let p = 0, i = 0; p < gray.length; p++, i += 4) {
+      const value = grayAt(data, i);
+      gray[p] = value;
+      total += value;
+      if (value < 35) dark++;
+    }
+    let lapTotal = 0;
+    let lapSquared = 0;
+    let lapCount = 0;
+    for (let y = 1; y < height - 1; y++) {
+      for (let x = 1; x < width - 1; x++) {
+        const p = y * width + x;
+        const lap = Math.abs(
+          gray[p - 1] + gray[p + 1] + gray[p - width] + gray[p + width] - gray[p] * 4
+        );
+        lapTotal += lap;
+        lapSquared += lap * lap;
+        lapCount++;
+      }
+    }
+    const lapMean = lapCount ? lapTotal / lapCount : 0;
+    const sharpness = lapCount
+      ? Math.sqrt(Math.max(0, lapSquared / lapCount - lapMean * lapMean))
+      : 0;
+    const mean = gray.length ? total / gray.length : 0;
+    const issues = [];
+    const shortSide = Math.min(originalWidth, originalHeight);
+    if (shortSide < 1000) {
+      issues.push(`画像が小さめです（短辺${shortSide}px）。短辺1200px以上を目安にしてください。`);
+    }
+    if (mean < 72 || dark / gray.length > .32) {
+      issues.push("写真が暗い、または影が広く写っています。明るい場所で影を避けてください。");
+    } else if (mean > 238) {
+      issues.push("写真が明るすぎます。照明の反射や白飛びを避けてください。");
+    }
+    if (sharpness < 14) {
+      issues.push("手ぶれ・ピンぼけの可能性があります。端末を止めて文字にピントを合わせてください。");
+    }
+    return {issues, mean, sharpness, shortSide};
+  }
+
+  async function processPageCanvas(canvas, fileName) {
+    show("workingCard");
+    try {
+      if (subject === "standard") {
+        await readStandardPage(canvas, fileName);
+      } else {
+        await readMathPage(canvas, fileName);
+      }
+    } catch (error) {
+      $("errorText").textContent = error && error.message
+        ? error.message
+        : "画像を処理できませんでした。別の写真でお試しください。";
+      show("errorCard");
+    }
+  }
+
   async function readPage(file) {
     show("workingCard");
     $("workingText").textContent = "写真を読み込んでいます…";
@@ -299,14 +519,18 @@
       base.width = Math.round(bitmap.width * scale);
       base.height = Math.round(bitmap.height * scale);
       base.getContext("2d").drawImage(bitmap, 0, 0, base.width, base.height);
+      const quality = photoQuality(base, bitmap.width, bitmap.height);
       bitmap.close();
       await nextFrame();
 
-      if (subject === "standard") {
-        await readStandardPage(base, file.name);
-      } else {
-        await readMathPage(base, file.name);
+      if (quality.issues.length) {
+        pendingPhoto = {canvas: base, fileName: file.name};
+        $("qualityIssues").innerHTML = quality.issues
+          .map(issue => `<li>${escapeHtml(issue)}</li>`).join("");
+        show("qualityCard");
+        return;
       }
+      await processPageCanvas(base, file.name);
     } catch (error) {
       $("errorText").textContent = error && error.message
         ? error.message
@@ -837,6 +1061,9 @@
     if (!result) return;
     result.className = "grading-result hidden";
     result.innerHTML = "";
+    lastGrade = null;
+    window.__markReaderPdfData = null;
+    $("pdfButton").classList.add("hidden");
   }
 
   function finishStandard() {
@@ -861,6 +1088,7 @@
         answer.state = select.value ? "ok" : "blank";
         select.parentElement.className = `answer ${answer.state}`;
         clearGrade();
+        saveAnswers();
       };
     });
     updateGradingHeader();
@@ -868,9 +1096,10 @@
     renderPreviews();
     $("copyStatus").textContent = "";
     show("resultCard");
+    saveAnswers();
   }
 
-  function finishMath() {
+  function finishMath(preserveSelection = false) {
     const questions = pageData.flatMap(p => p.questions);
     const counts = countStates(questions.flatMap(q => q.answers));
     $("summary").textContent = `${TEMPLATES[subject].name}・読取済み ${counts.ok}欄・要確認 ${counts.warn}欄・未記入 ${counts.blank}欄`;
@@ -890,7 +1119,9 @@
         confident: q.answers.filter(a => a.value !== "" && a.state === "ok").length,
         total: q.answers.filter(a => a.value !== "").length
       })).sort((a, b) => b.confident - a.confident || b.total - a.total || a.number - b.number);
-      selectedQuestions = new Set(activity.slice(0, 3).map(x => x.number));
+      if (!preserveSelection || selectedQuestions.size !== 3) {
+        selectedQuestions = new Set(activity.slice(0, 3).map(x => x.number));
+      }
       renderSelection();
     } else {
       $("selectionPanel").classList.add("hidden");
@@ -906,6 +1137,7 @@
         answer.state = select.value === "" ? "blank" : "ok";
         select.closest(".answer").className = `answer ${answer.state}`;
         clearGrade();
+        saveAnswers();
       };
     });
     updateGradingHeader();
@@ -913,6 +1145,7 @@
     renderPreviews();
     $("copyStatus").textContent = "";
     show("resultCard");
+    saveAnswers();
   }
 
   function countStates(items) {
@@ -962,6 +1195,7 @@
         }
         clearGrade();
         renderSelectionState();
+        saveAnswers();
       };
     });
   }
@@ -978,7 +1212,9 @@
   }
 
   function renderPreviews() {
-    $("previews").innerHTML = pageData.map((page, i) => `
+    const previewPages = pageData.filter(page => page.preview);
+    $("previews").closest("details").classList.toggle("hidden", !previewPages.length);
+    $("previews").innerHTML = previewPages.map((page, i) => `
       <figure>
         <figcaption>${subject === "standard" ? "検出結果" : `第${i + 1}面の検出結果`}</figcaption>
         <img src="${page.preview}" alt="${subject === "standard" ? "検出結果" : `第${i + 1}面の検出結果`}">
@@ -1007,6 +1243,101 @@
     return {className: "wrong", text: "×"};
   }
 
+  function shortGroupLabel(value) {
+    return String(value || "全体")
+      .replace(/模擬試験|共通テスト|数学|国語/g, "")
+      .replace(/\s+/g, "")
+      .slice(0, 10) || "全体";
+  }
+
+  function drawRadarChart(canvas, groups) {
+    if (!canvas || !groups.length) return;
+    const size = 560;
+    canvas.width = size;
+    canvas.height = 430;
+    const ctx = canvas.getContext("2d");
+    const cx = size / 2;
+    const cy = 205;
+    const radius = 132;
+    const count = groups.length;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = '700 18px -apple-system,BlinkMacSystemFont,"Segoe UI","Yu Gothic",sans-serif';
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    for (let level = 1; level <= 4; level++) {
+      ctx.beginPath();
+      groups.forEach((_, index) => {
+        const angle = -Math.PI / 2 + Math.PI * 2 * index / count;
+        const r = radius * level / 4;
+        const x = cx + Math.cos(angle) * r;
+        const y = cy + Math.sin(angle) * r;
+        if (index) ctx.lineTo(x, y);
+        else ctx.moveTo(x, y);
+      });
+      ctx.closePath();
+      ctx.strokeStyle = level === 4 ? "#bcc7dc" : "#dde3ee";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+    groups.forEach((group, index) => {
+      const angle = -Math.PI / 2 + Math.PI * 2 * index / count;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
+      ctx.strokeStyle = "#e0e5ee";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      const lx = cx + Math.cos(angle) * (radius + 46);
+      const ly = cy + Math.sin(angle) * (radius + 36);
+      ctx.fillStyle = "#43506a";
+      ctx.fillText(shortGroupLabel(group.group), lx, ly);
+    });
+    ctx.beginPath();
+    groups.forEach((group, index) => {
+      const angle = -Math.PI / 2 + Math.PI * 2 * index / count;
+      const rate = group.possible ? Math.max(0, Math.min(1, group.earned / group.possible)) : 0;
+      const x = cx + Math.cos(angle) * radius * rate;
+      const y = cy + Math.sin(angle) * radius * rate;
+      if (index) ctx.lineTo(x, y);
+      else ctx.moveTo(x, y);
+    });
+    ctx.closePath();
+    ctx.fillStyle = "rgba(49,95,206,.20)";
+    ctx.fill();
+    ctx.strokeStyle = "#315fce";
+    ctx.lineWidth = 5;
+    ctx.stroke();
+  }
+
+  function pdfData(result) {
+    const key = selectedAnswerKey();
+    return {
+      examLabel: key ? key.examLabel : "",
+      year: key ? key.year : "",
+      subject: TEMPLATES[subject].name,
+      score: result.score,
+      maxScore: result.maxScore,
+      correct: result.correct,
+      partial: result.partial,
+      wrong: result.wrong,
+      missing: result.missing,
+      chosenGroups: result.chosenGroups,
+      groups: result.groups,
+      rows: result.rows.filter(row => row.included).map(row => {
+        const status = gradeStatus(row);
+        return {
+          id: displayGradeId(row.question),
+          got: row.got.join("") || "未入力",
+          expected: row.expected,
+          earned: row.earned,
+          points: row.points,
+          judge: status.text
+        };
+      }),
+      generatedAt: new Date().toISOString()
+    };
+  }
+
   function renderGrade(result) {
     const includedCount = result.rows.filter(row => row.included).length;
     const groupHtml = result.groups.map(group => `
@@ -1027,6 +1358,12 @@
           <td>${status.text}</td>
         </tr>`;
     }).join("");
+    const groupTableHtml = result.groups.map(group => `
+      <tr>
+        <td>${escapeHtml(group.group)}</td>
+        <td>${formatScore(group.earned)} / ${formatScore(group.possible)}</td>
+        <td>${group.possible ? Math.round(group.earned / group.possible * 1000) / 10 : 0}%</td>
+      </tr>`).join("");
     $("gradingResult").className = "grading-result";
     $("gradingResult").innerHTML = `
       <div class="score-summary">
@@ -1039,6 +1376,19 @@
         ? `<p class="chosen-groups">採点対象：必答問題＋${result.chosenGroups.map(escapeHtml).join("・")}</p>`
         : ""}
       <div class="group-scores">${groupHtml}</div>
+      <div class="result-analytics">
+        <section class="radar-card">
+          <h3>大問別レーダー</h3>
+          <canvas id="scoreRadar" aria-label="大問別得点率のレーダーチャート"></canvas>
+        </section>
+        <section class="group-table-card">
+          <h3>大問別得点</h3>
+          <table class="group-score-table">
+            <thead><tr><th>大問</th><th>得点</th><th>得点率</th></tr></thead>
+            <tbody>${groupTableHtml}</tbody>
+          </table>
+        </section>
+      </div>
       <details class="grade-details">
         <summary>採点内訳を表示</summary>
         <div class="grade-table-wrap">
@@ -1048,6 +1398,7 @@
           </table>
         </div>
       </details>`;
+    drawRadarChart($("scoreRadar"), result.groups);
   }
 
   function gradeAnswers() {
@@ -1070,13 +1421,43 @@
         mathQuestions: pageData.flatMap(page => page.questions || []),
         selectedQuestions
       });
+      lastGrade = result;
+      window.__markReaderPdfData = pdfData(result);
       renderGrade(result);
+      $("pdfButton").classList.remove("hidden");
+      saveAnswers();
       $("gradingResult").scrollIntoView({behavior: "smooth", block: "nearest"});
     } catch (error) {
       $("gradingResult").className = "grading-result grade-error";
       $("gradingResult").textContent = error && error.message
         ? error.message
         : "採点できませんでした。";
+    }
+  }
+
+  async function exportPdf() {
+    if (!lastGrade || !window.__markReaderPdfData) {
+      $("gradingResult").className = "grading-result grade-error";
+      $("gradingResult").textContent = "先に採点してください。";
+      return;
+    }
+    if (!window.MarkReaderPDF || typeof window.MarkReaderPDF.exportResult !== "function") {
+      $("copyStatus").textContent = "PDF出力を準備できませんでした。ページを再読み込みしてください。";
+      return;
+    }
+    const button = $("pdfButton");
+    button.disabled = true;
+    button.classList.add("busy");
+    button.textContent = "PDFを作成しています…";
+    try {
+      await window.MarkReaderPDF.exportResult(window.__markReaderPdfData);
+    } catch (error) {
+      console.error("PDF export failed", error);
+      $("copyStatus").textContent = `PDFを作成できませんでした：${error && error.message ? error.message : error}`;
+    } finally {
+      button.disabled = false;
+      button.classList.remove("busy");
+      button.textContent = "採点結果PDFを保存";
     }
   }
 
@@ -1112,6 +1493,7 @@
     detectMathComponents,
     readStandardBlock,
     makeAiMathQuestions,
+    photoQuality,
     mathLayoutBias,
     rotateMathBoxes180,
     normalizeMathOrientation

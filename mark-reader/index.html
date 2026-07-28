@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
   <title>マークシート自動読取</title>
-  <link rel="stylesheet" href="./style.css?v=6.0">
+  <link rel="stylesheet" href="./style.css?v=7.0">
 </head>
 <body>
   <header>
     <p class="eyebrow">共テ・センター自動採点サイト</p>
     <h1>マークシート自動読取</h1>
-    <span class="badge">実験版 v6.0</span>
+    <span class="badge">実験版 v7.0</span>
   </header>
 
   <main>
@@ -43,6 +43,23 @@
         <small>端末では画像の向き補正と解答欄の切抜きだけを行い、マーク値はAIだけで判定します。</small>
         <p id="aiAvailability" class="ai-availability" aria-live="polite"></p>
       </div>
+      <section id="savedResumePanel" class="saved-resume hidden" aria-live="polite">
+        <div>
+          <b>この端末に保存済みの解答があります</b>
+          <span id="savedResumeText"></span>
+        </div>
+        <button id="resumeButton" type="button">保存済み解答を開く</button>
+      </section>
+      <section class="photo-guide">
+        <h3>読み取りやすい写真</h3>
+        <ul>
+          <li>用紙全体と、解答欄の黒い基準四角をすべて入れる</li>
+          <li>真上から撮り、用紙を写真の大部分に写す</li>
+          <li>影・反射・手ぶれを避け、明るい場所で撮る</li>
+          <li>スクリーンショットや送信時に圧縮された画像を避ける</li>
+        </ul>
+        <p>撮影後に解像度・明るさ・ぼけを端末内で確認します。写真自体は保存しません。</p>
+      </section>
       <button id="startButton" class="camera-button" type="button">国語・通常型を撮影する</button>
       <p id="setupHelp">国語で精度を確認できた従来の読取処理をそのまま使用します。</p>
     </section>
@@ -53,11 +70,26 @@
       </div>
       <h2 id="captureTitle">用紙を撮影</h2>
       <p id="captureHelp"></p>
+      <div class="capture-checklist">
+        <span>黒い四角を全部入れる</span>
+        <span>真上から</span>
+        <span>影・反射なし</span>
+      </div>
       <label class="camera-button">
         撮影する・写真を選ぶ
         <input id="fileInput" type="file" accept="image/*" capture="environment">
       </label>
       <button id="backButton" class="secondary" type="button">用紙選択に戻る</button>
+    </section>
+
+    <section id="qualityCard" class="card quality-card hidden" aria-live="assertive">
+      <h2>写真を確認してください</h2>
+      <p>読み取り精度が下がる可能性があります。</p>
+      <ul id="qualityIssues"></ul>
+      <div class="quality-actions">
+        <button id="qualityRetakeButton" class="retry-button" type="button">撮り直す</button>
+        <button id="qualityUseButton" class="secondary" type="button">この写真を使う</button>
+      </div>
     </section>
 
     <section id="workingCard" class="card hidden" aria-live="polite">
@@ -83,6 +115,7 @@
         <span class="warn-dot"></span>要確認
         <span class="blank-dot"></span>未記入
       </div>
+      <p id="autosaveStatus" class="autosave-status" aria-live="polite">解答番号はこの端末に自動保存されます。</p>
       <p id="aiResultStatus" class="ai-result-status hidden" aria-live="polite"></p>
       <section id="selectionPanel" class="selection-panel hidden">
         <strong>数学② 選択した大問（3問）</strong>
@@ -100,6 +133,7 @@
           <button id="gradeButton" class="grade-button" type="button">採点する</button>
         </div>
         <div id="gradingResult" class="grading-result hidden" aria-live="polite"></div>
+        <button id="pdfButton" class="pdf-button hidden" type="button">採点結果PDFを保存</button>
       </section>
       <button id="copyButton" class="primary" type="button">確認した解答番号をコピー</button>
       <p id="copyStatus" class="copy-status"></p>
@@ -109,9 +143,10 @@
       </details>
     </section>
   </main>
-  <script src="./ai-config.js?v=6.0"></script>
-  <script type="module" src="./ai-reader.js?v=6.0"></script>
-  <script src="./grader.js?v=6.0"></script>
-  <script src="./reader.js?v=6.0"></script>
+  <script src="./ai-config.js?v=7.0"></script>
+  <script type="module" src="./ai-reader.js?v=7.0"></script>
+  <script src="./grader.js?v=7.0"></script>
+  <script src="./pdf-export.js?v=7.0"></script>
+  <script src="./reader.js?v=7.0"></script>
 </body>
 </html>

@@ -274,7 +274,10 @@
       groups.push({
         group,
         earned: groupRows.reduce((sum, row) => sum + row.earned, 0),
-        possible: groupRows.reduce((sum, row) => sum + row.points, 0)
+        possible: groupRows.reduce((sum, row) => sum + row.points, 0),
+        correct: groupRows.filter(row => row.earned === row.points).length,
+        items: groupRows.length,
+        missing: groupRows.filter(row => !row.answered).length
       });
     }
 
