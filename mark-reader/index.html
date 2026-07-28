@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
   <title>マークシート自動読取</title>
-  <link rel="stylesheet" href="./style.css?v=5.8">
+  <link rel="stylesheet" href="./style.css?v=6.0">
 </head>
 <body>
   <header>
     <p class="eyebrow">共テ・センター自動採点サイト</p>
     <h1>マークシート自動読取</h1>
-    <span class="badge">実験版 v5.8</span>
+    <span class="badge">実験版 v6.0</span>
   </header>
 
   <main>
@@ -32,6 +32,11 @@
         <button class="subject" data-subject="math2" type="button">
           <b>数学②</b><small>両面・選択問題</small>
         </button>
+      </div>
+      <div class="answer-key-option">
+        <label for="answerKeySelect">採点する正答データ</label>
+        <select id="answerKeySelect" aria-describedby="answerKeyHelp"></select>
+        <p id="answerKeyHelp">実験用に登録した正答データから選択してください。</p>
       </div>
       <div id="aiOption" class="ai-option hidden">
         <b>数学はGeminiで読み取ります</b>
@@ -86,6 +91,16 @@
       </section>
       <div id="standardResults" class="standard-results hidden"></div>
       <div id="mathResults" class="question-results hidden"></div>
+      <section class="grading-panel">
+        <div class="grading-head">
+          <div>
+            <strong>採点</strong>
+            <span id="selectedKeyLabel"></span>
+          </div>
+          <button id="gradeButton" class="grade-button" type="button">採点する</button>
+        </div>
+        <div id="gradingResult" class="grading-result hidden" aria-live="polite"></div>
+      </section>
       <button id="copyButton" class="primary" type="button">確認した解答番号をコピー</button>
       <p id="copyStatus" class="copy-status"></p>
       <details>
@@ -94,8 +109,9 @@
       </details>
     </section>
   </main>
-  <script src="./ai-config.js?v=5.8"></script>
-  <script type="module" src="./ai-reader.js?v=5.8"></script>
-  <script src="./reader.js?v=5.8"></script>
+  <script src="./ai-config.js?v=6.0"></script>
+  <script type="module" src="./ai-reader.js?v=6.0"></script>
+  <script src="./grader.js?v=6.0"></script>
+  <script src="./reader.js?v=6.0"></script>
 </body>
 </html>

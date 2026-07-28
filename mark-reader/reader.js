@@ -27,6 +27,84 @@
   let pageData = [];
   let standardAnswers = [];
   let selectedQuestions = new Set();
+  let answerKeys = [];
+  let selectedExam = "";
+
+  function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, character => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    })[character]);
+  }
+
+  function keySignature(key) {
+    return [key.year, key.exam, key.readerSubject].join("||");
+  }
+
+  function keysForSubject() {
+    return answerKeys.filter(key => key.readerSubject === subject);
+  }
+
+  function selectedAnswerKey() {
+    const signature = $("answerKeySelect").value;
+    return answerKeys.find(key => keySignature(key) === signature) || null;
+  }
+
+  function updateStartAvailability() {
+    const keyReady = Boolean(selectedAnswerKey());
+    const readerReady = subject === "standard" || aiConfigured();
+    $("startButton").disabled = !keyReady || !readerReady;
+  }
+
+  function updateAnswerKeyHelp() {
+    const key = selectedAnswerKey();
+    if (!key) {
+      $("answerKeyHelp").textContent = answerKeys.length
+        ? "この用紙形式で採点できる正答データがありません。"
+        : "正答データを読み込んでいます…";
+      updateStartAvailability();
+      return;
+    }
+    selectedExam = key.exam;
+    const source = key.source || "登録済み正答データ";
+    $("answerKeyHelp").textContent = `${key.examLabel}・${source}`;
+    updateStartAvailability();
+  }
+
+  function updateAnswerKeyOptions() {
+    const keys = keysForSubject();
+    const current = keys.find(key => key.exam === selectedExam) || keys[0];
+    $("answerKeySelect").innerHTML = keys.length
+      ? keys.map(key => `
+          <option value="${escapeHtml(keySignature(key))}">
+            ${escapeHtml(key.examLabel)}
+          </option>`).join("")
+      : '<option value="">読み込み中…</option>';
+    if (current) $("answerKeySelect").value = keySignature(current);
+    updateAnswerKeyHelp();
+  }
+
+  async function loadAnswerKeys() {
+    try {
+      const response = await fetch("./answer-keys.json?v=1", {cache: "no-store"});
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      if (!data || !Array.isArray(data.keys) || !data.keys.length) {
+        throw new Error("正答データが空です");
+      }
+      answerKeys = data.keys;
+      updateAnswerKeyOptions();
+    } catch (error) {
+      answerKeys = [];
+      $("answerKeySelect").innerHTML = '<option value="">正答データを読み込めませんでした</option>';
+      $("answerKeyHelp").textContent = "ページを再読み込みしてください。";
+      updateStartAvailability();
+      console.error("answer key loading failed", error);
+    }
+  }
 
   function aiConfigured() {
     return Boolean(window.MarkReaderAI && window.MarkReaderAI.isConfigured());
@@ -35,11 +113,11 @@
   function updateAiAvailability() {
     const available = aiConfigured();
     $("aiOption").classList.toggle("disabled", !available);
-    if (subject !== "standard") $("startButton").disabled = !available;
     $("aiAvailability").className = `ai-availability ${available ? "ready" : "unavailable"}`;
     $("aiAvailability").textContent = available
       ? "AI読取を利用できます。解答欄の切抜きだけを送信します。"
       : "AI読取を準備できませんでした。ページを再読み込みしてください。";
+    updateStartAvailability();
   }
 
   function updateSubjectUi() {
@@ -51,8 +129,9 @@
       : `${TEMPLATES[subject].name} 第1面を撮影する`;
     $("setupHelp").textContent = TEMPLATES[subject].help;
     $("aiOption").classList.toggle("hidden", subject === "standard");
-    $("startButton").disabled = false;
+    updateAnswerKeyOptions();
     if (subject !== "standard") updateAiAvailability();
+    else updateStartAvailability();
   }
 
   document.querySelectorAll(".subject").forEach(button => {
@@ -64,7 +143,9 @@
   if (window.addEventListener) {
     window.addEventListener("mark-reader-ai-ready", updateAiAvailability);
   }
+  $("answerKeySelect").onchange = updateAnswerKeyHelp;
   updateSubjectUi();
+  loadAnswerKeys();
 
   $("startButton").onclick = begin;
   $("backButton").onclick = reset;
@@ -78,6 +159,11 @@
   };
 
   function begin() {
+    if (!selectedAnswerKey()) {
+      $("errorText").textContent = "採点する正答データを読み込めませんでした。ページを再読み込みしてください。";
+      show("errorCard");
+      return;
+    }
     if (subject !== "standard" && !aiConfigured()) {
       $("errorText").textContent = "数学のAI読取を準備できませんでした。通信状態を確認してページを再読み込みしてください。";
       show("errorCard");
@@ -87,6 +173,7 @@
     pageData = [];
     standardAnswers = [];
     selectedQuestions.clear();
+    clearGrade();
     showCapture();
   }
 
@@ -95,6 +182,7 @@
     pageData = [];
     standardAnswers = [];
     selectedQuestions.clear();
+    clearGrade();
     show("setupCard");
   }
 
@@ -737,6 +825,20 @@
     });
   }
 
+  function updateGradingHeader() {
+    const key = selectedAnswerKey();
+    $("selectedKeyLabel").textContent = key
+      ? `${key.examLabel}・${TEMPLATES[subject].name}`
+      : "正答データ未選択";
+  }
+
+  function clearGrade() {
+    const result = $("gradingResult");
+    if (!result) return;
+    result.className = "grading-result hidden";
+    result.innerHTML = "";
+  }
+
   function finishStandard() {
     const counts = countStates(standardAnswers);
     $("summary").textContent = `国語・通常型・読取済み ${counts.ok}問・要確認 ${counts.warn}問・未記入 ${counts.blank}問`;
@@ -758,8 +860,11 @@
         answer.value = select.value ? +select.value : "";
         answer.state = select.value ? "ok" : "blank";
         select.parentElement.className = `answer ${answer.state}`;
+        clearGrade();
       };
     });
+    updateGradingHeader();
+    clearGrade();
     renderPreviews();
     $("copyStatus").textContent = "";
     show("resultCard");
@@ -800,8 +905,11 @@
         answer.value = select.value;
         answer.state = select.value === "" ? "blank" : "ok";
         select.closest(".answer").className = `answer ${answer.state}`;
+        clearGrade();
       };
     });
+    updateGradingHeader();
+    clearGrade();
     renderPreviews();
     $("copyStatus").textContent = "";
     show("resultCard");
@@ -852,6 +960,7 @@
           $("copyStatus").textContent = "選択できる大問は3問です。";
           return;
         }
+        clearGrade();
         renderSelectionState();
       };
     });
@@ -875,6 +984,103 @@
         <img src="${page.preview}" alt="${subject === "standard" ? "検出結果" : `第${i + 1}面の検出結果`}">
       </figure>`).join("");
   }
+
+  function formatScore(value) {
+    const rounded = Math.round(Number(value || 0) * 10) / 10;
+    return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+  }
+
+  function displayGradeId(question) {
+    if (subject === "standard") return String(question.id || "");
+    const number = window.MarkReaderGrader.questionNumber(question);
+    const symbols = window.MarkReaderGrader.answerSymbols(question);
+    return number && symbols.length
+      ? `第${number}問 ${symbols.join("・")}`
+      : String(question.id || "");
+  }
+
+  function gradeStatus(row) {
+    if (!row.included) return {className: "excluded", text: "対象外"};
+    if (!row.answered) return {className: "missing", text: "未入力"};
+    if (row.earned === row.points) return {className: "correct", text: "○"};
+    if (row.earned > 0) return {className: "partial", text: "△"};
+    return {className: "wrong", text: "×"};
+  }
+
+  function renderGrade(result) {
+    const includedCount = result.rows.filter(row => row.included).length;
+    const groupHtml = result.groups.map(group => `
+      <div>
+        <span>${escapeHtml(group.group)}</span>
+        <b>${formatScore(group.earned)} / ${formatScore(group.possible)}</b>
+      </div>`).join("");
+    const rowsHtml = result.rows.map(row => {
+      const status = gradeStatus(row);
+      return `
+        <tr class="${status.className}">
+          <td>${escapeHtml(displayGradeId(row.question))}</td>
+          <td>${escapeHtml(row.got.join("") || "未入力")}</td>
+          <td>${escapeHtml(row.expected)}</td>
+          <td>${row.included
+            ? `${formatScore(row.earned)} / ${formatScore(row.points)}`
+            : "—"}</td>
+          <td>${status.text}</td>
+        </tr>`;
+    }).join("");
+    $("gradingResult").className = "grading-result";
+    $("gradingResult").innerHTML = `
+      <div class="score-summary">
+        <div class="score-main"><span>得点</span><b>${formatScore(result.score)} / ${formatScore(result.maxScore)}</b></div>
+        <div><span>正答項目</span><b>${result.correct} / ${includedCount}</b></div>
+        <div><span>誤答・部分点</span><b>${result.wrong + result.partial}</b></div>
+        <div><span>未入力</span><b>${result.missing}</b></div>
+      </div>
+      ${result.chosenGroups.length
+        ? `<p class="chosen-groups">採点対象：必答問題＋${result.chosenGroups.map(escapeHtml).join("・")}</p>`
+        : ""}
+      <div class="group-scores">${groupHtml}</div>
+      <details class="grade-details">
+        <summary>採点内訳を表示</summary>
+        <div class="grade-table-wrap">
+          <table class="grade-table">
+            <thead><tr><th>番号</th><th>自分</th><th>正解</th><th>得点</th><th>判定</th></tr></thead>
+            <tbody>${rowsHtml}</tbody>
+          </table>
+        </div>
+      </details>`;
+  }
+
+  function gradeAnswers() {
+    const key = selectedAnswerKey();
+    if (!key) {
+      $("gradingResult").className = "grading-result grade-error";
+      $("gradingResult").textContent = "正答データを選択できませんでした。";
+      return;
+    }
+    if (subject === "math2" && selectedQuestions.size !== 3) {
+      $("gradingResult").className = "grading-result grade-error";
+      $("gradingResult").textContent = "採点する大問を3問選択してください。";
+      return;
+    }
+    try {
+      const result = window.MarkReaderGrader.grade({
+        key,
+        mode: subject,
+        standardAnswers,
+        mathQuestions: pageData.flatMap(page => page.questions || []),
+        selectedQuestions
+      });
+      renderGrade(result);
+      $("gradingResult").scrollIntoView({behavior: "smooth", block: "nearest"});
+    } catch (error) {
+      $("gradingResult").className = "grading-result grade-error";
+      $("gradingResult").textContent = error && error.message
+        ? error.message
+        : "採点できませんでした。";
+    }
+  }
+
+  $("gradeButton").onclick = gradeAnswers;
 
   $("copyButton").onclick = async () => {
     let text;
