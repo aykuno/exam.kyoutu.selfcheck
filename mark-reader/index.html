@@ -11,13 +11,13 @@
   <header>
     <p class="eyebrow">共テ・センター自動採点サイト</p>
     <h1>マークシート自動読取</h1>
-    <span class="badge">実験版 v4</span>
+    <span class="badge">実験版 v5</span>
   </header>
 
   <main>
     <section class="notice">
       <strong>科目ごとに専用の読取方法を使います。</strong>
-      <span>黒鉛筆で記入し、用紙全体と黒い基準四角が入るように撮影してください。画像は端末内だけで処理されます。</span>
+      <span>国語・通常型は端末内だけで処理します。数学でAI照合を有効にした場合は、氏名欄などを除いた解答欄の切抜きだけをGoogle Geminiへ送信します。</span>
     </section>
 
     <section id="setupCard" class="card action-card">
@@ -32,6 +32,13 @@
         <button class="subject" data-subject="math2" type="button">
           <b>数学②</b><small>両面・選択問題</small>
         </button>
+      </div>
+      <div id="aiOption" class="ai-option hidden">
+        <label>
+          <input id="aiAssist" type="checkbox" checked>
+          <span><b>Geminiでも照合する</b><small>端末判定と一致した欄は確定し、不一致だけ要確認にします。</small></span>
+        </label>
+        <p id="aiAvailability" class="ai-availability" aria-live="polite"></p>
       </div>
       <button id="startButton" class="camera-button" type="button">国語・通常型を撮影する</button>
       <p id="setupHelp">国語で精度を確認できた従来の読取処理をそのまま使用します。</p>
@@ -73,6 +80,7 @@
         <span class="warn-dot"></span>要確認
         <span class="blank-dot"></span>未記入
       </div>
+      <p id="aiResultStatus" class="ai-result-status hidden" aria-live="polite"></p>
       <section id="selectionPanel" class="selection-panel hidden">
         <strong>数学② 選択した大問（3問）</strong>
         <p>記入状況から推定しています。違う場合だけ直してください。</p>
@@ -88,6 +96,8 @@
       </details>
     </section>
   </main>
+  <script src="./ai-config.js"></script>
+  <script type="module" src="./ai-reader.js"></script>
   <script src="./reader.js"></script>
 </body>
 </html>
