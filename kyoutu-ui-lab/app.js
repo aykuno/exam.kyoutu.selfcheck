@@ -211,7 +211,7 @@
     return {minus:joined.includes('-')||String(k.subject).includes('数学'),letters};
   }
   function renderNumberKeys(){
-    const tokens=tokenSet(currentKey),layout=['7','8','9','4','5','6','1','2','3'];
+    const tokens=tokenSet(currentKey),layout=['1','2','3','4','5','6','7','8','9'];
     let html=layout.map(token=>`<button class="key" type="button" data-token="${token}">${token}</button>`).join('');
     if(tokens.minus) html+=`<button class="key" type="button" data-token="-">－</button><button class="key" type="button" data-token="0">0</button>`;
     else html+=`<button class="key zero-wide" type="button" data-token="0">0</button>`;
@@ -409,7 +409,9 @@
       });
     }else rows.forEach(row=>{possible+=row.pts;score+=row.earn;if(row.earn===row.pts)correct++;if(!row.got.length)missing++;});
     const max=currentKey.maxScore==null?possible:Number(currentKey.maxScore),display=possible?score*max/possible:score,rate=possible?score/possible*100:0;
-    return {k:currentKey,rows,score,possible,okc:correct,missing,mx:max,disp:display,rate,sig:keySignature(currentKey),createdAt:new Date()};
+    const includedCount=rows.filter(row=>row.included).length;
+    const correctRate=includedCount?correct/includedCount*100:0;
+    return {k:currentKey,rows,score,possible,okc:correct,missing,mx:max,disp:display,rate,correctRate,sig:keySignature(currentKey),createdAt:new Date()};
   }
 
   function radarSvg(stats){
@@ -418,16 +420,16 @@
     const point=(i,ratio)=>{const angle=-Math.PI/2+Math.PI*2*i/n;return [cx+Math.cos(angle)*r*ratio,cy+Math.sin(angle)*r*ratio];};
     const grid=[.25,.5,.75,1].map(ratio=>`<polygon class="radarGrid" points="${stats.map((_,i)=>point(i,ratio).join(',')).join(' ')}"></polygon>`).join('');
     const axes=stats.map((stat,i)=>{const end=point(i,1),angle=-Math.PI/2+Math.PI*2*i/n,label=[cx+Math.cos(angle)*(r+26),cy+Math.sin(angle)*(r+26)];return `<line class="radarAxis" x1="${cx}" y1="${cy}" x2="${end[0]}" y2="${end[1]}"></line><text x="${label[0]}" y="${label[1]}" text-anchor="middle" dominant-baseline="middle" font-size="11" fill="#344054">${esc(stat.group)}</text>`;}).join('');
-    const scorePoints=stats.map((stat,i)=>point(i,stat.max?stat.earn/stat.max:0));
+    const scorePoints=stats.map((stat,i)=>point(i,stat.items?stat.correct/stat.items:0));
     return `<svg class="radarSvg" viewBox="0 0 320 320" role="img" aria-label="問題番号別正答率レーダーチャート">${grid}${axes}<polygon class="radarShape" points="${scorePoints.map(p=>p.join(',')).join(' ')}"></polygon>${scorePoints.map(p=>`<circle class="radarPoint" cx="${p[0]}" cy="${p[1]}" r="3"></circle>`).join('')}</svg>`;
   }
   function renderResult(result){
     const stats=sectionStats(result.rows),included=result.rows.filter(row=>row.included),average=statsFor(result.k),bad=included.filter(row=>!row.got.length||row.earn<row.pts);
     const averageValue=average&&average.averageScore!=null?Number(average.averageScore).toFixed(2):'—';
-    const sectionRows=stats.map(stat=>`<tr><td>${esc(stat.group)}</td><td>${Math.round(stat.earn*10)/10} / ${stat.max}</td><td>${stat.max?Math.round(stat.earn/stat.max*1000)/10:0}%</td><td>${stat.correct} / ${stat.items}</td><td>${stat.missing}</td></tr>`).join('');
+    const sectionRows=stats.map(stat=>`<tr><td>${esc(stat.group)}</td><td>${Math.round(stat.earn*10)/10} / ${stat.max}</td><td>${stat.items?Math.round(stat.correct/stat.items*1000)/10:0}%</td><td>${stat.correct} / ${stat.items}</td><td>${stat.missing}</td></tr>`).join('');
     const allRows=result.rows.map(row=>{
       const judge=!row.included?'—':row.earn===row.pts?'○':row.earn>0?'△':'×',judgeClass=judge==='○'?'ok':judge==='△'?'partial':judge==='×'?'ng':'';
-      return `<tr><td>${esc(displayId(row.q))}</td><td>${esc(row.got.join('')||'未入力')}</td><td>${esc(expText(row.q))}</td><td>${row.included?`${row.earn} / ${row.pts}`:'対象外'}</td><td class="${judgeClass}">${judge}</td><td>${statRateHtml(result.k,row.q)}</td><td>${esc(rowNote(result.k,row)||'—')}</td></tr>`;
+      return `<tr><td>${esc(displayId(row.q))}</td><td>${esc(row.got.join('')||'未入力')}</td><td>${esc(expText(row.q))}</td><td class="${judgeClass}">${judge}</td><td>${row.included?`${row.earn} / ${row.pts}`:'対象外'}</td><td>${statRateHtml(result.k,row.q)}</td><td>${esc(rowNote(result.k,row)||'—')}</td></tr>`;
     }).join('');
     const missed=bad.length?`<div class="missedPanel"><h3>間違えた問題・未入力</h3><div class="missedList">${bad.map(row=>`<div class="missedItem"><b>${esc(displayId(row.q))}　${!row.got.length?'未入力':row.earn>0?'△':'×'}</b>自分：${esc(row.got.join('')||'未入力')} / 正解：${esc(expText(row.q))}<br>得点：${row.earn} / ${row.pts}</div>`).join('')}</div></div>`:'<div class="missedOk">間違えた問題・未入力はありません</div>';
     $('result').innerHTML=`
@@ -437,11 +439,11 @@
       </div>
       <div class="resultSummaryCard">
         <div><div class="resultSummarySubject">${esc(result.k.subject)}</div><div class="resultSummaryMeta">${esc(examText(result.k))}</div><div class="avgScoreMetric"><span class="avgLabel">受験者平均点</span><b class="avgValue">${esc(averageValue)}</b></div></div>
-        <div class="resultSummaryStats"><div class="resultSummaryStat"><span>点数</span><b>${Math.round(result.disp*10)/10} / ${result.mx}</b></div><div class="resultSummaryStat"><span>得点率</span><b>${Math.round(result.rate*10)/10}%</b></div><div class="resultSummaryStat"><span>正答項目</span><b>${result.okc} / ${included.length}</b></div><div class="resultSummaryStat"><span>未入力</span><b>${result.missing}</b></div></div>
+        <div class="resultSummaryStats"><div class="resultSummaryStat"><span>点数</span><b>${Math.round(result.disp*10)/10} / ${result.mx}</b></div><div class="resultSummaryStat"><span>正答率</span><b>${Math.round(result.correctRate*10)/10}%</b></div><div class="resultSummaryStat"><span>正答項目</span><b>${result.okc} / ${included.length}</b></div><div class="resultSummaryStat"><span>未入力</span><b>${result.missing}</b></div></div>
       </div>
-      ${stats.length?`<div class="radarPanel"><h3>問題番号別正答率</h3><div class="radarWrap">${radarSvg(stats)}<div class="sectionStats"><table><thead><tr><th>問題番号</th><th>得点</th><th>得点率</th><th>正答項目</th><th>未入力</th></tr></thead><tbody>${sectionRows}</tbody></table></div></div></div>`:''}
+      ${stats.length?`<div class="radarPanel"><h3>問題番号別正答率</h3><div class="radarWrap">${radarSvg(stats)}<div class="sectionStats"><table><thead><tr><th>問題番号</th><th>得点</th><th>正答率</th><th>正答項目</th><th>未入力</th></tr></thead><tbody>${sectionRows}</tbody></table></div></div></div>`:''}
       <h2 class="table-title">全問正誤</h2><p class="tableScrollNotice">表は右にスクロールできます</p>
-      <div class="resultTableWrap"><table class="resultTable"><thead><tr><th>番号</th><th>自分</th><th>正解</th><th>得点</th><th>判定</th><th>受験者正答率</th><th>注記</th></tr></thead><tbody>${allRows}</tbody></table></div>
+      <div class="resultTableWrap"><table class="resultTable"><thead><tr><th>番号</th><th>自分</th><th>正解</th><th>判定</th><th>得点</th><th>受験者正答率</th><th>注記</th></tr></thead><tbody>${allRows}</tbody></table></div>
       ${missed}
       <div class="result-bottom"><button type="button" id="editBottom">解答を修正</button><button type="button" id="anotherSubject">別の科目を選ぶ</button></div>`;
     $('editFromResult').onclick=$('editBottom').onclick=()=>showScreen('entry');
