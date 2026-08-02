@@ -45,7 +45,7 @@
       </article>
 
       <section class="selection-card">
-        <h2>新しく採点する</h2>
+        <h2>番号を入力して採点</h2>
         <div class="select-grid">
           <label>年度
             <select id="yearSelect" disabled><option>読み込み中...</option></select>
@@ -66,8 +66,17 @@
         </div>
         <div class="selection-footer">
           <p><span id="questionCount">—項目</span><span id="maxScore">—点</span><span>端末内に自動保存</span></p>
-          <button class="primary-button" id="startButton" type="button" disabled>この科目で入力を始める</button>
+          <button class="primary-button" id="startButton" type="button" disabled>この科目で番号を入力</button>
         </div>
+      </section>
+      <section class="photo-entry-card">
+        <div class="photo-entry-icon" aria-hidden="true">▣</div>
+        <div class="photo-entry-copy">
+          <span class="photo-entry-label">未登録の模試・試験にも対応</span>
+          <h2>答案用紙と解答を撮影して採点</h2>
+          <p>答案用紙を撮影して読取番号を確認した後、解答・配点一覧を撮影します。登録済みの正解データは使いません。</p>
+        </div>
+        <a class="photo-entry-button" href="photo/">カメラ採点を開く</a>
       </section>
       <p class="load-error" id="loadError" hidden></p>
     </section>
@@ -138,6 +147,6 @@
   </div>
 
   <script src="app.js"></script>
-  <script src="../pdf_export_v160.js"></script>
+  <script src="pdf-export.js"></script>
 </body>
 </html>
