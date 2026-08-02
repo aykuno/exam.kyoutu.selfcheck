@@ -204,7 +204,10 @@
       if(Array.isArray(q.conditionalCorrect)) q.conditionalCorrect.forEach(c=>values.push(...(c.answers||[])));
     });
     const joined=values.join('').normalize('NFKC').toUpperCase();
-    const letters=[...new Set(joined.match(/[A-Z]/g)||[])].sort();
+    const usedLetters=[...new Set(joined.match(/[A-Z]/g)||[])].sort();
+    const alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const highest=usedLetters.length?Math.max(2,...usedLetters.map(letter=>alphabet.indexOf(letter))):-1;
+    const letters=highest>=0?alphabet.slice(0,highest+1):[];
     return {minus:joined.includes('-')||String(k.subject).includes('数学'),letters};
   }
   function renderNumberKeys(){
