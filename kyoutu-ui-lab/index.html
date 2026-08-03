@@ -6,8 +6,8 @@
   <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#ffffff">
   <title>共通テスト・センター試験 自動採点｜UI検証版</title>
-  <link rel="stylesheet" href="style.css?v=20260803-scoringmodes1">
-  <link rel="stylesheet" href="photo/style.css?v=20260803-scoringmodes1">
+  <link rel="stylesheet" href="style.css?v=20260803-unifiedresults1">
+  <link rel="stylesheet" href="photo/style.css?v=20260803-unifiedresults1">
 </head>
 <body>
   <header class="site-header">
@@ -35,25 +35,6 @@
         <p>登録済みの試験で採点するか、自分の持つ解答と写真で照合するかを選べます。</p>
       </div>
 
-      <article class="resume-card" id="resumeCard" hidden>
-        <div>
-          <span class="resume-label">前回の続きから</span>
-          <strong id="resumeSubject"></strong>
-          <p id="resumeMeta"></p>
-          <div class="mini-progress"><span id="resumeBar"></span></div>
-        </div>
-        <button class="primary-button" id="manualResumeButton" type="button">入力を再開</button>
-      </article>
-
-      <section class="custom-compare-card">
-        <div>
-          <span class="custom-compare-label">登録のない試験はこちら</span>
-          <h2>自分の持つ解答と照合する</h2>
-          <p>答案用紙と、手元の解答・配点一覧を撮影して採点します。</p>
-        </div>
-        <button class="secondary-action-button" id="customCompareButton" type="button">写真同士で採点</button>
-      </section>
-
       <section class="selection-card">
         <h2>登録済みの試験で採点</h2>
         <div class="select-grid">
@@ -78,6 +59,15 @@
           <p><span id="questionCount">—項目</span><span id="maxScore">—点</span><span>端末内に自動保存</span></p>
           <button class="primary-button" id="manualStartButton" type="button" disabled>この科目で採点する</button>
         </div>
+      </section>
+
+      <section class="custom-compare-card">
+        <div>
+          <span class="custom-compare-label">登録のない試験はこちら</span>
+          <h2>自分の持つ解答と照合する</h2>
+          <p>①答案用紙、②手元の解答・配点一覧の順に撮影し、写真同士で採点します。</p>
+        </div>
+        <button class="secondary-action-button" id="customCompareButton" type="button">写真で照合する</button>
       </section>
       <p class="load-error" id="loadError" hidden></p>
     </section>
@@ -186,17 +176,17 @@
         <section class="custom-template-picker hidden" id="customTemplatePicker">
           <h3>答案用紙の形式を選ぶ</h3>
           <div class="subject-buttons">
-            <button class="subject selected" type="button" data-subject="standard"><b>国語・通常型</b><small>1〜60・片面</small></button>
-            <button class="subject" type="button" data-subject="math1"><b>数学①</b><small>第1面＋第2面</small></button>
-            <button class="subject" type="button" data-subject="math2"><b>数学②</b><small>両面・選択問題</small></button>
+            <button class="subject selected" type="button" data-subject="standard"><b>国語・通常型</b><small>国語など／1〜60の番号が並ぶ片面の答案用紙</small></button>
+            <button class="subject" type="button" data-subject="math1"><b>数学①</b><small>数学ⅠAなど／第1面＋第2面の答案用紙</small></button>
+            <button class="subject" type="button" data-subject="math2"><b>数学②</b><small>数学ⅡBCなど／両面・選択問題ありの答案用紙</small></button>
           </div>
         </section>
         <section class="photo-to-photo-intro" id="photoToPhotoIntro">
-          <h3>写真採点の流れ</h3>
+          <h3>撮影順：答案用紙 → 解答・配点一覧</h3>
           <ol>
-            <li>答案用紙を撮影して、読取番号を確認</li>
-            <li>解答・配点一覧を撮影して、正解と配点を確認</li>
-            <li>2枚の読取結果を照合して採点</li>
+            <li><strong>先に答案用紙</strong>を撮影して、自分の解答番号を確認</li>
+            <li><strong>次に解答・配点一覧</strong>を撮影して、正解と配点を確認</li>
+            <li>2つの読取結果を照合して採点</li>
           </ol>
           <p>登録済み正答データは使いません。解答写真に配点がない場合は、正誤と正解数まで表示します。</p>
         </section>
@@ -223,10 +213,10 @@
           <p>撮影後に解像度・明るさ・ぼけを端末内で確認します。写真自体は保存しません。</p>
         </section>
         <label id="startButton" class="camera-button">
-          <span id="startButtonText">国語・通常型を撮影する</span>
+          <span id="startButtonText">国語・通常型の答案用紙を撮影する</span>
           <input id="initialFileInput" type="file" accept="image/*" capture="environment">
         </label>
-        <p id="setupHelp">国語で精度を確認できた従来の読取処理をそのまま使用します。</p>
+        <p id="setupHelp">「国語・通常型」は、国語などで使う、1枚に1〜60の解答番号欄が並ぶ片面式の答案用紙です。</p>
       </section>
 
       <section id="captureCard" class="card action-card hidden">
@@ -310,7 +300,6 @@
             <button id="gradeButton" class="grade-button hidden" type="button">再採点する</button>
           </div>
           <div id="gradingResult" class="grading-result hidden" aria-live="polite"></div>
-          <button id="pdfButton" class="pdf-button hidden" type="button">採点結果PDFを保存</button>
         </section>
         <button id="copyButton" class="primary" type="button">確認した解答番号をコピー</button>
         <p id="copyStatus" class="copy-status"></p>
@@ -337,12 +326,11 @@
     </div>
   </div>
 
-  <script src="app.js?v=20260803-scoringmodes1"></script>
-  <script src="pdf-export.js?v=20260803-scoringmodes1"></script>
-  <script src="photo/ai-config.js?v=20260803-scoringmodes1"></script>
-  <script type="module" src="photo/ai-reader.js?v=20260803-scoringmodes1"></script>
-  <script src="photo/grader.js?v=20260803-scoringmodes1"></script>
-  <script src="photo/pdf-export.js?v=20260803-scoringmodes1"></script>
-  <script src="photo/reader.js?v=20260803-scoringmodes1"></script>
+  <script src="app.js?v=20260803-unifiedresults1"></script>
+  <script src="pdf-export.js?v=20260803-unifiedresults1"></script>
+  <script src="photo/ai-config.js?v=20260803-unifiedresults1"></script>
+  <script type="module" src="photo/ai-reader.js?v=20260803-unifiedresults1"></script>
+  <script src="photo/grader.js?v=20260803-unifiedresults1"></script>
+  <script src="photo/reader.js?v=20260803-unifiedresults1"></script>
 </body>
 </html>

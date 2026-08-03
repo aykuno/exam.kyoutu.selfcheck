@@ -6,7 +6,7 @@
 (function(){
   'use strict';
 
-  const VERSION = 'v177-footer10mm-radar435-judge-center';
+  const VERSION = 'v178-unified-results-judge-score-center';
   const PAGE_W = 1240;
   const PAGE_H = 1754;
   const M_LEFT = 62;
@@ -84,9 +84,9 @@
       '.resultTable th:nth-child(1),.resultTable td:nth-child(1){width:215px!important;white-space:nowrap!important;word-break:keep-all!important;overflow-wrap:normal!important}',
       '.resultTable th:nth-child(2),.resultTable td:nth-child(2){width:110px!important}',
       '.resultTable th:nth-child(3),.resultTable td:nth-child(3){width:250px!important}',
-      '.resultTable th:nth-child(4),.resultTable td:nth-child(4){width:95px!important}',
-      '.resultTable th:nth-child(5),.resultTable td:nth-child(5){width:70px!important;text-align:center!important;padding-left:0!important;padding-right:0!important}',
-      '.resultTable td:nth-child(5){font-size:22px!important;line-height:1!important;font-weight:900!important;text-align:center!important}',
+      '.resultTable th:nth-child(4),.resultTable td:nth-child(4){width:70px!important;text-align:center!important;padding-left:0!important;padding-right:0!important}',
+      '.resultTable td:nth-child(4){font-size:22px!important;line-height:1!important;font-weight:900!important;vertical-align:middle!important}',
+      '.resultTable th:nth-child(5),.resultTable td:nth-child(5){width:95px!important;text-align:center!important;padding-left:0!important;padding-right:0!important;vertical-align:middle!important}',
       '.resultTable th:nth-child(6),.resultTable td:nth-child(6){width:115px!important}',
       '.resultTable th:nth-child(7),.resultTable td:nth-child(7){width:auto!important;font-size:12px!important;color:#647086!important}',
       '.ok{color:#137333!important;font-weight:900!important}.partial{color:#8a5b00!important;font-weight:900!important}.ng{color:#b3261e!important;font-weight:900!important}',
@@ -625,7 +625,7 @@ if(true){
   function stripHtml(s){ const d=document.createElement('div'); d.innerHTML=String(s||''); return txt(d); }
   function rowToCells(data, r){
     const judge = !r.included ? '—' : (r.earn === r.pts ? '○' : (r.earn > 0 ? '△' : '×'));
-    return [displayId(r.q), (r.got || []).join('') || '未入力', expText(r.q), judge, r.included ? (r.earn + ' / ' + r.pts) : '対象外', statRate(data, r.q), rowNote(data, r) || '—'];
+    return [displayId(r.q), (r.got || []).join('') || '未入力', expText(r.q), judge, r.included ? (data.pointsAvailable===false?'—':(r.earn + ' / ' + r.pts)) : '対象外', statRate(data, r.q), rowNote(data, r) || '—'];
   }
 
   function drawFittedLine(ctx, text, x, y, maxWidth, maxSize, minSize, weight, color){
@@ -674,6 +674,7 @@ if(true){
   function drawRadarPanel(ctx, data, y){
     const stats = getStatsFromRows(data);
     if(!stats.length) return y;
+    const pointsAvailable = data.pointsAvailable !== false;
     const x = M_LEFT, w = PAGE_W-M_LEFT-M_RIGHT, h = 435;
     fillRound(ctx, x, y, w, h, 18, '#fbfcff', LINE);
     drawWrapped(ctx, '問題番号別正答率', x+16, y+16, 350, 21, '900', TEXT, 26, 1);
@@ -694,11 +695,11 @@ if(true){
 
     const tx = x + 485, ty = y + 80;
     const cols = [150,150,120,120,70];
-    const headers = ['問題番号','得点','正答率','正答項目','未入力'];
+    const headers = ['問題番号',pointsAvailable?'得点':'正解数','正答率','正答項目','未入力'];
     drawTableHeader(ctx, tx, ty, cols, headers, 26, 13);
     let yy = ty + 26;
     stats.forEach(s=>{
-      const row = [s.group, (Math.round(s.earn*10)/10)+' / '+s.max, s.items?Math.round(s.correct/s.items*1000)/10+'%':'0%', s.correct+' / '+s.items, String(s.missing)];
+      const row = [s.group, pointsAvailable?(Math.round(s.earn*10)/10)+' / '+s.max:s.correct+' / '+s.items, s.items?Math.round(s.correct/s.items*1000)/10+'%':'0%', s.correct+' / '+s.items, String(s.missing)];
       drawSimpleRow(ctx, tx, yy, cols, row, 31, 15);
       yy += 31;
     });
@@ -732,10 +733,10 @@ if(true){
     cells.forEach((c,i)=>{ const maxLines = i===0 ? 1 : (i===6 ? 3 : 2); const h = textHeight(ctx, c, cols[i]-16, i===3?26:14, i===3?26:18, maxLines) + 12; if(h>max) max=h; });
     return Math.min(Math.max(max, 30), 76);
   }
-  function drawResultTableHeader(ctx, y, continued){
+  function drawResultTableHeader(ctx, y, continued, pointsAvailable){
     if(continued){ drawWrapped(ctx, '全問一覧（続き）', M_LEFT, y, 360, 20, '900', TEXT, 26, 1); y += 34; }
     const cols=[215,110,250,70,95,115,PAGE_W-M_LEFT-M_RIGHT-215-110-250-70-95-115];
-    drawTableHeader(ctx, M_LEFT, y, cols, ['番号','自分','正解','判定','得点','受験者正答率','注記'], 30, 13);
+    drawTableHeader(ctx, M_LEFT, y, cols, ['番号','自分','正解','判定',pointsAvailable===false?'配点':'得点','受験者正答率','注記'], 30, 13);
     return {y:y+30, cols};
   }
   function drawResultRow(ctx, y, cols, cells, h){
@@ -746,12 +747,12 @@ if(true){
       const weight = i===3 ? '900' : '500';
       const lh = i===3 ? 26 : (i===6?17:18);
       const mx = i===6 ? 3 : 2;
-      if(i===3){
+      if(i===3 || i===4){
         setFont(ctx, size, weight, color);
         ctx.save();
         ctx.textAlign = 'center';
-        ctx.textBaseline = 'alphabetic';
-        ctx.fillText(cell, x + cols[i] / 2, y + Math.max(21, Math.round((h + size * 0.72) / 2)));
+        ctx.textBaseline = 'middle';
+        ctx.fillText(cell, x + cols[i] / 2, y + h / 2);
         ctx.restore();
       }
       else drawWrapped(ctx, cell, x+8, y+6, cols[i]-16, size, weight, color, lh, i===0 ? 1 : mx);
@@ -780,7 +781,7 @@ if(true){
       const judge = !r.got.length ? '未入力' : (r.earn>0?'△':'×');
       drawWrapped(ctx, displayId(r.q)+' '+judge, x+8, y+7, cardW-16, 13, '900', judge==='△'?WARN:BAD, 17, 1);
       drawWrapped(ctx, '自分：'+((r.got||[]).join('')||'未入力')+' / 正解：'+expText(r.q), x+8, y+25, cardW-16, 11, '600', TEXT, 14, 1);
-      drawWrapped(ctx, '得点：'+r.earn+' / '+r.pts, x+8, y+39, cardW-16, 11, '600', TEXT, 14, 1);
+      if(data.pointsAvailable!==false) drawWrapped(ctx, '得点：'+r.earn+' / '+r.pts, x+8, y+39, cardW-16, 11, '600', TEXT, 14, 1);
       x += cardW + gap;
       if((idx+1)%cardsPerRow===0){ x = panelX+16; y += cardH+gap; }
     });
@@ -792,12 +793,12 @@ if(true){
     p.y = drawHeader(ctx, data, p.y);
     p.y = drawSummary(ctx, data, p.y);
     p.y = drawRadarPanel(ctx, data, p.y);
-    let th = drawResultTableHeader(ctx, p.y, false); p.y = th.y; let cols=th.cols;
+    let th = drawResultTableHeader(ctx, p.y, false, data.pointsAvailable); p.y = th.y; let cols=th.cols;
     const rows = (data.rows || []).filter(r => r.included !== false);
     rows.forEach(r=>{
       const cells = rowToCells(data, r);
       const h = rowHeight(ctx, cells, cols);
-      if(p.y + h > CONTENT_BOTTOM){ p = addPage(pages); ctx = p.ctx; th = drawResultTableHeader(ctx, M_TOP, true); p.y = th.y; cols = th.cols; }
+      if(p.y + h > CONTENT_BOTTOM){ p = addPage(pages); ctx = p.ctx; th = drawResultTableHeader(ctx, M_TOP, true, data.pointsAvailable); p.y = th.y; cols = th.cols; }
       drawResultRow(ctx, p.y, cols, cells, h); p.y += h;
     });
     drawMissedPanel(pages, data);

@@ -62,12 +62,16 @@
   function groupsFor(k){ return [...new Set((k.questions || []).map(q=>q.group || '未分類'))]; }
   function qKey(q){ return norm(q.group || q.problemNumber) + '||' + norm(q.id); }
   function keySignature(k){ return k ? [String(k.year),k.exam,k.subject].join('||') : ''; }
-  function examText(k){ return `${k.year}年度 ${EXAM_LABELS[k.exam] || k.exam}`; }
+  function examText(k){
+    const year=k&&k.year?`${k.year}年度 `:'';
+    const exam=k?(EXAM_LABELS[k.exam]||k.exam||''):'';
+    return `${year}${exam}`.trim();
+  }
   function answerFor(q){ return answers[qKey(q)] || []; }
   function displayId(q){
     const id = String(q.id || '');
     const group = normalizedGroup(q.group || q.problemNumber);
-    if(!group || id.includes(group) || /^第\s*\d+\s*問/.test(id)) return id;
+    if(!group || group==='全体' || group==='未分類' || id.includes(group) || /^第\s*\d+\s*問/.test(id)) return id;
     return `${group}-${id}`;
   }
   function groupSortValue(group){
@@ -117,7 +121,6 @@
       keys=[...mainKeys,...mockKeys].map(normalizeKey);
       if(statsResponse.ok) statistics=await statsResponse.json();
       setupSelectors();
-      renderResume();
     }catch(error){
       $('loadError').hidden=false;
       $('loadError').textContent='正解データの読み込みに失敗しました。ページを再読み込みしてください。 '+error.message;
@@ -230,18 +233,6 @@
     const context=photoFlowContext();
     showScreen(context&&context.mode==='compare'?'home':'method');
   }
-  function renderResume(){
-    if(!keys.length) return;
-    const store=readStore(),record=store.last&&(store.records||{})[store.last],k=keys.find(item=>keySignature(item)===store.last);
-    if(!record||!k){ $('resumeCard').hidden=true; return; }
-    const entered=Object.values(record.answers||{}).filter(v=>Array.isArray(v)&&v.length).length;
-    $('resumeCard').hidden=false;
-    $('resumeSubject').textContent=k.subject;
-    $('resumeMeta').textContent=`${examText(k)}　${entered} / ${k.questions.length}項目入力`;
-    $('resumeBar').style.width=`${k.questions.length?entered/k.questions.length*100:0}%`;
-    $('manualResumeButton').dataset.signature=store.last;
-  }
-
   function startKey(k){
     if(!k) return;
     currentKey=k;
@@ -253,8 +244,6 @@
     renderEntry();
     showScreen('entry');
   }
-  function resumeLast(){ startKey(keys.find(k=>keySignature(k)===$('manualResumeButton').dataset.signature)); }
-
   function tokenSet(k){
     const values=[];
     (k.questions||[]).forEach(q=>{
@@ -484,30 +473,68 @@
     return `<svg class="radarSvg" viewBox="0 0 320 320" role="img" aria-label="問題番号別正答率レーダーチャート">${grid}${axes}<polygon class="radarShape" points="${scorePoints.map(p=>p.join(',')).join(' ')}"></polygon>${scorePoints.map(p=>`<circle class="radarPoint" cx="${p[0]}" cy="${p[1]}" r="3"></circle>`).join('')}</svg>`;
   }
   function renderResult(result){
-    const stats=sectionStats(result.rows),included=result.rows.filter(row=>row.included),average=statsFor(result.k),bad=included.filter(row=>!row.got.length||row.earn<row.pts);
+    const stats=sectionStats(result.rows),included=result.rows.filter(row=>row.included),average=statsFor(result.k),bad=included.filter(row=>!row.got.length||row.earn<row.pts),photo=result.inputMode==='photo',pointsAvailable=result.pointsAvailable!==false;
     const averageValue=average&&average.averageScore!=null?Number(average.averageScore).toFixed(2):'—';
-    const sectionRows=stats.map(stat=>`<tr><td>${esc(stat.group)}</td><td>${Math.round(stat.earn*10)/10} / ${stat.max}</td><td>${stat.items?Math.round(stat.correct/stat.items*1000)/10:0}%</td><td>${stat.correct} / ${stat.items}</td><td>${stat.missing}</td></tr>`).join('');
+    const sectionRows=stats.map(stat=>`<tr><td>${esc(stat.group)}</td><td>${pointsAvailable?`${Math.round(stat.earn*10)/10} / ${stat.max}`:`${stat.correct} / ${stat.items}`}</td><td>${stat.items?Math.round(stat.correct/stat.items*1000)/10:0}%</td><td>${stat.correct} / ${stat.items}</td><td>${stat.missing}</td></tr>`).join('');
     const allRows=result.rows.map(row=>{
       const judge=!row.included?'—':row.earn===row.pts?'○':row.earn>0?'△':'×',judgeClass=judge==='○'?'ok':judge==='△'?'partial':judge==='×'?'ng':'';
-      return `<tr><td>${esc(displayId(row.q))}</td><td>${esc(row.got.join('')||'未入力')}</td><td>${esc(expText(row.q))}</td><td class="${judgeClass}">${judge}</td><td>${row.included?`${row.earn} / ${row.pts}`:'対象外'}</td><td>${statRateHtml(result.k,row.q)}</td><td>${esc(rowNote(result.k,row)||'—')}</td></tr>`;
+      return `<tr><td>${esc(displayId(row.q))}</td><td>${esc(row.got.join('')||'未入力')}</td><td>${esc(expText(row.q))}</td><td class="${judgeClass}">${judge}</td><td>${row.included?(pointsAvailable?`${row.earn} / ${row.pts}`:'—'):'対象外'}</td><td>${statRateHtml(result.k,row.q)}</td><td>${esc(rowNote(result.k,row)||'—')}</td></tr>`;
     }).join('');
-    const missed=bad.length?`<div class="missedPanel"><h3>間違えた問題・未入力</h3><div class="missedList">${bad.map(row=>`<div class="missedItem"><b>${esc(displayId(row.q))}　${!row.got.length?'未入力':row.earn>0?'△':'×'}</b>自分：${esc(row.got.join('')||'未入力')} / 正解：${esc(expText(row.q))}<br>得点：${row.earn} / ${row.pts}</div>`).join('')}</div></div>`:'<div class="missedOk">間違えた問題・未入力はありません</div>';
+    const missed=bad.length?`<div class="missedPanel"><h3>間違えた問題・未入力</h3><div class="missedList">${bad.map(row=>`<div class="missedItem"><b>${esc(displayId(row.q))}　${!row.got.length?'未入力':row.earn>0?'△':'×'}</b>自分：${esc(row.got.join('')||'未入力')} / 正解：${esc(expText(row.q))}${pointsAvailable?`<br>得点：${row.earn} / ${row.pts}`:''}</div>`).join('')}</div></div>`:'<div class="missedOk">間違えた問題・未入力はありません</div>';
+    const editLabel=photo?'読取結果を修正':'解答を修正';
     $('result').innerHTML=`
       <div class="result-action-top">
         <div class="resultActionBar"><div class="resultActionLabel">採点結果</div><div class="resultActionIdentity"><span class="resultExamLine">${esc(examText(result.k))}</span><span class="resultSubjectLine">${esc(result.k.subject)}</span></div></div>
-        <div class="result-buttons"><button type="button" id="editFromResult">解答を修正</button><button class="pdf-button" type="button" id="exportPdfResult">PDF出力（A4）</button></div>
+        <div class="result-buttons"><button type="button" id="editFromResult">${editLabel}</button><button class="pdf-button" type="button" id="exportPdfResult">PDF出力（A4）</button></div>
       </div>
       <div class="resultSummaryCard">
-        <div><div class="resultSummarySubject">${esc(result.k.subject)}</div><div class="resultSummaryMeta">${esc(examText(result.k))}</div><div class="avgScoreMetric"><span class="avgLabel">受験者平均点</span><b class="avgValue">${esc(averageValue)}</b></div></div>
-        <div class="resultSummaryStats"><div class="resultSummaryStat"><span>点数</span><b>${Math.round(result.disp*10)/10} / ${result.mx}</b></div><div class="resultSummaryStat"><span>正答率</span><b>${Math.round(result.correctRate*10)/10}%</b></div><div class="resultSummaryStat"><span>正答項目</span><b>${result.okc} / ${included.length}</b></div><div class="resultSummaryStat"><span>未入力</span><b>${result.missing}</b></div></div>
+        <div><div class="resultSummarySubject">${esc(result.k.subject)}</div><div class="resultSummaryMeta">${esc(examText(result.k))}</div>${averageValue!=='—'?`<div class="avgScoreMetric"><span class="avgLabel">受験者平均点</span><b class="avgValue">${esc(averageValue)}</b></div>`:''}</div>
+        <div class="resultSummaryStats"><div class="resultSummaryStat"><span>${pointsAvailable?'点数':'正解数'}</span><b>${pointsAvailable?`${Math.round(result.disp*10)/10} / ${result.mx}`:`${result.okc} / ${included.length}`}</b></div><div class="resultSummaryStat"><span>正答率</span><b>${Math.round(result.correctRate*10)/10}%</b></div><div class="resultSummaryStat"><span>正答項目</span><b>${result.okc} / ${included.length}</b></div><div class="resultSummaryStat"><span>未入力</span><b>${result.missing}</b></div></div>
       </div>
-      ${stats.length?`<div class="radarPanel"><h3>問題番号別正答率</h3><div class="radarWrap">${radarSvg(stats)}<div class="sectionStats"><table><thead><tr><th>問題番号</th><th>得点</th><th>正答率</th><th>正答項目</th><th>未入力</th></tr></thead><tbody>${sectionRows}</tbody></table></div></div></div>`:''}
+      ${stats.length?`<div class="radarPanel"><h3>問題番号別正答率</h3><div class="radarWrap">${radarSvg(stats)}<div class="sectionStats"><table><thead><tr><th>問題番号</th><th>${pointsAvailable?'得点':'正解数'}</th><th>正答率</th><th>正答項目</th><th>未入力</th></tr></thead><tbody>${sectionRows}</tbody></table></div></div></div>`:''}
       <h2 class="table-title">全問正誤</h2><p class="tableScrollNotice">表は右にスクロールできます</p>
-      <div class="resultTableWrap"><table class="resultTable"><thead><tr><th>番号</th><th>自分</th><th>正解</th><th>判定</th><th>得点</th><th>受験者正答率</th><th>注記</th></tr></thead><tbody>${allRows}</tbody></table></div>
+      <div class="resultTableWrap"><table class="resultTable"><thead><tr><th>番号</th><th>自分</th><th>正解</th><th>判定</th><th>${pointsAvailable?'得点':'配点'}</th><th>受験者正答率</th><th>注記</th></tr></thead><tbody>${allRows}</tbody></table></div>
       ${missed}
-      <div class="result-bottom"><button type="button" id="editBottom">解答を修正</button><button type="button" id="anotherSubject">別の科目を選ぶ</button></div>`;
-    $('editFromResult').onclick=$('editBottom').onclick=()=>showScreen('entry');
+      <div class="result-bottom"><button type="button" id="editBottom">${editLabel}</button><button type="button" id="anotherSubject">別の科目を選ぶ</button></div>`;
+    $('editFromResult').onclick=$('editBottom').onclick=()=>photo?returnToPhotoReview():showScreen('entry');
     $('anotherSubject').onclick=()=>showScreen('home');
+  }
+
+  function returnToPhotoReview(){
+    if(window.UILabPhotoFlow&&typeof window.UILabPhotoFlow.showReview==='function') window.UILabPhotoFlow.showReview();
+    showScreen('photo');
+  }
+
+  function presentPhotoGrade(photoGrade,context){
+    if(!photoGrade||!Array.isArray(photoGrade.rows)) throw new Error('写真採点結果を表示できません。');
+    const sourceKey=deepClone(photoGrade.key||{}),ctx=context||{};
+    const k=normalizeKey(sourceKey);
+    k.year=ctx.year||k.year||'';
+    k.exam=ctx.mode==='registered'?(ctx.exam||k.exam):'自分の持つ解答と照合';
+    k.subject=ctx.subject||k.subject||ctx.templateLabel||'写真採点';
+    k.maxScore=photoGrade.maxScore;
+    const rows=photoGrade.rows.map((row,i)=>{
+      const q=deepClone(row.question||{});
+      q.group=normalizedGroup(q.group||q.problemNumber||'全体');
+      q.problemNumber=q.group;
+      if(ctx.mode!=='registered'&&!q.note&&q.photoConfidence){
+        q.note=({high:'AI確信度：高',medium:'AI確信度：中',low:'AI確信度：低'})[q.photoConfidence]||'';
+      }
+      return {q,i,got:(row.got||[]).map(norm),earn:Number(row.earned||0),pts:Number(row.points||0),included:row.included!==false};
+    });
+    const included=rows.filter(row=>row.included),correct=included.filter(row=>row.earn===row.pts).length,possible=included.reduce((sum,row)=>sum+row.pts,0);
+    const result={
+      k,rows,score:Number(photoGrade.rawScore||0),possible,okc:correct,missing:Number(photoGrade.missing||0),
+      mx:Number(photoGrade.maxScore||possible),disp:Number(photoGrade.score||0),
+      rate:possible?Number(photoGrade.rawScore||0)/possible*100:0,
+      correctRate:included.length?correct/included.length*100:0,
+      sig:ctx.signature||`photo||${Date.now()}`,createdAt:new Date(),inputMode:'photo',
+      pointsAvailable:photoGrade.pointsAvailable!==false,photoContext:{...ctx}
+    };
+    lastResult=result;
+    window.__lastGrade=result;
+    renderResult(result);
+    showScreen('result');
   }
   function requestGrade(){
     const missing=currentKey.questions.filter(q=>!answerFor(q).length).length;
@@ -567,7 +594,7 @@
     $('headerBack').hidden=name==='home';
     updateStepLabels(name);
     updateSteps(name==='home'?1:name==='method'||name==='entry'?2:name==='photo'&&window.__photoFlowStage==='result'?3:name==='photo'?2:3);
-    if(name==='home'){renderResume();renderSubjectPreview();}
+    if(name==='home'){renderSubjectPreview();}
     if(name==='method'){renderMethodSelection();}
     if(name==='entry'){renderEntry();requestAnimationFrame(updateKeypadHeight);}
     window.scrollTo({top:0,behavior:'instant'});
@@ -577,7 +604,7 @@
     if(push&&history.state&&history.state.screen!==name) history.pushState({screen:name},'',screenUrl(name));
   }
   function backOne(){
-    if(currentScreen==='result') showScreen('entry');
+    if(currentScreen==='result') lastResult&&lastResult.inputMode==='photo'?returnToPhotoReview():showScreen('entry');
     else if(currentScreen==='photo') backFromPhoto();
     else if(currentScreen==='entry') showScreen('method');
     else if(currentScreen==='method') showScreen('home');
@@ -593,7 +620,7 @@
 
   function bind(){
     $('yearSelect').onchange=refreshExamOptions;$('examSelect').onchange=refreshSubjectOptions;$('subjectSelect').onchange=renderSubjectPreview;
-    $('manualStartButton').onclick=selectGradingSubject;$('manualResumeButton').onclick=resumeLast;$('customCompareButton').onclick=openCustomCompare;$('brandHome').onclick=()=>showScreen('home');
+    $('manualStartButton').onclick=selectGradingSubject;$('customCompareButton').onclick=openCustomCompare;$('brandHome').onclick=()=>showScreen('home');
     $('methodBack').onclick=()=>showScreen('home');$('methodManual').onclick=openManualMethod;$('methodPhoto').onclick=openPhotoMethod;
     $('photoHomeBack').onclick=backFromPhoto;
     $('headerBack').onclick=backOne;$('backToSelection').onclick=()=>showScreen('method');
@@ -606,7 +633,7 @@
     document.addEventListener('keydown',handleKeyboard);
   }
 
-  window.selId=()=>keySignature(currentKey);
+  window.selId=()=>lastResult&&lastResult.inputMode==='photo'?lastResult.sig:keySignature(currentKey);
   window.grade=gradeNow;
   window.sectionStats=sectionStats;
   window.displayId=displayId;
@@ -623,6 +650,7 @@
     },
     home:backFromPhoto
   };
+  window.UILabResults={showPhotoGrade:presentPhotoGrade};
 
   const initialScreen='home';
   history.replaceState({screen:initialScreen},'',screenUrl(initialScreen));
