@@ -192,17 +192,43 @@
   function openPhotoMethod(){
     if(!currentKey) return showScreen('home');
     const context={
+      mode:'registered',
       template:photoTemplateFor(currentKey),
       signature:keySignature(currentKey),
       year:String(currentKey.year||''),
       exam:currentKey.exam,
       examText:examText(currentKey),
-      subject:currentKey.subject
+      subject:currentKey.subject,
+      registeredKey:deepClone(currentKey)
     };
     if(window.UILabPhotoFlow&&typeof window.UILabPhotoFlow.configure==='function'){
       window.UILabPhotoFlow.configure(context);
     }
     showScreen('photo');
+  }
+  function openCustomCompare(){
+    currentKey=null;
+    const context={
+      mode:'compare',
+      template:'standard',
+      signature:'custom-photo-compare',
+      year:'',
+      exam:'photo-compare',
+      examText:'自分の持つ解答と照合'
+    };
+    if(window.UILabPhotoFlow&&typeof window.UILabPhotoFlow.configure==='function'){
+      window.UILabPhotoFlow.configure(context);
+    }
+    showScreen('photo');
+  }
+  function photoFlowContext(){
+    return window.UILabPhotoFlow&&typeof window.UILabPhotoFlow.getContext==='function'
+      ? window.UILabPhotoFlow.getContext()
+      : null;
+  }
+  function backFromPhoto(){
+    const context=photoFlowContext();
+    showScreen(context&&context.mode==='compare'?'home':'method');
   }
   function renderResume(){
     if(!keys.length) return;
@@ -552,7 +578,8 @@
   }
   function backOne(){
     if(currentScreen==='result') showScreen('entry');
-    else if(currentScreen==='entry'||currentScreen==='photo') showScreen('method');
+    else if(currentScreen==='photo') backFromPhoto();
+    else if(currentScreen==='entry') showScreen('method');
     else if(currentScreen==='method') showScreen('home');
   }
   function handleKeyboard(event){
@@ -566,9 +593,9 @@
 
   function bind(){
     $('yearSelect').onchange=refreshExamOptions;$('examSelect').onchange=refreshSubjectOptions;$('subjectSelect').onchange=renderSubjectPreview;
-    $('manualStartButton').onclick=selectGradingSubject;$('manualResumeButton').onclick=resumeLast;$('brandHome').onclick=()=>showScreen('home');
+    $('manualStartButton').onclick=selectGradingSubject;$('manualResumeButton').onclick=resumeLast;$('customCompareButton').onclick=openCustomCompare;$('brandHome').onclick=()=>showScreen('home');
     $('methodBack').onclick=()=>showScreen('home');$('methodManual').onclick=openManualMethod;$('methodPhoto').onclick=openPhotoMethod;
-    $('photoHomeBack').onclick=()=>showScreen('method');
+    $('photoHomeBack').onclick=backFromPhoto;
     $('headerBack').onclick=backOne;$('backToSelection').onclick=()=>showScreen('method');
     $('previousField').onclick=()=>moveToIndex(currentIndex-1);$('nextBlank').onclick=nextUnfilled;$('manualGradeButton').onclick=requestGrade;
     $('prevGroup').onclick=()=>showGroup(currentGroupIndex-1);$('nextGroup').onclick=()=>showGroup(currentGroupIndex+1);
@@ -594,7 +621,7 @@
       updateSteps(stage==='result'?3:2);
       updateStepLabels('photo');
     },
-    home:()=>showScreen(currentKey?'method':'home')
+    home:backFromPhoto
   };
 
   const initialScreen='home';
