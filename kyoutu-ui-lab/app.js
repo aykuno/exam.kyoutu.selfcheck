@@ -131,7 +131,7 @@
     $('yearSelect').disabled=false;
     $('examSelect').disabled=false;
     $('subjectSelect').disabled=false;
-    $('startButton').disabled=false;
+    $('manualStartButton').disabled=false;
     refreshExamOptions();
   }
   function refreshExamOptions(){
@@ -178,7 +178,7 @@
     $('resumeSubject').textContent=k.subject;
     $('resumeMeta').textContent=`${examText(k)}　${entered} / ${k.questions.length}項目入力`;
     $('resumeBar').style.width=`${k.questions.length?entered/k.questions.length*100:0}%`;
-    $('resumeButton').dataset.signature=store.last;
+    $('manualResumeButton').dataset.signature=store.last;
   }
 
   function startKey(k){
@@ -193,7 +193,7 @@
     showScreen('entry');
   }
   function startSelected(){ startKey(selectedKey()); }
-  function resumeLast(){ startKey(keys.find(k=>keySignature(k)===$('resumeButton').dataset.signature)); }
+  function resumeLast(){ startKey(keys.find(k=>keySignature(k)===$('manualResumeButton').dataset.signature)); }
 
   function tokenSet(k){
     const values=[];
@@ -489,23 +489,35 @@
       el.classList.toggle('active',i===step-1);el.classList.toggle('done',i<step-1);
     });
   }
+  function updateStepLabels(name){
+    const labels=document.querySelectorAll('.steps .step b');
+    if(labels[1]) labels[1].textContent=name==='photo'?'写真を撮影':'解答を入力';
+    if(labels[2]) labels[2].textContent='採点結果';
+  }
+  function screenUrl(name){
+    const url=new URL(location.href);
+    if(name==='photo') url.searchParams.set('mode','photo');
+    else url.searchParams.delete('mode');
+    return url.pathname+url.search+url.hash;
+  }
   function applyScreen(name){
     currentScreen=name;
-    $('homeScreen').hidden=name!=='home';$('entryScreen').hidden=name!=='entry';$('resultScreen').hidden=name!=='result';
+    $('homeScreen').hidden=name!=='home';$('entryScreen').hidden=name!=='entry';$('photoScreen').hidden=name!=='photo';$('resultScreen').hidden=name!=='result';
     document.body.classList.toggle('entry-mode',name==='entry');
     $('headerBack').hidden=name==='home';
-    updateSteps(name==='home'?1:name==='entry'?2:3);
+    updateStepLabels(name);
+    updateSteps(name==='home'?1:name==='entry'?2:name==='photo'&&window.__photoFlowStage==='result'?3:name==='photo'?2:3);
     if(name==='home'){renderResume();renderSubjectPreview();}
     if(name==='entry'){renderEntry();requestAnimationFrame(updateKeypadHeight);}
     window.scrollTo({top:0,behavior:'instant'});
   }
   function showScreen(name,push=true){
     applyScreen(name);
-    if(push&&history.state&&history.state.screen!==name) history.pushState({screen:name},'',location.href);
+    if(push&&history.state&&history.state.screen!==name) history.pushState({screen:name},'',screenUrl(name));
   }
   function backOne(){
     if(currentScreen==='result') showScreen('entry');
-    else if(currentScreen==='entry') showScreen('home');
+    else if(currentScreen==='entry'||currentScreen==='photo') showScreen('home');
   }
   function handleKeyboard(event){
     if(currentScreen!=='entry'||event.metaKey||event.ctrlKey||event.altKey) return;
@@ -518,9 +530,10 @@
 
   function bind(){
     $('yearSelect').onchange=refreshExamOptions;$('examSelect').onchange=refreshSubjectOptions;$('subjectSelect').onchange=renderSubjectPreview;
-    $('startButton').onclick=startSelected;$('resumeButton').onclick=resumeLast;$('brandHome').onclick=()=>showScreen('home');
+    $('manualStartButton').onclick=startSelected;$('manualResumeButton').onclick=resumeLast;$('brandHome').onclick=()=>showScreen('home');
+    $('openPhotoFlow').onclick=()=>showScreen('photo');$('photoHomeBack').onclick=()=>showScreen('home');
     $('headerBack').onclick=backOne;$('backToSelection').onclick=()=>showScreen('home');
-    $('previousField').onclick=()=>moveToIndex(currentIndex-1);$('nextBlank').onclick=nextUnfilled;$('gradeButton').onclick=requestGrade;
+    $('previousField').onclick=()=>moveToIndex(currentIndex-1);$('nextBlank').onclick=nextUnfilled;$('manualGradeButton').onclick=requestGrade;
     $('prevGroup').onclick=()=>showGroup(currentGroupIndex-1);$('nextGroup').onclick=()=>showGroup(currentGroupIndex+1);
     $('returnToEntry').onclick=()=>{$('missingModal').hidden=true;};$('scoreAnyway').onclick=gradeNow;
     $('fillCheckAnswers').onclick=fillCheckAnswers;$('clearAllAnswers').onclick=clearAllAnswers;
@@ -537,9 +550,19 @@
   window.statRateHtml=statRateHtml;
   window.rowNote=rowNote;
   window.esc=esc;
+  window.UILabPhotoNavigation={
+    open:()=>showScreen('photo'),
+    setStage:stage=>{
+      if(currentScreen!=='photo') return;
+      updateSteps(stage==='result'?3:2);
+      updateStepLabels('photo');
+    },
+    home:()=>showScreen('home')
+  };
 
-  history.replaceState({screen:'home'},'',location.href);
+  const initialScreen=new URLSearchParams(location.search).get('mode')==='photo'?'photo':'home';
+  history.replaceState({screen:initialScreen},'',screenUrl(initialScreen));
   bind();
-  applyScreen('home');
+  applyScreen(initialScreen);
   loadData();
 })();

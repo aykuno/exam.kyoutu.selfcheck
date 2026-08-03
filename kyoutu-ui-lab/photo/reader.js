@@ -33,6 +33,13 @@
   let answerKeyPhotoRun = 0;
   const ANSWER_STORE = "ct-mark-reader-photo-answers-v2";
 
+  function setOuterStage(stage) {
+    window.__photoFlowStage = stage;
+    if (window.UILabPhotoNavigation && typeof window.UILabPhotoNavigation.setStage === "function") {
+      window.UILabPhotoNavigation.setStage(stage);
+    }
+  }
+
   function escapeHtml(value) {
     return String(value ?? "").replace(/[&<>"']/g, character => ({
       "&": "&amp;",
@@ -192,6 +199,7 @@
     refreshSavedUi();
     if (subject !== "standard") updateAiAvailability();
     else updateStartAvailability();
+    setOuterStage("capture");
   }
 
   document.querySelectorAll(".subject").forEach(button => {
@@ -248,6 +256,7 @@
     pendingPhoto = null;
     clearAnswerKeyPhotoResult();
     clearGrade();
+    setOuterStage("capture");
     showCapture();
   }
 
@@ -261,6 +270,7 @@
     clearAnswerKeyPhotoResult();
     clearGrade();
     refreshSavedUi();
+    setOuterStage("capture");
     show("setupCard");
   }
 
@@ -323,6 +333,7 @@
         : "裏返した第2面を、同じように用紙全体が入るよう撮影してください。";
     $("step1").className = pageIndex === 0 ? "active" : "done";
     $("step2").className = pageIndex === 1 ? "active" : "";
+    setOuterStage("capture");
     show("captureCard");
   }
 
@@ -1293,6 +1304,7 @@
     window.__markReaderPdfData = null;
     $("pdfButton").classList.add("hidden");
     $("gradeButton").classList.toggle("hidden", !selectedAnswerKey());
+    setOuterStage("review");
   }
 
   function finishStandard() {
@@ -1324,6 +1336,7 @@
     clearGrade();
     renderPreviews();
     $("copyStatus").textContent = "";
+    setOuterStage("review");
     show("resultCard");
     saveAnswers();
     updateAnswerKeyPhotoAvailability();
@@ -1378,6 +1391,7 @@
     clearGrade();
     renderPreviews();
     $("copyStatus").textContent = "";
+    setOuterStage("review");
     show("resultCard");
     saveAnswers();
     updateAnswerKeyPhotoAvailability();
@@ -1672,6 +1686,7 @@
       lastGrade = result;
       window.__markReaderPdfData = pdfData(result);
       renderGrade(result);
+      setOuterStage("result");
       $("pdfButton").classList.remove("hidden");
       saveAnswers();
       $("gradingResult").scrollIntoView({behavior: "smooth", block: "nearest"});
