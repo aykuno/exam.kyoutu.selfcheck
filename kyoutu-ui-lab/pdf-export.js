@@ -729,7 +729,7 @@ if(true){
   }
   function rowHeight(ctx, cells, cols){
     let max = 30;
-    cells.forEach((c,i)=>{ const maxLines = i===0 ? 1 : (i===6 ? 3 : 2); const h = textHeight(ctx, c, cols[i]-16, i===3?20:14, i===3?20:18, maxLines) + 12; if(h>max) max=h; });
+    cells.forEach((c,i)=>{ const maxLines = i===0 ? 1 : (i===6 ? 3 : 2); const h = textHeight(ctx, c, cols[i]-16, i===3?26:14, i===3?26:18, maxLines) + 12; if(h>max) max=h; });
     return Math.min(Math.max(max, 30), 76);
   }
   function drawResultTableHeader(ctx, y, continued){
@@ -742,9 +742,9 @@ if(true){
     let x=M_LEFT;
     cells.forEach((cell,i)=>{
       const color = i===3 ? (cell==='○'?GOOD:(cell==='△'?WARN:(cell==='×'?BAD:MUTED))) : (i===6?MUTED:TEXT);
-      const size = i===3 ? 22 : (i===6?13:14);
+      const size = i===3 ? 26 : (i===6?13:14);
       const weight = i===3 ? '900' : '500';
-      const lh = i===3 ? 20 : (i===6?17:18);
+      const lh = i===3 ? 26 : (i===6?17:18);
       const mx = i===6 ? 3 : 2;
       if(i===3){
         setFont(ctx, size, weight, color);
