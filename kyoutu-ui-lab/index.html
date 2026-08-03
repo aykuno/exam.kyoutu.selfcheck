@@ -6,8 +6,8 @@
   <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#ffffff">
   <title>共通テスト・センター試験 自動採点｜UI検証版</title>
-  <link rel="stylesheet" href="style.css?v=20260803-subjectflow2">
-  <link rel="stylesheet" href="photo/style.css?v=20260803-subjectflow2">
+  <link rel="stylesheet" href="style.css?v=20260803-scoringmodes1">
+  <link rel="stylesheet" href="photo/style.css?v=20260803-scoringmodes1">
 </head>
 <body>
   <header class="site-header">
@@ -32,7 +32,7 @@
       <div class="page-heading">
         <p class="eyebrow">メインサイトとは別のUI検証版</p>
         <h1>試験を選ぶ</h1>
-        <p>2025年度本試験と2026年度第2回河合全統共通テスト模試の実データで動作します。</p>
+        <p>登録済みの試験で採点するか、自分の持つ解答と写真で照合するかを選べます。</p>
       </div>
 
       <article class="resume-card" id="resumeCard" hidden>
@@ -45,8 +45,17 @@
         <button class="primary-button" id="manualResumeButton" type="button">入力を再開</button>
       </article>
 
+      <section class="custom-compare-card">
+        <div>
+          <span class="custom-compare-label">登録のない試験はこちら</span>
+          <h2>自分の持つ解答と照合する</h2>
+          <p>答案用紙と、手元の解答・配点一覧を撮影して採点します。</p>
+        </div>
+        <button class="secondary-action-button" id="customCompareButton" type="button">写真同士で採点</button>
+      </section>
+
       <section class="selection-card">
-        <h2>試験・科目を選ぶ</h2>
+        <h2>登録済みの試験で採点</h2>
         <div class="select-grid">
           <label>年度
             <select id="yearSelect" disabled><option>読み込み中...</option></select>
@@ -95,8 +104,8 @@
           <button class="method-option" id="methodPhoto" type="button">
             <span class="method-icon camera" aria-hidden="true">▣</span>
             <span class="method-copy">
-              <strong>写真を撮影して採点</strong>
-              <small>選択した科目に対応する答案用紙と、解答・配点一覧を撮影して照合します。</small>
+              <strong>答案用紙を撮影して採点</strong>
+              <small>答案の番号を写真から読み取り、登録済みの正解・配点データで採点します。</small>
             </span>
             <span class="method-arrow" aria-hidden="true">›</span>
           </button>
@@ -154,27 +163,35 @@
     </section>
 
     <section class="screen photo-flow" id="photoScreen" hidden>
-      <button class="inline-back photo-home-back" id="photoHomeBack" type="button">‹ 採点方法の選択へ戻る</button>
+      <button class="inline-back photo-home-back" id="photoHomeBack" type="button">‹ 前の画面へ戻る</button>
       <div class="photo-page-heading">
         <p class="eyebrow" id="photoContextExam">写真同士で照合</p>
-        <h1>答案用紙と解答の写真で採点</h1>
-        <p><strong id="photoContextSubject"></strong>の答案と解答・配点一覧を順番に撮影し、読取結果を確認してから自動採点します。</p>
+        <h1 id="photoPageTitle">答案用紙を撮影して採点</h1>
+        <p id="photoPageIntro">答案番号を読み取り、登録済みの正解データで自動採点します。</p>
       </div>
 
       <section class="notice photo-notice">
-        <strong>科目ごとに専用の読取方法を使います。</strong>
-        <span>国語・通常型の答案用紙は端末内で読み取ります。数学の答案欄と、採点に使う解答・配点一覧はGoogle Geminiで読み取ります。氏名欄などは送信しません。</span>
+        <strong id="photoNoticeTitle">科目ごとに専用の読取方法を使います。</strong>
+        <span id="photoNoticeText">国語・通常型の答案用紙は端末内で読み取ります。数学の答案欄はGoogle Geminiで読み取ります。氏名欄などは送信しません。</span>
       </section>
 
       <section id="setupCard" class="card action-card">
-        <h2>撮影する用紙</h2>
-        <div class="locked-sheet-card">
+        <h2 id="photoSetupTitle">答案用紙を撮影</h2>
+        <div class="locked-sheet-card" id="lockedSheetCard">
           <span>選択済み</span>
           <strong id="photoSheetSubject"></strong>
           <small id="photoSheetExam"></small>
           <b id="photoSheetTemplate"></b>
         </div>
-        <section class="photo-to-photo-intro">
+        <section class="custom-template-picker hidden" id="customTemplatePicker">
+          <h3>答案用紙の形式を選ぶ</h3>
+          <div class="subject-buttons">
+            <button class="subject selected" type="button" data-subject="standard"><b>国語・通常型</b><small>1〜60・片面</small></button>
+            <button class="subject" type="button" data-subject="math1"><b>数学①</b><small>第1面＋第2面</small></button>
+            <button class="subject" type="button" data-subject="math2"><b>数学②</b><small>両面・選択問題</small></button>
+          </div>
+        </section>
+        <section class="photo-to-photo-intro" id="photoToPhotoIntro">
           <h3>写真採点の流れ</h3>
           <ol>
             <li>答案用紙を撮影して、読取番号を確認</li>
@@ -205,7 +222,10 @@
           </ul>
           <p>撮影後に解像度・明るさ・ぼけを端末内で確認します。写真自体は保存しません。</p>
         </section>
-        <button id="startButton" class="camera-button" type="button">国語・通常型を撮影する</button>
+        <label id="startButton" class="camera-button">
+          <span id="startButtonText">国語・通常型を撮影する</span>
+          <input id="initialFileInput" type="file" accept="image/*" capture="environment">
+        </label>
         <p id="setupHelp">国語で精度を確認できた従来の読取処理をそのまま使用します。</p>
       </section>
 
@@ -317,12 +337,12 @@
     </div>
   </div>
 
-  <script src="app.js?v=20260803-subjectflow2"></script>
-  <script src="pdf-export.js?v=20260803-subjectflow2"></script>
-  <script src="photo/ai-config.js?v=20260803-subjectflow2"></script>
-  <script type="module" src="photo/ai-reader.js?v=20260803-subjectflow2"></script>
-  <script src="photo/grader.js?v=20260803-subjectflow2"></script>
-  <script src="photo/pdf-export.js?v=20260803-subjectflow2"></script>
-  <script src="photo/reader.js?v=20260803-subjectflow2"></script>
+  <script src="app.js?v=20260803-scoringmodes1"></script>
+  <script src="pdf-export.js?v=20260803-scoringmodes1"></script>
+  <script src="photo/ai-config.js?v=20260803-scoringmodes1"></script>
+  <script type="module" src="photo/ai-reader.js?v=20260803-scoringmodes1"></script>
+  <script src="photo/grader.js?v=20260803-scoringmodes1"></script>
+  <script src="photo/pdf-export.js?v=20260803-scoringmodes1"></script>
+  <script src="photo/reader.js?v=20260803-scoringmodes1"></script>
 </body>
 </html>
