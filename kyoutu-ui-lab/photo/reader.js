@@ -55,13 +55,25 @@
     return photoAnswerKey;
   }
 
+  function isRegisteredMode() {
+    return photoContext?.mode === "registered" &&
+      photoContext.registeredKey &&
+      Array.isArray(photoContext.registeredKey.questions);
+  }
+
+  function registeredAnswerKey() {
+    return isRegisteredMode() ? photoContext.registeredKey : null;
+  }
+
   function subjectStoreKey() {
+    if (photoContext?.mode === "compare") return `photo||custom||${subject}`;
     return photoContext?.signature
       ? `photo||${photoContext.signature}`
       : `photo||${subject}`;
   }
 
   function activeSubjectLabel() {
+    if (photoContext?.mode === "compare") return TEMPLATES[subject].name;
     return photoContext?.subject || TEMPLATES[subject].name;
   }
 
@@ -126,7 +138,7 @@
       subject,
       updatedAt: new Date().toISOString(),
       selectedQuestions: [...selectedQuestions].sort((a, b) => a - b),
-      photoAnswerKey
+      photoAnswerKey: isRegisteredMode() ? null : photoAnswerKey
     };
     if (subject === "standard") {
       entry.standardAnswers = standardAnswers.map(answer => ({
@@ -170,11 +182,16 @@
 
   function updateStartAvailability() {
     const readerReady = subject === "standard" || aiConfigured();
-    $("startButton").disabled = !readerReady;
+    $("initialFileInput").disabled = !readerReady;
+    $("startButton").classList.toggle("disabled", !readerReady);
+    $("startButton").setAttribute("aria-disabled", String(!readerReady));
     updateAnswerKeyPhotoAvailability();
   }
 
   function updateAnswerKeyPhotoAvailability() {
+    const registered = isRegisteredMode();
+    $("answerKeyPhotoPanel").classList.toggle("hidden", registered);
+    if (registered) return;
     const hasAnswers = subject === "standard"
       ? standardAnswers.length > 0
       : pageData.some(page => (page.questions || []).length);
@@ -209,17 +226,34 @@
     document.querySelectorAll(".subject").forEach(button =>
       button.classList.toggle("selected", button.dataset.subject === subject)
     );
-    $("startButton").textContent = subject === "standard"
+    $("startButtonText").textContent = subject === "standard"
       ? `${templateDisplayName()}を撮影する`
       : `${TEMPLATES[subject].name} 第1面を撮影する`;
-    $("photoContextExam").textContent = photoContext?.examText || "写真同士で照合";
-    $("photoContextSubject").textContent = activeSubjectLabel();
+    const registered = isRegisteredMode();
+    $("photoContextExam").textContent = photoContext?.examText || "自分の持つ解答と照合";
     $("photoSheetSubject").textContent = activeSubjectLabel();
     $("photoSheetExam").textContent = photoContext?.examText || "";
     $("photoSheetTemplate").textContent = `対応用紙：${templateDescription()}`;
+    $("photoPageTitle").textContent = registered
+      ? "答案用紙を撮影して採点"
+      : "答案用紙と解答の写真で採点";
+    $("photoPageIntro").textContent = registered
+      ? `${activeSubjectLabel()}の答案番号を読み取り、登録済みの正解・配点データで自動採点します。`
+      : "答案用紙と手元の解答・配点一覧を順番に撮影し、写真同士を照合して採点します。";
+    $("photoNoticeTitle").textContent = registered
+      ? "解答・配点の写真は必要ありません。"
+      : "答案と解答・配点一覧の2種類を読み取ります。";
+    $("photoNoticeText").textContent = registered
+      ? "この試験の正解・配点は登録済みです。答案用紙だけを撮影してください。写真自体は保存しません。"
+      : "答案用紙を先に読み取り、続いて手元の解答・配点一覧を読み取ります。写真自体は保存しません。";
+    $("photoSetupTitle").textContent = registered ? "答案用紙を撮影" : "撮影する用紙を選ぶ";
+    $("customTemplatePicker").classList.toggle("hidden", registered);
+    $("lockedSheetCard").classList.toggle("hidden", !registered);
+    $("photoToPhotoIntro").classList.toggle("hidden", registered);
+    $("photoHomeBack").textContent = registered ? "‹ 採点方法の選択へ戻る" : "‹ 試験選択へ戻る";
     $("setupHelp").textContent = TEMPLATES[subject].help;
     $("aiOption").classList.toggle("hidden", subject === "standard");
-    photoAnswerKey = null;
+    photoAnswerKey = registeredAnswerKey();
     clearAnswerKeyPhotoResult();
     refreshSavedUi();
     if (subject !== "standard") updateAiAvailability();
@@ -229,6 +263,7 @@
 
   document.querySelectorAll(".subject").forEach(button => {
     button.onclick = () => {
+      if (isRegisteredMode()) return;
       subject = button.dataset.subject;
       clearAnswerKeyPhotoResult();
       updateSubjectUi();
@@ -239,7 +274,6 @@
   }
   updateSubjectUi();
 
-  $("startButton").onclick = begin;
   $("backButton").onclick = reset;
   $("errorBackButton").onclick = reset;
   $("retryButton").onclick = showCapture;
@@ -261,13 +295,18 @@
     if (file) readPage(file);
     $("fileInput").value = "";
   };
+  $("initialFileInput").onchange = () => {
+    const file = $("initialFileInput").files && $("initialFileInput").files[0];
+    $("initialFileInput").value = "";
+    if (file) begin(file);
+  };
   $("answerKeyPhotoInput").onchange = () => {
     const files = [...($("answerKeyPhotoInput").files || [])];
     $("answerKeyPhotoInput").value = "";
     if (files.length) compareAnswerKeyPhotos(files);
   };
 
-  function begin() {
+  function begin(file) {
     if (subject !== "standard" && !aiConfigured()) {
       $("errorText").textContent = "数学のAI読取を準備できませんでした。通信状態を確認してページを再読み込みしてください。";
       show("errorCard");
@@ -277,12 +316,12 @@
     pageData = [];
     standardAnswers = [];
     selectedQuestions.clear();
-    photoAnswerKey = null;
+    photoAnswerKey = registeredAnswerKey();
     pendingPhoto = null;
     clearAnswerKeyPhotoResult();
     clearGrade();
     setOuterStage("capture");
-    showCapture();
+    readPage(file);
   }
 
   function reset() {
@@ -290,7 +329,7 @@
     pageData = [];
     standardAnswers = [];
     selectedQuestions.clear();
-    photoAnswerKey = null;
+    photoAnswerKey = registeredAnswerKey();
     pendingPhoto = null;
     clearAnswerKeyPhotoResult();
     clearGrade();
@@ -308,9 +347,10 @@
     pageIndex = TEMPLATES[subject].pages.length;
     pendingPhoto = null;
     clearGrade();
-    photoAnswerKey = entry.photoAnswerKey && Array.isArray(entry.photoAnswerKey.questions)
-      ? entry.photoAnswerKey
-      : null;
+    photoAnswerKey = registeredAnswerKey() ||
+      (entry.photoAnswerKey && Array.isArray(entry.photoAnswerKey.questions)
+        ? entry.photoAnswerKey
+        : null);
     if (subject === "standard") {
       standardAnswers = (entry.standardAnswers || []).map(answer => ({
         number: Number(answer.number),
@@ -1315,9 +1355,11 @@
 
   function updateGradingHeader() {
     const key = selectedAnswerKey();
-    $("selectedKeyLabel").textContent = key
-      ? `${key.examLabel}・解答写真から${key.photoCoverage || 0}欄を読取`
-      : "解答写真を読み取ると自動採点します。";
+    $("selectedKeyLabel").textContent = isRegisteredMode()
+      ? `${photoContext.examText}の登録済み正解データで採点します。`
+      : key
+        ? `${key.examLabel}・解答写真から${key.photoCoverage || 0}欄を読取`
+        : "解答写真を読み取ると自動採点します。";
   }
 
   function clearGrade() {
@@ -1366,7 +1408,7 @@
     saveAnswers();
     updateAnswerKeyPhotoAvailability();
     if (photoAnswerKey) {
-      renderPhotoAnswerKey([]);
+      if (!isRegisteredMode()) renderPhotoAnswerKey([]);
       gradeAnswers();
     }
   }
@@ -1421,7 +1463,7 @@
     saveAnswers();
     updateAnswerKeyPhotoAvailability();
     if (photoAnswerKey) {
-      renderPhotoAnswerKey([]);
+      if (!isRegisteredMode()) renderPhotoAnswerKey([]);
       gradeAnswers();
     }
   }
@@ -1582,6 +1624,26 @@
     ctx.stroke();
   }
 
+  function questionRateHtml(question) {
+    const key = selectedAnswerKey();
+    return isRegisteredMode() && typeof window.statRateHtml === "function"
+      ? window.statRateHtml(key, question)
+      : "—";
+  }
+
+  function questionRateText(question) {
+    return String(questionRateHtml(question))
+      .replace(/<br\s*\/?\s*>/gi, " / ")
+      .replace(/<[^>]+>/g, "");
+  }
+
+  function questionNote(question) {
+    if (isRegisteredMode() && typeof window.rowNote === "function") {
+      return window.rowNote(selectedAnswerKey(), {q: question}) || "—";
+    }
+    return ({high:"AI確信度：高",medium:"AI確信度：中",low:"AI確信度：低"})[question.photoConfidence] || "—";
+  }
+
   function pdfData(result) {
     const key = selectedAnswerKey();
     return {
@@ -1606,8 +1668,8 @@
           earned: row.earned,
           points: row.points,
           judge: status.text,
-          correctRate: "—",
-          note: ({high:"AI確信度：高",medium:"AI確信度：中",low:"AI確信度：低"})[row.question.photoConfidence] || "—"
+          correctRate: questionRateText(row.question),
+          note: questionNote(row.question)
         };
       }),
       generatedAt: new Date().toISOString()
@@ -1625,7 +1687,7 @@
       </div>`).join("");
     const rowsHtml = result.rows.map(row => {
       const status = gradeStatus(row);
-      const note = ({high:"AI確信度：高",medium:"AI確信度：中",low:"AI確信度：低"})[row.question.photoConfidence] || "—";
+      const note = questionNote(row.question);
       return `
         <tr class="${status.className}">
           <td>${escapeHtml(displayGradeId(row.question))}</td>
@@ -1637,7 +1699,7 @@
               ? `${formatScore(row.earned)} / ${formatScore(row.points)}`
               : "配点なし"
             : "—"}</td>
-          <td>—</td>
+          <td>${questionRateHtml(row.question)}</td>
           <td>${escapeHtml(note)}</td>
         </tr>`;
     }).join("");
