@@ -31,6 +31,7 @@
   let pendingPhoto = null;
   let lastGrade = null;
   let answerKeyPhotoRun = 0;
+  let photoContext = null;
   const ANSWER_STORE = "ct-mark-reader-photo-answers-v2";
 
   function setOuterStage(stage) {
@@ -55,7 +56,26 @@
   }
 
   function subjectStoreKey() {
-    return `photo||${subject}`;
+    return photoContext?.signature
+      ? `photo||${photoContext.signature}`
+      : `photo||${subject}`;
+  }
+
+  function activeSubjectLabel() {
+    return photoContext?.subject || TEMPLATES[subject].name;
+  }
+
+  function templateDisplayName() {
+    if (subject === "standard" && photoContext?.subject && !photoContext.subject.includes("国語")) {
+      return "通常型";
+    }
+    return TEMPLATES[subject].name;
+  }
+
+  function templateDescription() {
+    if (subject === "standard") return `${templateDisplayName()}・1〜60・片面`;
+    if (subject === "math1") return "数学①・第1面＋第2面";
+    return "数学②・両面・選択問題";
   }
 
   function readAnswerStore() {
@@ -190,8 +210,13 @@
       button.classList.toggle("selected", button.dataset.subject === subject)
     );
     $("startButton").textContent = subject === "standard"
-      ? "国語・通常型を撮影する"
+      ? `${templateDisplayName()}を撮影する`
       : `${TEMPLATES[subject].name} 第1面を撮影する`;
+    $("photoContextExam").textContent = photoContext?.examText || "写真同士で照合";
+    $("photoContextSubject").textContent = activeSubjectLabel();
+    $("photoSheetSubject").textContent = activeSubjectLabel();
+    $("photoSheetExam").textContent = photoContext?.examText || "";
+    $("photoSheetTemplate").textContent = `対応用紙：${templateDescription()}`;
     $("setupHelp").textContent = TEMPLATES[subject].help;
     $("aiOption").classList.toggle("hidden", subject === "standard");
     photoAnswerKey = null;
@@ -324,7 +349,7 @@
     const standard = subject === "standard";
     $("stepIndicator").classList.toggle("hidden", standard);
     $("captureTitle").textContent = standard
-      ? "国語・通常型を撮影"
+      ? `${templateDisplayName()}を撮影`
       : `${TEMPLATES[subject].name} 第${pageIndex + 1}面を撮影`;
     $("captureHelp").textContent = standard
       ? "用紙全体と、左右の解答欄にある黒い基準四角をすべて入れてください。"
@@ -710,7 +735,7 @@
       }
       answerKeyPhotoStatus("working", "解答写真から正解・配点を読み取り、答案写真と照合しています…");
       const readResult = await window.MarkReaderAI.analyzeAnswerKey({
-        subjectLabel: TEMPLATES[subject].name,
+        subjectLabel: activeSubjectLabel(),
         entries: entries.map(({code, label}) => ({code, label})),
         images: converted.map(({data, mimeType}) => ({data, mimeType}))
       });
@@ -1349,7 +1374,7 @@
   function finishMath(preserveSelection = false) {
     const questions = pageData.flatMap(p => p.questions);
     const counts = countStates(questions.flatMap(q => q.answers));
-    $("summary").textContent = `${TEMPLATES[subject].name}・読取済み ${counts.ok}欄・要確認 ${counts.warn}欄・未記入 ${counts.blank}欄`;
+    $("summary").textContent = `${activeSubjectLabel()}・読取済み ${counts.ok}欄・要確認 ${counts.warn}欄・未記入 ${counts.blank}欄`;
     const aiPages = pageData.filter(page => page.aiStatus);
     if (aiPages.length) {
       const partial = aiPages.some(page => page.aiStatus === "partial");
@@ -1560,9 +1585,9 @@
   function pdfData(result) {
     const key = selectedAnswerKey();
     return {
-      examLabel: key ? key.examLabel : "",
-      year: key ? key.year : "",
-      subject: TEMPLATES[subject].name,
+      examLabel: photoContext?.examText || (key ? key.examLabel : ""),
+      year: photoContext?.year || (key ? key.year : ""),
+      subject: activeSubjectLabel(),
       score: result.score,
       maxScore: result.maxScore,
       pointsAvailable: result.pointsAvailable,
@@ -1743,9 +1768,24 @@
     }
     try {
       await navigator.clipboard.writeText(text);
-      $("copyStatus").textContent = `${TEMPLATES[subject].name}の解答番号をコピーしました。`;
+      $("copyStatus").textContent = `${activeSubjectLabel()}の解答番号をコピーしました。`;
     } catch (_) {
       $("copyStatus").textContent = `コピーできませんでした：${text}`;
+    }
+  };
+
+  window.UILabPhotoFlow = {
+    configure(context) {
+      const nextSubject = context && TEMPLATES[context.template]
+        ? context.template
+        : "standard";
+      photoContext = context ? {...context, template: nextSubject} : null;
+      subject = nextSubject;
+      updateSubjectUi();
+      reset();
+    },
+    getContext() {
+      return photoContext ? {...photoContext} : null;
     }
   };
 
