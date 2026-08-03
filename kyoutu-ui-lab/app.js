@@ -95,7 +95,6 @@
     store.records[keySignature(currentKey)]={answers:deepClone(answers),currentIndex,savedAt:new Date().toISOString()};
     store.last=keySignature(currentKey);
     writeStore(store);
-    renderResume();
   }
   function loadSaved(k){
     const record=(readStore().records||{})[keySignature(k)];

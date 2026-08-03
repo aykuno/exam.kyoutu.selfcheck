@@ -480,7 +480,7 @@ if(true){
 (function(){
   'use strict';
 
-  const VERSION = 'v178-safari-datauri-modal-chrome-firefox-unchanged';
+  const VERSION = 'v179-optical-row-centering';
   const PAGE_W = 1240;
   const PAGE_H = 1754;
   const RENDER_SCALE = 2.33; // 約350dpi相当（Android/iPhone共通）
@@ -525,6 +525,17 @@ if(true){
     if(stroke){ ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.stroke(); }
   }
   function line(ctx, x1, y1, x2, y2, color, width){ ctx.beginPath(); ctx.strokeStyle = color || LINE; ctx.lineWidth = width || 1; ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); }
+  function drawOpticallyCentered(ctx, text, centerX, centerY, fallbackSize){
+    const value = String(text == null ? '' : text);
+    ctx.save();
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'alphabetic';
+    const metrics = ctx.measureText(value);
+    const ascent = Number.isFinite(metrics.actualBoundingBoxAscent) ? metrics.actualBoundingBoxAscent : fallbackSize * 0.75;
+    const descent = Number.isFinite(metrics.actualBoundingBoxDescent) ? metrics.actualBoundingBoxDescent : fallbackSize * 0.25;
+    ctx.fillText(value, centerX, centerY + (ascent - descent) / 2);
+    ctx.restore();
+  }
 
   function wrapText(ctx, text, maxWidth){
     text = String(text == null ? '' : text);
@@ -749,11 +760,7 @@ if(true){
       const mx = i===6 ? 3 : 2;
       if(i===3 || i===4){
         setFont(ctx, size, weight, color);
-        ctx.save();
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(cell, x + cols[i] / 2, y + h / 2);
-        ctx.restore();
+        drawOpticallyCentered(ctx, cell, x + cols[i] / 2, y + h / 2, size);
       }
       else drawWrapped(ctx, cell, x+8, y+6, cols[i]-16, size, weight, color, lh, i===0 ? 1 : mx);
       x += cols[i];
