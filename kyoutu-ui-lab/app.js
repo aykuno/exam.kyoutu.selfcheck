@@ -169,6 +169,41 @@
     if(k.explanationSourceUrl) links.push(`<a href="${esc(k.explanationSourceUrl)}" target="_blank" rel="noopener">解説</a>`);
     $('sourceLinks').innerHTML=links.join('');
   }
+  function photoTemplateFor(k){
+    const subject=String(k&&k.subject||'').normalize('NFKC');
+    if(!subject.includes('数学')) return 'standard';
+    return /(?:Ⅱ|II|2|IIBC|IIB|数学[^A]*[BC])/.test(subject) ? 'math2' : 'math1';
+  }
+  function renderMethodSelection(){
+    if(!currentKey) return;
+    $('methodSubject').textContent=currentKey.subject;
+    $('methodExam').textContent=`${examText(currentKey)}　${groupsFor(currentKey).length}大問・${currentKey.questions.length}項目`;
+  }
+  function selectGradingSubject(){
+    const k=selectedKey();
+    if(!k) return;
+    currentKey=k;
+    renderMethodSelection();
+    showScreen('method');
+  }
+  function openManualMethod(){
+    if(currentKey) startKey(currentKey);
+  }
+  function openPhotoMethod(){
+    if(!currentKey) return showScreen('home');
+    const context={
+      template:photoTemplateFor(currentKey),
+      signature:keySignature(currentKey),
+      year:String(currentKey.year||''),
+      exam:currentKey.exam,
+      examText:examText(currentKey),
+      subject:currentKey.subject
+    };
+    if(window.UILabPhotoFlow&&typeof window.UILabPhotoFlow.configure==='function'){
+      window.UILabPhotoFlow.configure(context);
+    }
+    showScreen('photo');
+  }
   function renderResume(){
     if(!keys.length) return;
     const store=readStore(),record=store.last&&(store.records||{})[store.last],k=keys.find(item=>keySignature(item)===store.last);
@@ -192,7 +227,6 @@
     renderEntry();
     showScreen('entry');
   }
-  function startSelected(){ startKey(selectedKey()); }
   function resumeLast(){ startKey(keys.find(k=>keySignature(k)===$('manualResumeButton').dataset.signature)); }
 
   function tokenSet(k){
@@ -491,23 +525,24 @@
   }
   function updateStepLabels(name){
     const labels=document.querySelectorAll('.steps .step b');
-    if(labels[1]) labels[1].textContent=name==='photo'?'写真を撮影':'解答を入力';
+    if(labels[1]) labels[1].textContent=name==='method'?'採点方法を選ぶ':name==='photo'?'写真を撮影':'解答を入力';
     if(labels[2]) labels[2].textContent='採点結果';
   }
   function screenUrl(name){
     const url=new URL(location.href);
-    if(name==='photo') url.searchParams.set('mode','photo');
+    if(name==='photo'||name==='method') url.searchParams.set('mode',name);
     else url.searchParams.delete('mode');
     return url.pathname+url.search+url.hash;
   }
   function applyScreen(name){
     currentScreen=name;
-    $('homeScreen').hidden=name!=='home';$('entryScreen').hidden=name!=='entry';$('photoScreen').hidden=name!=='photo';$('resultScreen').hidden=name!=='result';
+    $('homeScreen').hidden=name!=='home';$('methodScreen').hidden=name!=='method';$('entryScreen').hidden=name!=='entry';$('photoScreen').hidden=name!=='photo';$('resultScreen').hidden=name!=='result';
     document.body.classList.toggle('entry-mode',name==='entry');
     $('headerBack').hidden=name==='home';
     updateStepLabels(name);
-    updateSteps(name==='home'?1:name==='entry'?2:name==='photo'&&window.__photoFlowStage==='result'?3:name==='photo'?2:3);
+    updateSteps(name==='home'?1:name==='method'||name==='entry'?2:name==='photo'&&window.__photoFlowStage==='result'?3:name==='photo'?2:3);
     if(name==='home'){renderResume();renderSubjectPreview();}
+    if(name==='method'){renderMethodSelection();}
     if(name==='entry'){renderEntry();requestAnimationFrame(updateKeypadHeight);}
     window.scrollTo({top:0,behavior:'instant'});
   }
@@ -517,7 +552,8 @@
   }
   function backOne(){
     if(currentScreen==='result') showScreen('entry');
-    else if(currentScreen==='entry'||currentScreen==='photo') showScreen('home');
+    else if(currentScreen==='entry'||currentScreen==='photo') showScreen('method');
+    else if(currentScreen==='method') showScreen('home');
   }
   function handleKeyboard(event){
     if(currentScreen!=='entry'||event.metaKey||event.ctrlKey||event.altKey) return;
@@ -530,9 +566,10 @@
 
   function bind(){
     $('yearSelect').onchange=refreshExamOptions;$('examSelect').onchange=refreshSubjectOptions;$('subjectSelect').onchange=renderSubjectPreview;
-    $('manualStartButton').onclick=startSelected;$('manualResumeButton').onclick=resumeLast;$('brandHome').onclick=()=>showScreen('home');
-    $('openPhotoFlow').onclick=()=>showScreen('photo');$('photoHomeBack').onclick=()=>showScreen('home');
-    $('headerBack').onclick=backOne;$('backToSelection').onclick=()=>showScreen('home');
+    $('manualStartButton').onclick=selectGradingSubject;$('manualResumeButton').onclick=resumeLast;$('brandHome').onclick=()=>showScreen('home');
+    $('methodBack').onclick=()=>showScreen('home');$('methodManual').onclick=openManualMethod;$('methodPhoto').onclick=openPhotoMethod;
+    $('photoHomeBack').onclick=()=>showScreen('method');
+    $('headerBack').onclick=backOne;$('backToSelection').onclick=()=>showScreen('method');
     $('previousField').onclick=()=>moveToIndex(currentIndex-1);$('nextBlank').onclick=nextUnfilled;$('manualGradeButton').onclick=requestGrade;
     $('prevGroup').onclick=()=>showGroup(currentGroupIndex-1);$('nextGroup').onclick=()=>showGroup(currentGroupIndex+1);
     $('returnToEntry').onclick=()=>{$('missingModal').hidden=true;};$('scoreAnyway').onclick=gradeNow;
@@ -551,16 +588,16 @@
   window.rowNote=rowNote;
   window.esc=esc;
   window.UILabPhotoNavigation={
-    open:()=>showScreen('photo'),
+    open:openPhotoMethod,
     setStage:stage=>{
       if(currentScreen!=='photo') return;
       updateSteps(stage==='result'?3:2);
       updateStepLabels('photo');
     },
-    home:()=>showScreen('home')
+    home:()=>showScreen(currentKey?'method':'home')
   };
 
-  const initialScreen=new URLSearchParams(location.search).get('mode')==='photo'?'photo':'home';
+  const initialScreen='home';
   history.replaceState({screen:initialScreen},'',screenUrl(initialScreen));
   bind();
   applyScreen(initialScreen);
