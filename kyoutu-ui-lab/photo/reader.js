@@ -5,7 +5,7 @@
   const TEMPLATES = {
     standard: {
       name: "国語・通常型",
-      help: "国語で精度を確認できた従来の読取処理をそのまま使用します。",
+      help: "「国語・通常型」は、国語などで使う、1枚に1〜60の解答番号欄が並ぶ片面式の答案用紙です。",
       pages: [[1, 2]],
       standard: true
     },
@@ -79,15 +79,15 @@
 
   function templateDisplayName() {
     if (subject === "standard" && photoContext?.subject && !photoContext.subject.includes("国語")) {
-      return "通常型";
+      return "国語・通常型";
     }
     return TEMPLATES[subject].name;
   }
 
   function templateDescription() {
-    if (subject === "standard") return `${templateDisplayName()}・1〜60・片面`;
-    if (subject === "math1") return "数学①・第1面＋第2面";
-    return "数学②・両面・選択問題";
+    if (subject === "standard") return "国語・通常型（国語など／1〜60の番号が並ぶ片面式）";
+    if (subject === "math1") return "数学①（数学ⅠAなど／第1面＋第2面）";
+    return "数学②（数学ⅡBCなど／両面・選択問題あり）";
   }
 
   function readAnswerStore() {
@@ -226,10 +226,12 @@
     document.querySelectorAll(".subject").forEach(button =>
       button.classList.toggle("selected", button.dataset.subject === subject)
     );
-    $("startButtonText").textContent = subject === "standard"
-      ? `${templateDisplayName()}を撮影する`
-      : `${TEMPLATES[subject].name} 第1面を撮影する`;
     const registered = isRegisteredMode();
+    $("startButtonText").textContent = registered
+      ? `${activeSubjectLabel()}の答案用紙を撮影する`
+      : subject === "standard"
+        ? `${templateDisplayName()}の答案用紙を撮影する`
+        : `${TEMPLATES[subject].name}の答案用紙 第1面を撮影する`;
     $("photoContextExam").textContent = photoContext?.examText || "自分の持つ解答と照合";
     $("photoSheetSubject").textContent = activeSubjectLabel();
     $("photoSheetExam").textContent = photoContext?.examText || "";
@@ -239,13 +241,13 @@
       : "答案用紙と解答の写真で採点";
     $("photoPageIntro").textContent = registered
       ? `${activeSubjectLabel()}の答案番号を読み取り、登録済みの正解・配点データで自動採点します。`
-      : "答案用紙と手元の解答・配点一覧を順番に撮影し、写真同士を照合して採点します。";
+      : "先に答案用紙、次に手元の解答・配点一覧を撮影し、写真同士を照合して採点します。";
     $("photoNoticeTitle").textContent = registered
       ? "解答・配点の写真は必要ありません。"
       : "答案と解答・配点一覧の2種類を読み取ります。";
     $("photoNoticeText").textContent = registered
       ? "この試験の正解・配点は登録済みです。答案用紙だけを撮影してください。写真自体は保存しません。"
-      : "答案用紙を先に読み取り、続いて手元の解答・配点一覧を読み取ります。写真自体は保存しません。";
+      : "撮影順は、①答案用紙 → ②解答・配点一覧です。先に自分の答案を読み取り、その後に正解と配点を読み取ります。写真自体は保存しません。";
     $("photoSetupTitle").textContent = registered ? "答案用紙を撮影" : "撮影する用紙を選ぶ";
     $("customTemplatePicker").classList.toggle("hidden", registered);
     $("lockedSheetCard").classList.toggle("hidden", !registered);
@@ -289,7 +291,6 @@
     pendingPhoto = null;
     processPageCanvas(photo.canvas, photo.fileName);
   };
-  $("pdfButton").onclick = exportPdf;
   $("fileInput").onchange = () => {
     const file = $("fileInput").files && $("fileInput").files[0];
     if (file) readPage(file);
@@ -1368,8 +1369,6 @@
     result.className = "grading-result hidden";
     result.innerHTML = "";
     lastGrade = null;
-    window.__markReaderPdfData = null;
-    $("pdfButton").classList.add("hidden");
     $("gradeButton").classList.toggle("hidden", !selectedAnswerKey());
     setOuterStage("review");
   }
@@ -1541,215 +1540,6 @@
       </figure>`).join("");
   }
 
-  function formatScore(value) {
-    const rounded = Math.round(Number(value || 0) * 10) / 10;
-    return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
-  }
-
-  function displayGradeId(question) {
-    return answerKeyEntryLabel(question);
-  }
-
-  function gradeStatus(row) {
-    if (!row.included) return {className: "excluded", text: "対象外"};
-    if (!row.answered) return {className: "missing", text: "未入力"};
-    if (row.earned === row.points) return {className: "correct", text: "○"};
-    if (row.earned > 0) return {className: "partial", text: "△"};
-    return {className: "wrong", text: "×"};
-  }
-
-  function shortGroupLabel(value) {
-    return window.MarkReaderGrader.groupLabel(value)
-      .replace(/模擬試験|共通テスト|数学|国語/g, "")
-      .replace(/\s+/g, "")
-      .slice(0, 10) || "全体";
-  }
-
-  function drawRadarChart(canvas, groups) {
-    if (!canvas || !groups.length) return;
-    const size = 560;
-    canvas.width = size;
-    canvas.height = 430;
-    const ctx = canvas.getContext("2d");
-    const cx = size / 2;
-    const cy = 205;
-    const radius = 132;
-    const count = groups.length;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.font = '700 18px -apple-system,BlinkMacSystemFont,"Segoe UI","Yu Gothic",sans-serif';
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    for (let level = 1; level <= 4; level++) {
-      ctx.beginPath();
-      groups.forEach((_, index) => {
-        const angle = -Math.PI / 2 + Math.PI * 2 * index / count;
-        const r = radius * level / 4;
-        const x = cx + Math.cos(angle) * r;
-        const y = cy + Math.sin(angle) * r;
-        if (index) ctx.lineTo(x, y);
-        else ctx.moveTo(x, y);
-      });
-      ctx.closePath();
-      ctx.strokeStyle = level === 4 ? "#bcc7dc" : "#dde3ee";
-      ctx.lineWidth = 2;
-      ctx.stroke();
-    }
-    groups.forEach((group, index) => {
-      const angle = -Math.PI / 2 + Math.PI * 2 * index / count;
-      ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.lineTo(cx + Math.cos(angle) * radius, cy + Math.sin(angle) * radius);
-      ctx.strokeStyle = "#e0e5ee";
-      ctx.lineWidth = 1;
-      ctx.stroke();
-      const lx = cx + Math.cos(angle) * (radius + 46);
-      const ly = cy + Math.sin(angle) * (radius + 36);
-      ctx.fillStyle = "#43506a";
-      ctx.fillText(shortGroupLabel(group.group), lx, ly);
-    });
-    ctx.beginPath();
-    groups.forEach((group, index) => {
-      const angle = -Math.PI / 2 + Math.PI * 2 * index / count;
-      const rate = group.items ? Math.max(0, Math.min(1, group.correct / group.items)) : 0;
-      const x = cx + Math.cos(angle) * radius * rate;
-      const y = cy + Math.sin(angle) * radius * rate;
-      if (index) ctx.lineTo(x, y);
-      else ctx.moveTo(x, y);
-    });
-    ctx.closePath();
-    ctx.fillStyle = "rgba(49,95,206,.20)";
-    ctx.fill();
-    ctx.strokeStyle = "#315fce";
-    ctx.lineWidth = 5;
-    ctx.stroke();
-  }
-
-  function questionRateHtml(question) {
-    const key = selectedAnswerKey();
-    return isRegisteredMode() && typeof window.statRateHtml === "function"
-      ? window.statRateHtml(key, question)
-      : "—";
-  }
-
-  function questionRateText(question) {
-    return String(questionRateHtml(question))
-      .replace(/<br\s*\/?\s*>/gi, " / ")
-      .replace(/<[^>]+>/g, "");
-  }
-
-  function questionNote(question) {
-    if (isRegisteredMode() && typeof window.rowNote === "function") {
-      return window.rowNote(selectedAnswerKey(), {q: question}) || "—";
-    }
-    return ({high:"AI確信度：高",medium:"AI確信度：中",low:"AI確信度：低"})[question.photoConfidence] || "—";
-  }
-
-  function pdfData(result) {
-    const key = selectedAnswerKey();
-    return {
-      examLabel: photoContext?.examText || (key ? key.examLabel : ""),
-      year: photoContext?.year || (key ? key.year : ""),
-      subject: activeSubjectLabel(),
-      score: result.score,
-      maxScore: result.maxScore,
-      pointsAvailable: result.pointsAvailable,
-      correct: result.correct,
-      partial: result.partial,
-      wrong: result.wrong,
-      missing: result.missing,
-      chosenGroups: result.chosenGroups,
-      groups: result.groups,
-      rows: result.rows.filter(row => row.included).map(row => {
-        const status = gradeStatus(row);
-        return {
-          id: displayGradeId(row.question),
-          got: row.got.join("") || "未入力",
-          expected: row.expected,
-          earned: row.earned,
-          points: row.points,
-          judge: status.text,
-          correctRate: questionRateText(row.question),
-          note: questionNote(row.question)
-        };
-      }),
-      generatedAt: new Date().toISOString()
-    };
-  }
-
-  function renderGrade(result) {
-    const includedCount = result.rows.filter(row => row.included).length;
-    const groupHtml = result.groups.map(group => `
-      <div>
-        <span>${escapeHtml(group.group)}</span>
-        <b>${result.pointsAvailable
-          ? `${formatScore(group.earned)} / ${formatScore(group.possible)}`
-          : `${group.correct} / ${group.items}`}</b>
-      </div>`).join("");
-    const rowsHtml = result.rows.map(row => {
-      const status = gradeStatus(row);
-      const note = questionNote(row.question);
-      return `
-        <tr class="${status.className}">
-          <td>${escapeHtml(displayGradeId(row.question))}</td>
-          <td>${escapeHtml(row.got.join("") || "未入力")}</td>
-          <td>${escapeHtml(row.expected)}</td>
-          <td>${status.text}</td>
-          <td>${row.included
-            ? result.pointsAvailable
-              ? `${formatScore(row.earned)} / ${formatScore(row.points)}`
-              : "配点なし"
-            : "—"}</td>
-          <td>${questionRateHtml(row.question)}</td>
-          <td>${escapeHtml(note)}</td>
-        </tr>`;
-    }).join("");
-    const groupTableHtml = result.groups.map(group => `
-      <tr>
-        <td>${escapeHtml(group.group)}</td>
-        <td>${result.pointsAvailable
-          ? `${formatScore(group.earned)} / ${formatScore(group.possible)}`
-          : `${group.correct} / ${group.items}`}</td>
-        <td>${group.items ? Math.round(group.correct / group.items * 1000) / 10 : 0}%</td>
-      </tr>`).join("");
-    $("gradingResult").className = "grading-result";
-    $("gradingResult").innerHTML = `
-      <div class="score-summary">
-        <div class="score-main"><span>${result.pointsAvailable ? "得点" : "正解数"}</span><b>${result.pointsAvailable
-          ? `${formatScore(result.score)} / ${formatScore(result.maxScore)}`
-          : `${result.correct} / ${includedCount}`}</b></div>
-        <div><span>採点単位</span><b>${includedCount}</b></div>
-        <div><span>誤答・部分点</span><b>${result.wrong + result.partial}</b></div>
-        <div><span>未入力</span><b>${result.missing}</b></div>
-      </div>
-      ${result.chosenGroups.length
-        ? `<p class="chosen-groups">採点対象：必答問題＋${result.chosenGroups.map(escapeHtml).join("・")}</p>`
-        : ""}
-      <div class="group-scores">${groupHtml}</div>
-      <div class="result-analytics">
-        <section class="radar-card">
-          <h3>大問別レーダー</h3>
-          <canvas id="scoreRadar" aria-label="大問別正答率のレーダーチャート"></canvas>
-        </section>
-        <section class="group-table-card">
-          <h3>${result.pointsAvailable ? "大問別得点" : "大問別正解数"}</h3>
-          <table class="group-score-table">
-            <thead><tr><th>大問</th><th>${result.pointsAvailable ? "得点" : "正解数"}</th><th>正答率</th></tr></thead>
-            <tbody>${groupTableHtml}</tbody>
-          </table>
-        </section>
-      </div>
-      <details class="grade-details">
-        <summary>採点内訳を表示</summary>
-        <div class="grade-table-wrap">
-          <table class="grade-table">
-            <thead><tr><th>番号</th><th>自分</th><th>正解</th><th>判定</th><th>得点</th><th>受験者正答率</th><th>注記</th></tr></thead>
-            <tbody>${rowsHtml}</tbody>
-          </table>
-        </div>
-      </details>`;
-    drawRadarChart($("scoreRadar"), result.groups);
-  }
-
   function gradeAnswers() {
     const key = selectedAnswerKey();
     if (!key) {
@@ -1771,43 +1561,19 @@
         selectedQuestions
       });
       lastGrade = result;
-      window.__markReaderPdfData = pdfData(result);
-      renderGrade(result);
-      setOuterStage("result");
-      $("pdfButton").classList.remove("hidden");
       saveAnswers();
-      $("gradingResult").scrollIntoView({behavior: "smooth", block: "nearest"});
+      if (!window.UILabResults || typeof window.UILabResults.showPhotoGrade !== "function") {
+        throw new Error("共通の採点結果画面を準備できませんでした。ページを再読み込みしてください。");
+      }
+      window.UILabResults.showPhotoGrade(result, {
+        ...(photoContext || {}),
+        templateLabel: TEMPLATES[subject].name
+      });
     } catch (error) {
       $("gradingResult").className = "grading-result grade-error";
       $("gradingResult").textContent = error && error.message
         ? error.message
         : "採点できませんでした。";
-    }
-  }
-
-  async function exportPdf() {
-    if (!lastGrade || !window.__markReaderPdfData) {
-      $("gradingResult").className = "grading-result grade-error";
-      $("gradingResult").textContent = "先に採点してください。";
-      return;
-    }
-    if (!window.MarkReaderPDF || typeof window.MarkReaderPDF.exportResult !== "function") {
-      $("copyStatus").textContent = "PDF出力を準備できませんでした。ページを再読み込みしてください。";
-      return;
-    }
-    const button = $("pdfButton");
-    button.disabled = true;
-    button.classList.add("busy");
-    button.textContent = "PDFを作成しています…";
-    try {
-      await window.MarkReaderPDF.exportResult(window.__markReaderPdfData);
-    } catch (error) {
-      console.error("PDF export failed", error);
-      $("copyStatus").textContent = `PDFを作成できませんでした：${error && error.message ? error.message : error}`;
-    } finally {
-      button.disabled = false;
-      button.classList.remove("busy");
-      button.textContent = "採点結果PDFを保存";
     }
   }
 
@@ -1848,6 +1614,10 @@
     },
     getContext() {
       return photoContext ? {...photoContext} : null;
+    },
+    showReview() {
+      setOuterStage("review");
+      show("resultCard");
     }
   };
 
