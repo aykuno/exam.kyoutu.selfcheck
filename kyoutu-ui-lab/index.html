@@ -6,8 +6,8 @@
   <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#ffffff">
   <title>共通テスト・センター試験 自動採点｜UI検証版</title>
-  <link rel="stylesheet" href="style.css?v=20260803-integrated1">
-  <link rel="stylesheet" href="photo/style.css?v=20260803-integrated1">
+  <link rel="stylesheet" href="style.css?v=20260803-subjectflow2">
+  <link rel="stylesheet" href="photo/style.css?v=20260803-subjectflow2">
 </head>
 <body>
   <header class="site-header">
@@ -46,7 +46,7 @@
       </article>
 
       <section class="selection-card">
-        <h2>番号を入力して採点</h2>
+        <h2>試験・科目を選ぶ</h2>
         <div class="select-grid">
           <label>年度
             <select id="yearSelect" disabled><option>読み込み中...</option></select>
@@ -67,23 +67,45 @@
         </div>
         <div class="selection-footer">
           <p><span id="questionCount">—項目</span><span id="maxScore">—点</span><span>端末内に自動保存</span></p>
-          <button class="primary-button" id="manualStartButton" type="button" disabled>この科目で番号を入力</button>
+          <button class="primary-button" id="manualStartButton" type="button" disabled>この科目で採点する</button>
         </div>
-      </section>
-      <section class="photo-entry-card">
-        <div class="photo-entry-icon" aria-hidden="true">▣</div>
-        <div class="photo-entry-copy">
-          <span class="photo-entry-label">未登録の模試・試験にも対応</span>
-          <h2>答案用紙と解答を撮影して採点</h2>
-          <p>答案用紙を撮影して読取番号を確認した後、解答・配点一覧を撮影します。登録済みの正解データは使いません。</p>
-        </div>
-        <button class="photo-entry-button" id="openPhotoFlow" type="button">写真を撮影して採点</button>
       </section>
       <p class="load-error" id="loadError" hidden></p>
     </section>
 
+    <section class="screen method-screen" id="methodScreen" hidden>
+      <button class="inline-back" id="methodBack" type="button">‹ 試験・科目選択へ戻る</button>
+      <div class="page-heading">
+        <p class="eyebrow">選択した科目</p>
+        <h1 id="methodSubject"></h1>
+        <p id="methodExam"></p>
+      </div>
+      <section class="method-selection-card">
+        <h2>採点方法を選ぶ</h2>
+        <p class="method-lead">この科目を、どの方法で採点するか選んでください。</p>
+        <div class="method-options">
+          <button class="method-option" id="methodManual" type="button">
+            <span class="method-icon" aria-hidden="true">123</span>
+            <span class="method-copy">
+              <strong>番号を入力して採点</strong>
+              <small>画面の10キーで解答番号を入力し、登録済みの正解データで採点します。</small>
+            </span>
+            <span class="method-arrow" aria-hidden="true">›</span>
+          </button>
+          <button class="method-option" id="methodPhoto" type="button">
+            <span class="method-icon camera" aria-hidden="true">▣</span>
+            <span class="method-copy">
+              <strong>写真を撮影して採点</strong>
+              <small>選択した科目に対応する答案用紙と、解答・配点一覧を撮影して照合します。</small>
+            </span>
+            <span class="method-arrow" aria-hidden="true">›</span>
+          </button>
+        </div>
+      </section>
+    </section>
+
     <section class="screen entry-screen" id="entryScreen" hidden>
-      <button class="inline-back" id="backToSelection" type="button">‹ 試験・科目選択へ戻る</button>
+      <button class="inline-back" id="backToSelection" type="button">‹ 採点方法の選択へ戻る</button>
       <div class="entry-heading">
         <div>
           <p id="entryExam"></p>
@@ -134,9 +156,9 @@
     <section class="screen photo-flow" id="photoScreen" hidden>
       <button class="inline-back photo-home-back" id="photoHomeBack" type="button">‹ 採点方法の選択へ戻る</button>
       <div class="photo-page-heading">
-        <p class="eyebrow">写真同士で照合</p>
+        <p class="eyebrow" id="photoContextExam">写真同士で照合</p>
         <h1>答案用紙と解答の写真で採点</h1>
-        <p>答案と解答・配点一覧を順番に撮影し、読取結果を確認してから自動採点します。</p>
+        <p><strong id="photoContextSubject"></strong>の答案と解答・配点一覧を順番に撮影し、読取結果を確認してから自動採点します。</p>
       </div>
 
       <section class="notice photo-notice">
@@ -145,17 +167,12 @@
       </section>
 
       <section id="setupCard" class="card action-card">
-        <h2>用紙を選択</h2>
-        <div class="subject-buttons" role="group" aria-label="用紙形式">
-          <button class="subject selected" data-subject="standard" type="button">
-            <b>国語・通常型</b><small>1〜60・片面</small>
-          </button>
-          <button class="subject" data-subject="math1" type="button">
-            <b>数学①</b><small>第1面＋第2面</small>
-          </button>
-          <button class="subject" data-subject="math2" type="button">
-            <b>数学②</b><small>両面・選択問題</small>
-          </button>
+        <h2>撮影する用紙</h2>
+        <div class="locked-sheet-card">
+          <span>選択済み</span>
+          <strong id="photoSheetSubject"></strong>
+          <small id="photoSheetExam"></small>
+          <b id="photoSheetTemplate"></b>
         </div>
         <section class="photo-to-photo-intro">
           <h3>写真採点の流れ</h3>
@@ -300,12 +317,12 @@
     </div>
   </div>
 
-  <script src="app.js?v=20260803-integrated1"></script>
-  <script src="pdf-export.js?v=20260803-integrated1"></script>
-  <script src="photo/ai-config.js?v=20260803-integrated1"></script>
-  <script type="module" src="photo/ai-reader.js?v=20260803-integrated1"></script>
-  <script src="photo/grader.js?v=20260803-integrated1"></script>
-  <script src="photo/pdf-export.js?v=20260803-integrated1"></script>
-  <script src="photo/reader.js?v=20260803-integrated1"></script>
+  <script src="app.js?v=20260803-subjectflow2"></script>
+  <script src="pdf-export.js?v=20260803-subjectflow2"></script>
+  <script src="photo/ai-config.js?v=20260803-subjectflow2"></script>
+  <script type="module" src="photo/ai-reader.js?v=20260803-subjectflow2"></script>
+  <script src="photo/grader.js?v=20260803-subjectflow2"></script>
+  <script src="photo/pdf-export.js?v=20260803-subjectflow2"></script>
+  <script src="photo/reader.js?v=20260803-subjectflow2"></script>
 </body>
 </html>
