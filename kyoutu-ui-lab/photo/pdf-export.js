@@ -335,8 +335,8 @@
     values.forEach((value, index) => {
       if (index === 3) {
         const color = value === "○" ? COLORS.green : value === "△" ? COLORS.amber : COLORS.red;
-        setFont(ctx, 23, "900", color, "center");
-        ctx.fillText(value, x + TABLE_COLUMNS[index] / 2, y + Math.max(5, (height - 25) / 2));
+        setFont(ctx, 27, "900", color, "center");
+        ctx.fillText(value, x + TABLE_COLUMNS[index] / 2, y + Math.max(4, (height - 27) / 2));
       } else {
         drawText(
           ctx,
