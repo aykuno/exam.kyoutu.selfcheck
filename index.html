@@ -2,67 +2,108 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#ffffff">
   <title>共通テスト・センター試験 自動採点</title>
   <style>
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:#f6f7fb;color:#1d2433}
-    .boot{max-width:720px;margin:48px auto;padding:20px;background:white;border:1px solid #d9deea;border-radius:16px;box-shadow:0 10px 24px rgba(22,34,64,.06)}
+    .boot{max-width:720px;margin:48px auto;padding:20px;background:#fff;border:1px solid #d9deea;border-radius:16px;box-shadow:0 10px 24px rgba(22,34,64,.06)}
   </style>
 </head>
 <body>
-<div class="boot"><h1>読み込み中</h1><p>正解データを読み込んでいます。</p></div>
+<div class="boot"><h1>読み込み中</h1><p>新しい採点画面を読み込んでいます。</p></div>
 <script>
 (function(){
-  const CURRENT_WRAPPER_URL = 'https://raw.githubusercontent.com/aykuno/exam.kyoutu.selfcheck/53ef468d0f41d280f3429942bfdb5387d29cd73e/index.html';
+  'use strict';
+
+  const LAB_INDEX = 'kyoutu-ui-lab/index.html?v=20260904-production1';
+  const LAB_APP = 'kyoutu-ui-lab/app.js?v=20260904-production1';
+  const OLD_PROBLEM_PREFIX = 'https://kyotsutest.vercel.app/test/';
+  const NEW_PROBLEM_PREFIX = 'https://kyotsu.org/test/';
 
   function fail(message){
-    document.body.innerHTML = '<pre style="white-space:pre-wrap;margin:20px;padding:16px;border-radius:12px;background:#0b1020;color:#e5e7eb">' + message + '</pre>';
+    document.body.innerHTML = '<pre style="white-space:pre-wrap;margin:20px;padding:16px;border-radius:12px;background:#0b1020;color:#e5e7eb">' + String(message).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])) + '</pre>';
   }
 
-  function replaceRequired(html, oldText, newText, label){
-    if(!html.includes(oldText)) throw new Error(label + ' を見つけられませんでした。');
-    return html.replace(oldText, newText);
+  function replaceRequired(text, oldText, newText, label){
+    if(!text.includes(oldText)) throw new Error(label + ' を見つけられませんでした。');
+    return text.replace(oldText, newText);
   }
 
-  function patchWrapper(html){
-    html = replaceRequired(html,
-`  const MOCK_EXAM_LABEL = '模擬試験-2026年5月実施ベネッセ共通テスト模試';
-  const UPDATE_TIME_TEXT = '最終更新日時：2026/7/05 18:30';`,
-`  const MOCK_EXAM_LABEL = '模擬試験-2026年5月実施ベネッセ共通テスト模試';
-  const KAWAI_EXAM_ID = 'mock-kawai-zento-2026-02';
-  const KAWAI_EXAM_LABEL = '模擬試験-第２回 河合全統共通テスト模試';
-  const UPDATE_TIME_TEXT = '最終更新日時：2026/7/26 23:59';`,
-      '模試定義');
-
-    html = replaceRequired(html,
-      "html = html.replace(/<b>バージョン：v\\d+<\\/b>/, '<b>バージョン：v182</b>');",
-      "html = html.replace(/<b>バージョン：v\\d+<\\/b>/, '<b>バージョン：v184</b>');",
-      'バージョン定義');
-
-    html = replaceRequired(html,
-`      "const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）','" + MOCK_EXAM_ID + "':'" + MOCK_EXAM_LABEL + "'};"`,
-`      "const STORAGE='ct-marker-keys-v8'; const USER_STORAGE='ct-marker-user-answers-v1'; const examLabel={main:'本試験',retake:'追試験・再試験',other:'試作問題','center-main':'本試験（センター）','center-retake':'追試験（センター）','" + MOCK_EXAM_ID + "':'" + MOCK_EXAM_LABEL + "','" + KAWAI_EXAM_ID + "':'" + KAWAI_EXAM_LABEL + "'};"`,
+  function patchApp(app){
+    app = replaceRequired(app,
+`  const EXAM_LABELS = {
+    main:'本試験',
+    'mock-kawai-zento-2026-02':'第2回 河合全統共通テスト模試'
+  };`,
+`  const EXAM_LABELS = {
+    main:'本試験',
+    retake:'追試験・再試験',
+    other:'試作問題',
+    'center-main':'本試験（センター）',
+    'center-retake':'追試験（センター）',
+    'mock-benesse-2026-05':'模擬試験-2026年5月実施ベネッセ共通テスト模試',
+    'mock-kawai-zento-2026-02':'模擬試験-第２回 河合全統共通テスト模試'
+  };`,
       '試験区分表示定義');
 
-    html = replaceRequired(html,
-`    const oldInit = "async function init(){const res=await fetch('answer_keys_verified.json',{cache:'no-store'});const obj=await res.json();BASE_KEYS=obj.keys||[];try{const sres=await fetch('statistics_final.json',{cache:'no-store'});if(sres.ok)STAT_DATA=await sres.json();}catch(e){STAT_DATA={entries:[]};}refresh();}";
-    // v179: 模試データは answer_keys_verified.json に統合済み。別JSONをfetchして実行時結合しない。
-    if (!html.includes(oldInit)) throw new Error('index.html の init 関数を見つけられませんでした。');`,
-`    const oldInit = "async function init(){const res=await fetch('answer_keys_verified.json',{cache:'no-store'});const obj=await res.json();BASE_KEYS=obj.keys||[];try{const sres=await fetch('statistics_final.json',{cache:'no-store'});if(sres.ok)STAT_DATA=await sres.json();}catch(e){STAT_DATA={entries:[]};}refresh();}";
-    const newInit = "async function init(){const res=await fetch('answer_keys_verified.json',{cache:'no-store'});const obj=await res.json();BASE_KEYS=obj.keys||[];for(const file of ['answer_keys_mock_kawai_2026_02_english_info.json','answer_keys_mock_kawai_2026_02_geo_history.json','answer_keys_mock_kawai_2026_02_civics_combined.json','answer_keys_mock_kawai_2026_02_japanese.json','answer_keys_mock_kawai_2026_02_math1.json','answer_keys_mock_kawai_2026_02_math2.json','answer_keys_mock_kawai_2026_02_science_basic.json','answer_keys_mock_kawai_2026_02_science_advanced.json']){try{const mres=await fetch(file,{cache:'no-store'});if(mres.ok){const mobj=await mres.json();BASE_KEYS=BASE_KEYS.concat(mobj.keys||[]);}}catch(e){console.warn('Kawai mock answer data could not be loaded: '+file,e);}}const infoGroupLabels={Q2A:'第2問 A',Q2B:'第2問 B',Q4A:'第4問 A',Q4B:'第4問 B'};for(const k of BASE_KEYS){if(k.problemUrl&&k.problemUrl.startsWith('https://kyotsutest.vercel.app/test/'))k.problemUrl='https://kyotsu.org/test/'+k.problemUrl.slice('https://kyotsutest.vercel.app/test/'.length);if(k.exam==='mock-kawai-zento-2026-02'&&k.subject==='情報I'){for(const q of (k.questions||[])){if(infoGroupLabels[q.group])q.group=infoGroupLabels[q.group];}}}try{const sres=await fetch('statistics_final.json',{cache:'no-store'});if(sres.ok)STAT_DATA=await sres.json();}catch(e){STAT_DATA={entries:[]};}refresh();}";
-    if (!html.includes(oldInit)) throw new Error('index.html の init 関数を見つけられませんでした。');
-    html = html.replace(oldInit, newInit);`,
-      '正解データ読込定義');
+    app = replaceRequired(app,
+      "      if(!mainResponse.ok) throw new Error('2025年度本試験データを読み込めませんでした。');",
+      "      if(!mainResponse.ok) throw new Error('正解データを読み込めませんでした。');",
+      '正解データエラー表示');
 
+    app = replaceRequired(app,
+      "      const mainKeys=(mainObject.keys||[]).filter(k=>String(k.year)==='2025'&&k.exam==='main');",
+      "      const mainKeys=(mainObject.keys||[]);",
+      '本番データ範囲');
+
+    app = replaceRequired(app,
+      "      keys=[...mainKeys,...mockKeys].map(k=>normalizeKey(mergeSourceMetadata(k,sourceEntries)));",
+      "      keys=[...mainKeys,...mockKeys].map(k=>{const merged=mergeSourceMetadata(k,sourceEntries);if(merged.problemUrl&&merged.problemUrl.startsWith('" + OLD_PROBLEM_PREFIX + "'))merged.problemUrl='" + NEW_PROBLEM_PREFIX + "'+merged.problemUrl.slice('" + OLD_PROBLEM_PREFIX + "'.length);return normalizeKey(merged);});",
+      '問題URL・全データ統合');
+
+    return app;
+  }
+
+  function patchHtml(html, app){
+    html = replaceRequired(html, '<head>', '<head>\n  <base href="./kyoutu-ui-lab/">', 'base要素');
+    html = html.replace('<title>共通テスト・センター試験 自動採点｜UI検証版</title>', '<title>共通テスト・センター試験 自動採点</title>');
+    html = html.replace('<span class="lab-badge">検証版</span>', '');
+    html = html.replace('<p class="eyebrow">メインサイトとは別のUI検証版</p>', '<p class="eyebrow">共通テスト・センター試験 自動採点</p>');
+    html = html.replace('</head>', '<style>.test-tools{display:none!important}</style>\n</head>');
+
+    const loadError = '      <p class="load-error" id="loadError" hidden></p>';
+    const userKeyCard = `      <section class="custom-compare-card">
+        <div>
+          <span class="custom-compare-label">自分で登録した正答データ</span>
+          <h2>登録済みの自作データで採点</h2>
+          <p>学校の小テスト・模試・自作問題など、自分で登録した正答データを使って採点します。</p>
+        </div>
+        <a class="secondary-action-button" href="../user-key-tool/" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">登録データで採点する</a>
+      </section>
+`;
+    html = replaceRequired(html, loadError, userKeyCard + loadError, 'ユーザー登録データ導線');
+
+    const appTag = '<script src="app.js?v=20260903-source-links2"></' + 'script>';
+    const safeApp = app.replace(/<\/script/gi,'<\\/script');
+    html = replaceRequired(html, appTag, '<script>' + safeApp + '</' + 'script>', 'app.js読込タグ');
     return html;
   }
 
-  fetch(CURRENT_WRAPPER_URL, {cache:'no-store'})
-    .then(r => {if(!r.ok) throw new Error('current wrapper fetch failed: ' + r.status); return r.text();})
-    .then(patchWrapper)
-    .then(html => {document.open(); document.write(html); document.close();})
-    .catch(err => fail('読み込みに失敗しました。\n' + err.message));
+  Promise.all([
+    fetch(LAB_INDEX,{cache:'no-store'}),
+    fetch(LAB_APP,{cache:'no-store'})
+  ])
+    .then(async ([htmlResponse,appResponse])=>{
+      if(!htmlResponse.ok) throw new Error('新UI HTMLの読み込みに失敗しました: '+htmlResponse.status);
+      if(!appResponse.ok) throw new Error('新UI JavaScriptの読み込みに失敗しました: '+appResponse.status);
+      const html=await htmlResponse.text();
+      const app=patchApp(await appResponse.text());
+      return patchHtml(html,app);
+    })
+    .then(html=>{document.open();document.write(html);document.close();})
+    .catch(error=>fail('メインサイトの読み込みに失敗しました。\n'+error.message));
 })();
 </script>
 </body>
