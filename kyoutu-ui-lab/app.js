@@ -62,6 +62,17 @@
   function groupsFor(k){ return [...new Set((k.questions || []).map(q=>q.group || '未分類'))]; }
   function qKey(q){ return norm(q.group || q.problemNumber) + '||' + norm(q.id); }
   function keySignature(k){ return k ? [String(k.year),k.exam,k.subject].join('||') : ''; }
+  function mergeSourceMetadata(k,sourceEntries){
+    const meta=(sourceEntries||[]).find(item=>
+      String(item.year)===String(k.year)&&item.exam===k.exam&&item.subject===k.subject
+    );
+    if(!meta) return k;
+    const out=deepClone(k);
+    ['source','sourceUrl','answerPdfUrl','sourcePageUrl','problemUrl','problemSource'].forEach(field=>{
+      if((out[field]==null||out[field]==='')&&meta[field]!=null&&meta[field]!=='') out[field]=meta[field];
+    });
+    return out;
+  }
   function examText(k){
     const year=k&&k.year?`${k.year}年度 `:'';
     const exam=k?(EXAM_LABELS[k.exam]||k.exam||''):'';
@@ -104,9 +115,10 @@
 
   async function loadData(){
     try{
-      const [mainResponse,statsResponse,...mockResponses]=await Promise.all([
+      const [mainResponse,statsResponse,sourceIndexResponse,...mockResponses]=await Promise.all([
         fetch('../answer_keys_verified.json',{cache:'no-store'}),
         fetch('../statistics_final.json',{cache:'no-store'}),
+        fetch('../source_index.json',{cache:'no-store'}),
         ...DATA_FILES.map(file=>fetch(file,{cache:'no-store'}))
       ]);
       if(!mainResponse.ok) throw new Error('2025年度本試験データを読み込めませんでした。');
@@ -117,7 +129,16 @@
         return response.json();
       }));
       const mockKeys=mockObjects.flatMap(obj=>obj.keys||[]).filter(k=>String(k.year)==='2026'&&k.exam==='mock-kawai-zento-2026-02');
-      keys=[...mainKeys,...mockKeys].map(normalizeKey);
+      let sourceEntries=[];
+      if(sourceIndexResponse.ok){
+        try{
+          const sourceIndex=await sourceIndexResponse.json();
+          sourceEntries=sourceIndex.included||[];
+        }catch(error){
+          console.warn('出典リンク索引を読み込めませんでした。',error);
+        }
+      }
+      keys=[...mainKeys,...mockKeys].map(k=>normalizeKey(mergeSourceMetadata(k,sourceEntries)));
       if(statsResponse.ok) statistics=await statsResponse.json();
       setupSelectors();
     }catch(error){
@@ -166,9 +187,11 @@
     $('questionCount').textContent=`${k.questions.length}項目`;
     $('maxScore').textContent=`${k.maxScore==null?totalScore(k):k.maxScore}点`;
     const links=[];
-    if(k.sourceUrl) links.push(`<a href="${esc(k.sourceUrl)}" target="_blank" rel="noopener">正解</a>`);
-    if(k.problemUrl) links.push(`<a href="${esc(k.problemUrl)}" target="_blank" rel="noopener">問題</a>`);
-    if(k.explanationSourceUrl) links.push(`<a href="${esc(k.explanationSourceUrl)}" target="_blank" rel="noopener">解説</a>`);
+    const answerUrl=k.answerPdfUrl||k.sourceUrl;
+    if(answerUrl) links.push(`<a href="${esc(answerUrl)}" target="_blank" rel="noopener noreferrer">解答</a>`);
+    if(k.sourcePageUrl&&k.sourcePageUrl!==answerUrl) links.push(`<a href="${esc(k.sourcePageUrl)}" target="_blank" rel="noopener noreferrer">掲載ページ</a>`);
+    if(k.problemUrl) links.push(`<a href="${esc(k.problemUrl)}" target="_blank" rel="noopener noreferrer">問題</a>`);
+    if(k.explanationSourceUrl) links.push(`<a href="${esc(k.explanationSourceUrl)}" target="_blank" rel="noopener noreferrer">解説</a>`);
     $('sourceLinks').innerHTML=links.join('');
   }
   function photoTemplateFor(k){
