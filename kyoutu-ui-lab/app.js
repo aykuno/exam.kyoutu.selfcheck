@@ -11,6 +11,7 @@
     '../answer_keys_mock_kawai_2026_02_science_basic.json',
     '../answer_keys_mock_kawai_2026_02_science_advanced.json'
   ];
+  const KAWAI_GUIDE_URL = 'https://moshi-navi.kawai-juku.ac.jp/tebiki/2026/266062011';
   const STORAGE_KEY = 'ct-ui-lab-realdata-v1';
   const EXAM_LABELS = {
     main:'本試験',
@@ -63,14 +64,19 @@
   function qKey(q){ return norm(q.group || q.problemNumber) + '||' + norm(q.id); }
   function keySignature(k){ return k ? [String(k.year),k.exam,k.subject].join('||') : ''; }
   function mergeSourceMetadata(k,sourceEntries){
+    const out=deepClone(k);
     const meta=(sourceEntries||[]).find(item=>
       String(item.year)===String(k.year)&&item.exam===k.exam&&item.subject===k.subject
     );
-    if(!meta) return k;
-    const out=deepClone(k);
-    ['source','sourceUrl','answerPdfUrl','sourcePageUrl','problemUrl','problemSource'].forEach(field=>{
-      if((out[field]==null||out[field]==='')&&meta[field]!=null&&meta[field]!=='') out[field]=meta[field];
-    });
+    if(meta){
+      ['source','sourceUrl','answerPdfUrl','sourcePageUrl','problemUrl','problemSource','explanationSource','explanationSourceUrl'].forEach(field=>{
+        if((out[field]==null||out[field]==='')&&meta[field]!=null&&meta[field]!=='') out[field]=meta[field];
+      });
+    }
+    if(String(out.year)==='2026'&&out.exam==='mock-kawai-zento-2026-02'){
+      if(!out.sourceUrl) out.sourceUrl=KAWAI_GUIDE_URL;
+      if(!out.explanationSourceUrl) out.explanationSourceUrl=KAWAI_GUIDE_URL;
+    }
     return out;
   }
   function examText(k){
