@@ -17,10 +17,68 @@
 (function(){
   'use strict';
 
-  const LAB_INDEX = 'kyoutu-ui-lab/index.html?v=20260904-production1';
-  const LAB_APP = 'kyoutu-ui-lab/app.js?v=20260904-production1';
+  const LAB_INDEX = 'kyoutu-ui-lab/index.html?v=20260904-production2';
+  const LAB_APP = 'kyoutu-ui-lab/app.js?v=20260904-production2';
   const OLD_PROBLEM_PREFIX = 'https://kyotsutest.vercel.app/test/';
   const NEW_PROBLEM_PREFIX = 'https://kyotsu.org/test/';
+  const DNC_R8_MAIN_PAGE = 'https://www.dnc.ac.jp/kyotsu/kakomondai/r8/r8_honsiken_seikai.html';
+  const DNC_R8_RETAKE_PAGE = 'https://www.dnc.ac.jp/kyotsu/kakomondai/r8/r8_tuisaisiken_seikai.html';
+
+  function dncPdf(d,file,name){
+    return 'https://www.dnc.ac.jp/albums/abm.php?d='+d+'&f='+file+'&n='+encodeURIComponent(name);
+  }
+
+  const DNC_R8_MAIN_ANSWERS = {
+    '国語':dncPdf(797,'abm00006035.pdf','R8_【国語】発表用正解.pdf'),
+    '地理総合，地理探究':dncPdf(797,'abm00006031.pdf','R8_【地理総合，地理探究】発表用正解.pdf'),
+    '歴史総合，日本史探究':dncPdf(797,'abm00006032.pdf','R8_【歴史総合，日本史探究】発表用正解.pdf'),
+    '歴史総合，世界史探究':dncPdf(797,'abm00006033.pdf','R8_【歴史総合，世界史探究】発表用正解.pdf'),
+    '公共，倫理':dncPdf(797,'abm00006030.pdf','R8_【公共，倫理】発表用正解.pdf'),
+    '公共，政治・経済':dncPdf(797,'abm00006034.pdf','R8_【公共，政治経済】発表用正解.pdf'),
+    '地理総合':dncPdf(797,'abm00006029.pdf','R8_【地総／歴総／公共】発表用正解.pdf'),
+    '歴史総合':dncPdf(797,'abm00006029.pdf','R8_【地総／歴総／公共】発表用正解.pdf'),
+    '公共':dncPdf(797,'abm00006029.pdf','R8_【地総／歴総／公共】発表用正解.pdf'),
+    '数学Ⅰ，数学A':dncPdf(797,'abm00006054.pdf','R8_【数学Ⅰ，数学A】発表用正解.pdf'),
+    '数学Ⅰ':dncPdf(797,'abm00006053.pdf','R8_【数学Ⅰ】発表用正解.pdf'),
+    '数学Ⅱ，数学B，数学C':dncPdf(797,'abm00006056.pdf','R8_【数学Ⅱ，数学B，数学C】発表用正解.pdf'),
+    '物理基礎':dncPdf(797,'abm00006051.pdf','R8_【基礎科目】発表用正解.pdf'),
+    '化学基礎':dncPdf(797,'abm00006051.pdf','R8_【基礎科目】発表用正解.pdf'),
+    '生物基礎':dncPdf(797,'abm00006051.pdf','R8_【基礎科目】発表用正解.pdf'),
+    '地学基礎':dncPdf(797,'abm00006051.pdf','R8_【基礎科目】発表用正解.pdf'),
+    '物理':dncPdf(797,'abm00006049.pdf','R8_【物理】発表用正解.pdf'),
+    '化学':dncPdf(797,'abm00006050.pdf','R8_【化学】発表用正解.pdf'),
+    '生物':dncPdf(797,'abm00006047.pdf','R8_【生物】発表用正解.pdf'),
+    '地学':dncPdf(797,'abm00006048.pdf','R8_【地学】発表用正解.pdf'),
+    '英語（リーディング）':dncPdf(797,'abm00006039.pdf','R8_【英語（リーディング）】発表用正解.pdf'),
+    '英語（リスニング）':dncPdf(797,'abm00006037.pdf','R8_【英語（リスニング）】発表用正解.pdf'),
+    '情報Ⅰ':dncPdf(797,'abm00006055.pdf','R8_【情報Ⅰ】発表用正解.pdf')
+  };
+
+  const DNC_R8_RETAKE_ANSWERS = {
+    '国語':dncPdf(798,'abm00006068.pdf','R8_追・再試験【国語】発表用正解.pdf'),
+    '地理総合，地理探究':dncPdf(798,'abm00006070.pdf','R8_追・再試験【地理総合，地理探究】発表用正解.pdf'),
+    '歴史総合，日本史探究':dncPdf(798,'abm00006069.pdf','R8_追・再試験【歴史総合，日本史探究】発表用正解.pdf'),
+    '歴史総合，世界史探究':dncPdf(798,'abm00006071.pdf','R8_追・再試験【歴史総合，世界史探究】発表用正解.pdf'),
+    '公共，倫理':dncPdf(798,'abm00006073.pdf','R8_追・再試験【公共，倫理】発表用正解.pdf'),
+    '公共，政治・経済':dncPdf(798,'abm00006072.pdf','R8_追・再試験【公共，政治経済】発表用正解.pdf'),
+    '地理総合':dncPdf(798,'abm00006074.pdf','R8_追・再試験【地総／歴総／公共】発表用正解.pdf'),
+    '歴史総合':dncPdf(798,'abm00006074.pdf','R8_追・再試験【地総／歴総／公共】発表用正解.pdf'),
+    '公共':dncPdf(798,'abm00006074.pdf','R8_追・再試験【地総／歴総／公共】発表用正解.pdf'),
+    '数学Ⅰ，数学A':dncPdf(798,'abm00006096.pdf','R8_追・再試験【数学Ⅰ，数学A】発表用正解.pdf'),
+    '数学Ⅰ':dncPdf(798,'abm00006097.pdf','R8_追・再試験【数学Ⅰ】発表用正解.pdf'),
+    '数学Ⅱ，数学B，数学C':dncPdf(798,'abm00006098.pdf','R8_追・再試験【数学Ⅱ，数学B，数学C】発表用正解.pdf'),
+    '物理基礎':dncPdf(798,'abm00006091.pdf','R8_追・再試験【基礎科目】発表用正解.pdf'),
+    '化学基礎':dncPdf(798,'abm00006091.pdf','R8_追・再試験【基礎科目】発表用正解.pdf'),
+    '生物基礎':dncPdf(798,'abm00006091.pdf','R8_追・再試験【基礎科目】発表用正解.pdf'),
+    '地学基礎':dncPdf(798,'abm00006091.pdf','R8_追・再試験【基礎科目】発表用正解.pdf'),
+    '物理':dncPdf(798,'abm00006092.pdf','R8_追・再試験【物理】発表用正解.pdf'),
+    '化学':dncPdf(798,'abm00006093.pdf','R8_追・再試験【化学】発表用正解.pdf'),
+    '生物':dncPdf(798,'abm00006094.pdf','R8_追・再試験【生物】発表用正解.pdf'),
+    '地学':dncPdf(798,'abm00006095.pdf','R8_追・再試験【地学】発表用正解.pdf'),
+    '英語（リーディング）':dncPdf(798,'abm00006083.pdf','R8_追・再試験【英語（リーディング）】発表用正解.pdf'),
+    '英語（リスニング）':dncPdf(798,'abm00006079.pdf','R8追・再試験【英語（リスニング）】発表用正解.pdf'),
+    '情報Ⅰ':dncPdf(798,'abm00006099.pdf','R8_追・再試験【情報Ⅰ】発表用正解.pdf')
+  };
 
   function fail(message){
     document.body.innerHTML = '<pre style="white-space:pre-wrap;margin:20px;padding:16px;border-radius:12px;background:#0b1020;color:#e5e7eb">' + String(message).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])) + '</pre>';
@@ -58,10 +116,11 @@
       "      const mainKeys=(mainObject.keys||[]);",
       '本番データ範囲');
 
-    app = replaceRequired(app,
-      "      keys=[...mainKeys,...mockKeys].map(k=>normalizeKey(mergeSourceMetadata(k,sourceEntries)));",
-      "      keys=[...mainKeys,...mockKeys].map(k=>{const merged=mergeSourceMetadata(k,sourceEntries);if(merged.problemUrl&&merged.problemUrl.startsWith('" + OLD_PROBLEM_PREFIX + "'))merged.problemUrl='" + NEW_PROBLEM_PREFIX + "'+merged.problemUrl.slice('" + OLD_PROBLEM_PREFIX + "'.length);return normalizeKey(merged);});",
-      '問題URL・全データ統合');
+    const dncMainJson=JSON.stringify(DNC_R8_MAIN_ANSWERS);
+    const dncRetakeJson=JSON.stringify(DNC_R8_RETAKE_ANSWERS);
+    const oldMerge="      keys=[...mainKeys,...mockKeys].map(k=>normalizeKey(mergeSourceMetadata(k,sourceEntries)));";
+    const newMerge=`      const dncR8Main=${dncMainJson};const dncR8Retake=${dncRetakeJson};keys=[...mainKeys,...mockKeys].map(k=>{const merged=mergeSourceMetadata(k,sourceEntries);if(merged.problemUrl&&merged.problemUrl.startsWith('${OLD_PROBLEM_PREFIX}'))merged.problemUrl='${NEW_PROBLEM_PREFIX}'+merged.problemUrl.slice('${OLD_PROBLEM_PREFIX}'.length);if(String(merged.year)==='2026'&&(merged.exam==='main'||merged.exam==='retake')){const dncMap=merged.exam==='main'?dncR8Main:dncR8Retake;const answer=dncMap[merged.subject];if(answer){merged.answerPdfUrl=answer;merged.sourceUrl=answer;}merged.sourcePageUrl=merged.exam==='main'?'${DNC_R8_MAIN_PAGE}':'${DNC_R8_RETAKE_PAGE}';merged.source='大学入試センター 令和8年度 '+(merged.exam==='main'?'本試験':'追・再試験')+'の正解';}return normalizeKey(merged);});`;
+    app = replaceRequired(app,oldMerge,newMerge,'問題URL・大学入試センター正解リンク統合');
 
     return app;
   }
