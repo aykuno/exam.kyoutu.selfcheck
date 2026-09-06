@@ -12,7 +12,7 @@
     '../answer_keys_mock_kawai_2026_02_science_advanced.json'
   ];
   const KAWAI_GUIDE_URL = 'https://moshi-navi.kawai-juku.ac.jp/tebiki/2026/266062011';
-  // Source link catalog, revision 2. Checked 2026-09-05/06. Missing kinds are unconfirmed.
+  // Source link catalog, revision 3. Checked 2026-09-05/06. Missing kinds retain existing links.
   const SOURCE_LINK_CATALOG = {
     "2001||center-main||世界史A":{"問題":[["https://kyotsu.org/test/2001_%E4%B8%96%E7%95%8C%E5%8F%B2A_%E6%9C%AC%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf","問題"]]},
     "2001||center-main||世界史B":{"問題":[["https://kyotsu.org/test/2001_%E4%B8%96%E7%95%8C%E5%8F%B2B_%E6%9C%AC%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf","問題"]]},
@@ -1069,15 +1069,14 @@
     $('maxScore').textContent=`${k.maxScore==null?totalScore(k):k.maxScore}点`;
     const links=[];
     const catalog=SOURCE_LINK_CATALOG[keySignature(k)]||{};
+    const fallback={'問題':k.problemUrl,'解答':k.answerPdfUrl||k.sourceUrl,'解説':k.explanationSourceUrl};
     ['問題','解答','解説'].forEach(kind=>{
-      const items=(catalog[kind]||[]).filter(([url])=>/^https:\/\//.test(url));
-      if(items.length){
-        items.forEach(([url,label])=>links.push(`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`));
-      }else{
-        links.push(`<span aria-disabled="true" title="アクセスできる該当資料を確認できていません。" style="margin:0;border:1px solid #d9deea;border-radius:9px;padding:8px 10px;background:#f1f4f8;color:#667085;font-size:12px;font-weight:900">${kind}（確認不能）</span>`);
-      }
+      const items=catalog[kind]||(fallback[kind]?[[fallback[kind],kind]]:[]);
+      items.forEach(([url,label])=>links.push(`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`));
     });
-    (catalog['掲載ページ']||[]).filter(([url])=>/^https:\/\//.test(url)).forEach(([url,label])=>{
+    const answerUrl=catalog['解答']?catalog['解答'][0][0]:fallback['解答'];
+    const sourcePages=catalog['掲載ページ']||(k.sourcePageUrl?[[k.sourcePageUrl,'掲載ページ']]:[]);
+    sourcePages.filter(([url])=>url!==answerUrl).forEach(([url,label])=>{
       links.push(`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`);
     });
     $('sourceLinks').innerHTML=links.join('');
