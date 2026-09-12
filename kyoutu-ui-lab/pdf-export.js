@@ -480,7 +480,7 @@ if(true){
 (function(){
   'use strict';
 
-  const VERSION = 'v179-optical-row-centering';
+  const VERSION = 'v180-safari-pure-datauri';
   const PAGE_W = 1240;
   const PAGE_H = 1754;
   const RENDER_SCALE = 2.33; // 約350dpi相当（Android/iPhone共通）
@@ -498,7 +498,7 @@ if(true){
   const GOOD = '#137333';
   const BAD = '#b3261e';
   const WARN = '#8a5b00';
-  const JPEG_QUALITY = 0.97;
+  const JPEG_QUALITY = 0.93;
 
   function $(id){ return document.getElementById(id); }
   function txt(el){ return (el && (el.innerText || el.textContent) || '').replace(/\s+/g, ' ').trim(); }
@@ -815,48 +815,66 @@ if(true){
 
   function canvasToJpegBytes(canvas){
     return new Promise((resolve, reject)=>{
-      if(canvas.toBlob){
-        canvas.toBlob(async blob=>{
-          try{
-            if(!blob) throw new Error('canvas JPEG生成に失敗しました。');
-            resolve(new Uint8Array(await blob.arrayBuffer()));
-          }catch(e){ reject(e); }
-        }, 'image/jpeg', JPEG_QUALITY);
-      }else{
-        try{
-          const dataUrl = canvas.toDataURL('image/jpeg', JPEG_QUALITY);
-          const bin = atob(dataUrl.split(',')[1]||'');
-          const bytes = new Uint8Array(bin.length);
-          for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
-          resolve(bytes);
-        }catch(e){ reject(e); }
-      }
+      try{
+        const dataUrl = canvas.toDataURL('image/jpeg', JPEG_QUALITY);
+        const comma = dataUrl.indexOf(',');
+        if(comma < 0) throw new Error('canvas JPEG生成に失敗しました。');
+        const bin = atob(dataUrl.slice(comma + 1));
+        const bytes = new Uint8Array(bin.length);
+        for(let i=0;i<bin.length;i++) bytes[i] = bin.charCodeAt(i) & 0xff;
+        resolve(bytes);
+      }catch(e){ reject(e); }
     });
   }
-  const enc = new TextEncoder();
-  function ascii(s){ return enc.encode(String(s)); }
-  function makePdfBlob(jpegs){
+
+  function byteString(s){
+    s = String(s);
+    const bytes = new Uint8Array(s.length);
+    for(let i=0;i<s.length;i++) bytes[i] = s.charCodeAt(i) & 0xff;
+    return bytes;
+  }
+
+  function makePdfBytes(jpegs){
     const pdfW=595.275590551, pdfH=841.88976378, parts=[], offsets=[0]; let len=0;
-    function add(part){ if(typeof part==='string') part=ascii(part); parts.push(part); len += part.byteLength || part.length || 0; }
-    function obj(n, body){ offsets[n]=len; add(n+' 0 obj\n'); body.forEach(add); add('\nendobj\n'); }
+    function add(part){
+      if(typeof part === 'string') part = byteString(part);
+      parts.push(part);
+      len += part.byteLength || part.length || 0;
+    }
+    function obj(n, body){
+      offsets[n]=len;
+      add(n+' 0 obj\n');
+      body.forEach(add);
+      add('\nendobj\n');
+    }
     add('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
-    const kids=[]; for(let i=0;i<jpegs.length;i++) kids.push((3+i*3)+' 0 R');
+    const kids=[];
+    for(let i=0;i<jpegs.length;i++) kids.push((3+i*3)+' 0 R');
     obj(1,['<< /Type /Catalog /Pages 2 0 R >>']);
     obj(2,['<< /Type /Pages /Kids [',kids.join(' '),'] /Count ',String(jpegs.length),' >>']);
     for(let i=0;i<jpegs.length;i++){
       const page=3+i*3, content=page+1, image=page+2, name='Im'+(i+1);
       const stream='q\n'+pdfW.toFixed(3)+' 0 0 '+pdfH.toFixed(3)+' 0 0 cm\n/'+name+' Do\nQ\n';
       obj(page,['<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ',pdfW.toFixed(3),' ',pdfH.toFixed(3),'] /Resources << /XObject << /',name,' ',image,' 0 R >> >> /Contents ',content,' 0 R >>']);
-      obj(content,['<< /Length ',String(ascii(stream).length),' >>\nstream\n',stream,'endstream']);
-      offsets[image]=len; add(image+' 0 obj\n');
+      obj(content,['<< /Length ',String(byteString(stream).length),' >>\nstream\n',stream,'endstream']);
+      offsets[image]=len;
+      add(image+' 0 obj\n');
       add('<< /Type /XObject /Subtype /Image /Width '+RASTER_W+' /Height '+RASTER_H+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+jpegs[i].length+' >>\nstream\n');
-      add(jpegs[i]); add('\nendstream\nendobj\n');
+      add(jpegs[i]);
+      add('\nendstream\nendobj\n');
     }
     const xref=len, maxObj=2+jpegs.length*3;
     add('xref\n0 '+(maxObj+1)+'\n0000000000 65535 f \n');
     for(let i=1;i<=maxObj;i++) add(String(offsets[i]).padStart(10,'0')+' 00000 n \n');
     add('trailer\n<< /Size '+(maxObj+1)+' /Root 1 0 R >>\nstartxref\n'+xref+'\n%%EOF');
-    return new Blob(parts,{type:'application/pdf'});
+
+    const out = new Uint8Array(len);
+    let pos = 0;
+    for(const part of parts){
+      out.set(part, pos);
+      pos += part.byteLength || part.length || 0;
+    }
+    return out;
   }
 
   function showPrintFallback(reason){
@@ -871,8 +889,6 @@ if(true){
   }
 
   function isIOSSafariOnly(){
-    // Name is kept for compatibility with the surrounding code, but the branch is intentionally Safari-only.
-    // Chrome/Firefox/Edge, including their iOS user agents, keep the existing direct-download path.
     const ua = navigator.userAgent || '';
     const vendor = navigator.vendor || '';
     const isSafari = /Safari\//.test(ua) && /Apple/i.test(vendor || 'Apple');
@@ -887,8 +903,7 @@ if(true){
     return name;
   }
 
-  function arrayBufferToBase64(buffer){
-    const bytes = new Uint8Array(buffer);
+  function bytesToBase64(bytes){
     let binary = '';
     const chunkSize = 8192;
     for(let i=0;i<bytes.length;i+=chunkSize){
@@ -897,23 +912,8 @@ if(true){
     return btoa(binary);
   }
 
-  function blobToDataUrl(blob){
-    return new Promise((resolve, reject)=>{
-      if(typeof FileReader !== 'undefined'){
-        const reader = new FileReader();
-        reader.onload = ()=> resolve(String(reader.result || ''));
-        reader.onerror = ()=> reject(reader.error || new Error('PDFデータURLの作成に失敗しました。'));
-        reader.readAsDataURL(blob);
-        return;
-      }
-      if(blob && typeof blob.arrayBuffer === 'function'){
-        blob.arrayBuffer().then(buffer=>{
-          resolve('data:application/pdf;base64,' + arrayBufferToBase64(buffer));
-        }).catch(reject);
-        return;
-      }
-      reject(new Error('このブラウザではPDFデータURLを作成できません。'));
-    });
+  function pdfBytesToDataUri(pdfBytes){
+    return 'data:application/pdf;base64,' + bytesToBase64(pdfBytes);
   }
 
   function showPdfDownloadModal(dataUri, filename){
@@ -956,20 +956,21 @@ if(true){
     document.body.appendChild(overlay);
   }
 
-  async function showSafariPdfDownloadModal(pdf, filename){
-    const dataUri = await blobToDataUrl(pdf);
-    if(!/^data:application\/pdf(?:;[^,]*)?;base64,/i.test(dataUri)){
+  function showSafariPdfDownloadModal(pdfBytes, filename){
+    const dataUri = pdfBytesToDataUri(pdfBytes);
+    if(!/^data:application\/pdf;base64,/i.test(dataUri)){
       throw new Error('PDFのdata URI形式が不正です。');
     }
     showPdfDownloadModal(dataUri, filename);
   }
 
-  async function deliverPdf(pdf, filename){
+  async function deliverPdf(pdfBytes, filename){
     if(isIOSSafariOnly()){
-      await showSafariPdfDownloadModal(pdf, filename);
+      showSafariPdfDownloadModal(pdfBytes, filename);
       return;
     }
-    const url = URL.createObjectURL(pdf);
+    const pdfBlob = new Blob([pdfBytes], {type:'application/pdf'});
+    const url = URL.createObjectURL(pdfBlob);
     const a = document.createElement('a');
     a.href = url; a.download = filename; a.rel = 'noopener';
     document.body.appendChild(a); a.click(); a.remove();
@@ -983,10 +984,10 @@ if(true){
       const canvases = buildCanvases(data);
       const jpegs = [];
       for(const c of canvases) jpegs.push(await canvasToJpegBytes(c));
-      const pdf = makePdfBlob(jpegs);
+      const pdfBytes = makePdfBytes(jpegs);
       const k = data.k || {};
       const filename = '採点結果_' + escFile((k.year ? String(k.year)+'_' : '') + (k.subject || '')) + '_' + fileStamp(new Date()) + '.pdf';
-      await deliverPdf(pdf, filename);
+      await deliverPdf(pdfBytes, filename);
     }catch(err){
       console.error(err);
       if(isIOSSafariOnly()){
