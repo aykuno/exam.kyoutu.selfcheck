@@ -111,7 +111,8 @@
     '../answer_keys_mock_kawai_2026_02_science_basic.json',
     '../answer_keys_mock_kawai_2026_02_science_advanced.json',
     '../answer_keys_mock_benesun_2026_09.json',
-    '../answer_keys_mock_benesun_2026_09_more.json'
+    '../answer_keys_mock_benesun_2026_09_more.json',
+    '../answer_keys_mock_benesun_2026_09_info_corrected.json'
   ];`,
       '模試データファイル一覧');
 
@@ -149,7 +150,7 @@
 
     app = replaceRequired(app,
       "      const mockKeys=mockObjects.flatMap(obj=>obj.keys||[]).filter(k=>String(k.year)==='2026'&&k.exam==='mock-kawai-zento-2026-02');",
-      "      const mockKeys=mockObjects.flatMap(obj=>obj.keys||[]).filter(k=>String(k.year)==='2026'&&(k.exam==='mock-kawai-zento-2026-02'||k.exam==='mock-benesun-2026-09'));",
+      "      const mockKeys=mockObjects.flatMap(obj=>obj.keys||[]).filter(k=>String(k.year)==='2026'&&(k.exam==='mock-kawai-zento-2026-02'||k.exam==='mock-benesun-2026-09')).filter(k=>!(k.exam==='mock-benesun-2026-09'&&k.subject==='情報I'));",
       '模試データ範囲');
 
     const dncMainJson=JSON.stringify(DNC_R8_MAIN_ANSWERS);
@@ -157,6 +158,43 @@
     const oldMerge="      keys=[...mainKeys,...mockKeys].map(k=>normalizeKey(mergeSourceMetadata(k,sourceEntries)));";
     const newMerge=`      const dncR8Main=${dncMainJson};const dncR8Retake=${dncRetakeJson};keys=[...mainKeys,...mockKeys].map(k=>{const merged=mergeSourceMetadata(k,sourceEntries);if(merged.problemUrl&&merged.problemUrl.startsWith('${OLD_PROBLEM_PREFIX}'))merged.problemUrl='${NEW_PROBLEM_PREFIX}'+merged.problemUrl.slice('${OLD_PROBLEM_PREFIX}'.length);if(String(merged.year)==='2026'&&(merged.exam==='main'||merged.exam==='retake')){const dncMap=merged.exam==='main'?dncR8Main:dncR8Retake;const answer=dncMap[merged.subject];if(answer){merged.answerPdfUrl=answer;merged.sourceUrl=answer;}merged.sourcePageUrl=merged.exam==='main'?'${DNC_R8_MAIN_PAGE}':'${DNC_R8_RETAKE_PAGE}';merged.source='大学入試センター 令和8年度 '+(merged.exam==='main'?'本試験':'追・再試験')+'の正解';}return normalizeKey(merged);});`;
     app = replaceRequired(app,oldMerge,newMerge,'問題URL・大学入試センター正解リンク統合');
+
+    app = replaceRequired(app,
+`  function inputToken(token){
+    const q=currentKey.questions[currentIndex],id=qKey(q),max=expectedLength(q);
+    let value=answers[id]||[];
+    if(value.length>=max) value=[];
+    value.push(norm(token));
+    answers[id]=value;
+    if(value.length>=max){
+      const next=currentKey.questions.findIndex((item,i)=>i>currentIndex&&!answerFor(item).length);
+      if(next>=0) currentIndex=next; else if(currentIndex<currentKey.questions.length-1) currentIndex++;
+      currentGroupIndex=Math.max(0,groupsFor(currentKey).indexOf(currentKey.questions[currentIndex].group));
+    }
+    renderGroupTabs();renderAnswerGrid();renderProgress();renderKeypadCurrent();saveCurrent();
+  }`,
+`  let editingExistingQuestion='';
+  function inputToken(token){
+    const q=currentKey.questions[currentIndex],id=qKey(q),max=expectedLength(q);
+    let value=answers[id]||[];
+    if(value.length>=max){
+      value=[];
+      editingExistingQuestion=id;
+    }
+    value.push(norm(token));
+    answers[id]=value;
+    if(value.length>=max){
+      if(editingExistingQuestion===id){
+        editingExistingQuestion='';
+      }else{
+        const next=currentKey.questions.findIndex((item,i)=>i>currentIndex&&!answerFor(item).length);
+        if(next>=0) currentIndex=next; else if(currentIndex<currentKey.questions.length-1) currentIndex++;
+        currentGroupIndex=Math.max(0,groupsFor(currentKey).indexOf(currentKey.questions[currentIndex].group));
+      }
+    }
+    renderGroupTabs();renderAnswerGrid();renderProgress();renderKeypadCurrent();saveCurrent();
+  }`,
+      '解答修正時の自動移動');
 
     return app;
   }
