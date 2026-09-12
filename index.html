@@ -91,6 +91,30 @@
 
   function patchApp(app){
     app = replaceRequired(app,
+`  const DATA_FILES = [
+    '../answer_keys_mock_kawai_2026_02_english_info.json',
+    '../answer_keys_mock_kawai_2026_02_geo_history.json',
+    '../answer_keys_mock_kawai_2026_02_civics_combined.json',
+    '../answer_keys_mock_kawai_2026_02_japanese.json',
+    '../answer_keys_mock_kawai_2026_02_math1.json',
+    '../answer_keys_mock_kawai_2026_02_math2.json',
+    '../answer_keys_mock_kawai_2026_02_science_basic.json',
+    '../answer_keys_mock_kawai_2026_02_science_advanced.json'
+  ];`,
+`  const DATA_FILES = [
+    '../answer_keys_mock_kawai_2026_02_english_info.json',
+    '../answer_keys_mock_kawai_2026_02_geo_history.json',
+    '../answer_keys_mock_kawai_2026_02_civics_combined.json',
+    '../answer_keys_mock_kawai_2026_02_japanese.json',
+    '../answer_keys_mock_kawai_2026_02_math1.json',
+    '../answer_keys_mock_kawai_2026_02_math2.json',
+    '../answer_keys_mock_kawai_2026_02_science_basic.json',
+    '../answer_keys_mock_kawai_2026_02_science_advanced.json',
+    '../answer_keys_mock_benesun_2026_09.json'
+  ];`,
+      '模試データファイル一覧');
+
+    app = replaceRequired(app,
 `  const EXAM_LABELS = {
     main:'本試験',
     'mock-kawai-zento-2026-02':'第2回 河合全統共通テスト模試'
@@ -102,7 +126,8 @@
     'center-main':'本試験（センター）',
     'center-retake':'追試験（センター）',
     'mock-benesse-2026-05':'模擬試験-2026年5月実施ベネッセ共通テスト模試',
-    'mock-kawai-zento-2026-02':'模擬試験-第２回 河合全統共通テスト模試'
+    'mock-kawai-zento-2026-02':'模擬試験-第２回 河合全統共通テスト模試',
+    'mock-benesun-2026-09':'模擬試験-2026年9月実施ベネ駿マーク模試'
   };`,
       '試験区分表示定義');
 
@@ -115,6 +140,16 @@
       "      const mainKeys=(mainObject.keys||[]).filter(k=>String(k.year)==='2025'&&k.exam==='main');",
       "      const mainKeys=(mainObject.keys||[]);",
       '本番データ範囲');
+
+    app = replaceRequired(app,
+      "        if(!response.ok) throw new Error('河合模試データを読み込めませんでした。');",
+      "        if(!response.ok) throw new Error('模試データを読み込めませんでした。');",
+      '模試データエラー表示');
+
+    app = replaceRequired(app,
+      "      const mockKeys=mockObjects.flatMap(obj=>obj.keys||[]).filter(k=>String(k.year)==='2026'&&k.exam==='mock-kawai-zento-2026-02');",
+      "      const mockKeys=mockObjects.flatMap(obj=>obj.keys||[]).filter(k=>String(k.year)==='2026'&&(k.exam==='mock-kawai-zento-2026-02'||k.exam==='mock-benesun-2026-09'));",
+      '模試データ範囲');
 
     const dncMainJson=JSON.stringify(DNC_R8_MAIN_ANSWERS);
     const dncRetakeJson=JSON.stringify(DNC_R8_RETAKE_ANSWERS);
