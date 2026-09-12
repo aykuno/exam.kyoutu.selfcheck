@@ -173,28 +173,19 @@
     }
     renderGroupTabs();renderAnswerGrid();renderProgress();renderKeypadCurrent();saveCurrent();
   }`,
-`  let editingExistingQuestion='';
-  function inputToken(token){
+`  function inputToken(token){
     const q=currentKey.questions[currentIndex],id=qKey(q),max=expectedLength(q);
     let value=answers[id]||[];
-    if(value.length>=max){
-      value=[];
-      editingExistingQuestion=id;
-    }
+    if(value.length>=max) value=[];
     value.push(norm(token));
     answers[id]=value;
-    if(value.length>=max){
-      if(editingExistingQuestion===id){
-        editingExistingQuestion='';
-      }else{
-        const next=currentKey.questions.findIndex((item,i)=>i>currentIndex&&!answerFor(item).length);
-        if(next>=0) currentIndex=next; else if(currentIndex<currentKey.questions.length-1) currentIndex++;
-        currentGroupIndex=Math.max(0,groupsFor(currentKey).indexOf(currentKey.questions[currentIndex].group));
-      }
+    if(value.length>=max&&currentIndex<currentKey.questions.length-1){
+      currentIndex++;
+      currentGroupIndex=Math.max(0,groupsFor(currentKey).indexOf(currentKey.questions[currentIndex].group));
     }
     renderGroupTabs();renderAnswerGrid();renderProgress();renderKeypadCurrent();saveCurrent();
   }`,
-      '解答修正時の自動移動');
+      '解答入力後の次欄移動');
 
     return app;
   }
