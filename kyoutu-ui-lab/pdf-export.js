@@ -1,8 +1,8 @@
-/* v182 Safari PDF delivery wrapper + result UX fixes */
+/* v183 Safari PDF delivery wrapper + result UX fixes */
 (function(){
   'use strict';
 
-  const VERSION = 'v182-safari-native-share';
+  const VERSION = 'v183-safari-native-share-exam-filename';
 
   function isSafari(){
     const ua = navigator.userAgent || '';
@@ -102,7 +102,7 @@
   observer.observe(document.documentElement, {subtree:true, childList:true});
 
   const script = document.currentScript;
-  const legacyUrl = new URL('pdf-export-v180-legacy.js?v=20260912-v182', script && script.src ? script.src : document.baseURI).href;
+  const legacyUrl = new URL('pdf-export-v180-legacy.js?v=20260912-v183', script && script.src ? script.src : document.baseURI).href;
 
   fetch(legacyUrl, {cache:'no-store'})
     .then(function(r){
@@ -114,6 +114,9 @@
         source = source.replace('const RENDER_SCALE = 2.33; // 約350dpi相当（Android/iPhone共通）', 'const RENDER_SCALE = 1.55; // Safari安定化: 約230dpi相当');
         source = source.replace('const JPEG_QUALITY = 0.93;', 'const JPEG_QUALITY = 0.86;');
       }
+      const examNameExpr = "({'mock-benesun-2026-09':'第1回ベネ駿共テ模試','mock-kawai-zento-2026-02':'第2回河合全統共テ模試','mock-benesse-2026-05':'5月ベネッセ共テ模試','main':'本試験','retake':'追試験・再試験','center-main':'本試験（センター）','center-retake':'追試験（センター）','other':'試作問題'}[k.exam]||k.exam||'')";
+      source = source.replace("const filename = '採点結果_' + escFile((k.year ? String(k.year)+'_' : '') + (k.subject || '')) + '_' + fileStamp(new Date()) + '.pdf';", "const filename = '採点結果_' + escFile((k.year ? String(k.year) : '') + " + examNameExpr + " + '_' + (k.subject || '')) + '_' + fileStamp(new Date()) + '.pdf';");
+      source = source.replace("const filename = '採点結果_' + safeText((k.year ? String(k.year) + '_' : '') + (k.subject || '')) + '_' + fileStamp(new Date()) + '.pdf';", "const filename = '採点結果_' + safeText((k.year ? String(k.year) : '') + " + examNameExpr + " + '_' + (k.subject || '')) + '_' + fileStamp(new Date()) + '.pdf';");
       source += '\n//# sourceURL=pdf-export-v180-legacy.js';
       (0,eval)(source);
       console.info('PDF wrapper loaded: ' + VERSION);
