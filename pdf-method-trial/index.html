@@ -1,0 +1,444 @@
+<!doctype html><html lang="ja"><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PDF保存方式の独立検証</title>
+<style>body{font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:24px;background:#f6f7fb;color:#1d2433}main{max-width:960px;margin:auto}button,a{font:inherit;padding:14px 22px;border:0;border-radius:10px;background:#2563eb;color:white;cursor:pointer}button:disabled{opacity:.5}#status{white-space:pre-wrap;line-height:1.7}#preview{display:grid;grid-template-columns:1fr 1fr;gap:16px}#preview svg{width:100%;height:auto;background:#fff;border:1px solid #d9deea}.overlay{position:fixed;inset:0;background:#000b;display:flex;align-items:center;justify-content:center;padding:20px}.card{background:white;padding:24px;border-radius:16px;max-width:460px;line-height:1.7}.card a{display:block;text-align:center;text-decoration:none;margin:16px 0}.card button{background:#e5e7eb;color:#1d2433}@media(max-width:600px){#preview{grid-template-columns:1fr}}</style>
+<main><h1>PDF保存方式の独立検証</h1><p>v1.0.0 · 最終更新：2026/09/12 23:22（日本時間）</p><p>引き継ぎ資料の SVG → Canvas → JPEG → 自前PDF → data URI → 手動ダウンロードを試すファイルです。</p><p>2026年度 本試験・国語のテスト入力（1項目入力、35項目未入力）を使用。既存サイトのコードや採点データの読み込み・変更は行いません。PDFの版面はこの方式を試すための検証用です。</p><button id="generate" type="button">資料の方式でPDFを生成</button><p id="status" role="status">準備完了</p><div id="preview"></div></main>
+<script id="test-data" type="application/json">{
+  "title": "2026年度 本試験",
+  "subject": "国語",
+  "score": "0 / 200",
+  "rate": "0%",
+  "correct": "0 / 36",
+  "missing": "35",
+  "sections": [
+    [
+      "問題番号",
+      "得点",
+      "正答率",
+      "正答項目",
+      "未入力"
+    ],
+    [
+      "第1問",
+      "0 / 45",
+      "0%",
+      "0 / 10",
+      "9"
+    ],
+    [
+      "第2問",
+      "0 / 45",
+      "0%",
+      "0 / 7",
+      "7"
+    ],
+    [
+      "第3問",
+      "0 / 20",
+      "0%",
+      "0 / 4",
+      "4"
+    ],
+    [
+      "第4問",
+      "0 / 45",
+      "0%",
+      "0 / 7",
+      "7"
+    ],
+    [
+      "第5問",
+      "0 / 45",
+      "0%",
+      "0 / 8",
+      "8"
+    ]
+  ],
+  "rows": [
+    [
+      "番号",
+      "自分",
+      "正解",
+      "判定",
+      "得点",
+      "受験者正答率",
+      "注記"
+    ],
+    [
+      "第1問-1",
+      "1",
+      "4",
+      "×",
+      "0 / 2",
+      "67.17%",
+      "—"
+    ],
+    [
+      "第1問-2",
+      "未入力",
+      "4",
+      "×",
+      "0 / 2",
+      "93.54%",
+      "—"
+    ],
+    [
+      "第1問-3",
+      "未入力",
+      "1",
+      "×",
+      "0 / 2",
+      "96.66%",
+      "—"
+    ],
+    [
+      "第1問-4",
+      "未入力",
+      "2",
+      "×",
+      "0 / 2",
+      "75.50%",
+      "—"
+    ],
+    [
+      "第1問-5",
+      "未入力",
+      "2",
+      "×",
+      "0 / 2",
+      "90.23%",
+      "—"
+    ],
+    [
+      "第1問-6",
+      "未入力",
+      "3",
+      "×",
+      "0 / 7",
+      "68.70%",
+      "—"
+    ],
+    [
+      "第1問-7",
+      "未入力",
+      "2",
+      "×",
+      "0 / 7",
+      "57.67%",
+      "—"
+    ],
+    [
+      "第1問-8",
+      "未入力",
+      "2",
+      "×",
+      "0 / 7",
+      "42.40%",
+      "—"
+    ],
+    [
+      "第1問-9",
+      "未入力",
+      "3",
+      "×",
+      "0 / 7",
+      "64.80%",
+      "—"
+    ],
+    [
+      "第1問-10",
+      "未入力",
+      "1",
+      "×",
+      "0 / 7",
+      "56.10%",
+      "—"
+    ],
+    [
+      "第2問-11",
+      "未入力",
+      "2",
+      "×",
+      "0 / 6",
+      "89.59%",
+      "—"
+    ],
+    [
+      "第2問-12",
+      "未入力",
+      "3",
+      "×",
+      "0 / 6",
+      "83.96%",
+      "—"
+    ],
+    [
+      "第2問-13",
+      "未入力",
+      "4",
+      "×",
+      "0 / 6",
+      "66.82%",
+      "—"
+    ],
+    [
+      "第2問-14",
+      "未入力",
+      "1",
+      "×",
+      "0 / 6",
+      "80.41%",
+      "—"
+    ],
+    [
+      "第2問-15",
+      "未入力",
+      "2",
+      "×",
+      "0 / 7",
+      "57.41%",
+      "—"
+    ],
+    [
+      "第2問-16",
+      "未入力",
+      "1",
+      "×",
+      "0 / 7",
+      "63.97%",
+      "—"
+    ],
+    [
+      "第2問-17",
+      "未入力",
+      "4",
+      "×",
+      "0 / 7",
+      "52.77%",
+      "—"
+    ],
+    [
+      "第3問-18",
+      "未入力",
+      "3",
+      "×",
+      "0 / 5",
+      "79.50%",
+      "—"
+    ],
+    [
+      "第3問-19",
+      "未入力",
+      "3",
+      "×",
+      "0 / 4",
+      "58.03%",
+      "—"
+    ],
+    [
+      "第3問-20-21",
+      "未入力",
+      "16",
+      "×",
+      "0 / 6",
+      "29.96%",
+      "順不同 / 得点率と受験者正答率が異なる。表示列は受験者正答率。"
+    ],
+    [
+      "第3問-22",
+      "未入力",
+      "3",
+      "×",
+      "0 / 5",
+      "52.71%",
+      "—"
+    ],
+    [
+      "第4問-23",
+      "未入力",
+      "1",
+      "×",
+      "0 / 5",
+      "68.29%",
+      "—"
+    ],
+    [
+      "第4問-24",
+      "未入力",
+      "3",
+      "×",
+      "0 / 5",
+      "51.11%",
+      "—"
+    ],
+    [
+      "第4問-25",
+      "未入力",
+      "4",
+      "×",
+      "0 / 5",
+      "48.17%",
+      "—"
+    ],
+    [
+      "第4問-26",
+      "未入力",
+      "2",
+      "×",
+      "0 / 7",
+      "44.68%",
+      "—"
+    ],
+    [
+      "第4問-27",
+      "未入力",
+      "2",
+      "×",
+      "0 / 7",
+      "46.77%",
+      "—"
+    ],
+    [
+      "第4問-28",
+      "未入力",
+      "4",
+      "×",
+      "0 / 8",
+      "37.10%",
+      "—"
+    ],
+    [
+      "第4問-29",
+      "未入力",
+      "4",
+      "×",
+      "0 / 8",
+      "35.09%",
+      "—"
+    ],
+    [
+      "第5問-30",
+      "未入力",
+      "4",
+      "×",
+      "0 / 4",
+      "55.07%",
+      "—"
+    ],
+    [
+      "第5問-31",
+      "未入力",
+      "1",
+      "×",
+      "0 / 4",
+      "50.13%",
+      "—"
+    ],
+    [
+      "第5問-32",
+      "未入力",
+      "3",
+      "×",
+      "0 / 6",
+      "61.28%",
+      "—"
+    ],
+    [
+      "第5問-33",
+      "未入力",
+      "2",
+      "×",
+      "0 / 5",
+      "17.48%",
+      "—"
+    ],
+    [
+      "第5問-34",
+      "未入力",
+      "3",
+      "×",
+      "0 / 5",
+      "57.53%",
+      "—"
+    ],
+    [
+      "第5問-35",
+      "未入力",
+      "1",
+      "×",
+      "0 / 6",
+      "44.09%",
+      "—"
+    ],
+    [
+      "第5問-36",
+      "未入力",
+      "2",
+      "×",
+      "0 / 7",
+      "60.80%",
+      "—"
+    ],
+    [
+      "第5問-37",
+      "未入力",
+      "2",
+      "×",
+      "0 / 8",
+      "61.23%",
+      "—"
+    ]
+  ]
+}</script>
+<script>
+'use strict';
+const DATA=JSON.parse(document.getElementById('test-data').textContent);
+const W=1240,H=1754,RASTER_W=2480,RASTER_H=3508;
+const xml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+function svgPage(index){
+ const p=[`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="1240" height="1754" fill="white"/>`];
+ const text=(s,x,y,size=18,color='#1d2433',weight=400,anchor='start')=>p.push(`<text x="${x}" y="${y}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Hiragino Sans,Yu Gothic,Meiryo,sans-serif" font-size="${size}" fill="${color}" font-weight="${weight}" text-anchor="${anchor}">${xml(s)}</text>`);
+ const rect=(x,y,w,h,fill='#fbfcff',stroke='#d9deea',r=0)=>p.push(`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${r}" fill="${fill}" stroke="${stroke}"/>`);
+ const line=(x,y,x2,y2)=>p.push(`<path d="M${x} ${y}L${x2} ${y2}" fill="none" stroke="#d9deea"/>`);
+ let y;
+ if(index===0){
+  text('採点結果',58,62,16,'#647086');text(DATA.title,58,108,34,'#1d2433',700);text(DATA.subject,58,150,34,'#1d2433',700);
+  rect(58,195,1124,110,'#fbfcff','#dfe7fb',16);text(DATA.subject,78,234,23,'#1d2433',700);text(DATA.title,78,271,15);
+  [['点数',DATA.score],['正答率',DATA.rate],['正答項目',DATA.correct],['未入力',DATA.missing]].forEach(([label,value],i)=>{const x=354+i*200;rect(x,210,188,80,'#fff','#dfe7fb',10);text(label,x+12,235,14,'#647086');text(value,x+12,273,25,'#1d2433',700)});
+  rect(58,325,1124,310,'#fbfcff','#d9deea',16);text('問題番号別正答率',78,362,23,'#1d2433',700);
+  const cx=272,cy=485,rad=103,n=5,point=(i,r)=>[cx+Math.cos(-Math.PI/2+i*Math.PI*2/n)*r,cy+Math.sin(-Math.PI/2+i*Math.PI*2/n)*r];
+  for(let k=1;k<=4;k++)p.push(`<polygon points="${Array.from({length:n},(_,i)=>point(i,rad*k/4).join(',')).join(' ')}" fill="none" stroke="#d9deea"/>`);
+  for(let i=0;i<n;i++){const a=point(i,rad);line(cx,cy,...a);const b=point(i,rad+24);text('第'+(i+1)+'問',b[0],b[1]+6,15,'#1d2433',600,'middle')}
+  p.push(`<circle cx="${cx}" cy="${cy}" r="5" fill="#2f5fd0"/>`);
+  DATA.sections.forEach((row,i)=>{row.forEach((c,j)=>text(c,500+j*126,400+i*35,i?17:15));line(494,410+i*35,1160,410+i*35)});
+  y=671;
+ }else{text('全問一覧（続き）',58,67,23,'#1d2433',700);y=98;}
+ const widths=[205,110,205,80,100,130,194],xs=[58];widths.forEach((w,i)=>xs.push(xs[i]+w));
+ rect(58,y,1124,32,'#f7f8fc','#f7f8fc');DATA.rows[0].forEach((s,i)=>text(s,xs[i]+8,y+23,16,'#4a556b',600));y+=32;
+ const rows=DATA.rows.slice(index===0?1:23,index===0?23:undefined);
+ rows.forEach(row=>{row.forEach((s,i)=>{if(i===6&&s.length>24){const chars=Array.from(s);text(chars.slice(0,22).join(''),xs[i]+8,y+19,11,'#647086');text(chars.slice(22).join(''),xs[i]+8,y+33,11,'#647086')}else text(s,i===3||i===4?xs[i]+widths[i]/2:xs[i]+8,y+27,i===3?25:17,i===3?'#b3261e':'#1d2433',i===3?700:400,i===3||i===4?'middle':'start')});y+=41;line(58,y,1182,y)});
+ if(index===1){y+=20;rect(58,y,1124,382,'#fff7f6','#f0c7c1',16);text('間違えた問題・未入力',76,y+32,22,'#8c1d18',700);DATA.rows.slice(1).forEach((r,i)=>{const x=76+(i%6)*182,yy=y+49+Math.floor(i/6)*52;rect(x,yy,173,45,'#fff','#f0d0cb',7);text(r[0]+' '+(r[1]==='未入力'?'未入力':r[3]),x+6,yy+14,12,'#8c1d18',700);text('自分：'+r[1]+' / 正解：'+r[2],x+6,yy+28,10);text('得点：'+r[4],x+6,yy+40,10)})}
+ text((index+1)+' / 2',620,1700,17,'#344054',600,'middle');p.push('</svg>');return p.join('');
+}
+const pages=[svgPage(0),svgPage(1)];document.getElementById('preview').innerHTML=pages.join('');
+function svgToJpeg(svg){return new Promise((resolve,reject)=>{const img=new Image();img.onerror=()=>reject(new Error('SVG画像の読み込みに失敗'));img.onload=()=>{const canvas=document.createElement('canvas');try{canvas.width=RASTER_W;canvas.height=RASTER_H;const ctx=canvas.getContext('2d');if(!ctx)throw new Error('Canvasが利用できません');ctx.fillStyle='white';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);const uri=canvas.toDataURL('image/jpeg',0.93);if(!uri.startsWith('data:image/jpeg;base64,'))throw new Error('JPEG生成に失敗');resolve(atob(uri.split(',')[1]));}catch(e){reject(e)}finally{canvas.width=0;canvas.height=0}};img.src='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svg)));});}
+function makePdf(jpegs){
+ const PW=595.276,PH=841.890,objs=[];
+ objs.push('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj');
+ objs.push('2 0 obj\n<< /Type /Pages /Kids ['+jpegs.map((_,i)=>(3+i*3)+' 0 R').join(' ')+'] /Count '+jpegs.length+' >>\nendobj');
+ jpegs.forEach((jpeg,i)=>{const page=3+i*3,content=page+1,img=page+2,stream=`q ${PW} 0 0 ${PH} 0 0 cm /Im1 Do Q`;
+  objs.push(`${page} 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PW} ${PH}] /Contents ${content} 0 R /Resources << /XObject << /Im1 ${img} 0 R >> >> >>\nendobj`);
+  objs.push(`${content} 0 obj\n<< /Length ${stream.length} >>\nstream\n${stream}\nendstream\nendobj`);
+  objs.push(`${img} 0 obj\n<< /Type /XObject /Subtype /Image /Width ${RASTER_W} /Height ${RASTER_H} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpeg.length} >>\nstream\n${jpeg}\nendstream\nendobj`);
+ });
+ const hdr='%PDF-1.4\n';let body='',pos=hdr.length;const offsets=[];for(const o of objs){offsets.push(pos);body+=o+'\n';pos=hdr.length+body.length;}
+ let xref=`xref\n0 ${objs.length+1}\n0000000000 65535 f \n`;for(const o of offsets)xref+=String(o).padStart(10,'0')+' 00000 n \n';
+ const str=hdr+body+xref+`trailer\n<< /Size ${objs.length+1} /Root 1 0 R >>\nstartxref\n${pos}\n%%EOF`;
+ const bytes=new Uint8Array(str.length);for(let i=0;i<str.length;i++)bytes[i]=str.charCodeAt(i)&255;
+ let bin='';for(let i=0;i<bytes.length;i+=8192)bin+=String.fromCharCode(...bytes.subarray(i,i+8192));return {uri:'data:application/pdf;base64,'+btoa(bin),bytes:bytes.length};
+}
+document.getElementById('generate').addEventListener('click',async()=>{
+ const button=document.getElementById('generate'),status=document.getElementById('status');button.disabled=true;const start=performance.now();
+ try{const jpegs=[];for(let i=0;i<pages.length;i++){status.textContent=`SVG → Canvas → JPEG：${i+1} / ${pages.length}ページ`;jpegs.push(await svgToJpeg(pages[i]));}const result=makePdf(jpegs);status.textContent=`生成成功：${pages.length}ページ、${result.bytes.toLocaleString()} bytes、${((performance.now()-start)/1000).toFixed(2)}秒\nPDFのダウンロードは、下のボタンを手動で押すと始まります。`;
+ const overlay=document.createElement('div');overlay.className='overlay';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-label','PDFファイル');const card=document.createElement('div');card.className='card';const title=document.createElement('h2');title.textContent='PDFファイル';const guide=document.createElement('p');guide.textContent='下のボタンを押してダウンロードしてください。資料のSafari向け案内：長押し →「リンクをダウンロード」';const link=document.createElement('a');link.href=result.uri;link.download='pdf-method-trial-result.pdf';link.textContent='PDFをダウンロード';const close=document.createElement('button');close.textContent='閉じる';close.onclick=()=>overlay.remove();card.append(title,guide,link,close);overlay.append(card);document.body.append(overlay);
+ }catch(e){status.textContent='失敗：'+e.message;console.error(e)}finally{button.disabled=false}
+});
+</script></html>
