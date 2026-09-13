@@ -186,100 +186,79 @@ function makePdfBlob(jpegs) {
   return new Blob(parts, { type: 'application/pdf' });
 }
 
+// 2026-05-30 23:11 JST の v192 系と同じ Safari 判定。
 function isIOSSafariOnly() {
   const ua = navigator.userAgent || '';
-  const vendor = navigator.vendor || '';
-  const isSafari = /Safari\//.test(ua) && /Apple/i.test(vendor || 'Apple');
-  const isOtherBrowser = /(Chrome|Chromium|CriOS|FxiOS|Firefox|EdgiOS|Edg\/|OPiOS|OPR\/|DuckDuckGo|Instagram|FBAN|FBAV|Line)/i.test(ua);
-  return isSafari && !isOtherBrowser;
+  const platform = navigator.platform || '';
+  const isiOS = /iPad|iPhone|iPod/.test(ua) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (!isiOS) return false;
+  return /Safari\//.test(ua) && !/(CriOS|FxiOS|EdgiOS|OPiOS|DuckDuckGo|Instagram|FBAN|FBAV|Line)/.test(ua);
 }
 
-function safeFilename(s) {
-  let name = String(s || '採点結果.pdf').replace(/[\\/:*?"<>|]/g, '_').trim();
-  if (!name) name = '採点結果.pdf';
-  if (!/\.pdf$/i.test(name)) name += '.pdf';
-  return name;
-}
-
-function arrayBufferToBase64(buffer) {
-  const bytes = new Uint8Array(buffer);
-  let binary = '';
-  const chunkSize = 8192;
-  for (let i = 0; i < bytes.length; i += chunkSize) {
-    binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
-  }
-  return btoa(binary);
-}
-
-function blobToDataUrl(blob) {
-  return new Promise((resolve, reject) => {
-    if (typeof FileReader !== 'undefined') {
-      const reader = new FileReader();
-      reader.onload = () => resolve(String(reader.result || ''));
-      reader.onerror = () => reject(reader.error || new Error('PDFデータURLの作成に失敗しました。'));
-      reader.readAsDataURL(blob);
-      return;
-    }
-    if (blob && typeof blob.arrayBuffer === 'function') {
-      blob.arrayBuffer().then(buffer => {
-        resolve('data:application/pdf;base64,' + arrayBufferToBase64(buffer));
-      }).catch(reject);
-      return;
-    }
-    reject(new Error('このブラウザではPDFデータURLを作成できません。'));
-  });
-}
-
-function showPdfDownloadModal(dataUri, filename) {
-  const old = document.getElementById('pdf-dl-modal');
+let __iosPendingPdf = null;
+function closeIosPdfShareBox() {
+  const old = document.getElementById('__iosPdfShareBox');
   if (old) old.remove();
-
-  const safeName = safeFilename(filename || '採点結果.pdf');
-  const overlay = document.createElement('div');
-  overlay.id = 'pdf-dl-modal';
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999999;display:flex;align-items:center;justify-content:center;padding:20px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;';
-
-  const card = document.createElement('div');
-  card.style.cssText = 'background:white;border-radius:16px;padding:24px;max-width:440px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.25);color:#1d2433;';
-
-  const title = document.createElement('div');
-  title.textContent = '採点結果PDF';
-  title.style.cssText = 'font-weight:bold;font-size:16px;margin-bottom:8px;';
-
-  const guide = document.createElement('div');
-  guide.style.cssText = 'font-size:12px;color:#6b7280;margin-bottom:20px;line-height:1.7;';
-  guide.innerHTML = '下のボタンを押してダウンロードしてください。<br><b>Safari</b>：長押し →「リンクをダウンロード」';
-
-  const link = document.createElement('a');
-  link.href = dataUri;
-  link.download = safeName;
-  link.textContent = safeName + ' をダウンロード';
-  link.style.cssText = 'display:block;background:#2563eb;color:white;border-radius:12px;padding:13px;font-weight:bold;font-size:14px;text-decoration:none;margin-bottom:12px;word-break:break-all;';
-
-  const close = document.createElement('button');
-  close.type = 'button';
-  close.textContent = '閉じる';
-  close.style.cssText = 'background:#e5e7eb;border:none;border-radius:10px;padding:9px 24px;font-size:13px;font-weight:600;cursor:pointer;';
-  close.addEventListener('click', () => overlay.remove());
-
-  card.append(title, guide, link, close);
-  overlay.appendChild(card);
-  document.body.appendChild(overlay);
 }
 
-async function showSafariPdfDownloadModal(pdf, filename) {
-  const dataUri = await blobToDataUrl(pdf);
-  if (!/^data:application\/pdf(?:;[^,]*)?;base64,/i.test(dataUri)) {
-    throw new Error('PDFのdata URI形式が不正です。');
-  }
-  showPdfDownloadModal(dataUri, filename);
+function showIosPdfShareBox(pdf, filename) {
+  closeIosPdfShareBox();
+  __iosPendingPdf = { pdf, filename };
+
+  const box = document.createElement('div');
+  box.id = '__iosPdfShareBox';
+  box.style.cssText = 'position:fixed;inset:0;z-index:2147483647;background:rgba(15,23,42,.48);display:flex;align-items:center;justify-content:center;padding:22px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;';
+  box.innerHTML = '<div style="max-width:420px;width:100%;background:#fff;border-radius:18px;padding:18px;box-shadow:0 18px 50px rgba(15,23,42,.28);color:#1d2433">'
+    + '<div style="font-weight:900;font-size:18px;margin-bottom:8px">PDFの準備ができました</div>'
+    + '<div style="font-size:13px;line-height:1.55;color:#647086;font-weight:700;margin-bottom:14px">iPhone Safariでは、次のボタンからPDFファイルを共有します。共有シートで「ファイルに保存」を選んでください。プリントは使いません。</div>'
+    + '<button type="button" class="iosPdfShareSave" style="width:100%;border:0;border-radius:14px;padding:13px 14px;background:#2f5fd0;color:#fff;font-weight:900;font-size:16px">PDFを保存</button>'
+    + '<button type="button" class="iosPdfShareOpen" style="width:100%;border:0;border-radius:14px;padding:12px 14px;background:#e8ecf6;color:#1d2433;font-weight:900;font-size:15px;margin-top:8px">PDFを開く</button>'
+    + '<button type="button" class="iosPdfShareClose" style="width:100%;border:0;border-radius:14px;padding:10px 14px;background:#fff;color:#647086;font-weight:900;font-size:14px;margin-top:6px">閉じる</button>'
+    + '</div>';
+  document.body.appendChild(box);
+
+  const saveBtn = box.querySelector('.iosPdfShareSave');
+  const openBtn = box.querySelector('.iosPdfShareOpen');
+  const closeBtn = box.querySelector('.iosPdfShareClose');
+
+  saveBtn.addEventListener('click', async function() {
+    try {
+      const p = __iosPendingPdf;
+      if (!p) return;
+      const file = new File([p.pdf], p.filename, { type: 'application/pdf' });
+      if (navigator.canShare && navigator.canShare({ files: [file] }) && navigator.share) {
+        await navigator.share({ files: [file], title: p.filename });
+      } else {
+        const url = URL.createObjectURL(p.pdf);
+        window.open(url, '_blank', 'noopener');
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+      }
+    } catch (e) {
+      alert('PDFの共有に失敗しました: ' + (e && e.message ? e.message : e));
+    }
+  });
+
+  openBtn.addEventListener('click', function() {
+    try {
+      const p = __iosPendingPdf;
+      if (!p) return;
+      const url = URL.createObjectURL(p.pdf);
+      window.open(url, '_blank', 'noopener');
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    } catch (e) {
+      alert('PDFを開けませんでした: ' + (e && e.message ? e.message : e));
+    }
+  });
+
+  closeBtn.addEventListener('click', closeIosPdfShareBox);
 }
 
-async function deliverPdf(pdf, filename) {
+function deliverPdf(pdf, filename) {
   if (isIOSSafariOnly()) {
-    await showSafariPdfDownloadModal(pdf, filename);
-    return 'Safari data URI modal';
+    showIosPdfShareBox(pdf, filename);
+    return 'iPhone/iPad Safari: Web Share / File';
   }
+
   const url = URL.createObjectURL(pdf);
   const a = document.createElement('a');
   a.href = url;
@@ -297,29 +276,27 @@ async function generatePDF() {
   const status = document.getElementById('status');
   button.disabled = true;
   const start = performance.now();
+
   try {
-    status.textContent = '6/18版：350dpi相当でページをラスタライズ中';
+    status.textContent = '5/30最新版：350dpi相当でページをラスタライズ中';
     await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
     const svgs = [buildSVG(DATA, 0), buildSVG(DATA, 1)];
     const jpegs = [];
     for (let i = 0; i < svgs.length; i++) {
-      status.textContent = `6/18版：JPEG生成 ${i + 1} / ${svgs.length}`;
+      status.textContent = `5/30最新版：JPEG生成 ${i + 1} / ${svgs.length}`;
       jpegs.push(await svgToJpegBytes(svgs[i]));
     }
-    status.textContent = '6/18版：PDFを組み立て中';
+
+    status.textContent = '5/30最新版：PDFを組み立て中';
     const pdf = makePdfBlob(jpegs);
-    const route = await deliverPdf(pdf, '採点結果_2026_国語_0618trial.pdf');
+    const route = deliverPdf(pdf, '採点結果_2026_国語_0530trial.pdf');
     status.textContent = `生成成功：${jpegs.length}ページ / ${route}\n${((performance.now() - start) / 1000).toFixed(2)}秒`;
   } catch (error) {
     console.error(error);
-    if (isIOSSafariOnly()) {
+    try {
       alert('PDF生成に失敗しました: ' + (error && error.message ? error.message : error));
-    } else {
-      try {
-        alert('直接PDF保存に失敗しました。印刷画面を開きます。');
-        window.print();
-      } catch (_) {}
-    }
+    } catch (_) {}
     status.textContent = '失敗：' + (error && error.message ? error.message : error);
   } finally {
     button.disabled = false;
