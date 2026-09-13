@@ -3,6 +3,10 @@
 const DATA = JSON.parse(document.getElementById('test-data').textContent);
 const W = 1240;
 const H = 1754;
+const RENDER_SCALE = 2.33;
+const RASTER_W = Math.round(W * RENDER_SCALE);
+const RASTER_H = Math.round(H * RENDER_SCALE);
+const JPEG_QUALITY = 0.97;
 
 const xml = s => String(s ?? '').replace(/[&<>"']/g, c => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;'
@@ -94,96 +98,231 @@ function buildSVG(data, index) {
   return p.join('');
 }
 
-// 2026年6月前半に使われていた v158 系の発行経路を再現する。
-// PDFバイナリを自前生成せず、ユーザー操作中に印刷専用ウィンドウを開き、
-// A4ページを構築した後に window.print() を呼び出す。
-function makePrintWindow() {
-  const w = window.open('', '_blank');
-  if (!w) {
-    alert('ポップアップがブロックされました。Safariの設定でポップアップを許可してから、もう一度実行してください。');
-    return null;
-  }
-
-  w.document.open();
-  w.document.write(`<!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>採点結果PDF</title>
-<style>
-  @page{size:A4 portrait;margin:0}
-  *{box-sizing:border-box}
-  html,body{margin:0!important;padding:0!important;background:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif}
-  #pdfRoot{width:210mm;margin:0 auto;background:#fff}
-  .pdfPage{width:210mm;height:297mm;position:relative;overflow:hidden;background:#fff;margin:0 auto;page-break-after:always;break-after:page}
-  .pdfPage:last-child{page-break-after:auto;break-after:auto}
-  .pdfPage svg{display:block;width:210mm;height:297mm}
-  @media print{html,body,#pdfRoot{margin:0!important;padding:0!important}}
-</style>
-</head>
-<body><div id="pdfRoot"></div></body>
-</html>`);
-  w.document.close();
-  return w;
-}
-
-function buildPrintPages(w) {
-  const root = w.document.getElementById('pdfRoot');
-  if (!root) throw new Error('印刷用ページを作成できませんでした。');
-  [buildSVG(DATA, 0), buildSVG(DATA, 1)].forEach(svg => {
-    const page = w.document.createElement('div');
-    page.className = 'pdfPage';
-    page.innerHTML = svg;
-    root.appendChild(page);
+function svgToJpegBytes(svg) {
+  return new Promise((resolve, reject) => {
+    const blob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = RASTER_W;
+        canvas.height = RASTER_H;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) throw new Error('Canvasの描画領域を確保できませんでした。');
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, RASTER_W, RASTER_H);
+        ctx.imageSmoothingEnabled = true;
+        if ('imageSmoothingQuality' in ctx) ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0, RASTER_W, RASTER_H);
+        const dataUrl = canvas.toDataURL('image/jpeg', JPEG_QUALITY);
+        const bin = atob(dataUrl.split(',')[1] || '');
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        resolve(bytes);
+      } catch (e) {
+        reject(e);
+      } finally {
+        URL.revokeObjectURL(url);
+        img.onload = img.onerror = null;
+      }
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error('SVG画像を読み込めませんでした。'));
+    };
+    img.src = url;
   });
 }
 
-function generatePDF() {
+const enc = new TextEncoder();
+function ascii(s) { return enc.encode(String(s)); }
+
+function makePdfBlob(jpegs) {
+  const pdfW = 595.275590551;
+  const pdfH = 841.88976378;
+  const parts = [];
+  const offsets = [0];
+  let len = 0;
+
+  function add(part) {
+    if (typeof part === 'string') part = ascii(part);
+    parts.push(part);
+    len += part.byteLength || part.length || 0;
+  }
+  function obj(n, body) {
+    offsets[n] = len;
+    add(n + ' 0 obj\n');
+    body.forEach(add);
+    add('\nendobj\n');
+  }
+
+  add('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
+  const kids = [];
+  for (let i = 0; i < jpegs.length; i++) kids.push((3 + i * 3) + ' 0 R');
+  obj(1, ['<< /Type /Catalog /Pages 2 0 R >>']);
+  obj(2, ['<< /Type /Pages /Kids [', kids.join(' '), '] /Count ', String(jpegs.length), ' >>']);
+
+  for (let i = 0; i < jpegs.length; i++) {
+    const page = 3 + i * 3;
+    const content = page + 1;
+    const image = page + 2;
+    const name = 'Im' + (i + 1);
+    const stream = 'q\n' + pdfW.toFixed(3) + ' 0 0 ' + pdfH.toFixed(3) + ' 0 0 cm\n/' + name + ' Do\nQ\n';
+    obj(page, ['<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ', pdfW.toFixed(3), ' ', pdfH.toFixed(3), '] /Resources << /XObject << /', name, ' ', image, ' 0 R >> >> /Contents ', content, ' 0 R >>']);
+    obj(content, ['<< /Length ', String(ascii(stream).length), ' >>\nstream\n', stream, 'endstream']);
+    offsets[image] = len;
+    add(image + ' 0 obj\n');
+    add('<< /Type /XObject /Subtype /Image /Width ' + RASTER_W + ' /Height ' + RASTER_H + ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ' + jpegs[i].length + ' >>\nstream\n');
+    add(jpegs[i]);
+    add('\nendstream\nendobj\n');
+  }
+
+  const xref = len;
+  const maxObj = 2 + jpegs.length * 3;
+  add('xref\n0 ' + (maxObj + 1) + '\n0000000000 65535 f \n');
+  for (let i = 1; i <= maxObj; i++) add(String(offsets[i]).padStart(10, '0') + ' 00000 n \n');
+  add('trailer\n<< /Size ' + (maxObj + 1) + ' /Root 1 0 R >>\nstartxref\n' + xref + '\n%%EOF');
+  return new Blob(parts, { type: 'application/pdf' });
+}
+
+function isIOSSafariOnly() {
+  const ua = navigator.userAgent || '';
+  const vendor = navigator.vendor || '';
+  const isSafari = /Safari\//.test(ua) && /Apple/i.test(vendor || 'Apple');
+  const isOtherBrowser = /(Chrome|Chromium|CriOS|FxiOS|Firefox|EdgiOS|Edg\/|OPiOS|OPR\/|DuckDuckGo|Instagram|FBAN|FBAV|Line)/i.test(ua);
+  return isSafari && !isOtherBrowser;
+}
+
+function safeFilename(s) {
+  let name = String(s || '採点結果.pdf').replace(/[\\/:*?"<>|]/g, '_').trim();
+  if (!name) name = '採点結果.pdf';
+  if (!/\.pdf$/i.test(name)) name += '.pdf';
+  return name;
+}
+
+function arrayBufferToBase64(buffer) {
+  const bytes = new Uint8Array(buffer);
+  let binary = '';
+  const chunkSize = 8192;
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
+  }
+  return btoa(binary);
+}
+
+function blobToDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    if (typeof FileReader !== 'undefined') {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ''));
+      reader.onerror = () => reject(reader.error || new Error('PDFデータURLの作成に失敗しました。'));
+      reader.readAsDataURL(blob);
+      return;
+    }
+    if (blob && typeof blob.arrayBuffer === 'function') {
+      blob.arrayBuffer().then(buffer => {
+        resolve('data:application/pdf;base64,' + arrayBufferToBase64(buffer));
+      }).catch(reject);
+      return;
+    }
+    reject(new Error('このブラウザではPDFデータURLを作成できません。'));
+  });
+}
+
+function showPdfDownloadModal(dataUri, filename) {
+  const old = document.getElementById('pdf-dl-modal');
+  if (old) old.remove();
+
+  const safeName = safeFilename(filename || '採点結果.pdf');
+  const overlay = document.createElement('div');
+  overlay.id = 'pdf-dl-modal';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999999;display:flex;align-items:center;justify-content:center;padding:20px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;';
+
+  const card = document.createElement('div');
+  card.style.cssText = 'background:white;border-radius:16px;padding:24px;max-width:440px;width:100%;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.25);color:#1d2433;';
+
+  const title = document.createElement('div');
+  title.textContent = '採点結果PDF';
+  title.style.cssText = 'font-weight:bold;font-size:16px;margin-bottom:8px;';
+
+  const guide = document.createElement('div');
+  guide.style.cssText = 'font-size:12px;color:#6b7280;margin-bottom:20px;line-height:1.7;';
+  guide.innerHTML = '下のボタンを押してダウンロードしてください。<br><b>Safari</b>：長押し →「リンクをダウンロード」';
+
+  const link = document.createElement('a');
+  link.href = dataUri;
+  link.download = safeName;
+  link.textContent = safeName + ' をダウンロード';
+  link.style.cssText = 'display:block;background:#2563eb;color:white;border-radius:12px;padding:13px;font-weight:bold;font-size:14px;text-decoration:none;margin-bottom:12px;word-break:break-all;';
+
+  const close = document.createElement('button');
+  close.type = 'button';
+  close.textContent = '閉じる';
+  close.style.cssText = 'background:#e5e7eb;border:none;border-radius:10px;padding:9px 24px;font-size:13px;font-weight:600;cursor:pointer;';
+  close.addEventListener('click', () => overlay.remove());
+
+  card.append(title, guide, link, close);
+  overlay.appendChild(card);
+  document.body.appendChild(overlay);
+}
+
+async function showSafariPdfDownloadModal(pdf, filename) {
+  const dataUri = await blobToDataUrl(pdf);
+  if (!/^data:application\/pdf(?:;[^,]*)?;base64,/i.test(dataUri)) {
+    throw new Error('PDFのdata URI形式が不正です。');
+  }
+  showPdfDownloadModal(dataUri, filename);
+}
+
+async function deliverPdf(pdf, filename) {
+  if (isIOSSafariOnly()) {
+    await showSafariPdfDownloadModal(pdf, filename);
+    return 'Safari data URI modal';
+  }
+  const url = URL.createObjectURL(pdf);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.rel = 'noopener';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 30000);
+  return 'Object URL direct download';
+}
+
+async function generatePDF() {
   const button = document.getElementById('generate');
   const status = document.getElementById('status');
   button.disabled = true;
   const start = performance.now();
-
-  // v158と同じく、ポップアップはクリックイベント中に同期的に開く。
-  const w = makePrintWindow();
-  if (!w) {
-    button.disabled = false;
-    status.textContent = '失敗：印刷用ウィンドウを開けませんでした。';
-    return;
-  }
-
   try {
-    status.textContent = '6月前半の方式：印刷専用ページを構築中';
-    buildPrintPages(w);
-
-    // v158に合わせ、描画反映を待ってから focus → print を実行する。
-    setTimeout(() => {
-      try {
-        w.focus();
-        setTimeout(() => {
-          try {
-            w.print();
-            status.textContent = `印刷ダイアログを呼び出しました。Safariでは共有/プリント画面からPDFとして保存してください。\n${((performance.now() - start) / 1000).toFixed(2)}秒`;
-          } catch (error) {
-            console.error(error);
-            status.textContent = 'window.print() の呼び出しで失敗：' + error.message;
-          } finally {
-            button.disabled = false;
-          }
-        }, 250);
-      } catch (error) {
-        console.error(error);
-        button.disabled = false;
-        status.textContent = '印刷画面の準備で失敗：' + error.message;
-      }
-    }, 80);
+    status.textContent = '6/18版：350dpi相当でページをラスタライズ中';
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const svgs = [buildSVG(DATA, 0), buildSVG(DATA, 1)];
+    const jpegs = [];
+    for (let i = 0; i < svgs.length; i++) {
+      status.textContent = `6/18版：JPEG生成 ${i + 1} / ${svgs.length}`;
+      jpegs.push(await svgToJpegBytes(svgs[i]));
+    }
+    status.textContent = '6/18版：PDFを組み立て中';
+    const pdf = makePdfBlob(jpegs);
+    const route = await deliverPdf(pdf, '採点結果_2026_国語_0618trial.pdf');
+    status.textContent = `生成成功：${jpegs.length}ページ / ${route}\n${((performance.now() - start) / 1000).toFixed(2)}秒`;
   } catch (error) {
     console.error(error);
-    try { w.close(); } catch (_) {}
+    if (isIOSSafariOnly()) {
+      alert('PDF生成に失敗しました: ' + (error && error.message ? error.message : error));
+    } else {
+      try {
+        alert('直接PDF保存に失敗しました。印刷画面を開きます。');
+        window.print();
+      } catch (_) {}
+    }
+    status.textContent = '失敗：' + (error && error.message ? error.message : error);
+  } finally {
     button.disabled = false;
-    status.textContent = '印刷用ページの構築で失敗：' + error.message;
   }
 }
 
