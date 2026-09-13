@@ -13,7 +13,7 @@ function buildSVG(data, index){
   rect(58,195,1124,110,'#fbfcff','#dfe7fb',16);text(data.subject,78,234,23,'#1d2433',700);text(data.title,78,271,15);
   [['点数',data.score],['正答率',data.rate],['正答項目',data.correct],['未入力',data.missing]].forEach(([label,value],i)=>{const x=354+i*200;rect(x,210,188,80,'#fff','#dfe7fb',10);text(label,x+12,235,14,'#647086');text(value,x+12,273,25,'#1d2433',700)});
   rect(58,325,1124,310,'#fbfcff','#d9deea',16);text('問題番号別正答率',78,362,23,'#1d2433',700);
-  const cx=272,cy=485,rad=103,n=5,point=(i,r)=>[cx+Math.cos(-Math.PI/2+i*Math.PI*2/n)*r,cy+Math.sin(-Math.PI/2+i*Math.PI*2/n)*r];
+  const cx=272,cy=505,rad=90,n=5,point=(i,r)=>[cx+Math.cos(-Math.PI/2+i*Math.PI*2/n)*r,cy+Math.sin(-Math.PI/2+i*Math.PI*2/n)*r];
   for(let k=1;k<=4;k++)p.push(`<polygon points="${Array.from({length:n},(_,i)=>point(i,rad*k/4).join(',')).join(' ')}" fill="none" stroke="#d9deea"/>`);
   for(let i=0;i<n;i++){const a=point(i,rad);line(cx,cy,...a);const b=point(i,rad+24);text('第'+(i+1)+'問',b[0],b[1]+6,15,'#1d2433',600,'middle')}
   p.push(`<circle cx="${cx}" cy="${cy}" r="5" fill="#2f5fd0"/>`);
