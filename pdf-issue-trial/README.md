@@ -1,7 +1,7 @@
 # PDF発行方式の検証
 
-バージョン：v1.0.1  
-最終更新：2026/09/13 11:53（日本時間）
+バージョン：v1.0.2  
+最終更新：2026/09/13 11:56（日本時間）
 
 新資料「PDF発行の仕組み解説」に従った独立実装です。前回の `pdf-method-trial/` と本体サイトのファイルは変更しません。
 
@@ -43,3 +43,5 @@
 - v1.0.1では、検証で見つかったレーダーチャートの見出しと第1問ラベルの重なりを調整しました。
 
 参考：[MDN — data URLsのSecurity issues](https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data#security_issues)
+
+- v1.0.2：ブラウザーに残る古いスクリプトを読み込まないよう、app.jsの読込URLの更新番号を揃えました。
