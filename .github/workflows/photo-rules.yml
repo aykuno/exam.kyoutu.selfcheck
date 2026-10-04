@@ -1,0 +1,37 @@
+name: Photo answer formats and grading verification
+on:
+  push:
+    branches:
+      - audit/photo-rules-20261004
+    paths:
+      - kyoutu-ui-lab/**
+      - audit/photo-rules/**
+      - .github/workflows/photo-rules.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compare photo scoring with existing registered subjects
+        run: node kyoutu-ui-lab/photo/tests/format-grader.test.cjs
+      - name: Install browser
+        run: |
+          npm install --no-save playwright@1.55.1
+          npx playwright install --with-deps chromium
+      - name: Verify mobile review and grading
+        run: |
+          python -m http.server 8765 >/tmp/photo-rules-server.log 2>&1 &
+          node audit/photo-rules/browser.cjs
+      - name: Save browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: photo-rules-verification
+          path: audit/photo-rules/output
+          retention-days: 3
