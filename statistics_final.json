@@ -1,9 +1,9 @@
 {
-  "version": "v137",
-  "generatedAt": "2026-05-16T15:45:00+09:00",
+  "version": "v138",
+  "generatedAt": "2026-10-04T04:01:46.940Z",
   "source": "大学入試センター 受験者数・平均点の推移（本試験）／旺文社 教育情報センター 小問別正答率",
   "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/",
-  "notes": "2004〜2007本試験の登録済み科目に、大学入試センター公表の受験者平均点を追加。英語（筆記）は英語（リーディング）に統一。 / v126: 2021年度追試（令和3年度1月30日・31日、追試験・再試験を含む）の受験者平均点を登録。 / v131: 正解データ本体は2020追試 数学Ⅱ・数学Bを追加。平均点データは未追加。 / v132: 平均点データの追加なし。 / v133: 平均点データの追加なし。 / v134: 平均点データの追加なし。 / v135: 平均点データの追加なし。 / v137: 平均点データの追加なし。問題PDFリンク整備のみ。",
+  "notes": "2004〜2007本試験の登録済み科目に、大学入試センター公表の受験者平均点を追加。英語（筆記）は英語（リーディング）に統一。 / v126: 2021年度追試（令和3年度1月30日・31日、追試験・再試験を含む）の受験者平均点を登録。 / v131: 正解データ本体は2020追試 数学Ⅱ・数学Bを追加。平均点データは未追加。 / v132: 平均点データの追加なし。 / v133: 平均点データの追加なし。 / v134: 平均点データの追加なし。 / v135: 平均点データの追加なし。 / v137: 平均点データの追加なし。問題PDFリンク整備のみ。 / v138: 2006本試験の旧課程理科4科目と2009〜2017本試験数学I・Ａの平均点を追加。科目名表記を登録データに合わせ、大学入試センター公表値を使用。",
   "entries": [
     {
       "year": "2000",
@@ -2626,8 +2626,8 @@
       "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
       "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
       "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
-      "averageScore": 48.0,
-      "averageScore100": 48.0,
+      "averageScore": 48,
+      "averageScore100": 48,
       "averageScoreScale": "app-max-score",
       "items": []
     },
@@ -3809,8 +3809,8 @@
       "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h24_h26.html",
       "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
       "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h24_h26.html",
-      "averageScore": 64.0,
-      "averageScore100": 64.0,
+      "averageScore": 64,
+      "averageScore100": 64,
       "averageScoreScale": "app-max-score",
       "items": []
     },
@@ -5201,7 +5201,7 @@
       "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
       "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h27_h29.html",
       "averageScore": 32.5,
-      "averageScore100": 65.0,
+      "averageScore100": 65,
       "averageScoreScale": "app-max-score",
       "items": []
     },
@@ -5928,8 +5928,8 @@
       "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h30_r2.html",
       "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
       "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h30_r2.html",
-      "averageScore": 30.0,
-      "averageScore100": 30.0,
+      "averageScore": 30,
+      "averageScore100": 30,
       "averageScoreScale": "app-max-score",
       "items": []
     },
@@ -7890,8 +7890,8 @@
         },
         {
           "id": "29",
-          "correctRate": 58.0,
-          "scoreRate": 58.0
+          "correctRate": 58,
+          "scoreRate": 58
         },
         {
           "id": "30",
@@ -8775,8 +8775,8 @@
         },
         {
           "id": "26",
-          "correctRate": 74.0,
-          "scoreRate": 74.0
+          "correctRate": 74,
+          "scoreRate": 74
         },
         {
           "id": "27",
@@ -9030,8 +9030,8 @@
         },
         {
           "id": "1-ソ・タ・チ",
-          "correctRate": 58.0,
-          "scoreRate": 58.0
+          "correctRate": 58,
+          "scoreRate": 58
         },
         {
           "id": "1-ツ",
@@ -9404,8 +9404,8 @@
         },
         {
           "id": "第2問 ト・ナ",
-          "correctRate": 47.0,
-          "scoreRate": 47.0
+          "correctRate": 47,
+          "scoreRate": 47
         },
         {
           "id": "第2問 ニ・ヌ",
@@ -9469,8 +9469,8 @@
         },
         {
           "id": "第4問 サ",
-          "correctRate": 83.0,
-          "scoreRate": 83.0
+          "correctRate": 83,
+          "scoreRate": 83
         },
         {
           "id": "第4問 シ・ス・セ・ソ",
@@ -9978,8 +9978,8 @@
         },
         {
           "id": "6",
-          "correctRate": 66.0,
-          "scoreRate": 66.0
+          "correctRate": 66,
+          "scoreRate": 66
         },
         {
           "id": "7",
@@ -10210,8 +10210,8 @@
         },
         {
           "id": "19",
-          "correctRate": 67.0,
-          "scoreRate": 67.0
+          "correctRate": 67,
+          "scoreRate": 67
         },
         {
           "id": "20",
@@ -10844,8 +10844,8 @@
         },
         {
           "id": "15",
-          "correctRate": 77.0,
-          "scoreRate": 77.0
+          "correctRate": 77,
+          "scoreRate": 77
         },
         {
           "id": "16",
@@ -11298,7 +11298,7 @@
       "subject": "化学基礎",
       "source": "旺文社 教育情報センター 2025年 共通テスト 小問別正答率（大学入試センター資料を基に作成）",
       "sourceUrl": "https://eic.obunsha.co.jp/file/exam_info/2025/0326_1.pdf",
-      "averageScore": 27.0,
+      "averageScore": 27,
       "averageCorrectRate": 53.82,
       "examinees": 90939,
       "items": [
@@ -11385,7 +11385,7 @@
           "note": "複数の解答番号をまとめた採点行。受験者正答率は該当解答番号の統計を統合表示。"
         }
       ],
-      "averageScore100": 54.0,
+      "averageScore100": 54,
       "averageScoreScale": "app-max-score",
       "averageSource": "大学入試センター 共通テスト 受験者数・平均点の推移（本試験）",
       "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/R3_.html"
@@ -12661,8 +12661,8 @@
         },
         {
           "id": "第5問 シ",
-          "correctRate": 33.0,
-          "scoreRate": 33.0
+          "correctRate": 33,
+          "scoreRate": 33
         },
         {
           "id": "第5問 ス・セ・ソ・タ",
@@ -13498,8 +13498,8 @@
         },
         {
           "id": "106",
-          "correctRate": 74.0,
-          "scoreRate": 74.0
+          "correctRate": 74,
+          "scoreRate": 74
         },
         {
           "id": "107",
@@ -13631,8 +13631,8 @@
         },
         {
           "id": "16",
-          "correctRate": 52.0,
-          "scoreRate": 52.0
+          "correctRate": 52,
+          "scoreRate": 52
         },
         {
           "id": "17",
@@ -13705,8 +13705,8 @@
         },
         {
           "id": "103",
-          "correctRate": 63.0,
-          "scoreRate": 63.0
+          "correctRate": 63,
+          "scoreRate": 63
         },
         {
           "id": "104-105",
@@ -13915,8 +13915,8 @@
         },
         {
           "id": "28-29",
-          "correctRate": 10.0,
-          "scoreRate": 10.0,
+          "correctRate": 10,
+          "scoreRate": 10,
           "note": "複数の解答番号をまとめた採点行。受験者正答率は該当解答番号の統計を統合表示。"
         },
         {
@@ -14689,8 +14689,8 @@
         },
         {
           "id": "31",
-          "correctRate": 57.0,
-          "scoreRate": 57.0
+          "correctRate": 57,
+          "scoreRate": 57
         },
         {
           "id": "32",
@@ -14745,8 +14745,8 @@
         },
         {
           "id": "106",
-          "correctRate": 67.0,
-          "scoreRate": 67.0
+          "correctRate": 67,
+          "scoreRate": 67
         },
         {
           "id": "107",
@@ -15622,8 +15622,8 @@
         },
         {
           "id": "4-イ",
-          "correctRate": 89.0,
-          "scoreRate": 89.0
+          "correctRate": 89,
+          "scoreRate": 89
         },
         {
           "id": "4-ウ",
@@ -16296,8 +16296,8 @@
         },
         {
           "id": "12",
-          "correctRate": 90.0,
-          "scoreRate": 90.0
+          "correctRate": 90,
+          "scoreRate": 90
         },
         {
           "id": "13",
@@ -16396,8 +16396,8 @@
         },
         {
           "id": "32",
-          "correctRate": 64.0,
-          "scoreRate": 64.0
+          "correctRate": 64,
+          "scoreRate": 64
         }
       ],
       "averageScore100": 60.88,
@@ -17723,6 +17723,175 @@
       "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/R3_.html",
       "averageScore": 56.68,
       "averageScore100": 56.68,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "化学IA",
+      "source": "大学入試センター 受験者数・平均点の推移（本試験）平成18～23年度センター試験",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageSource": "大学入試センター 受験者数・平均点の推移（本試験）平成18～23年度センター試験",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageScore": 58.92,
+      "averageScore100": 58.92,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "地学IA",
+      "source": "大学入試センター 受験者数・平均点の推移（本試験）平成18～23年度センター試験",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageSource": "大学入試センター 受験者数・平均点の推移（本試験）平成18～23年度センター試験",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageScore": 55.54,
+      "averageScore100": 55.54,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "物理IA",
+      "source": "大学入試センター 受験者数・平均点の推移（本試験）平成18～23年度センター試験",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageSource": "大学入試センター 受験者数・平均点の推移（本試験）平成18～23年度センター試験",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageScore": 61.43,
+      "averageScore100": 61.43,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2006",
+      "exam": "center-main",
+      "subject": "生物IA",
+      "source": "大学入試センター 受験者数・平均点の推移（本試験）平成18～23年度センター試験",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageSource": "大学入試センター 受験者数・平均点の推移（本試験）平成18～23年度センター試験",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageScore": 57,
+      "averageScore100": 57,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2009",
+      "exam": "center-main",
+      "subject": "数学I・Ａ",
+      "source": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageScore": 63.96,
+      "averageScore100": 63.96,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2010",
+      "exam": "center-main",
+      "subject": "数学I・Ａ",
+      "source": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageScore": 48.96,
+      "averageScore100": 48.96,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2011",
+      "exam": "center-main",
+      "subject": "数学I・Ａ",
+      "source": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h18_h23.html",
+      "averageScore": 65.95,
+      "averageScore100": 65.95,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2012",
+      "exam": "center-main",
+      "subject": "数学I・Ａ",
+      "source": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h24_h26.html",
+      "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h24_h26.html",
+      "averageScore": 69.97,
+      "averageScore100": 69.97,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2013",
+      "exam": "center-main",
+      "subject": "数学I・Ａ",
+      "source": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h24_h26.html",
+      "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h24_h26.html",
+      "averageScore": 51.2,
+      "averageScore100": 51.2,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2014",
+      "exam": "center-main",
+      "subject": "数学I・Ａ",
+      "source": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h24_h26.html",
+      "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h24_h26.html",
+      "averageScore": 62.08,
+      "averageScore100": 62.08,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2015",
+      "exam": "center-main",
+      "subject": "数学I・Ａ",
+      "source": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h27_h29.html",
+      "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h27_h29.html",
+      "averageScore": 61.27,
+      "averageScore100": 61.27,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2016",
+      "exam": "center-main",
+      "subject": "数学I・Ａ",
+      "source": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h27_h29.html",
+      "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h27_h29.html",
+      "averageScore": 55.27,
+      "averageScore100": 55.27,
+      "averageScoreScale": "app-max-score",
+      "items": []
+    },
+    {
+      "year": "2017",
+      "exam": "center-main",
+      "subject": "数学I・Ａ",
+      "source": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "sourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h27_h29.html",
+      "averageSource": "大学入試センター センター試験 受験者数・平均点の推移（本試験）",
+      "averageSourceUrl": "https://www.dnc.ac.jp/kyotsu/suii/center_suii/h27_h29.html",
+      "averageScore": 61.12,
+      "averageScore100": 61.12,
       "averageScoreScale": "app-max-score",
       "items": []
     }
