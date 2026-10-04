@@ -12,7 +12,7 @@
     return String(value ?? "")
       .normalize("NFKC")
       .trim()
-      .replace(/[−ー―–—－]/g, "-")
+      .replace(/[−‐‑‒–—―ー－]/g, "-")
       .toLowerCase();
   }
 
@@ -22,14 +22,15 @@
   }
 
   function groupLabel(value) {
-    const text = String(value || "全体").trim();
-    const match = text.match(/^Q\s*([0-9]+)$/i);
+    const text = String(value || "全体").normalize("NFKC").trim();
+    const match = text.match(/^(?:Q\s*|第\s*)([0-9]+)(?:\s*問)?$/i);
     return match ? `第${Number(match[1])}問` : text;
   }
 
   function expected(question) {
     if (Array.isArray(question.answers)) return question.answers.map(norm);
-    return [norm(question.answer)];
+    const values = window.PhotoAnswerFormat?.vector(question.answer, question.photoCodes?.length || 1);
+    return values || [norm(question.answer)];
   }
 
   function toArray(value) {
@@ -112,25 +113,28 @@
       if ((counts.get(id) || 0) === 1) lookup.set(id, row.got);
       lookup.set(norm(`${row.question.problemNumber || row.question.group || ""}||${row.question.id}`), row.got);
     }
-    return id => lookup.get(norm(id)) || [];
+    for (const row of rows) (row.question.photoCodes || []).forEach((code,index) => {
+      lookup.set(norm(code),[row.got[index] || ""]);
+    });
+    return (id,group) => lookup.get(norm(group + "||" + id)) || lookup.get(norm(id)) || [];
   }
 
   function match(got, question, getById) {
     const max = points(question);
     if (question.alwaysAward) return max;
 
-    if (Array.isArray(question.conditionalCorrect)) {
+    if (Array.isArray(question.conditionalCorrect) && question.conditionalCorrect.length) {
       for (const condition of question.conditionalCorrect) {
         const dependencyMatches = Array.isArray(condition.allOf)
           ? condition.allOf.every(dependency =>
               equalAnswers(
-                getById(dependency.ifId),
+                getById(dependency.ifId, question.problemNumber || question.group),
                 dependency.ifEquals || [],
                 Boolean(dependency.ifUnordered)
               )
             )
           : equalAnswers(
-              getById(condition.ifId),
+              getById(condition.ifId, question.problemNumber || question.group),
               condition.ifEquals || [],
               Boolean(condition.ifUnordered)
             );
@@ -181,7 +185,7 @@
           answer.every((value, index) =>
             value === "*" || value === null || norm(got[index]) === norm(value)
           )
-        ) return Number(partial.points || 0);
+        ) return Math.min(max, Math.max(0, Number(partial.points || 0)));
       }
     }
 
@@ -189,7 +193,7 @@
       for (const partial of question.partialAnswers) {
         const answer = Array.isArray(partial.answers) ? partial.answers : [partial.answer];
         if (equalAnswers(got, answer, Boolean(partial.unordered))) {
-          return Number(partial.points || 0);
+          return Math.min(max, Math.max(0, Number(partial.points || 0)));
         }
       }
     }
@@ -243,7 +247,8 @@
         index,
         question,
         got,
-        answered: got.some(value => norm(value) !== ""),
+        answered: Boolean(question.alwaysAward) || got.some(value => norm(value) !== ""),
+        complete: Boolean(question.alwaysAward) || (got.length > 0 && got.every(value => norm(value) !== "")),
         points: key.pointsAvailable === false ? 1 : points(question),
         earned: 0,
         included: true
@@ -251,11 +256,10 @@
     });
     const getById = makeAnswerLookup(rows);
     rows.forEach(row => {
-      const scoredQuestion = key.pointsAvailable === false
-        ? {...row.question, points: 1, point: 1}
-        : row.question;
-      const earned = match(row.got, scoredQuestion, getById);
-      row.earned = key.pointsAvailable === false ? (earned > 0 ? 1 : 0) : earned;
+      const earned = match(row.got, row.question, getById);
+      // 配点不明時も「一部正解」を「すべて正解」にしない。
+      row.earned = key.pointsAvailable === false
+        ? (earned >= points(row.question) ? 1 : earned > 0 ? .5 : 0) : earned;
       row.expected = expectedText(row.question);
     });
 
@@ -265,8 +269,10 @@
     for (const rule of key.selectionRules || []) {
       for (const group of rule.groups || []) optionalGroups.add(group);
       const explicit = (rule.groups || []).filter(group => selectedGroups?.has(group));
-      const groups = mode === "universal" && explicit.length === Number(rule.choose || 1)
-        ? explicit : selectedRuleGroups(rule, selected, rows);
+      if (mode === "universal" && explicit.length !== Number(rule.choose || 1)) {
+        throw new Error("採点する大問を指定された数だけ選んでください。");
+      }
+      const groups = mode === "universal" ? explicit : selectedRuleGroups(rule, selected, rows);
       for (const group of groups) chosenGroups.add(group);
     }
     if (optionalGroups.size) {
@@ -282,7 +288,7 @@
     const possible = included.reduce((sum, row) => sum + row.points, 0);
     const pointsAvailable = key.pointsAvailable !== false;
     const maxScore = Number(pointsAvailable ? (key.maxScore ?? possible) : possible);
-    const score = possible ? rawScore * maxScore / possible : rawScore;
+    const score = key.scaleScore === false ? rawScore : possible ? rawScore * maxScore / possible : rawScore;
     const groups = [];
     const groupNames = [...new Set(included.map(row => row.question.group || "全体"))];
     for (const group of groupNames) {
@@ -293,7 +299,7 @@
         possible: groupRows.reduce((sum, row) => sum + row.points, 0),
         correct: groupRows.filter(row => row.earned === row.points).length,
         items: groupRows.length,
-        missing: groupRows.filter(row => !row.answered).length
+        missing: groupRows.filter(row => !row.complete).length
       });
     }
 
@@ -309,7 +315,7 @@
       correct: included.filter(row => row.earned === row.points).length,
       partial: included.filter(row => row.earned > 0 && row.earned < row.points).length,
       wrong: included.filter(row => row.answered && row.earned === 0).length,
-      missing: included.filter(row => !row.answered).length,
+      missing: included.filter(row => !row.complete).length,
       chosenGroups: [...chosenGroups].map(groupLabel)
     };
   }

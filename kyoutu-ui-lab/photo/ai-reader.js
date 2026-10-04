@@ -97,42 +97,38 @@
     if (!answerKeyModelPromise) {
       answerKeyModelPromise = (async () => {
         const {ai, aiSdk} = await getAiContext();
-        const responseSchema = aiSdk.Schema.object({
-          properties: {
-            examLabel: aiSdk.Schema.string(),
-            maxScore: aiSdk.Schema.integer(),
-            selectionRules: aiSdk.Schema.array({items: aiSdk.Schema.object({properties: {
-              groups: aiSdk.Schema.array({items: aiSdk.Schema.string()}),
-              choose: aiSdk.Schema.integer()
-            }})}),
-            answers: aiSdk.Schema.array({
-              items: aiSdk.Schema.object({
-                properties: {
-                  codes: aiSdk.Schema.array({
-                    items: aiSdk.Schema.string()
-                  }),
-                  answers: aiSdk.Schema.array({
-                    items: aiSdk.Schema.string()
-                  }),
-                  alternatives: aiSdk.Schema.array({
-                    items: aiSdk.Schema.string()
-                  }),
-                  group: aiSdk.Schema.string(),
-                  points: aiSdk.Schema.integer(),
-                  unordered: aiSdk.Schema.boolean(),
-                  confidence: aiSdk.Schema.enumString({
-                    enum: ["high", "medium", "low"]
-                  })
-                }
-              })
-            })
-          }
-        });
+        const strings = () => aiSdk.Schema.array({items:aiSdk.Schema.string()});
+        const partial = () => aiSdk.Schema.object({properties:{
+          answers:strings(),points:aiSdk.Schema.integer(),unordered:aiSdk.Schema.boolean()
+        },optionalProperties:["unordered"]});
+        const responseSchema = aiSdk.Schema.object({properties:{
+          examLabel:aiSdk.Schema.string(),maxScore:aiSdk.Schema.integer(),
+          selectionRules:aiSdk.Schema.array({items:aiSdk.Schema.object({properties:{
+            groups:strings(),choose:aiSdk.Schema.integer()
+          }})}),
+          answers:aiSdk.Schema.array({items:aiSdk.Schema.object({properties:{
+            codes:strings(),answers:strings(),group:aiSdk.Schema.string(),points:aiSdk.Schema.integer(),
+            unordered:aiSdk.Schema.boolean(),
+            confidence:aiSdk.Schema.enumString({enum:["high","medium","low"]}),
+            correctOptions:aiSdk.Schema.array({items:strings()}),
+            partialAnyCorrect:aiSdk.Schema.integer(),
+            partialAnswers:aiSdk.Schema.array({items:partial()}),
+            partialConditions:aiSdk.Schema.array({items:partial()}),
+            conditionalCorrect:aiSdk.Schema.array({items:aiSdk.Schema.object({properties:{
+              answers:strings(),unordered:aiSdk.Schema.boolean(),
+              allOf:aiSdk.Schema.array({items:aiSdk.Schema.object({properties:{
+                ifCode:aiSdk.Schema.string(),ifEquals:strings()
+              }})})
+            },optionalProperties:["unordered"]})}),
+            alwaysAward:aiSdk.Schema.boolean(),note:aiSdk.Schema.string()
+          },optionalProperties:["correctOptions","partialAnyCorrect","partialAnswers",
+            "partialConditions","conditionalCorrect","alwaysAward","note"]})})
+        }});
         return aiSdk.getGenerativeModel(ai, {
           model: config.model || "gemini-3.5-flash-lite",
           generationConfig: {
             temperature: 0,
-            maxOutputTokens: 8192,
+            maxOutputTokens: 16384,
             responseMimeType: "application/json",
             responseSchema
           }
@@ -220,55 +216,11 @@
     return validateResponse(parsed, questionNumbers);
   }
 
-  function validateAnswerKeyResponse(value, expectedCodes) {
-    if (!value || !Array.isArray(value.answers)) {
-      throw new Error("解答写真のAI応答形式を確認できませんでした。");
-    }
-    const expected = new Set(expectedCodes);
-    const used = new Set();
-    const answers = [];
-    for (const item of value.answers) {
-      const codes = Array.isArray(item?.codes)
-        ? item.codes.map(code => typeof code === "string" ? code.trim() : "").filter(Boolean)
-        : [];
-      const values = Array.isArray(item?.answers)
-        ? item.answers.map(answer => typeof answer === "string" ? answer.trim() : "")
-        : [];
-      if (
-        !codes.length ||
-        codes.length !== values.length ||
-        new Set(codes).size !== codes.length ||
-        codes.some(code => !expected.has(code) || used.has(code)) ||
-        !["high", "medium", "low"].includes(item.confidence)
-      ) {
-        continue;
-      }
-      codes.forEach(code => used.add(code));
-      answers.push({
-        codes,
-        answers: values,
-        alternatives: Array.isArray(item.alternatives)
-          ? item.alternatives.map(value => String(value || "").trim()).filter(Boolean)
-          : [],
-        group: typeof item.group === "string" && item.group.trim()
-          ? item.group.trim()
-          : "全体",
-        points: Number.isInteger(item.points) && item.points > 0 ? item.points : null,
-        unordered: Boolean(item.unordered),
-        confidence: item.confidence
-      });
-    }
-    return {
-      examLabel: typeof value.examLabel === "string" ? value.examLabel.trim() : "",
-      maxScore: Number.isInteger(value.maxScore) && value.maxScore > 0 ? value.maxScore : null,
-      answers,
-      selectionRules: Array.isArray(value.selectionRules) ? value.selectionRules.filter(rule =>
-        Array.isArray(rule.groups) && rule.groups.length > 0 &&
-        rule.groups.every(group => typeof group === "string" && group.length < 80) &&
-        new Set(rule.groups).size === rule.groups.length &&
-        Number.isInteger(rule.choose) && rule.choose > 0 && rule.choose <= rule.groups.length
-      ).map(rule => ({groups: rule.groups.slice(), choose: rule.choose})) : []
-    };
+  function validateAnswerKeyResponse(value, entries) {
+    // 旧呼出しのコード配列にも対応する。
+    const metadata = (entries || []).map(entry => typeof entry === "string"
+      ? {code:entry,label:entry,group:"全体"} : entry);
+    return window.PhotoAnswerFormat.normalizeKey(value,metadata);
   }
 
   async function analyzeAnswerKey({subjectLabel, entries, images}) {
@@ -293,6 +245,15 @@
       "「−」は独立した正解1文字です。長音やダッシュにせず半角の\"-\"にしてください。",
       "別解が印刷されている場合、正解をコード順に連結した文字列をalternativesへ追加してください。",
       "順不同と明記されている採点単位だけunordered=trueにしてください。",
+      "複数欄をまとめた採点は1件にし、answersはcodesと同じ欄数の配列に分けてください。例: アイが21なら[\"2\",\"1\"]、アイウが−12なら[\"-\",\"1\",\"2\"]。1欄の選択肢10は[\"10\"]のままです。",
+      "配点欄の縦結合・横結合、括弧や罫線でまとめられた範囲を確認してください。まとめて3点を各欄3点へ重複させないでください。大問全体の配点を各設問へ割り当てないでください。",
+      "「両方正解」「すべて正解」「完答」はまとめた1採点単位にし、部分点を設定しません。「各2点」「1つ正解につき2点」は合計配点をpoints、1つ分をpartialAnyCorrect=2にしてください。順不同かどうかとは別の規則です。",
+      "別解はcorrectOptionsへ、欄ごとの値を配列で入れてください。例 [[\"10\",\"a\"],[\"11\",\"b\"]]。別解がない場合は省略できます。",
+      "指定された解答だけが部分点になる場合はpartialAnswersにanswers・points・unorderedを転記してください。一部の欄だけが合っていれば部分点ならpartialConditionsで不問の欄を\"*\"としてください。",
+      "他の解答欄で選んだ値によって正解が変わる場合はconditionalCorrectへ転記し、allOfのifCodeは欄一覧のコード、ifEqualsはその欄の条件値1件、answersはこの採点単位の正解としてください。条件や別解を推測しないでください。",
+      "問題訂正などで全員に配点と明記されている場合だけalwaysAward=true。注記はnoteへ短く転記し、存在しない規則は省略または0・空配列・falseにしてください。",
+      "答案の第1問・第2問等で同じア・イがあっても混ぜないでください。groupはコード一覧の大問名を使い、選択問題のgroupsもそれと一致させてください。",
+
       "groupは答案欄一覧に示した大問名と一致させてください。大問を確認できなければ「全体」にしてください。",
       "pointsは、その採点単位の配点が写真に明記されている場合だけ正の整数にしてください。配点がない、または判読不能なら0にしてください。",
       "写真に試験名が明記されていればexamLabelへ転記し、なければ空文字にしてください。",
@@ -315,7 +276,7 @@
     } catch (_) {
       throw new Error("解答写真のAI応答をJSONとして読み取れませんでした。");
     }
-    return validateAnswerKeyResponse(parsed, entries.map(entry => entry.code));
+    return validateAnswerKeyResponse(parsed, entries);
   }
 
 
@@ -327,40 +288,8 @@
       .replace(/[−‐‑‒–—―ー]/g, "-").toLowerCase();
   }
 
-  function validateSheetResponse(value, entries = []) {
-    if (!value || !Array.isArray(value.answers)) {
-      throw new Error("答案写真のAI応答形式を確認できませんでした。同じ写真で再試行できます。");
-    }
-    const expected = new Map(entries.map(entry => [entry.code, entry]));
-    const found = new Map();
-    for (const item of value.answers) {
-      if (!item || typeof item.code !== "string" || typeof item.value !== "string" ||
-          !CONFIDENCE.includes(item.confidence)) continue;
-      const code = item.code.trim();
-      if (!code || code.length > 160 || (expected.size && !expected.has(code))) continue;
-      const token = item.value === "blank" || item.value === "unknown" ? "" : normalizeToken(item.value);
-      if (token.length > 32) continue;
-      const metadata = expected.get(code);
-      const answer = {
-        code,
-        label: metadata?.label || String(item.label || code).slice(0, 120),
-        group: metadata?.group || String(item.group || "全体").slice(0, 80),
-        value: token,
-        state: item.value === "unknown" || item.confidence !== "high" ? "warn" :
-          token === "" ? "blank" : "ok",
-        aiConfidence: item.confidence
-      };
-      const previous = found.get(code);
-      if (previous) {
-        if (previous.value !== token) {
-          previous.value = "";
-          previous.state = "warn";
-          previous.aiConfidence = "low";
-        } else if (answer.state === "warn") previous.state = "warn";
-      } else found.set(code, answer);
-    }
-    if (!found.size) throw new Error("解答欄を特定できませんでした。同じ写真で再試行するか、欄を写した写真を追加してください。");
-    return [...found.values()];
+  function validateSheetResponse(value, entries = [], allowAdditional = false) {
+    return window.PhotoAnswerFormat.normalizeSheet(value,entries,allowAdditional);
   }
 
   async function getSheetModel() {
@@ -379,8 +308,10 @@
                 label: aiSdk.Schema.string(),
                 group: aiSdk.Schema.string(),
                 value: aiSdk.Schema.string(),
-                confidence: aiSdk.Schema.enumString({enum: CONFIDENCE})
-              }})})
+                confidence: aiSdk.Schema.enumString({enum: CONFIDENCE}),
+                codes: aiSdk.Schema.array({items:aiSdk.Schema.string()}),
+                values: aiSdk.Schema.array({items:aiSdk.Schema.string()})
+              },optionalProperties:["codes","values"]})})
             }})
           }
         });
@@ -389,7 +320,7 @@
     return sheetModelPromise;
   }
 
-  async function analyzeAnswerSheet({subjectLabel, entries = [], images}) {
+  async function analyzeAnswerSheet({subjectLabel, entries = [], images, allowAdditional = false}) {
     if (!images?.length) throw new Error("答案の写真がありません。");
     const model = await getSheetModel();
     const prompt = [
@@ -399,13 +330,18 @@
       "まず印刷された日本語が読める向きに解釈し、大問・小問・解答欄ラベルと選択肢を確認してください。",
       "列数や並びを決めつけず、各列に実際に印刷された数字・英字・記号を読み、塗られた列の値を返してください。",
       "数学の−は独立した選択肢です。0と取り違えず半角の-で返してください。情報等のa〜fや他の英字は小文字で返してください。",
+      "原則1解答欄につき1件を返してください。複数欄をまとめる場合はcodesとvaluesを同じ欄数で返してください。例: ア・イ・ウの−12はvalues=[\"-\",\"1\",\"2\"]です。1欄の選択肢10は1件のvalue=\"10\"のままです。",
+      "解答番号10と11をまとめた欄、ア〜ウ等の連続欄、順不同でも欄名と値を対応させて読み取ってください。印刷されたまとめ方や配点は解答そのものに混ぜないでください。",
+      "解答科目・出題範囲・選択問題の指定欄、受験番号・氏名欄は解答項目に含めないでください。理科基礎など別分野で大問番号や欄番号が再開する場合、groupに分野名も含めて区別してください。",
+
       "赤い採点印、印刷の輪郭、薄い消し跡は解答に含めないでください。",
       "未記入と確認できる欄はvalue=blank。二重マーク、ラベル不明、読めない値はvalue=unknown、confidence=low。推測で埋めないでください。",
       "画像にない欄は返さないでください。未記入欄も実際に見える場合だけ返してください。",
       "複数写真は同じ試験の別ページまたは同じページの拡大です。用紙の順番や表裏を仮定しないでください。同じ欄は一度だけ返し、食い違う場合はunknownにしてください。",
       "答案写真に正解一覧や問題が混在していても受験者の解答欄のみを読んでください。",
       entries.length ?
-        "照合先の欄一覧（正解の値は含みません）。必ずこのcodeを使い、group・labelで照合してください。別の大問や同名の欄を混同しないでください。\n" +
+        (allowAdditional ? "既に確認した欄一覧。写っている既存欄はこのcodeを使い、新しい欄があれば追加してください。\n" :
+        "照合先の欄一覧（正解の値は含みません）。必ずこのcodeを使い、group・labelで照合してください。別の大問や同名の欄を混同しないでください。\n") +
         entries.map(entry => entry.code + ": " + entry.group + " / " + entry.label).join("\n") :
         "欄一覧がないので、印刷されたラベルを使ってcodeを生成してください。codeは大問/小問/欄の一意な文字列（例 Q1/ア、N19）。groupは印刷された大問名、labelは欄ラベル。見えない大問は全体とし、同じ記号を勝手に統合しないでください。",
       "返答前に、ラベル・値・負号・英字を全欄見直してください。確信がない場合はlowにしてください。"
@@ -419,7 +355,7 @@
     let parsed;
     try { parsed = JSON.parse(result.response.text()); }
     catch (_) { throw new Error("答案写真のAI応答をJSONとして読み取れませんでした。同じ写真で再試行できます。"); }
-    return validateSheetResponse(parsed, entries);
+    return validateSheetResponse(parsed, entries, allowAdditional);
   }
 
   window.MarkReaderAI = Object.freeze({
