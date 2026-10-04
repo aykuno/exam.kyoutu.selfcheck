@@ -10,7 +10,8 @@
     return match ? "第" + Number(match[1]) + "問" : text;
   };
   function labels(value) {
-    const text = String(value ?? "").normalize("NFKC").trim();
+    const text = String(value ?? "").normalize("NFKC").trim()
+      .replace(/^(?:第\s*\d+\s*問|Q\s*\d+)\s*[:：-]?\s*/i,"");
     let match = text.match(/^(\d+)\s*[-~〜～]\s*(\d+)$/);
     if (match) {
       const first = Number(match[1]), last = Number(match[2]);
@@ -36,7 +37,8 @@
       ...(question.correctOptions || []).map(a => a.length),
       ...(question.conditionalCorrect || []).map(a => a.answers?.length)].filter(Number.isInteger);
     if (lengths.length) return Math.max(1,...lengths);
-    return Math.max(1,labels(question.id).length);
+    const printed=labels(question.id);
+    return printed.length && printed.every(label=>/^\d+$/.test(label) || KANA.includes(label) || /^[a-z]$/i.test(label)) ? printed.length : 1;
   }
   function slotLabels(question) {
     const count = slots(question), printed = labels(question.id);

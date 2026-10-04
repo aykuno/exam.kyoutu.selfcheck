@@ -156,6 +156,12 @@ test("printed labels in grouped key codes can be matched unambiguously",()=>{
   assert.equal(grade(key,["2","1"]).rawScore,2);
 });
 
+test("registered IDs with question prefixes keep the physical kana slot count",()=>{
+  assert.equal(F.slots({id:"第1問 ケ",answer:"1"}),1);
+  assert.deepEqual(Array.from(F.slotLabels({id:"第1問 ケ",answer:"1"})),["ケ"]);
+  assert.deepEqual(Array.from(F.slotLabels({id:"第1問 ア・イ",answers:["2","8"]})),["ア","イ"]);
+});
+
 // 登録済み59科目の写真採点結果を既存の番号入力採点と比較する。
 const app=read("kyoutu-ui-lab/app.js");
 const eqStart=app.indexOf("  function eq("),matchEnd=app.indexOf("  function expText(",eqStart);
