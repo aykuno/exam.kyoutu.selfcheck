@@ -147,6 +147,15 @@ test("saved legacy alternatives can still be reconstructed",()=>{
   assert.equal(grade(key,["3","4"]).rawScore,2);
 });
 
+test("optional empty grouping fields do not hide a scalar answer",()=>{
+  const answer=F.normalizeSheet({answers:[{code:"R1",codes:[],values:[],label:"",group:"",value:"2",confidence:"high"}]},metadata(["1"]));
+  assert.equal(answer[0].value,"2");
+});
+test("printed labels in grouped key codes can be matched unambiguously",()=>{
+  const key=keyFrom({answers:[{codes:["ア","イ"],group:"Q1",answers:["21"],points:2,confidence:"high"}]},metadata(["ア","イ"]));
+  assert.equal(grade(key,["2","1"]).rawScore,2);
+});
+
 // 登録済み59科目の写真採点結果を既存の番号入力採点と比較する。
 const app=read("kyoutu-ui-lab/app.js");
 const eqStart=app.indexOf("  function eq("),matchEnd=app.indexOf("  function expText(",eqStart);
@@ -175,7 +184,12 @@ for(const source of [...main,...mocks]){
     const answerEntries=key.questions.flatMap((q,i)=>q.photoCodes.map((code,j)=>({code,value:got[i][j]||""})));
     const actual=G.grade({key,mode:"universal",answerEntries,selectedGroups});
     actual.rows.forEach((row,i)=>{
-      assert.equal(row.earned,golden(key.questions[i],got[i]),
+      const wanted=golden(key.questions[i],got[i]);
+      if (row.earned!==wanted) console.log("SCORING_MISMATCH "+JSON.stringify({
+        subject:source.subject,question:key.questions[i],got:got[i],wanted,earned:row.earned,
+        questions:key.questions.map((q,index)=>({id:q.id,group:q.group,answers:got[index],codes:q.photoCodes}))
+      }));
+      assert.equal(row.earned,wanted,
         source.subject+" "+variant+" "+key.questions[i].group+" "+key.questions[i].id);
       comparisons++;
     });

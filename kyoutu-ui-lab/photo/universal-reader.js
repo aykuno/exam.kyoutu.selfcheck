@@ -374,8 +374,25 @@
 
   function renderKey() {
     $("answerKeyPhotoResult").classList.remove("hidden");
-    const mode = q => q.alwaysAward ? "award" : q.partialAnyCorrect
-      ? q.unordered ? "each-unordered" : "each-ordered" : q.unordered ? "unordered" : "ordered";
+    const mode = q => q.photoRuleMode || (q.alwaysAward ? "award" : q.partialAnyCorrect
+      ? q.unordered ? "each-unordered" : "each-ordered" : q.unordered ? "unordered" : "ordered");
+    const describeRules = q => {
+      const detail=[];
+      const displayValues=values=>values.map(value=>value==="*" ? "不問" : value).join(" / ");
+      for (const values of q.correctOptions || []) detail.push("正解：" + displayValues(values));
+      for (const partial of [...q.partialAnswers || [],...q.partialConditions || []])
+        detail.push(displayValues(partial.answers) + " → " + partial.points + "点");
+      for (const condition of q.conditionalCorrect || []) {
+        const dependencies=(condition.allOf || []).map(dependency => {
+          const entry=entries.find(e=>e.code === dependency.ifId);
+          return (entry ? window.MarkReaderGrader.groupLabel(entry.group) + " " + entry.label : dependency.ifId) +
+            " が " + displayValues(dependency.ifEquals || []);
+        }).join("、");
+        detail.push(dependencies + " のとき " + displayValues(condition.answers || []));
+      }
+      return detail.length ? '<details><summary>別解・部分点・条件</summary><small class="photo-rule-note">' +
+        detail.map(escape).join("<br>") + '</small></details>' : "";
+    };
     const options = [["ordered","順番どおり・完答"],["unordered","順不同・完答"],
       ["each-ordered","順番どおり・各欄の部分点"],["each-unordered","順不同・各欄の部分点"],["award","全員得点"]];
     $("answerKeyPhotoResult").innerHTML =
@@ -383,7 +400,7 @@
       key.questions.map((q,index) => '<tr><td>' + escape(window.MarkReaderGrader.groupLabel(q.group) + " " + q.id) +
         (q.photoConfidence !== "high" ? "（要確認）" : "") +
         '<small class="photo-rule-note">' + escape(window.PhotoAnswerFormat.ruleText(q) +
-          (q.note ? " / " + q.note : "")) + '</small></td><td><input data-key="' + index +
+          (q.note ? " / " + q.note : "")) + '</small>' + describeRules(q) + '</td><td><input data-key="' + index +
         '" data-field="answer" value="' + escape(q.answers.join(" / ")) + '" aria-label="正解"></td>' +
         '<td><input data-key="' + index + '" data-field="points" type="number" min="1" step="1" value="' +
         (q.photoPoints ? q.points : "") + '" aria-label="合計配点"></td><td><select data-key="' + index +
@@ -391,7 +408,7 @@
           '<option value="' + value + '"' + (mode(q) === value ? " selected" : "") + '>' + text + '</option>').join("") +
         '</select></td><td><input data-key="' + index +
         '" data-field="each" type="number" min="1" step="1" value="' +
-        (q.partialAnyCorrect || "") + '"' + (!q.partialAnyCorrect ? " disabled" : "") +
+        (q.partialAnyCorrect || "") + '"' + (!mode(q).startsWith("each-") ? " disabled" : " required") +
         ' aria-label="1つ正解の点"></td></tr>').join("") +
       '</tbody></table></div><p>例：2欄で「21」は「2 / 1」へ分けられます。「両方正解」と「各○点」を確認してください。配点が不明な場合は正解数で採点します。</p>';
     $("answerKeyPhotoResult").querySelectorAll("input,select").forEach(input => {
@@ -402,7 +419,9 @@
           if (!value || (!q.alwaysAward && value.some(v=>!v))) {
             input.setCustomValidity("欄数に合わせて正解を / で区切ってください。");input.reportValidity();return;
           }
-          input.setCustomValidity("");q.answers=value;
+          input.setCustomValidity("");
+          if (q.conditionalCorrect?.length && window.MarkReaderGrader.equalAnswers(q.answers,q.conditionalCorrect[0].answers,false)) q.conditionalCorrect[0].answers=value;
+          q.answers=value;
           if (q.correctOptions) q.correctOptions[0]=value;
         } else if (input.dataset.field === "points") {
           q.photoPoints=input.value !== "" && Number.isInteger(Number(input.value)) && Number(input.value)>0;
@@ -412,9 +431,10 @@
           const each=input.value.startsWith("each-");
           q.unordered=input.value==="unordered" || input.value==="each-unordered";
           q.alwaysAward=input.value==="award";
-          q.partialAnyCorrect=each ? q.partialAnyCorrect || 1 : 0;
+          q.photoRuleMode=input.value;
+          q.partialAnyCorrect=each ? q.partialAnyCorrect || 0 : 0;
           const pointInput=$("answerKeyPhotoResult").querySelector('input[data-key="' + index + '"][data-field="each"]');
-          pointInput.disabled=!each;pointInput.value=each ? q.partialAnyCorrect : "";
+          pointInput.disabled=!each;pointInput.required=each;pointInput.value=each ? q.partialAnyCorrect || "" : "";
           // 手動で採点方法を指定した場合は、写真からの複雑な規則をその指定に置き換える。
           delete q.conditionalCorrect;delete q.partialConditions;delete q.partialAnswers;
         } else {
@@ -425,7 +445,9 @@
           input.setCustomValidity("");q.partialAnyCorrect=value;
         }
         const eachInput=$("answerKeyPhotoResult").querySelector('input[data-key="' + index + '"][data-field="each"]');
-        if (!eachInput.disabled) eachInput.setCustomValidity(!q.photoPoints
+        if (!eachInput.disabled) eachInput.setCustomValidity(!q.partialAnyCorrect
+          ? "1つ正解の点を入力してください。"
+          : !q.photoPoints
           ? "各欄の部分点を使う場合は合計配点を入力してください。"
           : q.partialAnyCorrect*q.answers.length>q.points ? "部分点の合計が合計配点を超えています。" : "");
         q.photoConfidence="high";save();

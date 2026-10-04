@@ -62,12 +62,12 @@
   }
   function resolve(item,entries,allowAdditional=false) {
     const byCode = new Map(entries.map(e => [e.code,e]));
-    const rawCodes = Array.isArray(item.codes) ? item.codes :
+    const rawCodes = Array.isArray(item.codes) && item.codes.length ? item.codes :
       typeof item.codes === "string" ? item.codes.split(/[,，、;\s]+/).filter(Boolean) :
       item.code ? [item.code] : [];
     if (rawCodes.length > 1 && rawCodes.every(code => byCode.has(code)))
       return rawCodes.map(code => byCode.get(code));
-    const printed = labels(item.label || (rawCodes.length === 1 ? rawCodes[0] : ""));
+    const printed = item.label ? labels(item.label) : rawCodes.flatMap(code => labels(code));
     const itemGroup = group(item.group);
     if (printed.length > 1) {
       const matches = printed.map(label => {
@@ -98,7 +98,7 @@
       if (!item || !["high","medium","low"].includes(item.confidence)) continue;
       const mapped = resolve(item,entries,allowAdditional || !entries.length);
       if (!mapped.length || new Set(mapped.map(e => e.code)).size !== mapped.length) continue;
-      const values = vector(item.values ?? item.value,mapped.length);
+      const values = vector(Array.isArray(item.values) && item.values.length ? item.values : item.value,mapped.length);
       mapped.forEach((entry,index) => {
         const raw = values?.[index], uncertain = !values || raw === "unknown" || raw === undefined;
         const token = uncertain || raw === "blank" ? "" : norm(raw);
