@@ -162,6 +162,21 @@ test("registered IDs with question prefixes keep the physical kana slot count",(
   assert.deepEqual(Array.from(F.slotLabels({id:"第1問 ア・イ",answers:["2","8"]})),["ア","イ"]);
 });
 
+test("missing model values require confirmation instead of being treated as blank",()=>{
+  const value=F.normalizeSheet({answers:[{code:"R1",label:"1",confidence:"high"}]},metadata(["1"]));
+  assert.equal(value[0].state,"warn");
+});
+test("a standalone Q1 label is retained",()=>{
+  assert.deepEqual(Array.from(F.labels("Q1")),["Q1"]);
+});
+test("partly photographed optional groups retain the selection requirement",()=>{
+  const key=keyFrom({selectionRules:[{groups:["Q1","Q2"],choose:1}],answers:[
+    {codes:["R1"],answers:["1"],points:2,confidence:"high"}
+  ]},metadata(["1"]));
+  assert.equal(key.selectionRules.length,1);
+  assert.throws(()=>grade(key,["1"]),/選んで/);
+});
+
 // 登録済み59科目の写真採点結果を既存の番号入力採点と比較する。
 const app=read("kyoutu-ui-lab/app.js");
 const eqStart=app.indexOf("  function eq("),matchEnd=app.indexOf("  function expText(",eqStart);

@@ -10,8 +10,9 @@
     return match ? "第" + Number(match[1]) + "問" : text;
   };
   function labels(value) {
-    const text = String(value ?? "").normalize("NFKC").trim()
-      .replace(/^(?:第\s*\d+\s*問|Q\s*\d+)\s*[:：-]?\s*/i,"");
+    let text = String(value ?? "").normalize("NFKC").trim();
+    const prefix=text.match(/^(?:第\s*\d+\s*問|Q\s*\d+)\s*[:：/-]?\s*(.*)$/i);
+    if (prefix?.[1]) text=prefix[1];
     let match = text.match(/^(\d+)\s*[-~〜～]\s*(\d+)$/);
     if (match) {
       const first = Number(match[1]), last = Number(match[2]);
@@ -49,7 +50,7 @@
   }
   // 欄数が明確な場合だけ連結値を分解する。1欄の「10」は「1」「0」にしない。
   function vector(value,count) {
-    if (!Number.isInteger(count) || count < 1) return null;
+    if (!Number.isInteger(count) || count < 1 || value == null) return null;
     if (Array.isArray(value)) {
       if (value.length === count) return value.map(norm);
       if (value.length === 1 && count > 1) return vector(value[0],count);
@@ -102,7 +103,7 @@
       if (!mapped.length || new Set(mapped.map(e => e.code)).size !== mapped.length) continue;
       const values = vector(Array.isArray(item.values) && item.values.length ? item.values : item.value,mapped.length);
       mapped.forEach((entry,index) => {
-        const raw = values?.[index], uncertain = !values || raw === "unknown" || raw === undefined;
+        const raw = values?.[index], uncertain = !values || raw === "unknown" || raw === "" || raw === undefined;
         const token = uncertain || raw === "blank" ? "" : norm(raw);
         const answer = {...entry,value:token.length <= 32 ? token : "",
           state:uncertain || token.length > 32 || item.confidence !== "high" ? "warn" : token ? "ok" : "blank",

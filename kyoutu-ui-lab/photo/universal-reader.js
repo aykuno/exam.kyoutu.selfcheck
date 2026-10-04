@@ -368,7 +368,7 @@
       photoCoverage:used.size,photoEntryCount:entries.length,photoWarnings:result.warnings || [],
       selectionRules:(result.selectionRules || []).map(rule => ({
         groups:rule.groups.map(window.PhotoAnswerFormat.group),choose:rule.choose
-      })).filter(rule => rule.groups.every(group => questions.some(q => q.group === group)))
+      }))
     };
   }
 

@@ -44,6 +44,7 @@ const {chromium}=require("playwright"),fs=require("fs"),path=require("path"),ass
     assert.equal(await page.locator('select[data-key="1"]').inputValue(),"each-unordered");
     assert.equal(await page.locator('input[data-key="1"][data-field="each"]').inputValue(),"2");
     await page.screenshot({path:output+"/rules-review.png",fullPage:true});
+    console.log("PHOTO_REVIEW_IMAGE "+(await page.screenshot({type:"jpeg",quality:60,fullPage:true})).toString("base64"));
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
     await page.locator("#photoAnswer4").fill("9");
     await page.locator("#photoAnswer4").dispatchEvent("change");
