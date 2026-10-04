@@ -4,7 +4,8 @@ const {chromium}=require("playwright"),fs=require("fs"),assert=require("node:ass
   const output="audit/photo-accuracy/output";fs.mkdirSync(output,{recursive:true});
   const browser=await chromium.launch({headless:true});
   const page=await browser.newPage({viewport:{width:430,height:932}});
-  const errors=[],googleCalls=[];
+  const errors=[],googleCalls=[],consoleErrors=[];
+  page.on("console",message=>{if(message.type()==="error")consoleErrors.push(message.text());});
   page.on("pageerror",error=>errors.push(error.message));
   page.on("request",request=>{if(/firebasevertexai|firebaseappcheck/.test(request.url()))googleCalls.push(request.url());});
   await page.route("https://www.gstatic.com/firebasejs/**",async route=>{
@@ -14,7 +15,7 @@ const {chromium}=require("playwright"),fs=require("fs"),assert=require("node:ass
       "firebase-app-check.js":'export class ReCaptchaEnterpriseProvider{}; export const initializeAppCheck=()=>({});',
       "firebase-ai.js":'export const getAI=()=>({}); export const Schema=Object.fromEntries(["object","array","string","integer","boolean","enumString"].map(type=>[type,value=>({type,...value})])); export const getGenerativeModel=(ai,args)=>({generateContent:async parts=>{window.__requestParts.push(parts);window.__schema=args.generationConfig.responseSchema;return {response:{text:()=>JSON.stringify(window.__fixtureResponse)}};}});'
     };
-    await route.fulfill({status:200,contentType:"text/javascript",body:modules[file]||"export {};"});
+    await route.fulfill({status:200,contentType:"text/javascript",headers:{"access-control-allow-origin":"*"},body:modules[file]||"export {};"});
   });
   await page.route(/https:\/\/(?:.*googleapis\.com|.*recaptcha\.net)/,route=>route.abort());
   try{
@@ -107,6 +108,6 @@ const {chromium}=require("playwright"),fs=require("fs"),assert=require("node:ass
       correctKeyGroupMetadata:"pass",googleCalls:googleCalls.length};
     fs.writeFileSync(output+"/results.json",JSON.stringify(result,null,2));
     console.log("PHOTO_ACCURACY_BROWSER "+JSON.stringify(result));
-  }catch(error){await page.screenshot({path:output+"/failure.png",fullPage:true}).catch(()=>{});console.error(error);process.exitCode=1;}
+  }catch(error){await page.screenshot({path:output+"/failure.png",fullPage:true}).catch(()=>{});console.error(error);console.error("PHOTO_FAILURE_CONTEXT "+JSON.stringify(await page.evaluate(()=>({error:document.getElementById("errorText")?.textContent,requests:window.__requestParts?.length,parts:window.__requestParts?.map(parts=>parts.filter(p=>p.text).map(p=>p.text.slice(0,150))),context:window.UILabPhotoFlow?.getContext()}))));console.error("PHOTO_CONSOLE_ERRORS "+JSON.stringify(consoleErrors));process.exitCode=1;}
   finally{await browser.close();}
 })();
