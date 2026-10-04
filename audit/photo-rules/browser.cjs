@@ -29,10 +29,8 @@ const {chromium}=require("playwright"),fs=require("fs"),path=require("path"),ass
           ]},args.entries);
         }
       });
+      document.getElementById("customCompareButton").click();
       window.UILabPhotoFlow.configure({mode:"compare",subject:"形式確認",signature:"rules-ui-test"});
-      window.UILabPhotoNavigation.open();
-      for(const id of ["homeScreen","methodScreen","entryScreen","resultScreen"])document.getElementById(id).hidden=true;
-      document.getElementById("photoScreen").hidden=false;
     });
     const image={name:"fixture.png",mimeType:"image/png",buffer:Buffer.from(
       "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jr5kAAAAASUVORK5CYII=","base64")};

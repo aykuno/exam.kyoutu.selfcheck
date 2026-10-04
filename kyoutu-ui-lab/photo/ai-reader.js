@@ -128,7 +128,7 @@
           model: config.model || "gemini-3.5-flash-lite",
           generationConfig: {
             temperature: 0,
-            maxOutputTokens: 8192,
+            maxOutputTokens: 16384,
             responseMimeType: "application/json",
             responseSchema
           }

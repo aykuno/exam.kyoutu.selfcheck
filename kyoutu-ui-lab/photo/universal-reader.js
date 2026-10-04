@@ -410,7 +410,7 @@
         '" data-field="each" type="number" min="1" step="1" value="' +
         (q.partialAnyCorrect || "") + '"' + (!mode(q).startsWith("each-") ? " disabled" : " required") +
         ' aria-label="1つ正解の点"></td></tr>').join("") +
-      '</tbody></table></div><p>例：2欄で「21」は「2 / 1」へ分けられます。「両方正解」と「各○点」を確認してください。配点が不明な場合は正解数で採点します。</p>';
+      '</tbody></table></div><p>表を横にスクロールすると、合計配点・採点方法・1つ正解の点を修正できます。例：2欄で「21」は「2 / 1」へ分けられます。「両方正解」と「各○点」を確認してください。配点が不明な場合は正解数で採点します。</p>';
     $("answerKeyPhotoResult").querySelectorAll("input,select").forEach(input => {
       input.onchange = () => {
         const index=Number(input.dataset.key),q=key.questions[index];
