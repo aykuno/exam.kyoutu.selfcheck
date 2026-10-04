@@ -1385,6 +1385,7 @@
   function renderResult(result){
     const stats=sectionStats(result.rows),included=result.rows.filter(row=>row.included),average=statsFor(result.k),bad=included.filter(row=>!row.got.length||row.earn<row.pts),photo=result.inputMode==='photo',pointsAvailable=result.pointsAvailable!==false;
     const averageValue=average&&average.averageScore!=null?Number(average.averageScore).toFixed(2):'—';
+    const showAverage=averageValue!=='—'||['main','center-main','retake','center-retake'].includes(result.k.exam);
     const sectionRows=stats.map(stat=>`<tr><td>${esc(stat.group)}</td><td>${pointsAvailable?`${Math.round(stat.earn*10)/10} / ${stat.max}`:`${stat.correct} / ${stat.items}`}</td><td>${stat.items?Math.round(stat.correct/stat.items*1000)/10:0}%</td><td>${stat.correct} / ${stat.items}</td><td>${stat.missing}</td></tr>`).join('');
     const allRows=result.rows.map(row=>{
       const judge=!row.included?'—':row.earn===row.pts?'○':row.earn>0?'△':'×',judgeClass=judge==='○'?'ok':judge==='△'?'partial':judge==='×'?'ng':'';
@@ -1398,7 +1399,7 @@
         <div class="result-buttons"><button type="button" id="editFromResult">${editLabel}</button><button class="pdf-button" type="button" id="exportPdfResult">PDF出力（A4）</button></div>
       </div>
       <div class="resultSummaryCard">
-        <div><div class="resultSummarySubject">${esc(result.k.subject)}</div><div class="resultSummaryMeta">${esc(examText(result.k))}</div>${averageValue!=='—'?`<div class="avgScoreMetric"><span class="avgLabel">受験者平均点</span><b class="avgValue">${esc(averageValue)}</b></div>`:''}</div>
+        <div><div class="resultSummarySubject">${esc(result.k.subject)}</div><div class="resultSummaryMeta">${esc(examText(result.k))}</div>${showAverage?`<div class="avgScoreMetric"><span class="avgLabel">受験者平均点</span><b class="avgValue">${averageValue==='—'?'掲載元に記載なし':esc(averageValue)}</b></div>`:''}</div>
         <div class="resultSummaryStats"><div class="resultSummaryStat"><span>${pointsAvailable?'点数':'正解数'}</span><b>${pointsAvailable?`${Math.round(result.disp*10)/10} / ${result.mx}`:`${result.okc} / ${included.length}`}</b></div><div class="resultSummaryStat"><span>正答率</span><b>${Math.round(result.correctRate*10)/10}%</b></div><div class="resultSummaryStat"><span>正答項目</span><b>${result.okc} / ${included.length}</b></div><div class="resultSummaryStat"><span>未入力</span><b>${result.missing}</b></div></div>
       </div>
       ${stats.length?`<div class="radarPanel"><h3>問題番号別正答率</h3><div class="radarWrap">${radarSvg(stats)}<div class="sectionStats"><table><thead><tr><th>問題番号</th><th>${pointsAvailable?'得点':'正解数'}</th><th>正答率</th><th>正答項目</th><th>未入力</th></tr></thead><tbody>${sectionRows}</tbody></table></div></div></div>`:''}
