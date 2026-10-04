@@ -9,7 +9,7 @@ const {chromium}=require("playwright"),fs=require("fs"),path=require("path"),ass
   page.on("request",request=>{if(/firebasevertexai|firebaseappcheck/.test(request.url()))googleCalls.push(request.url());});
   await page.route(/https:\/\/(?:www\.gstatic\.com\/firebasejs|.*googleapis\.com|.*recaptcha\.net)/,route=>route.abort());
   try{
-    await page.goto("http://127.0.0.1:8765/kyoutu-ui-lab/",{waitUntil:"domcontentloaded"});
+    await page.goto(process.env.PHOTO_VERIFY_URL || "http://127.0.0.1:8765/kyoutu-ui-lab/",{waitUntil:"domcontentloaded"});
     await page.waitForFunction(()=>window.PhotoAnswerFormat&&window.UILabPhotoFlow&&window.MarkReaderAI?.isConfigured());
     await page.evaluate(()=>{
       const F=window.PhotoAnswerFormat;

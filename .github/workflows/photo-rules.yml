@@ -25,6 +25,8 @@ jobs:
           npm install --no-save playwright@1.55.1
           npx playwright install --with-deps chromium
       - name: Verify mobile review and grading
+        env:
+          PHOTO_VERIFY_URL: https://aykuno.github.io/exam.kyoutu.selfcheck/?photo-rules-check=20261004-universal2
         run: |
           python -m http.server 8765 >/tmp/photo-rules-server.log 2>&1 &
           node audit/photo-rules/browser.cjs
