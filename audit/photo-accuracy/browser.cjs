@@ -13,7 +13,7 @@ const {chromium}=require("playwright"),fs=require("fs"),assert=require("node:ass
     const modules={
       "firebase-app.js":'export const initializeApp=()=>({});',
       "firebase-app-check.js":'export class ReCaptchaEnterpriseProvider{}; export const initializeAppCheck=()=>({});',
-      "firebase-ai.js":'export const getAI=()=>({}); export const Schema=Object.fromEntries(["object","array","string","integer","boolean","enumString"].map(type=>[type,value=>({type,...value})])); export const getGenerativeModel=(ai,args)=>({generateContent:async parts=>{window.__requestParts.push(parts);window.__schema=args.generationConfig.responseSchema;return {response:{text:()=>JSON.stringify(window.__fixtureResponse)}};}});'
+      "firebase-ai.js":'export class GoogleAIBackend{}; export const getAI=()=>({}); export const Schema=Object.fromEntries(["object","array","string","integer","boolean","enumString"].map(type=>[type,value=>({type,...value})])); export const getGenerativeModel=(ai,args)=>({generateContent:async parts=>{window.__requestParts.push(parts);window.__schema=args.generationConfig.responseSchema;return {response:{text:()=>JSON.stringify(window.__fixtureResponse)}};}});'
     };
     await route.fulfill({status:200,contentType:"text/javascript",headers:{"access-control-allow-origin":"*"},body:modules[file]||"export {};"});
   });
