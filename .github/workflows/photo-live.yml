@@ -1,0 +1,37 @@
+name: Live photo reader verification
+on:
+  push:
+    branches:
+      - audit/photo-live-20261004
+    paths:
+      - .github/workflows/photo-live.yml
+      - audit/photo-live/**
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser and image tools
+        run: |
+          npm install --no-save playwright@1.55.1
+          npx playwright install --with-deps chromium
+          python -m pip install Pillow
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+      - name: Create labelled mark sheet fixtures
+        run: python audit/photo-live/make_sheets.py
+      - name: Read actual images through the published site
+        run: node audit/photo-live/verify.cjs
+      - name: Publish diagnostic screenshots and model responses
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: photo-live-verification
+          path: audit/photo-live/output
+          retention-days: 2
