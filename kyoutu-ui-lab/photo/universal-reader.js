@@ -1,4 +1,4 @@
-/* 写真採点 v20261004-universal2: 全科目の用紙・解答欄をGoogle Geminiで照合 */
+/* 写真採点 v20261004-accuracy1: 全科目の用紙・解答欄をGoogle Geminiで照合 */
 (() => {
   "use strict";
   const $ = id => document.getElementById(id);
@@ -54,6 +54,8 @@
       ? "全科目をGoogle Geminiで読み取ります。"
       : "AI読取を準備できませんでした。通信状態を確認してください。";
     $("retryButton").disabled = busy || !sheets.length;
+    $("reviewRetryButton").disabled = busy || !sheets.length;
+    $("reviewRetryButton").classList.toggle("hidden", !sheets.length);
     ["gradeButton","rescanButton","resumeButton"].forEach(id => { $(id).disabled = busy; });
     $("savedResumePanel").classList.toggle("hidden", !saved());
   }
@@ -83,7 +85,7 @@
     $("setupHelp").textContent = "1枚から読取できます。表裏がある場合は、撮影済みの写真をまとめて選択できます。";
     $("aiOption").classList.remove("hidden");
     $("aiOption").querySelector("b").textContent = "全科目をGoogle Geminiで読み取ります";
-    $("aiOption").querySelector("small").textContent = "用紙の配置を固定せず、写真にある欄番号・選択肢・記入値を読み取ります。";
+    $("aiOption").querySelector("small").textContent = "科目ごとの列を照合し、細かい欄は同じ写真から自動で拡大して読み取ります。";
     $("photoHomeBack").textContent = registered() ? "‹ 採点方法の選択へ戻る" : "‹ 試験選択へ戻る";
     $("retryButton").textContent = "同じ写真で再試行";
     $("errorBackButton").textContent = "写真選択へ戻る";
@@ -156,36 +158,6 @@
     review(false);
   }
 
-  async function convert(file) {
-    let image, close = () => {};
-    try {
-      image = await createImageBitmap(file, {imageOrientation:"from-image"});
-      close = () => image.close();
-    } catch (_) {
-      const url = URL.createObjectURL(file);
-      image = new Image();
-      try {
-        await new Promise((resolve, reject) => { image.onload = resolve; image.onerror = reject; image.src = url; });
-      } finally { URL.revokeObjectURL(url); }
-    }
-    try {
-      const scale = Math.min(1, 2400 / Math.max(image.width, image.height));
-      const canvas = document.createElement("canvas");
-      canvas.width = Math.max(1, Math.round(image.width * scale));
-      canvas.height = Math.max(1, Math.round(image.height * scale));
-      const ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#fff"; ctx.fillRect(0,0,canvas.width,canvas.height);
-      ctx.drawImage(image,0,0,canvas.width,canvas.height);
-      return {data:canvas.toDataURL("image/jpeg", .92).split(",")[1], mimeType:"image/jpeg"};
-    } finally { close(); }
-  }
-
-  function checkImageSize(images) {
-    if (images.reduce((total,image) => total + image.data.length,0) > 18 * 1024 * 1024) {
-      throw new Error("写真の合計サイズが大きすぎます。解答欄に絞った写真を選んでください。");
-    }
-  }
-
   function uniqueFiles(existing, additions) {
     const result = existing.slice();
     const same = (a,b) => a.name === b.name && a.size === b.size && a.lastModified === b.lastModified;
@@ -220,9 +192,8 @@
     busy = true; updateAvailability(); show("workingCard"); stage("capture");
     try {
       $("workingText").textContent = sheets.length + "枚の答案写真を読み取っています…";
-      const images = [];
-      for (const file of sheets) { images.push(await convert(file)); if (token !== run) return; }
-      checkImageSize(images);
+      const images = await window.PhotoImagePreparation.prepare(sheets);
+      if (token !== run) return;
       const result = await window.MarkReaderAI.analyzeAnswerSheet({
         subjectLabel:label(), entries, images, allowAdditional:!registered()
       });
@@ -470,9 +441,8 @@
     const token=++run; busy=true; updateAvailability();
     $("answerKeyPhotoStatus").textContent=keyPhotos.length + "枚の解答写真を読み取っています…";
     try {
-      const images=[];
-      for (const file of keyPhotos) { images.push(await convert(file)); if (token!==run) return; }
-      checkImageSize(images);
+      const images=await window.PhotoImagePreparation.prepare(keyPhotos);
+      if (token!==run) return;
       const result=await window.MarkReaderAI.analyzeAnswerKey({subjectLabel:label(),entries,images});
       if (token!==run) return;
       key=makeKey(result); selectedGroups.clear(); renderKey(); review(false);
@@ -491,6 +461,7 @@
   inputHandler("answerKeyPhotoInput",readKeyPhotos);
   inputHandler("answerKeyCameraInput",readKeyPhotos);
   $("retryButton").onclick=() => readSheets();
+  $("reviewRetryButton").onclick=() => readSheets();
   $("answerKeyRetryButton").onclick=() => readKeyPhotos();
   $("errorBackButton").onclick=() => { show("setupCard"); stage("capture"); };
   $("backButton").onclick=() => { show("setupCard"); stage("capture"); };

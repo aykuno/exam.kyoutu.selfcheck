@@ -1,0 +1,43 @@
+name: Photo mark columns and image accuracy verification
+on:
+  push:
+    branches:
+      - audit/photo-accuracy-20261004
+    paths:
+      - kyoutu-ui-lab/**
+      - audit/photo-accuracy/**
+      - .github/workflows/photo-accuracy.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify column mapping and image geometry
+        run: node kyoutu-ui-lab/photo/tests/columns-images.test.cjs
+      - name: Compare scoring with all registered subjects
+        run: node kyoutu-ui-lab/photo/tests/format-grader.test.cjs
+      - name: Install browser
+        run: |
+          npm install --no-save playwright@1.55.1
+          npx playwright install --with-deps chromium
+      - name: Verify mobile image processing and answer workflow
+        run: |
+          python -m http.server 8765 >/tmp/photo-accuracy-server.log 2>&1 &
+          node audit/photo-accuracy/browser.cjs
+      - name: Verify previous grouped answer workflow
+        run: node audit/photo-accuracy/grouped-browser.cjs
+      - name: Save browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: photo-accuracy-verification
+          path: |
+            audit/photo-accuracy/output
+            audit/photo-rules/output
+          retention-days: 3

@@ -1,4 +1,4 @@
-/* 写真採点の欄・採点単位の整理 v20261004-universal2 */
+/* 写真採点の欄・採点単位の整理 v20261004-accuracy1 */
 (() => {
   "use strict";
   const KANA = [..."アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"];
@@ -94,20 +94,70 @@
       code:"C|" + itemGroup + "|" + norm(label),label,group:itemGroup
     }));
   }
+  function columnProfile(subjectLabel) {
+    const subject=String(subjectLabel || "").normalize("NFKC");
+    if (/数学|\bmath/i.test(subject)) return {
+      kind:"math",options:["-","0","1","2","3","4","5","6","7","8","9"],
+      instruction:"共通テスト・センター数学の標準列は左から−、0、1、2、3、4、5、6、7、8、9です。左から1列目は−、2列目は0、3列目は1です。負号の列を飛ばさず確認してください。"
+    };
+    if (/英語|国語|地理|歴史|公共|政治|倫理|物理|化学|生物|地学|english|japanese/i.test(subject)) return {
+      kind:"numbered",options:Array.from({length:10},(_,i)=>String(i+1)),
+      instruction:"英語・国語等の標準的な番号選択欄は左端が1で、左から1、2、3…です。左から1列目を0にしないでください。列の数は行によって違うので、実際に印刷された最後の選択肢まで確認してください。"
+    };
+    return {kind:"mixed",options:[],
+      instruction:"写真に印刷された科目・行ごとの選択肢を確認してください。数学の標準列は−、0、1…9、英語等の番号選択欄は1、2、3…です。情報などは0始まりや英字の欄もあるので、すべてを1始まりにしないでください。"};
+  }
+  function markLayouts(value) {
+    const layouts=new Map();
+    for (const item of Array.isArray(value.layouts) ? value.layouts : []) {
+      if (!item || typeof item.id!=="string" || !item.id) continue;
+      const options=Array.isArray(item.options) ? item.options.map(norm) : [];
+      const valid=options.length>=2 && options.length<=50 &&
+        options.every(x=>x && x.length<=32 && x!=="blank" && x!=="unknown") &&
+        new Set(options).size===options.length && ["high","medium","low"].includes(item.confidence);
+      if (layouts.has(item.id)) layouts.set(item.id,null);
+      else layouts.set(item.id,valid ? {...item,options} : null);
+    }
+    return layouts;
+  }
+  function readMarkedColumn(item,layouts,count) {
+    const hasEvidence=item.kind==="mark" || item.layoutId || item.markedIndices!==undefined;
+    if (item.kind==="unknown") return {value:"unknown",confidence:"low"};
+    if (!hasEvidence) return null; // 保存済み・旧応答の形式との互換性。
+    const layout=layouts.get(item.layoutId),indices=item.markedIndices;
+    const invalid={value:"unknown",confidence:"low"};
+    if (item.kind==="handwritten" || count!==1 || !layout || !Array.isArray(indices)) return invalid;
+    if (indices.length>1 || indices.some(i=>!Number.isInteger(i)||i<0||i>=layout.options.length)) return invalid;
+    if (norm(item.value)==="unknown") return invalid;
+    if (!indices.length) return norm(item.value)==="blank" ?
+      {value:"blank",confidence:item.confidence==="high"&&layout.confidence==="high" ? "high":"low"} : invalid;
+    if (norm(item.value)==="blank") return invalid;
+    // 数字の返答よりも、印刷された列の並びと塗り位置の対応を採用する。
+    return {value:layout.options[indices[0]],
+      confidence:item.confidence==="high"&&layout.confidence==="high" ? "high":"low",
+      markPosition:indices[0]+1,layoutId:item.layoutId};
+  }
   function normalizeSheet(value,entries=[],allowAdditional=false) {
     if (!value || !Array.isArray(value.answers)) throw new Error("答案写真のAI応答形式を確認できませんでした。");
-    const found = new Map();
+    const found = new Map(), layouts=markLayouts(value);
     for (const item of value.answers) {
       if (!item || !["high","medium","low"].includes(item.confidence)) continue;
       const mapped = resolve(item,entries,allowAdditional || !entries.length);
       if (!mapped.length || new Set(mapped.map(e => e.code)).size !== mapped.length) continue;
-      const values = vector(Array.isArray(item.values) && item.values.length ? item.values : item.value,mapped.length);
+      const printed=item.label ? labels(item.label) : [];
+      const metadataConflict=(printed.length===mapped.length && printed.some((label,i)=>norm(label)!==norm(mapped[i].label))) ||
+        (item.group && group(item.group)!=="全体" && mapped.some(entry=>group(entry.group)!==group(item.group)));
+      const marked=readMarkedColumn(item,layouts,mapped.length);
+      const confidence=metadataConflict ? "low" : marked?.confidence || item.confidence;
+      const values=metadataConflict ? null : marked ? vector(marked.value,mapped.length) :
+        vector(Array.isArray(item.values) && item.values.length ? item.values : item.value,mapped.length);
       mapped.forEach((entry,index) => {
         const raw = values?.[index], uncertain = !values || raw === "unknown" || raw === "" || raw === undefined;
         const token = uncertain || raw === "blank" ? "" : norm(raw);
         const answer = {...entry,value:token.length <= 32 ? token : "",
-          state:uncertain || token.length > 32 || item.confidence !== "high" ? "warn" : token ? "ok" : "blank",
-          aiConfidence:uncertain ? "low" : item.confidence};
+          state:uncertain || token.length > 32 || confidence !== "high" ? "warn" : token ? "ok" : "blank",
+          aiConfidence:uncertain ? "low" : confidence,
+          ...(marked?.markPosition ? {markPosition:marked.markPosition} : {})};
         const old = found.get(entry.code);
         if (old) {
           if (old.value !== answer.value) {
@@ -197,5 +247,5 @@
     return result.join("・");
   }
   window.PhotoAnswerFormat = Object.freeze({norm,group,labels,slots,slotLabels,vector,resolve,
-    normalizeSheet,normalizeKey,ruleText});
+    normalizeSheet,normalizeKey,ruleText,columnProfile});
 })();
