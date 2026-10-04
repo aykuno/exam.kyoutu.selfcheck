@@ -231,19 +231,19 @@
       throw new Error("解答の写真がありません。");
     }
     const model = await getAnswerKeyModel();
-    const entryList = entries.map(entry => `${entry.code}: ${entry.label}`).join("\n");
+    const entryList = entries.map(entry => `${entry.code}: ${entry.group || "全体"} / ${entry.label}`).join("\n");
     const prompt = [
       "日本の大学入学共通テストまたは模擬試験の、正解・配点一覧の写真を読み取ってください。",
       `科目: ${subjectLabel}`,
       "下記は、別の写真から読み取った答案用紙の解答欄コードと印刷ラベルです。正答の値は含まれていません。",
       entryList,
       "",
-      "写真に実際に掲載され、正答を判読できる採点単位だけをanswersへ返してください。",
+      "写真に実際に掲載され、正答を判読できる採点単位だけをanswersへ返してください。全体画像で大問・欄番号・配点の結合範囲を確認し、拡大画像で数字・負号・注記を確認してください。拡大で切れた表の罫線や配点範囲は全体画像と照合し、別の採点単位へ移さないでください。",
       "codesには上記コードをそのまま使い、answersには各コードに対応する正解の数字・英字・記号を同じ順で文字列として入れてください。0〜9やa〜fだけとは限りません。",
       "例: Q1-ア、Q1-イ、Q1-ウが「−、1、6」ならcodesを3件、answersを[\"-\",\"1\",\"6\"]にします。",
       "番号19と20が一括で4点なら、codesを2件まとめ、points=4の1採点単位にしてください。各欄が別配点なら分けてください。",
       "「−」は独立した正解1文字です。長音やダッシュにせず半角の\"-\"にしてください。",
-      "別解が印刷されている場合、正解をコード順に連結した文字列をalternativesへ追加してください。",
+      "別解が印刷されている場合、コード順の正解配列をcorrectOptionsへ追加してください。",
       "順不同と明記されている採点単位だけunordered=trueにしてください。",
       "複数欄をまとめた採点は1件にし、answersはcodesと同じ欄数の配列に分けてください。例: アイが21なら[\"2\",\"1\"]、アイウが−12なら[\"-\",\"1\",\"2\"]。1欄の選択肢10は[\"10\"]のままです。",
       "配点欄の縦結合・横結合、括弧や罫線でまとめられた範囲を確認してください。まとめて3点を各欄3点へ重複させないでください。大問全体の配点を各設問へ割り当てないでください。",
@@ -264,11 +264,7 @@
       "複数写真に同じ項目がある場合は、最も鮮明なものを1件だけ返してください。",
       "返答前に、answers配列の各値と、左端の「−」を一つずつ再確認してください。"
     ].join("\n");
-    const parts = [{text: prompt}];
-    images.forEach((image, index) => {
-      parts.push({text: `解答一覧の写真 ${index + 1}/${images.length}`});
-      parts.push({inlineData: {data: image.data, mimeType: image.mimeType}});
-    });
+    const parts = imageParts(images,"解答写真",prompt);
     const result = await model.generateContent(parts);
     let parsed;
     try {
@@ -279,6 +275,18 @@
     return validateAnswerKeyResponse(parsed, entries);
   }
 
+
+  function imageParts(images,title,prompt) {
+    const parts=[];
+    images.forEach((image,index)=>{
+      const page=image.page || index+1;
+      parts.push({text:title+" "+page+" / "+(image.view==="detail" ?
+        "同じ写真の"+image.region+"拡大（別ページではありません。欄名や選択肢が切れた行は全体画像で照合してください）" : "全体")});
+      parts.push({inlineData:{data:image.data,mimeType:image.mimeType}});
+    });
+    parts.push({text:prompt});
+    return parts;
+  }
 
   let sheetModelPromise = null;
   const CONFIDENCE = ["high", "medium", "low"];
@@ -303,15 +311,23 @@
             maxOutputTokens: 16384,
             responseMimeType: "application/json",
             responseSchema: aiSdk.Schema.object({properties: {
+              layouts: aiSdk.Schema.array({items:aiSdk.Schema.object({properties:{
+                id:aiSdk.Schema.string(),
+                options:aiSdk.Schema.array({items:aiSdk.Schema.string()}),
+                confidence:aiSdk.Schema.enumString({enum:CONFIDENCE})
+              }})}),
               answers: aiSdk.Schema.array({items: aiSdk.Schema.object({properties: {
                 code: aiSdk.Schema.string(),
                 label: aiSdk.Schema.string(),
                 group: aiSdk.Schema.string(),
                 value: aiSdk.Schema.string(),
                 confidence: aiSdk.Schema.enumString({enum: CONFIDENCE}),
+                kind: aiSdk.Schema.enumString({enum:["mark","handwritten","unknown"]}),
+                layoutId: aiSdk.Schema.string(),
+                markedIndices: aiSdk.Schema.array({items:aiSdk.Schema.integer()}),
                 codes: aiSdk.Schema.array({items:aiSdk.Schema.string()}),
                 values: aiSdk.Schema.array({items:aiSdk.Schema.string()})
-              },optionalProperties:["codes","values"]})})
+              },optionalProperties:["layoutId","markedIndices","codes","values"]})})
             }})
           }
         });
@@ -327,17 +343,24 @@
       "試験の答案写真から、受験者が実際にマーク・記入した解答を読み取ってください。科目や用紙の固定座標を仮定しないでください。",
       "科目: " + subjectLabel,
       "マークシート、手書きの番号・記号、印刷された解答欄に対応します。写真の問題を解いて答えを生成してはいけません。",
-      "まず印刷された日本語が読める向きに解釈し、大問・小問・解答欄ラベルと選択肢を確認してください。",
-      "列数や並びを決めつけず、各列に実際に印刷された数字・英字・記号を読み、塗られた列の値を返してください。",
+      "まず全体画像で印刷された日本語が読める向き・科目・大問・小問・解答欄ラベルを確認してください。拡大画像で塗りと列を見直し、全体画像の欄名に対応させてください。",
+      window.PhotoAnswerFormat.columnProfile(subjectLabel).instruction,
+      "この標準列は照合の手掛かりです。模試・異なる形式・行ごとの選択肢は、実際の印刷を優先してください。欄番号や受験番号の数字を選択肢にしないでください。",
+      "マーク式はkind=markとし、最初に実際の選択肢を左から順にlayoutsへ登録してください。同じ並びを共有する行は同じlayoutIdを使い、選択肢数や並びが違う行には別のidを使います。各layoutのoptionsは印刷値の文字列配列、confidenceは列の並びの確信度です。",
+      "次に、各行の解答欄ラベルと塗られた列の位置を対応させ、layoutId・markedIndices・valueを返してください。markedIndicesは0から数えた配列です。印刷値と列位置は別物です。左右が逆・列が一部しか写らない場合は全体画像へ戻って確認してください。",
+      "数学の標準11列ならoptions=[\"-\",\"0\",\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\"]。左端を塗った行はmarkedIndices=[0], value=\"-\"、次の列なら[1], value=\"0\"、3列目なら[2], value=\"1\"です。",
+      "英語の1〜4の行ならoptions=[\"1\",\"2\",\"3\",\"4\"]。左端はmarkedIndices=[0], value=\"1\"、4列目は[3], value=\"4\"です。選択肢10があれば1欄のvalue=\"10\"です。",
+      "全列と欄ラベルが一致する行だけを確定してください。列の並び・塗り位置を読めない行はkind=unknown,value=unknown,confidence=lowにします。マーク行は必ず1欄1件にしてください。",
+      "手書きの解答はkind=handwrittenとし、layoutIdとmarkedIndicesは省略します。問題文中の計算やメモを解答に取り込まないでください。",
       "数学の−は独立した選択肢です。0と取り違えず半角の-で返してください。情報等のa〜fや他の英字は小文字で返してください。",
-      "原則1解答欄につき1件を返してください。複数欄をまとめる場合はcodesとvaluesを同じ欄数で返してください。例: ア・イ・ウの−12はvalues=[\"-\",\"1\",\"2\"]です。1欄の選択肢10は1件のvalue=\"10\"のままです。",
+      "1解答欄につき1件を返してください。手書きの複数欄をまとめる場合だけcodesとvaluesを同じ欄数で返せます。例: ア・イ・ウの−12はvalues=[\"-\",\"1\",\"2\"]です。マーク式は各行の塗り位置を別々に確認します。",
       "解答番号10と11をまとめた欄、ア〜ウ等の連続欄、順不同でも欄名と値を対応させて読み取ってください。印刷されたまとめ方や配点は解答そのものに混ぜないでください。",
       "解答科目・出題範囲・選択問題の指定欄、受験番号・氏名欄は解答項目に含めないでください。理科基礎など別分野で大問番号や欄番号が再開する場合、groupに分野名も含めて区別してください。",
 
-      "赤い採点印、印刷の輪郭、薄い消し跡は解答に含めないでください。",
-      "未記入と確認できる欄はvalue=blank。二重マーク、ラベル不明、読めない値はvalue=unknown、confidence=low。推測で埋めないでください。",
+      "赤い採点印、印刷の輪郭、薄い消し跡は解答に含めないでください。丸の輪郭や中央の印刷数字と、鉛筆で内側が塗られた領域を区別してください。隣の行の塗りを現在の行に移さないでください。",
+      "未記入と確認できるマーク行はmarkedIndices=[],value=blankにしてください。二重マークは両列の位置をmarkedIndicesへ入れ、value=unknown,confidence=lowにしてください。ラベル不明、読めない値もunknown,lowです。推測で埋めないでください。",
       "画像にない欄は返さないでください。未記入欄も実際に見える場合だけ返してください。",
-      "複数写真は同じ試験の別ページまたは同じページの拡大です。用紙の順番や表裏を仮定しないでください。同じ欄は一度だけ返し、食い違う場合はunknownにしてください。",
+      "写真番号が同じ全体画像・拡大画像は同じページです。拡大の重なり部分を別の欄として二重に追加しないでください。全体で欄名を確認し、拡大で塗りを判定します。写真番号の異なる写真も同じ試験の別ページまたは追加の拡大です。表裏の順は仮定せず、同じ欄は一度だけ返してください。明瞭な画像同士で塗りが食い違う場合はunknownにしてください。",
       "答案写真に正解一覧や問題が混在していても受験者の解答欄のみを読んでください。",
       entries.length ?
         (allowAdditional ? "既に確認した欄一覧。写っている既存欄はこのcodeを使い、新しい欄があれば追加してください。\n" :
@@ -346,11 +369,7 @@
         "欄一覧がないので、印刷されたラベルを使ってcodeを生成してください。codeは大問/小問/欄の一意な文字列（例 Q1/ア、N19）。groupは印刷された大問名、labelは欄ラベル。見えない大問は全体とし、同じ記号を勝手に統合しないでください。",
       "返答前に、ラベル・値・負号・英字を全欄見直してください。確信がない場合はlowにしてください。"
     ].join("\n");
-    const parts = [{text: prompt}];
-    images.forEach((image, index) => {
-      parts.push({text: "答案写真 " + (index + 1) + "/" + images.length});
-      parts.push({inlineData: {data: image.data, mimeType: image.mimeType}});
-    });
+    const parts = imageParts(images,"答案写真",prompt);
     const result = await model.generateContent(parts);
     let parsed;
     try { parsed = JSON.parse(result.response.text()); }

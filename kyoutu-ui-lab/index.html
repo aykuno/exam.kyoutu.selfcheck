@@ -275,6 +275,7 @@
           <div><h2>答案用紙の読取結果</h2><p id="summary"></p></div>
           <button id="rescanButton" class="secondary" type="button">最初から読み直す</button>
         </div>
+        <button id="reviewRetryButton" class="secondary hidden" type="button">同じ写真で再読取</button>
         <div class="legend">
           <span class="ok-dot"></span>読取済み
           <span class="warn-dot"></span>要確認
@@ -344,9 +345,10 @@
   <script src="app.js?v=20260903-source-links2"></script>
   <script src="pdf-export.js?v=20260803-scoringpdf2"></script>
   <script src="photo/ai-config.js?v=20260803-scoringpdf2"></script>
-  <script src="photo/answer-format.js?v=20261004-universal2"></script>
-  <script type="module" src="photo/ai-reader.js?v=20261004-universal2"></script>
+  <script src="photo/image-preparation.js?v=20261004-accuracy1"></script>
+  <script src="photo/answer-format.js?v=20261004-accuracy1"></script>
+  <script type="module" src="photo/ai-reader.js?v=20261004-accuracy1"></script>
   <script src="photo/grader.js?v=20261004-universal2"></script>
-  <script src="photo/universal-reader.js?v=20261004-universal2"></script>
+  <script src="photo/universal-reader.js?v=20261004-accuracy1"></script>
 </body>
 </html>
