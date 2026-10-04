@@ -1,0 +1,70 @@
+name: Inspect all published exam averages
+on:
+  push:
+    branches: [audit/kyotsu-direct-20261004]
+    paths: [.github/workflows/kyotsu-source-audit.yml]
+permissions: {}
+jobs:
+  inspect:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Install free browser library
+        run: python3 -m pip install --quiet playwright
+      - name: Read published averages for every registered exam
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request,re,json,unicodedata,shutil
+          from urllib.parse import quote,unquote,urljoin
+          from playwright.sync_api import sync_playwright
+          def get(u):
+              with urllib.request.urlopen(u,timeout=90) as r:return r.read().decode('utf-8')
+          root='https://kyotsu.org/'
+          html=get(root)
+          asset=next(u for u in re.findall(r'<script[^>]+src=["\']([^"\']+)',html) if u.startswith('/assets/'))
+          js=get(urljoin(root,asset))
+          meta={}
+          for m in re.finditer(r'"([^"]+問題\.pdf)":\{([^{}]+)\}',js):
+              try:meta[m[1]]=json.loads(re.sub(r'(?<=[{,])([A-Za-z][A-Za-z0-9]*):',r'"\1":','{'+m[2]+'}'))
+              except Exception:pass
+          rows={}
+          for m in re.finditer(r'(\d{4})\t(main|makeup)\t([^\n]+)',js):
+              cols=(m[1]+'\t'+m[2]+'\t'+m[3]).strip().split('\t')
+              if len(cols)>=6:rows[cols[3]]={'year':cols[0],'exam':cols[1],'subject':cols[2],'question':cols[3]}
+          raw='https://raw.githubusercontent.com/aykuno/exam.kyoutu.selfcheck/main/'
+          app=get(raw+'kyoutu-ui-lab/app.js')
+          catalog=json.loads(re.sub(r',\s*}', '}',re.search(r'const SOURCE_LINK_CATALOG = (\{.*?\n  \});',app,re.S)[1]))
+          keys=json.loads(get(raw+'answer_keys_verified.json'))['keys']
+          stats=json.loads(get(raw+'statistics_final.json'))
+          sm={'||'.join([str(s['year']),s['exam'],s['subject']]):s for s in stats['entries']}
+          def norm(v):return re.sub(r'[\s・，、,（）()]','',unicodedata.normalize('NFKC',str(v))).replace('数学','').replace('英語リーディング','英語R').replace('英語筆記','英語R').replace('英語リスニング','英語L')
+          targets=[];unmatched=[]
+          for k in keys:
+              if k['exam'] not in ['main','center-main','retake','center-retake']:continue
+              sig='||'.join([str(k['year']),k['exam'],k['subject']])
+              pu=(catalog.get(sig,{}).get('問題') or [[k.get('problemUrl','')]])[0][0]
+              fn=unquote(pu.split('/')[-1]) if pu else ''
+              row=rows.get(fn)
+              if row is None:
+                  candidates=[r for r in rows.values() if r['year']==str(k['year']) and r['exam']==('makeup' if k['exam'] in ['retake','center-retake'] else 'main') and norm(r['subject'])==norm(k['subject'])]
+                  if len(candidates)==1:row=candidates[0]
+              if row is None:unmatched.append(sig);continue
+              m=meta.get(row['question'],{})
+              targets.append({'sig':sig,'maxScore':k.get('maxScore'),'filename':row['question'],'page':root+'test/'+quote(row['question']),'average':m.get('averageScore'),'sourceMax':m.get('totalScore'),'existingAverage':sm.get(sig,{}).get('averageScore')})
+          report={'targets':targets,'unmatched':unmatched,'metadataCount':len(meta),'keyCount':len(keys)}
+          data=json.dumps(report,ensure_ascii=False,separators=(',',':'))
+          for i in range(0,len(data),6000):print('AVERAGE_REPORT '+data[i:i+6000],flush=True)
+          with sync_playwright() as pw:
+              browser=pw.chromium.launch(executable_path=shutil.which('google-chrome'),headless=True,args=['--no-sandbox'])
+              page=browser.new_page()
+              examples=[]
+              for fn in ['2000_国語III_本試験問題.pdf','2024_国語_本試験問題.pdf','2026_国語_追試験問題.pdf']:
+                  page.goto(root+'test/'+quote(fn),wait_until='domcontentloaded',timeout=90000)
+                  page.wait_for_timeout(1200)
+                  examples.append({'filename':fn,'text':page.locator('body').inner_text().split('試験情報')[-1]})
+              print('SOURCE_EXAMPLES',json.dumps(examples,ensure_ascii=False),flush=True)
+              browser.close()
+          
+          PY
