@@ -10,22 +10,78 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
-      - name: Install free browser library
-        run: python3 -m pip install --quiet playwright
-      - name: Inspect math subject page buttons
+      - name: Install free browser and PDF libraries
+        run: python3 -m pip install --quiet playwright pypdf
+      - name: Verify deployed PDF buttons and average score displays
         shell: bash
         run: |
           python3 - <<'PY'
-          import json,shutil
+          import json,re,time,shutil,urllib.request,io
           from playwright.sync_api import sync_playwright
+          from pypdf import PdfReader
+          site='https://aykuno.github.io/exam.kyoutu.selfcheck/'
+          def get(url):
+              with urllib.request.urlopen(url,timeout=90) as r:return r.read().decode('utf-8')
+          for attempt in range(12):
+              app=get(site+'kyoutu-ui-lab/app.js?audit=20261004')
+              stats=json.loads(get(site+'statistics_final.json?audit=20261004'))
+              if 'revision 5.' in app and stats.get('version')=='v138':break
+              time.sleep(15)
+          else:raise Exception('Updated deployment did not arrive')
+          catalog=json.loads(re.sub(r',\s*}', '}',re.search(r'const SOURCE_LINK_CATALOG = (\{.*?\n  \});',app,re.S)[1]))
+          keys=json.loads(get(site+'answer_keys_verified.json'))['keys']
+          cases=[["2024","main","国語",116.5],["2025","main","数学Ⅰ",28.08],["2025","main","数学Ⅰ，数学A",53.51],["2021","retake","化学基礎",23.62],["2006","center-main","化学IA",58.92],["2006","center-main","地学IA",55.54],["2006","center-main","物理IA",61.43],["2006","center-main","生物IA",57],["2009","center-main","数学I・Ａ",63.96],["2010","center-main","数学I・Ａ",48.96],["2011","center-main","数学I・Ａ",65.95],["2012","center-main","数学I・Ａ",69.97],["2013","center-main","数学I・Ａ",51.2],["2014","center-main","数学I・Ａ",62.08],["2015","center-main","数学I・Ａ",61.27],["2016","center-main","数学I・Ａ",55.27],["2017","center-main","数学I・Ａ",61.12]]
           with sync_playwright() as pw:
               browser=pw.chromium.launch(executable_path=shutil.which('google-chrome') or shutil.which('chromium'),headless=True,args=['--no-sandbox'])
               page=browser.new_page()
-              for filename in ['2025_数学I_本試験問題.pdf','2025_数学IA_本試験問題.pdf']:
-                  from urllib.parse import quote
-                  page.goto('https://kyotsu.org/test/'+quote(filename),wait_until='domcontentloaded',timeout=90000)
-                  page.wait_for_selector('a[href*="r2.dev"]',timeout=90000)
-                  print('MATH_SOURCE',json.dumps({'filename':filename,'text':page.locator('body').inner_text().split('試験情報')[-1],'links':page.locator('a[href*="r2.dev"]').evaluate_all('(els)=>els.map(e=>({text:e.innerText,href:e.href}))')},ensure_ascii=False),flush=True)
+              errors=[]
+              page.on('pageerror',lambda e:errors.append(str(e)))
+              page.goto(site,wait_until='domcontentloaded',timeout=90000)
+              page.wait_for_function("document.getElementById('yearSelect') && !document.getElementById('yearSelect').disabled",timeout=120000)
+              rendered=page.evaluate("""({keys,catalog})=>{
+                const failures=[];let count=0,direct=0;
+                const set=(id,value)=>{const e=document.getElementById(id);e.value=String(value);e.dispatchEvent(new Event('change'));return e.value===String(value)};
+                for(const k of keys){
+                  const sig=[k.year,k.exam,k.subject].join('||');
+                  if(!set('yearSelect',k.year)||!set('examSelect',k.exam)||!set('subjectSelect',k.subject)){failures.push({sig,error:'Missing selector'});continue}
+                  const actual=[...document.querySelectorAll('#sourceLinks a')].map(e=>e.href);
+                  for(const kind of ['問題','解答','解説','掲載ページ']){
+                    for(const [url,label] of catalog[sig]?.[kind]||[]){
+                      if(kind==='掲載ページ' && url===catalog[sig]?.['解答']?.[0]?.[0])continue;
+                      if(!actual.includes(url))failures.push({sig,kind,url,error:'Missing link'});
+                      if((kind==='問題'||kind==='解答')&&url.includes('.r2.dev/'))direct++;
+                    }
+                  }
+                  count++;
+                }
+                return {count,direct,failures};
+              }""",{'keys':keys,'catalog':catalog})
+              assert not rendered['failures'],rendered
+              print('PUBLISHED_LINK_UI',json.dumps(rendered,ensure_ascii=False),flush=True)
+              averages=[]
+              for year,exam,subject,expected in cases:
+                  page.locator('#brandHome').click()
+                  page.select_option('#yearSelect',year)
+                  page.select_option('#examSelect',exam)
+                  page.select_option('#subjectSelect',subject)
+                  page.locator('#manualStartButton').click()
+                  page.locator('#methodManual').click()
+                  page.locator('#manualGradeButton').click()
+                  page.locator('#scoreAnyway').click()
+                  value=page.locator('.avgScoreMetric .avgValue').inner_text()
+                  assert value==format(expected,'.2f'),(year,exam,subject,value,expected)
+                  averages.append({'year':year,'exam':exam,'subject':subject,'average':value})
+              print('PUBLISHED_AVERAGE_UI',json.dumps(averages,ensure_ascii=False),flush=True)
+              for sig in ['2025||main||数学Ⅰ','2025||main||数学Ⅰ，数学A']:
+                  for kind in ['問題','解答']:
+                      url=catalog[sig][kind][0][0]
+                      response=page.request.get(url,timeout=90000)
+                      assert response.ok,(url,response.status)
+                      reader=PdfReader(io.BytesIO(response.body()))
+                      assert len(reader.pages)>0,url
+                      print('MATH_PDF_VERIFIED',sig,kind,len(reader.pages),flush=True)
+              assert not errors,errors
+              print('BROWSER_ERRORS',json.dumps(errors),flush=True)
               browser.close()
           
           PY
