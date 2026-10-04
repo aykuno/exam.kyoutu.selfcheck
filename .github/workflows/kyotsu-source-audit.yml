@@ -26,6 +26,7 @@ jobs:
           js='\n'.join(get(urljoin(root,u))[0] for u in assets if '.js' in u)
           print('JS_DISCOVERY',len(js),js[:1000],flush=True)
           bases=list(dict.fromkeys(re.findall(r'https://pub-[a-z0-9]+\.r2\.dev/',js)))
+          print('BASE_DISCOVERY',repr(bases),[js[max(0,m.start()-150):m.end()+150] for m in re.finditer(r'r2|questionPdf|averageScore|2024_国語',js)][:25],flush=True)
           assert len(bases)==1,bases
           base=bases[0]
           meta={}
