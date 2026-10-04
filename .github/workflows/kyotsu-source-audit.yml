@@ -20,7 +20,7 @@ jobs:
           from urllib.parse import quote,unquote,urljoin
           from playwright.sync_api import sync_playwright
           def get(u):
-              with urllib.request.urlopen(u,timeout=90) as r:return r.read().decode('utf-8')
+              with urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 PDF-source-audit'}),timeout=90) as r:return r.read().decode('utf-8')
           root='https://kyotsu.org/'
           html=get(root)
           asset=next(u for u in re.findall(r'<script[^>]+src=["\']([^"\']+)',html) if u.startswith('/assets/'))
