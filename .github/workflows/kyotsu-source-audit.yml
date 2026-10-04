@@ -22,13 +22,12 @@ jobs:
           root='https://kyotsu.org/'
           html,_=get(root)
           assets=re.findall(r'<script[^>]+src=["\']([^"\']+)',html)
-          print('DISCOVERY',json.dumps({'assets':assets,'html':html[:7000]},ensure_ascii=False),flush=True)
-          js='\n'.join(get(urljoin(root,u))[0] for u in assets if '.js' in u)
-          print('JS_DISCOVERY',len(js),js[:1000],flush=True)
-          bases=list(dict.fromkeys(re.findall(r'https://pub-[a-z0-9]+\.r2\.dev/',js)))
-          print('BASE_DISCOVERY',repr(bases),[js[max(0,m.start()-150):m.end()+150] for m in re.finditer(r'r2|questionPdf|averageScore|2024_国語',js)][:25],flush=True)
+          
+          js='\n'.join(get(urljoin(root,u))[0] for u in assets if u.startswith('/assets/'))
+          
+          bases=list(dict.fromkeys(re.findall(r'https://pub-[a-z0-9]+\.r2\.dev',js)))
           assert len(bases)==1,bases
-          base=bases[0]
+          base=bases[0]+'/'
           meta={}
           for m in re.finditer(r'"([^"]+問題\.pdf)":\{([^{}]+)\}',js):
               v='{'+re.sub(r'(?<=[{,])([A-Za-z][A-Za-z0-9]*):',r'"\1":','{'+m[2]+'}')[1:]
