@@ -101,6 +101,10 @@
           properties: {
             examLabel: aiSdk.Schema.string(),
             maxScore: aiSdk.Schema.integer(),
+            selectionRules: aiSdk.Schema.array({items: aiSdk.Schema.object({properties: {
+              groups: aiSdk.Schema.array({items: aiSdk.Schema.string()}),
+              choose: aiSdk.Schema.integer()
+            }})}),
             answers: aiSdk.Schema.array({
               items: aiSdk.Schema.object({
                 properties: {
@@ -233,6 +237,7 @@
       if (
         !codes.length ||
         codes.length !== values.length ||
+        new Set(codes).size !== codes.length ||
         codes.some(code => !expected.has(code) || used.has(code)) ||
         !["high", "medium", "low"].includes(item.confidence)
       ) {
@@ -256,7 +261,13 @@
     return {
       examLabel: typeof value.examLabel === "string" ? value.examLabel.trim() : "",
       maxScore: Number.isInteger(value.maxScore) && value.maxScore > 0 ? value.maxScore : null,
-      answers
+      answers,
+      selectionRules: Array.isArray(value.selectionRules) ? value.selectionRules.filter(rule =>
+        Array.isArray(rule.groups) && rule.groups.length > 0 &&
+        rule.groups.every(group => typeof group === "string" && group.length < 80) &&
+        new Set(rule.groups).size === rule.groups.length &&
+        Number.isInteger(rule.choose) && rule.choose > 0 && rule.choose <= rule.groups.length
+      ).map(rule => ({groups: rule.groups.slice(), choose: rule.choose})) : []
     };
   }
 
@@ -276,16 +287,17 @@
       entryList,
       "",
       "写真に実際に掲載され、正答を判読できる採点単位だけをanswersへ返してください。",
-      "codesには上記コードをそのまま使い、answersには各コードに対応する正解を同じ順で1文字ずつ入れてください。",
+      "codesには上記コードをそのまま使い、answersには各コードに対応する正解の数字・英字・記号を同じ順で文字列として入れてください。0〜9やa〜fだけとは限りません。",
       "例: Q1-ア、Q1-イ、Q1-ウが「−、1、6」ならcodesを3件、answersを[\"-\",\"1\",\"6\"]にします。",
       "番号19と20が一括で4点なら、codesを2件まとめ、points=4の1採点単位にしてください。各欄が別配点なら分けてください。",
       "「−」は独立した正解1文字です。長音やダッシュにせず半角の\"-\"にしてください。",
       "別解が印刷されている場合、正解をコード順に連結した文字列をalternativesへ追加してください。",
       "順不同と明記されている採点単位だけunordered=trueにしてください。",
-      "groupは必ず「第1問」の形に統一してください。写真から大問を確認できなければ「全体」にしてください。",
+      "groupは答案欄一覧に示した大問名と一致させてください。大問を確認できなければ「全体」にしてください。",
       "pointsは、その採点単位の配点が写真に明記されている場合だけ正の整数にしてください。配点がない、または判読不能なら0にしてください。",
       "写真に試験名が明記されていればexamLabelへ転記し、なければ空文字にしてください。",
       "満点が明記されていればmaxScoreへ入れ、なければ0にしてください。配点や満点を推測しないでください。",
+      "選択問題の規則が写真に明記されている場合だけ、selectionRulesにgroupsとchoose（選ぶ問数）を転記してください。明記されていなければ空配列にしてください。groupsはanswersのgroupと一致させてください。",
       "写真にない項目、隠れている項目、判読できない項目は返さないでください。",
       "一つのコードを複数の採点単位へ重複させないでください。",
       "複数写真に同じ項目がある場合は、最も鮮明なものを1件だけ返してください。",
@@ -306,11 +318,116 @@
     return validateAnswerKeyResponse(parsed, entries.map(entry => entry.code));
   }
 
+
+  let sheetModelPromise = null;
+  const CONFIDENCE = ["high", "medium", "low"];
+
+  function normalizeToken(value) {
+    return String(value ?? "").normalize("NFKC").trim()
+      .replace(/[−‐‑‒–—―ー]/g, "-").toLowerCase();
+  }
+
+  function validateSheetResponse(value, entries = []) {
+    if (!value || !Array.isArray(value.answers)) {
+      throw new Error("答案写真のAI応答形式を確認できませんでした。同じ写真で再試行できます。");
+    }
+    const expected = new Map(entries.map(entry => [entry.code, entry]));
+    const found = new Map();
+    for (const item of value.answers) {
+      if (!item || typeof item.code !== "string" || typeof item.value !== "string" ||
+          !CONFIDENCE.includes(item.confidence)) continue;
+      const code = item.code.trim();
+      if (!code || code.length > 160 || (expected.size && !expected.has(code))) continue;
+      const token = item.value === "blank" || item.value === "unknown" ? "" : normalizeToken(item.value);
+      if (token.length > 32) continue;
+      const metadata = expected.get(code);
+      const answer = {
+        code,
+        label: metadata?.label || String(item.label || code).slice(0, 120),
+        group: metadata?.group || String(item.group || "全体").slice(0, 80),
+        value: token,
+        state: item.value === "unknown" || item.confidence !== "high" ? "warn" :
+          token === "" ? "blank" : "ok",
+        aiConfidence: item.confidence
+      };
+      const previous = found.get(code);
+      if (previous) {
+        if (previous.value !== token) {
+          previous.value = "";
+          previous.state = "warn";
+          previous.aiConfidence = "low";
+        } else if (answer.state === "warn") previous.state = "warn";
+      } else found.set(code, answer);
+    }
+    if (!found.size) throw new Error("解答欄を特定できませんでした。同じ写真で再試行するか、欄を写した写真を追加してください。");
+    return [...found.values()];
+  }
+
+  async function getSheetModel() {
+    if (!sheetModelPromise) {
+      sheetModelPromise = (async () => {
+        const {ai, aiSdk} = await getAiContext();
+        return aiSdk.getGenerativeModel(ai, {
+          model: config.model || "gemini-3.5-flash-lite",
+          generationConfig: {
+            temperature: 0,
+            maxOutputTokens: 16384,
+            responseMimeType: "application/json",
+            responseSchema: aiSdk.Schema.object({properties: {
+              answers: aiSdk.Schema.array({items: aiSdk.Schema.object({properties: {
+                code: aiSdk.Schema.string(),
+                label: aiSdk.Schema.string(),
+                group: aiSdk.Schema.string(),
+                value: aiSdk.Schema.string(),
+                confidence: aiSdk.Schema.enumString({enum: CONFIDENCE})
+              }})})
+            }})
+          }
+        });
+      })().catch(error => { sheetModelPromise = null; throw error; });
+    }
+    return sheetModelPromise;
+  }
+
+  async function analyzeAnswerSheet({subjectLabel, entries = [], images}) {
+    if (!images?.length) throw new Error("答案の写真がありません。");
+    const model = await getSheetModel();
+    const prompt = [
+      "試験の答案写真から、受験者が実際にマーク・記入した解答を読み取ってください。科目や用紙の固定座標を仮定しないでください。",
+      "科目: " + subjectLabel,
+      "マークシート、手書きの番号・記号、印刷された解答欄に対応します。写真の問題を解いて答えを生成してはいけません。",
+      "まず印刷された日本語が読める向きに解釈し、大問・小問・解答欄ラベルと選択肢を確認してください。",
+      "列数や並びを決めつけず、各列に実際に印刷された数字・英字・記号を読み、塗られた列の値を返してください。",
+      "数学の−は独立した選択肢です。0と取り違えず半角の-で返してください。情報等のa〜fや他の英字は小文字で返してください。",
+      "赤い採点印、印刷の輪郭、薄い消し跡は解答に含めないでください。",
+      "未記入と確認できる欄はvalue=blank。二重マーク、ラベル不明、読めない値はvalue=unknown、confidence=low。推測で埋めないでください。",
+      "画像にない欄は返さないでください。未記入欄も実際に見える場合だけ返してください。",
+      "複数写真は同じ試験の別ページまたは同じページの拡大です。用紙の順番や表裏を仮定しないでください。同じ欄は一度だけ返し、食い違う場合はunknownにしてください。",
+      "答案写真に正解一覧や問題が混在していても受験者の解答欄のみを読んでください。",
+      entries.length ?
+        "照合先の欄一覧（正解の値は含みません）。必ずこのcodeを使い、group・labelで照合してください。別の大問や同名の欄を混同しないでください。\n" +
+        entries.map(entry => entry.code + ": " + entry.group + " / " + entry.label).join("\n") :
+        "欄一覧がないので、印刷されたラベルを使ってcodeを生成してください。codeは大問/小問/欄の一意な文字列（例 Q1/ア、N19）。groupは印刷された大問名、labelは欄ラベル。見えない大問は全体とし、同じ記号を勝手に統合しないでください。",
+      "返答前に、ラベル・値・負号・英字を全欄見直してください。確信がない場合はlowにしてください。"
+    ].join("\n");
+    const parts = [{text: prompt}];
+    images.forEach((image, index) => {
+      parts.push({text: "答案写真 " + (index + 1) + "/" + images.length});
+      parts.push({inlineData: {data: image.data, mimeType: image.mimeType}});
+    });
+    const result = await model.generateContent(parts);
+    let parsed;
+    try { parsed = JSON.parse(result.response.text()); }
+    catch (_) { throw new Error("答案写真のAI応答をJSONとして読み取れませんでした。同じ写真で再試行できます。"); }
+    return validateSheetResponse(parsed, entries);
+  }
+
   window.MarkReaderAI = Object.freeze({
     isConfigured,
     analyzeMathPage,
+    analyzeAnswerSheet,
     analyzeAnswerKey,
-    debug: Object.freeze({validateAnswerKeyResponse})
+    debug: Object.freeze({validateAnswerKeyResponse, validateSheetResponse})
   });
   window.dispatchEvent(new CustomEvent("mark-reader-ai-ready"));
 })();

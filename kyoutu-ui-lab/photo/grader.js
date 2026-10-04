@@ -87,7 +87,8 @@
     return lookup;
   }
 
-  function answersForQuestion(question, mode, standardAnswers, mathLookup) {
+  function answersForQuestion(question, mode, standardAnswers, mathLookup, entryLookup) {
+    if (mode === "universal") return (question.photoCodes || []).map(code => norm(entryLookup.get(code) || ""));
     if (mode === "standard") {
       return standardNumbers(question).map(number =>
         norm((standardAnswers || [])[number - 1]?.value)
@@ -230,13 +231,14 @@
       .map(item => item.group);
   }
 
-  function grade({key, mode, standardAnswers, mathQuestions, selectedQuestions}) {
+  function grade({key, mode, standardAnswers, mathQuestions, selectedQuestions, answerEntries, selectedGroups}) {
     if (!key || !Array.isArray(key.questions)) {
       throw new Error("先に解答写真を読み取ってください。");
     }
     const mathLookup = buildMathLookup(mathQuestions);
+    const entryLookup = new Map((answerEntries || []).map(entry => [entry.code, entry.value]));
     const rows = key.questions.map((question, index) => {
-      const got = answersForQuestion(question, mode, standardAnswers, mathLookup);
+      const got = answersForQuestion(question, mode, standardAnswers, mathLookup, entryLookup);
       return {
         index,
         question,
@@ -262,7 +264,10 @@
     const selected = new Set([...selectedQuestions || []].map(Number));
     for (const rule of key.selectionRules || []) {
       for (const group of rule.groups || []) optionalGroups.add(group);
-      for (const group of selectedRuleGroups(rule, selected, rows)) chosenGroups.add(group);
+      const explicit = (rule.groups || []).filter(group => selectedGroups?.has(group));
+      const groups = mode === "universal" && explicit.length === Number(rule.choose || 1)
+        ? explicit : selectedRuleGroups(rule, selected, rows);
+      for (const group of groups) chosenGroups.add(group);
     }
     if (optionalGroups.size) {
       rows.forEach(row => {
