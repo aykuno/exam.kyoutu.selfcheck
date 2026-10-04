@@ -10,73 +10,20 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
-      - name: Read public source metadata and verify PDF endpoints
+      - name: Install free browser library
+        run: python3 -m pip install --quiet playwright
+      - name: Open source page and inspect actual PDF buttons
         shell: bash
         run: |
           python3 - <<'PY'
-          import urllib.request,re,json,unicodedata,concurrent.futures,time
-          from urllib.parse import urljoin,unquote,quote
-          def get(u):
-              req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 PDF-source-audit'})
-              with urllib.request.urlopen(req,timeout=45) as r:return r.read().decode('utf-8'),r.geturl()
-          root='https://kyotsu.org/'
-          html,_=get(root)
-          assets=re.findall(r'<script[^>]+src=["\']([^"\']+)',html)
-          
-          js='\n'.join(get(urljoin(root,u))[0] for u in assets if u.startswith('/assets/'))
-          
-          bases=list(dict.fromkeys(re.findall(r'https://pub-[a-z0-9]+\.r2\.dev',js)))
-          assert len(bases)==1,bases
-          base=bases[0]+'/'
-          meta={}
-          for m in re.finditer(r'"([^"]+問題\.pdf)":\{([^{}]+)\}',js):
-              v='{'+re.sub(r'(?<=[{,])([A-Za-z][A-Za-z0-9]*):',r'"\1":','{'+m[2]+'}')[1:]
-              try:meta[m[1]]=json.loads(v)
-              except Exception:pass
-          rows={}
-          for m in re.finditer(r'(\d{4})\t(main|makeup)\t([^\n]+)',js):
-              cols=(m[1]+'\t'+m[2]+'\t'+m[3]).strip().split('\t')
-              if len(cols)>=6 and 2001<=int(cols[0])<=2026:
-                  rows[cols[3]]={'year':cols[0],'exam':cols[1],'subject':cols[2],'question':cols[3],'answer':cols[4],'state':cols[-1],'metadata':meta.get(cols[3],{})}
-          raw='https://raw.githubusercontent.com/aykuno/exam.kyoutu.selfcheck/main/'
-          app,_=get(raw+'kyoutu-ui-lab/app.js')
-          catalog=json.loads(re.sub(r',\s*}', '}',re.search(r'const SOURCE_LINK_CATALOG = (\{.*?\n  \});',app,re.S)[1]))
-          keys=json.loads(get(raw+'answer_keys_verified.json')[0])['keys']
-          included=json.loads(get(raw+'source_index.json')[0])['included']
-          metadata={str(x['year'])+'||'+x['exam']+'||'+x['subject']:x for x in included}
-          def norm(v):return re.sub(r'[\s・，、,（）()]','',unicodedata.normalize('NFKC',str(v))).replace('数学','').replace('旧','').replace('英語リーディング','英語R').replace('英語筆記','英語R').replace('英語リスニング','英語L')
-          out=[];missing=[]
-          for k in keys:
-              sig=str(k['year'])+'||'+k['exam']+'||'+k['subject']
-              if k['exam'] not in ['main','center-main','retake']:continue
-              cat=catalog.get(sig,{})
-              pu=(cat.get('問題') or [[None]])[0][0] or k.get('problemUrl') or metadata.get(sig,{}).get('problemUrl')
-              filename=unquote(pu.split('/')[-1]) if pu and '/test/' in pu or pu and '.r2.dev/' in pu else ''
-              row=rows.get(filename)
-              if row is None:
-                  candidates=[v for v in rows.values() if v['year']==str(k['year']) and v['exam']==('makeup' if k['exam']=='retake' else 'main') and norm(v['subject'])==norm(k['subject'])]
-                  if len(candidates)==1:row=candidates[0]
-              if not row:missing.append(sig);continue
-              info=row['metadata']
-              out.append({'sig':sig,'maxScore':k.get('maxScore'),'question':base+quote(row['question'],safe=''),'answer':base+quote(row['answer'],safe='') if row['answer'] else None,'page':root+'test/'+quote(row['question'],safe=''),'state':row['state'],'average':info.get('averageScore'),'examinees':info.get('examinees'),'metadata':info})
-          # Verify files using streamed GET and the PDF signature. No artifacts/cache are stored.
-          urls=list(dict.fromkeys(u for x in out for u in [x['question'],x['answer']] if u))
-          def check(u):
-              try:
-                  req=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0 PDF-source-audit'})
-                  with urllib.request.urlopen(req,timeout=35) as r:
-                      head=r.read(16);return u,{'status':r.status,'pdf':head.lstrip().startswith(b'%PDF-'),'final':r.geturl()}
-              except Exception as e:return u,{'pdf':False,'error':str(e)}
-          checks={}
-          with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
-              for i,(u,v) in enumerate(pool.map(check,urls)):
-                  checks[u]=v
-                  if i%100==0:print('PROGRESS',i,len(urls),flush=True)
-          report={'base':base,'assets':assets,'rowCount':len(rows),'metadataCount':len(meta),'targets':out,'missing':missing,'checks':checks}
-          print('REPORT_BEGIN')
-          data=json.dumps(report,ensure_ascii=False,separators=(',',':'))
-          # Keep lines manageable for the log API, without compressing evidence.
-          for i in range(0,len(data),6000):print('REPORT_CHUNK '+data[i:i+6000])
-          print('REPORT_END')
+          import json,shutil
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as pw:
+              browser=pw.chromium.launch(executable_path=shutil.which('google-chrome') or shutil.which('chromium'),headless=True,args=['--no-sandbox'])
+              page=browser.new_page()
+              page.goto('https://kyotsu.org/test/2024_%E5%9B%BD%E8%AA%9E_%E6%9C%AC%E8%A9%A6%E9%A8%93%E5%95%8F%E9%A1%8C.pdf',wait_until='domcontentloaded',timeout=90000)
+              page.wait_for_selector('a[href*="r2.dev"]',timeout=90000)
+              print('SOURCE_BROWSER',json.dumps({'url':page.url,'text':page.locator('body').inner_text(),'links':page.locator('a').evaluate_all('(els)=>els.map(e=>({text:e.innerText,href:e.href}))')},ensure_ascii=False),flush=True)
+              browser.close()
           
           PY
